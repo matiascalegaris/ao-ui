@@ -1,0 +1,19 @@
+.container {
+  background: black;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: fit-content;
+  padding: 10px;
+  .header {
+    text-align: center;
+    font-weight: 900; 
+  }
+  .tabSelection {
+    flex-direction: row;
+    display: flex;
+    .option {
+      margin: 10px;
+    }
+  }
+}
