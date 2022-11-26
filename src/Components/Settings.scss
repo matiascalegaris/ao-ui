@@ -1,5 +1,10 @@
 .container {
-  background: black;
+  background-image: url(../assets/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 20px solid transparent;
+  padding: 15px;
+  border-image: url(../assets/frame.png) 30 round;
   display: flex;
   flex-direction: column;
   color: white;

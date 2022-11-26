@@ -1,0 +1,22 @@
+.button-container {
+  border: 2px solid transparent;
+  border-image: url(../../../assets/input-area-empty-background.png) 2 round;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../../../assets/background.png);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: fit-content;
+  padding: 10px;
+  font-weight: 900;
+  font-family: Cardo, Arial;
+
+  &:hover {
+    color: gray;
+  }
+
+  &:active {
+    color: yellow;
+  }
+}
