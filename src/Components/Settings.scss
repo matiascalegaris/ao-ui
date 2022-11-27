@@ -1,15 +1,13 @@
 .container {
+  background-size: 100% 100%;
   background-image: url(../assets/background.png);
   background-repeat: no-repeat;
-  background-size: cover;
   border: 20px solid transparent;
-  padding: 15px;
-  border-image: url(../assets/frame.png) 30 round;
+  border-image: url(../assets/frame.png) 22 round;
   display: flex;
   flex-direction: column;
   color: white;
   width: fit-content;
-  padding: 10px;
   .header {
     text-align: center;
     font-weight: 900; 
