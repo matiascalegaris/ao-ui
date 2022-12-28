@@ -17,17 +17,58 @@
 
 @font-face {
   font-family: 'Cardo';
-  src: local('Alegra-AO'), url(./fonts/Cardo-Regular.ttf) format('truetype');
+  src: local('Cardo'), url(./fonts/Cardo-Regular.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Cardo';
   font-weight: 900;
-  src: local('Alegra-AO'), url(./fonts/Cardo-Bold.ttf) format('truetype');
+  src: local('Cardo'), url(./fonts/Cardo-Bold.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Cardo';
   font-style: italic;
-  src: local('Alegra-AO'), url(./fonts/Cardo-Italic.ttf) format('truetype');
+  src: local('Cardo'), url(./fonts/Cardo-Italic.ttf) format('truetype');
+}
+
+.dialog-header {
+  text-align: center;
+  font-weight: 900; 
+  border-bottom: #444343b3 2px solid;
+  padding: 10px 20px;
+  margin: 0px 20px;
+}
+
+.login-dialog-pos {
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.named-input {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.6rem;
+  font-weight: 900;
+  .name {
+    margin-bottom: 3px;
+    margin-top: 0px;
+  }
+}
+
+.app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .popups {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff3b;
+    display: flex;
+    .centered {
+      margin: auto;
+    }
+  }
 }

@@ -1,26 +1,42 @@
 .button-container {
+  border-style: inset;
   border: 2px solid transparent;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border-image: url(../../../assets/input-area-empty-background.png) 2 round;
-  background-image: url(../../../assets/background.png);
+  border-image: url(../../../assets/input-area-empty-background.png) 2;
+  background-image: url(../../../assets/button-default.png);
   display: flex;
   flex-direction: column;
   color: white;
-  width: fit-content;
-  padding: 10px;
+  padding:  5px 10px;
   font-weight: 900;
   font-family: Cardo, Arial;
-
+  text-align: center;
+  p {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
   &:hover {
     color: white;
-    border-image: url(../../../assets/border-over.png) 2 round;
+    border-image: url(../../../assets/border-over.png) 2;
     background-image: url(../../../assets/background-over.png);
   }
 
   &:active {
     color: #7F7F7F;
-    border-image: url(../../../assets/border-off.png) 2 round;
+    border-image: url(../../../assets/border-off.png) 2;
     background-image: url(../../../assets/background-off.png);
+  }
+}
+
+.red-bg {
+  background-image: url(../../../assets/red-bg-default.png);
+  &:hover {
+    background-image: url(../../../assets/red-bg-over.png);
+  }
+
+  &:active {
+    background-image: url(../../../assets/red-bg-off.png);
   }
 }

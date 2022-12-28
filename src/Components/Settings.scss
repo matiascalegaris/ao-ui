@@ -1,22 +1,13 @@
-.container {
-  background-size: 100% 100%;
-  background-image: url(../assets/background.png);
-  background-repeat: no-repeat;
-  border: 20px solid transparent;
-  border-image: url(../assets/frame.png) 22 round;
+.header {
+  text-align: center;
+  font-weight: 900; 
+}
+.input-area {
+  flex-direction: row;
   display: flex;
-  flex-direction: column;
-  color: white;
-  width: fit-content;
-  .header {
-    text-align: center;
-    font-weight: 900; 
-  }
-  .tabSelection {
-    flex-direction: row;
+  .named-input {
     display: flex;
-    .option {
-      margin: 10px;
-    }
+    display: column;
+    margin: 10px;
   }
 }

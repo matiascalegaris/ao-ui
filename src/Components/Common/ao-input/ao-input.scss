@@ -1,0 +1,21 @@
+.group {
+  border: 2px solid transparent;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-image: url(../../../assets/input-area-empty-background.png) 2;
+  background-image: url(../../../assets/background.png);
+  position: relative;
+  color: white;
+  padding: 5px;
+  font-family: Cardo, Arial;
+
+  .form-input {
+    background: transparent;
+    border: none;
+    color: white;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
