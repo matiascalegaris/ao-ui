@@ -4,11 +4,14 @@ import { useTranslation } from 'react-i18next';
 import AoButton from '../../Common/ao-button/ao-button';
 import AoInput from '../../Common/ao-input/ao-input';
 import AoDialog from '../../Common/ao-dialog/ao-dialog';
+import { useDispatch } from 'react-redux';
+import { setActiveDialog } from '../../../redux/UIFlowSlice'
 
 export default function ValidateAccount() {
   const [userCredentials, setCredentials] = useState({email:'', code:''});
   const {email, code } = userCredentials;
   const { t } = useTranslation();
+  const dispatch = useDispatch()
 
   const handleChange = event => {
     const { value, name } = event.target;

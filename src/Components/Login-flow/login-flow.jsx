@@ -1,26 +1,30 @@
-import React, {useState} from "react";
 import './login-flow.scss'
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import LogIn from "../Dialogs/login/login";
 import CreateAccount from "../Dialogs/create-account/create-account";
 import ValidateAccount from "../Dialogs/validate-account/validate-account";
 import ValidateCode from "../Dialogs/validate-code/validate-code";
+import { selectActiveDialog, setActiveDialog } from '../../redux/UIFlowSlice'
+import {RegisterApiCallback} from '../../Api/Api'
+
 
 export default function LogInFlow() {
-  const [state, setState] = useState({activeDialog:'login'});
-  const {activeDialog} = state;
-
-  const changeDialog = newDialog => {
-    setState({activeDialog: newDialog})
-  }
-
+  const activeDialog = useSelector(selectActiveDialog)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    RegisterApiCallback('setActiveDialog', (dialog) => {
+      dispatch(setActiveDialog(dialog))
+    });
+  },[]);
   return (
-    <div class='login-flow'>
+    <div className='login-flow'>
       {
         {
-          'login':<LogIn setNewDialog={changeDialog}/>,
-          'create-account': <CreateAccount setNewDialog={changeDialog}/>,
-          'validate-account': <ValidateAccount setNewDialog={changeDialog}/>,
-          'validate-code': <ValidateCode setNewDialog={changeDialog}/>
+          'login':<LogIn/>,
+          'create-account': <CreateAccount/>,
+          'validate-account': <ValidateAccount/>,
+          'validate-code': <ValidateCode />
         }
         [activeDialog]
       }

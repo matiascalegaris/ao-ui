@@ -10,7 +10,8 @@ const resources = {
       "SETTINGS": "Settings",
       'recovery-mail-hint': `If you don't get the recovery email, please check in the "Spam" folder.`,
       'recover-password-text': `Enter the email address that you used to create the account and we'll send you a recovery code.`,
-      'password-requirements': `Plase include at least one Upper and one lower case letter, and two numbers. The password can't start with a number.` 
+      'password-requirements': `Plase include at least one Upper and one lower case letter, and two numbers. The password can't start with a number.`,
+      'robot-code': "what is {{first}} + {{second}}" 
     }
   },
   es: {
@@ -18,7 +19,8 @@ const resources = {
       "SETTINGS": "Configuración",
       'recovery-mail-hint': `Si no recibiste el email de recuperacion, revisa la carpeta de "Spam".`,
       'recover-password-text': `Ingresa el mail que usaste para crear la cuenta y te enviaremos un codigo de recuperacion`,
-      'password-requirements': `Plase include at least one Upper and one lower case letter, and two numbers. The password can't start with a number.`
+      'password-requirements': `Plase include at least one Upper and one lower case letter, and two numbers. The password can't start with a number.`,
+      'robot-code': "cuanto es {{first}} + {{second}}"
     }
   }
 };

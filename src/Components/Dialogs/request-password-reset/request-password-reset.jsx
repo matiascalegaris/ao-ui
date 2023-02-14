@@ -5,11 +5,14 @@ import AoButton from '../../Common/ao-button/ao-button';
 import AoInput from '../../Common/ao-input/ao-input';
 import AoDialog from '../../Common/ao-dialog/ao-dialog';
 import AoLinkButton from "../../Common/ao-button/ao-link-button/ao-link-button";
+import { useDispatch } from 'react-redux';
+import { setActiveDialog } from '../../../redux/UIFlowSlice'
 
-export default function RequestPasswordReset({setNewDialog}) {
+export default function RequestPasswordReset() {
   const [userCredentials, setCredentials] = useState({email:''});
   const {email} = userCredentials;
   const { t } = useTranslation();
+  const dispatch = useDispatch()
 
   const handleChange = event => {
     const { value, name } = event.target;
@@ -17,11 +20,11 @@ export default function RequestPasswordReset({setNewDialog}) {
   }
   const validateCode = event => {
     event.preventDefault();
-    setNewDialog('validate-code')
+    dispatch(setActiveDialog('validate-code'));
   }
   const returnToMain = event => {
     event.preventDefault();
-    setNewDialog('create-account')
+    dispatch(setActiveDialog('create-account'));
   }
 
   return (
@@ -40,7 +43,7 @@ export default function RequestPasswordReset({setNewDialog}) {
       <div class='bottom-line'>
         <div class='line'>
           <AoButton className='split-area' caption='cancel' styles='split-area' onClick={ returnToMain } />
-          <AoButton className='split-area' caption='create account' styles='split-area red-bg'/>
+          <AoButton className='split-area' caption='create account' isRed={true} disabled={true} styles='split-area'/>
         </div>
         <div class='line'>
           <AoLinkButton styles='links' onClick={validateCode} caption='I already have a recovery code'/>

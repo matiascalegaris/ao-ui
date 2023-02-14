@@ -1,0 +1,14 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+  .message {
+    margin: auto;
+  }
+  .button-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+}

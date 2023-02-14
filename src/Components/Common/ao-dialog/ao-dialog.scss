@@ -1,13 +1,83 @@
+@keyframes fade-in {
+  from {transform: translateY(vh)}
+  to {transform: translateX(0px);}
+}
+
 .dialog-container {
   background-size: 100% 100%;
   background-image: url(../../../assets/background.png);
   background-repeat: no-repeat;
-  border: 22px solid transparent;
-  border-image: url(../../../assets/frame.png) 22;
   display: flex;
   flex-direction: column;
   color: white;
   width: fit-content;
   height: fit-content;
   padding: 0px;
+  animation-name: fade-in;
+  animation-duration: 5.4s;
+  animation-timing-function: ease-out;
+  position: relative;
+  .content {
+    margin: 22px;
+  }
+  .frame-top-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22;
+    height: 21;
+  }
+  .frame-bottom-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 22;
+    height: 21;
+  }
+  .frame-top-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 22;
+    height: 21;
+  }
+  .frame-bottom-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 22;
+    height: 21;
+  }
+  .frame-center-top {
+    position: absolute;
+    right: 22px;
+    left: 22px;
+    top: 0;
+    height: 21px;
+    width: fill-available;
+  }
+  .frame-center-bottom {
+    position: absolute;
+    right: 22px;
+    left: 22px;
+    bottom: 0;
+    height: 21px;
+    width: fill-available;
+  }
+  .frame-center-left {
+    position: absolute;
+    left: 0px;
+    top: 21px;
+    bottom: 21px;
+    width: 22px;
+    height: fill-available;
+  }
+  .frame-center-right {
+    position: absolute;
+    right: 0px;
+    top: 21px;
+    bottom: 21px;
+    width: 22px;
+    height: fill-available;
+  }
 }
