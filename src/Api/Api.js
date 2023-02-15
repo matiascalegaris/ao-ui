@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
       console.log('close client')
     },
     GetCredentials: () => ({
-      user: "test@a.com",
+      user: '', //"test@a.com",
       password: "pwdd",
     })
   }

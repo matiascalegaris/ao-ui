@@ -17,7 +17,7 @@ export default function LogIn() {
   useEffect(() => {
     const credentials = window.parent.BabelUI.GetCredentials()
     console.log(credentials);
-    if (credentials.user.length > 0 ) {
+    if (credentials.user.length > 0 || credentials.password.length > 0) {
       setCredentials({ ...userCredentials, 
         storeCredentials: true,
         email: credentials.user,
@@ -27,6 +27,10 @@ export default function LogIn() {
   const handleChange = event => {
     const { value, name } = event.target;
     setCredentials({ ...userCredentials, [name]: value});
+  }
+
+  const rememberLogin = event => {
+    setCredentials({ ...userCredentials, storeCredentials: !storeCredentials});
   }
   const updateDialog = event => {
     event.preventDefault();
@@ -61,7 +65,7 @@ export default function LogIn() {
             </p>
             <AoInput name="password" IsValid={validPwd} type="password" value={password} required handleChange={handleChange} />
           </div>
-          <AoCheckbox label={t('Remember me')} styles='split-area right-padding'/>
+          <AoCheckbox label={t('Remember me')} name="storeCredentials" styles='split-area right-padding' handleChange={rememberLogin} state={storeCredentials} />
           <AoButton caption='connect' styles='split-area' isRed={true} disabled={!enableLogin}  onClick={ DoLogin }/>
       </div>
       <div className='bottom-line'>
