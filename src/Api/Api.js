@@ -19,7 +19,11 @@ if (process.env.NODE_ENV === 'development') {
     },
     CloseClient: () => {
       console.log('close client')
-    }
+    },
+    GetCredentials: () => ({
+      user: "test",
+      password: "pwdd",
+    })
   }
 }
 export {RegisterApiCallback}

@@ -16,12 +16,12 @@ export default function AoDialog({children, styles}) {
       
       <div className='frame-side-container left'>
         <div className='spacer'></div>
-        <div className='frame-center left-img'></div>
+        <div className='left-img frame-center'></div>
         <div className='spacer'></div>
       </div>
       <div className='frame-side-container right'>
         <div className='spacer'></div>
-        <div className='frame-center right-img'></div>
+        <div className='right-img frame-center'></div>
         <div className='spacer'></div>
       </div>
       <div className='content'>

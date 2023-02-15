@@ -23,22 +23,26 @@ export default function ValidateAccount() {
       <h1 class='dialog-header'>{t('validate account').toUpperCase()}</h1>
       <div class='content-area'>
         <p class='desc-text'>{t('Enter the validation code sent to the email you used for registering.')}</p>
+        <span className="vertical-gap10"></span>
         <div class='named-input user'>
           <p class='name'>
             {t('email').toUpperCase()}
           </p>
           <AoInput name="email" type="email" value={email} required handleChange={handleChange} />
         </div>
+        <span className="vertical-gap10"></span>
         <div class='code-area'>
           <p class='code'>
             {t('validation code').toUpperCase()}
           </p>
+          <span className="horizontal-gap10"></span>
           <AoInput name="code" value={code} required handleChange={handleChange} />
         </div>
       </div>
       <div class='bottom-line'>
           <div class='line'>
             <AoButton caption='cancel' styles='split-area'/>
+            <span className="horizontal-gap10"></span>
             <AoButton caption='send' styles='split-area'/>
           </div>
       </div>

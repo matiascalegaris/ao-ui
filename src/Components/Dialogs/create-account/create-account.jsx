@@ -84,11 +84,14 @@ export default function CreateAccount() {
       <div class='bottom-line'>
         <div class='line'>
           <AoButton className='split-area' caption='cancel' styles='split-area'onClick={ returnToMain } />
+          <span className="horizontal-gap10"></span>
           <AoButton className='split-area' caption='create account' isRed={true} disabled={!validForm} styles='split-area'/>
         </div>
+        <span className="vertical-gap10"></span>
         <div class='line'>
-          <AoLinkButton styles='links split-area' onClick={validateAccount} caption={t('Validate account')}/>
-          <AoLinkButton styles='links split-area' onClick={validateCode} caption={t('Recover password')}/>
+          <AoLinkButton styles='split-area' onClick={validateAccount} caption={t('Validate account')}/>
+          <span className="horizontal-gap10"></span>
+          <AoLinkButton styles='split-area' onClick={validateCode} caption={t('Recover password')}/>
         </div>
       </div>
     </AoDialog>

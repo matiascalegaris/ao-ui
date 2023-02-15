@@ -5,7 +5,7 @@ const ValidateEmail = email => {
 }
 
 const ValidatePassword = pwd => {
-  return pwd.length === 0 || pwd.length > 4
+  return pwd.length === 0 || pwd.length >= 4
 }
 
 const SanitazeInput = input => {

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './login.scss'
 import { useTranslation } from 'react-i18next';
 import AoButton from '../../Common/ao-button/ao-button';
@@ -14,7 +14,16 @@ export default function LogIn() {
   const {email, password, storeCredentials } = userCredentials;
   const { t } = useTranslation();
   const dispatch = useDispatch()
-
+  useEffect(() => {
+    const credentials = window.parent.BabelUI.GetCredentials()
+    console.log(credentials);
+    if (credentials.user.length > 0 ) {
+      setCredentials({ ...userCredentials, 
+        storeCredentials: true,
+        email: credentials.user,
+        password: credentials.password});  
+    }
+  },[]);
   const handleChange = event => {
     const { value, name } = event.target;
     setCredentials({ ...userCredentials, [name]: value});
@@ -54,6 +63,7 @@ export default function LogIn() {
       </div>
       <div className='bottom-line'>
         <AoButton caption='account' styles='split-area' onClick={ updateDialog }/>
+        <span className="horizontal-gap10"></span>
         <AoButton caption='exit' styles='split-area' onClick={ DoClose }/>
       </div>
     </AoDialog>

@@ -3,7 +3,6 @@
     padding: 0px 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     margin-bottom: 20px;
     .desc-text {
       text-align: start;
@@ -16,7 +15,6 @@
     .code-area {
       display: flex;
       flex-direction: row;
-      gap: 10px;
       .code {
         flex-grow: 1;
         text-align: end;
@@ -38,11 +36,9 @@
     padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     .line {
       display: flex;
       flex-direction: row;
-      gap: 10px;
       width: 100%;
       padding-bottom: 20px;
       border-bottom: #444343b3 2px solid;

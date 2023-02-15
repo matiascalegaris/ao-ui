@@ -43,7 +43,7 @@
 
 .login-dialog-pos {
   margin: auto;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .named-input {
@@ -55,6 +55,20 @@
     margin-bottom: 3px;
     margin-top: 0px;
   }
+}
+
+.vertical-gap10 {
+  height: 0px;
+  width: 0px;
+  opacity: 0;
+  margin: 5px 0px;
+}
+
+.horizontal-gap10 {
+  height: 0px;
+  width: 0px;
+  opacity: 0;
+  margin: 0px 5px;
 }
 
 .app {

@@ -32,19 +32,23 @@ export default function RequestPasswordReset() {
       <h1 class='dialog-header'>{t('recover pasword').toUpperCase()}</h1>
       <div class='content-area'>
         <p class='desc-text'>{t('recover-password-text')}</p>
+        <span className="vertical-gap10"></span>
         <div class='named-input user'>
           <p class='name'>
             {t('email').toUpperCase()}
           </p>
           <AoInput name="email" type="email" value={email} required handleChange={handleChange} />
         </div>
+        <span className="vertical-gap10"></span>
         <p class='desc-text info-text'>{t('recovery-mail-hint')}</p>
       </div>
       <div class='bottom-line'>
         <div class='line'>
           <AoButton className='split-area' caption='cancel' styles='split-area' onClick={ returnToMain } />
+          <span className="horizontal-gap10"></span>
           <AoButton className='split-area' caption='create account' isRed={true} disabled={true} styles='split-area'/>
         </div>
+        <span className="vertical-gap10"></span>
         <div class='line'>
           <AoLinkButton styles='links' onClick={validateCode} caption='I already have a recovery code'/>
         </div>
