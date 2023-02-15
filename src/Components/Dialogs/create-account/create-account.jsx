@@ -46,7 +46,7 @@ export default function CreateAccount() {
   const validForm = validName && validSurName && validEmail && validPassword && validateRobotCode
   return (
     <AoDialog styles='create-account login-dialog-pos'>
-      <h1 class='header'>{t('create account').toUpperCase()}</h1>
+      <h1 class='dialog-header'>{t('create account').toUpperCase()}</h1>
         <div class="input-area">
         <div class='named-input name'>
             <p class='name'>
