@@ -42,6 +42,9 @@ export default function LogIn() {
     event.preventDefault();
     window.parent.BabelUI.CloseClient();
   }
+  const validUser = ValidateEmail(email)
+  const validPwd = ValidatePassword(password)
+  const enableLogin = validUser && validPwd && email.length > 0 && password.length > 0
   return (
     <AoDialog styles='login-dialog-pos'>
       <h1 className='login-header'>{t('log in').toUpperCase()}</h1>
@@ -50,16 +53,16 @@ export default function LogIn() {
             <p className='name'>
               {t('email').toUpperCase()}
             </p>
-            <AoInput name="email" type="email" IsValid={ValidateEmail(email)} value={email} required handleChange={handleChange} />
+            <AoInput name="email" type="email" IsValid={validUser} value={email} required handleChange={handleChange} />
           </div>
           <div className='named-input password'>
             <p className='name'>
               {t('password').toUpperCase()}
             </p>
-            <AoInput name="password" IsValid={ValidatePassword(password)} type="password" value={password} required handleChange={handleChange} />
+            <AoInput name="password" IsValid={validPwd} type="password" value={password} required handleChange={handleChange} />
           </div>
           <AoCheckbox label={t('Remember me')} styles='split-area right-padding'/>
-          <AoButton caption='connect' styles='split-area' isRed={true} disabled={true}  onClick={ DoLogin }/>
+          <AoButton caption='connect' styles='split-area' isRed={true} disabled={!enableLogin}  onClick={ DoLogin }/>
       </div>
       <div className='bottom-line'>
         <AoButton caption='account' styles='split-area' onClick={ updateDialog }/>

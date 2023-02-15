@@ -1,8 +1,9 @@
 .message {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  .message {
+  padding: 10px;
+  min-width: 160px;
+  .text {
     margin: auto;
   }
   .button-line {

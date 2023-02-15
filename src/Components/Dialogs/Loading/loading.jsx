@@ -4,10 +4,12 @@ import './loading.scss'
 
 export default function Loading({children, styles}) {
   return (
-    <AoDialog styles={'loading ' + styles}>
-      <Spinner/>
-      <div className='content'>
-        {children}
+    <AoDialog styles={styles} >
+      <div className='loading'>
+        <Spinner styles="spinner"/>
+        <div className='content'>
+          {children}
+        </div>
       </div>
     </AoDialog>
   )

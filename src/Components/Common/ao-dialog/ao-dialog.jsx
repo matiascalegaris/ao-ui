@@ -1,6 +1,6 @@
 import './ao-dialog.scss'
 
-export default function AoDialog({children, styles}) {
+export default function AoDialog({children, styles, contentStyles}) {
   return (
     <form className={'dialog-container ' + styles} autoComplete="off">
       <div className='frame-line-container top'>
@@ -24,7 +24,7 @@ export default function AoDialog({children, styles}) {
         <div className='right-img frame-center'></div>
         <div className='spacer'></div>
       </div>
-      <div className='content'>
+      <div className={'content ' + contentStyles}>
         {children}
       </div>
       
