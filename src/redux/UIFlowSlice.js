@@ -10,6 +10,7 @@ export const UIFlowSlice = createSlice({
   },
   reducers: {
     setActiveDialog : (state, action) => {
+      state.loading = false
       state.activeDialog = action.payload
     },
     displayLoading : (state, action) => {

@@ -1,13 +1,13 @@
 
 const RegisterApiCallback = (name,callback) => {
+  console.log('registering callback ' + name);
   if (window.parent.APicallbacks == null) {
-    window.parent.APicallbacks = {
-      name: callback
-    }
+    console.log('creating empty ' + name);
+    window.parent.APicallbacks = {}
+    
   }
-  else {
-    window.parent.APicallbacks[name] = callback
-  }
+  window.parent.APicallbacks[name] = callback
+  console.log('registering callback done');
 }
 
 if (process.env.NODE_ENV === 'development') {
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
       console.log('close client')
     },
     GetCredentials: () => ({
-      user: '', //"test@a.com",
+      user: "test@a.com",
       password: "pwdd",
     }),
     CreateAcount: (email, password, name, surname) => ({
