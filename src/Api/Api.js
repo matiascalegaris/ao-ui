@@ -12,7 +12,7 @@ const RegisterApiCallback = (name,callback) => {
 
 if (process.env.NODE_ENV === 'development') {
   window.parent.BabelUI = {
-    Login: (email, password) => {
+    Login: (email, password, storeCredentials) => {
       setTimeout(() => {
         window.parent.APicallbacks.ErrorMessage('failed to connect to server', 0, 1)
       }, 5000)

@@ -15,7 +15,7 @@ export default function ErrorMessage({children, styles}) {
         </div>
         <span className="vertical-gap10"></span>
         <div className='button-line'>
-          <AoButton caption='accept' onClick={ ()=> dispatch(hideErrorMessage()) }></AoButton>
+          <AoButton styles='button-settings' caption='accept' onClick={ ()=> dispatch(hideErrorMessage()) }></AoButton>
         </div>
       </div>
     </AoDialog>

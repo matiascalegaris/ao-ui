@@ -39,7 +39,7 @@ export default function LogIn() {
   const DoLogin = event => {
     event.preventDefault();
     dispatch(displayLoadingText('connecting-to-server'))
-    window.parent.BabelUI.Login(email, password);
+    window.parent.BabelUI.Login(email, password, storeCredentials);
   }
 
   const DoClose = event => {

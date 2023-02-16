@@ -10,5 +10,10 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
+    margin-left: auto;
+  }
+
+  .button-settings {
+    padding: 3px 10px;
   }
 }
