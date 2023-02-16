@@ -6,7 +6,7 @@ import AoInput from '../../Common/ao-input/ao-input';
 import AoDialog from '../../Common/ao-dialog/ao-dialog';
 import AoLinkButton from "../../Common/ao-button/ao-link-button/ao-link-button";
 import { useDispatch } from 'react-redux';
-import { setActiveDialog } from '../../../redux/UIFlowSlice'
+import { setActiveDialog, displayLoadingText } from '../../../redux/UIFlowSlice'
 import { GetRandomInt, ValidatePassword, ValidateEmail, ValidateRoboCode, ValidateString } from "../../../Tools/Utils";
 
 export default function CreateAccount() {
@@ -38,12 +38,19 @@ export default function CreateAccount() {
     event.preventDefault();
     dispatch(setActiveDialog('validate-code'));
   }
+
+  const createAccount = event => {
+    event.preventDefault();
+    dispatch(displayLoadingText('connecting-to-server'))
+    window.parent.BabelUI.CreateAcount(email, password, name, surname);
+  }
   const validName = ValidateString(name)
   const validSurName = ValidateString(surname)
   const validEmail = ValidateEmail(email)
   const validPassword = ValidatePassword(password)
   const validateRobotCode = ValidateRoboCode(validationParam1,validationParam2,validateField)
-  const validForm = validName && validSurName && validEmail && validPassword && validateRobotCode
+  const hasValues = name.length > 0 && surname.length > 0 && email.length > 0 && password.length > 0 && validateField.length > 0
+  const validForm = hasValues && validName && validSurName && validEmail && validPassword && validateRobotCode
   return (
     <AoDialog styles='create-account login-dialog-pos'>
       <h1 class='dialog-header'>{t('create account').toUpperCase()}</h1>
@@ -85,7 +92,7 @@ export default function CreateAccount() {
         <div class='line'>
           <AoButton className='split-area' caption='cancel' styles='split-area'onClick={ returnToMain } />
           <span className="horizontal-gap10"></span>
-          <AoButton className='split-area' caption='create account' isRed={true} disabled={!validForm} styles='split-area'/>
+          <AoButton className='split-area' caption='create account' isRed={true} disabled={!validForm} styles='split-area' onClick={createAccount} />
         </div>
         <span className="vertical-gap10"></span>
         <div class='line'>

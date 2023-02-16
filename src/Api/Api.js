@@ -23,6 +23,9 @@ if (process.env.NODE_ENV === 'development') {
     GetCredentials: () => ({
       user: '', //"test@a.com",
       password: "pwdd",
+    }),
+    CreateAcount: (email, password, name, surname) => ({
+      
     })
   }
 }
