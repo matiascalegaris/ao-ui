@@ -6,6 +6,7 @@ import AoInput from '../../Common/ao-input/ao-input';
 import AoDialog from '../../Common/ao-dialog/ao-dialog';
 import { useDispatch } from 'react-redux';
 import { setActiveDialog } from '../../../redux/UIFlowSlice'
+import { ValidateEmail, ValidValidationCode } from "../../../Tools/Utils";
 
 export default function ValidateAccount() {
   const [userCredentials, setCredentials] = useState({email:'', code:''});
@@ -17,7 +18,22 @@ export default function ValidateAccount() {
     const { value, name } = event.target;
     setCredentials({ ...userCredentials, [name]: value});
   }
+  const cancel = event => {
+    event.preventDefault();
+    dispatch(setActiveDialog('create-account'));
+  }
+  const resendCode = event => {
+    event.preventDefault();
+    window.parent.APicallbacks.ResendValidationCode(email)
+  }
+  const validateCode = event => {
+    event.preventDefault();
+    window.parent.APicallbacks.ValidateCode(email, code)
+  }
 
+  const validEmail = ValidateEmail(email)
+  const validCode = ValidValidationCode(code)
+  const buttonEnabled = validEmail && validCode
   return (
     <AoDialog styles='validate-account login-dialog-pos'>
       <h1 class='dialog-header'>{t('validate account').toUpperCase()}</h1>
@@ -28,22 +44,25 @@ export default function ValidateAccount() {
           <p class='name'>
             {t('email').toUpperCase()}
           </p>
-          <AoInput name="email" type="email" value={email} required handleChange={handleChange} />
+          <AoInput name="email" type="email" value={email} IsValid={validEmail || email.length === 0} required handleChange={handleChange} />
         </div>
         <span className="vertical-gap10"></span>
         <div class='code-area'>
           <p class='code'>
-            {t('validation code').toUpperCase()}
+            {t('validation-code').toUpperCase()}
           </p>
           <span className="horizontal-gap10"></span>
-          <AoInput name="code" value={code} required handleChange={handleChange} />
+          <AoInput name="code" value={code} IsValid={validCode || email.length === 0} required handleChange={handleChange} />
         </div>
       </div>
       <div class='bottom-line'>
           <div class='line'>
-            <AoButton caption='cancel' styles='split-area'/>
+            <AoButton caption='resend-code' disabled={!validEmail || email.length === 0} styles='split-area' onClick={ resendCode }/>
+          </div>
+          <div class='line'>
+            <AoButton caption='cancel' styles='split-area' onClick={ cancel } />
             <span className="horizontal-gap10"></span>
-            <AoButton caption='send' styles='split-area'/>
+            <AoButton caption='send' isRed={true} disabled={!buttonEnabled} styles='split-area' onClick={ validCode }/>
           </div>
       </div>
     </AoDialog>

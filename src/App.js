@@ -13,11 +13,12 @@ function App() {
   const { t } = useTranslation();
   useEffect(() => {
     RegisterApiCallback('ErrorMessage', (msg, localize, action) => {
+      console.log('message:' + msg + ' ' + localize + '' + action )
       if (localize) {
-        dispatch(displayErrorMessage(msg))
+        dispatch(displayErrorMessage(t(msg)))
       }
       else {
-        dispatch(displayErrorMessage(t(msg)))
+        dispatch(displayErrorMessage(msg))
       }
       
     })

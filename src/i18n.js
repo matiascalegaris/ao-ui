@@ -11,7 +11,12 @@ const resources = {
       'recovery-mail-hint': `If you don't get the recovery email, please check in the "Spam" folder.`,
       'recover-password-text': `Enter the email address that you used to create the account and we'll send you a recovery code.`,
       'password-requirements': `Plase include at least one Upper and one lower case letter, and two numbers. The password can't start with a number.`,
-      'robot-code': "{{first}} + {{second}} =" 
+      'robot-code': "{{first}} + {{second}} =",
+      'connection-failure': `An error has occurred while connecting to the server. We recommend checking the status of the servers at ao20.com.ar, and ensuring that you are directly connected to the internet.`,
+      'connecting-to-server': `Connecting to server`,
+      'connection-closed': `Connection closed by server`,
+      'validation-code': `validation code`,
+      'resend-code': `resend validation code`
     }
   },
   es: {
@@ -19,8 +24,15 @@ const resources = {
       "SETTINGS": "Configuración",
       'recovery-mail-hint': `Si no recibiste el email de recuperacion, revisa la carpeta de "Spam".`,
       'recover-password-text': `Ingresa el mail que usaste para crear la cuenta y te enviaremos un codigo de recuperacion`,
-      'password-requirements': `Plase include at least one Upper and one lower case letter, and two numbers. The password can't start with a number.`,
-      'robot-code': "{{first}} + {{second}} ="
+      'password-requirements': `La contraseña debe incluyes una mayucula, una minuscula y dos numeros. La contraseña no puede empezar con un numero.`,
+      'robot-code': "{{first}} + {{second}} =",
+      'connection-failure': `Ha ocurrido un error al conectar con el servidor. Le recomendamos verificar el estado de los servidores en ao20.com.ar, y asegurarse de estar conectado directamente a internet`,
+      'connecting-to-server': `Conectandose al servidor`,
+      'connection-closed': `Se perdio la conexion con el servidor`,
+      'validation-code': `código de validación`,
+      'resend-code': `Reenviar código de activación`,
+      'send': `enviar`,
+      'cancel': 'cancelar'
     }
   }
 };

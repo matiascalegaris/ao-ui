@@ -34,15 +34,15 @@ export default function CreateAccount() {
     event.preventDefault();
     dispatch(setActiveDialog('validate-account'));
   }
-  const validateCode = event => {
+  const passwordReset = event => {
     event.preventDefault();
-    dispatch(setActiveDialog('validate-code'));
+    dispatch(setActiveDialog('reset-password-request'));
   }
 
   const createAccount = event => {
     event.preventDefault();
-    dispatch(displayLoadingText('connecting-to-server'))
-    window.parent.BabelUI.CreateAcount(email, password, name, surname);
+    dispatch(displayLoadingText(t('connecting-to-server')))
+    window.parent.BabelUI.CreateAccount(email, password, name, surname);
   }
   const validName = ValidateString(name)
   const validSurName = ValidateString(surname)
@@ -53,7 +53,7 @@ export default function CreateAccount() {
   const validForm = hasValues && validName && validSurName && validEmail && validPassword && validateRobotCode
   return (
     <AoDialog styles='create-account login-dialog-pos'>
-      <h1 class='dialog-header'>{t('create account').toUpperCase()}</h1>
+      <h1 className='dialog-header'>{t('create account').toUpperCase()}</h1>
         <div class="input-area">
         <div class='named-input name'>
             <p class='name'>
@@ -98,7 +98,7 @@ export default function CreateAccount() {
         <div class='line'>
           <AoLinkButton styles='split-area' onClick={validateAccount} caption={t('Validate account')}/>
           <span className="horizontal-gap10"></span>
-          <AoLinkButton styles='split-area' onClick={validateCode} caption={t('Recover password')}/>
+          <AoLinkButton styles='split-area' onClick={passwordReset} caption={t('Recover password')}/>
         </div>
       </div>
     </AoDialog>

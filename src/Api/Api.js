@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
   window.parent.BabelUI = {
     Login: (email, password, storeCredentials) => {
       setTimeout(() => {
-        window.parent.APicallbacks.ErrorMessage('failed to connect to server', 0, 1)
+        window.parent.APicallbacks.ErrorMessage('connection-failure', 1, 0)
       }, 5000)
     },
     CloseClient: () => {
@@ -24,9 +24,15 @@ if (process.env.NODE_ENV === 'development') {
       user: "test@a.com",
       password: "pwdd",
     }),
-    CreateAcount: (email, password, name, surname) => ({
-      
-    })
+    CreateAccount: (email, password, name, surname) => ({
+    }),
+    ResendValidationCode: email => {
+    },
+    ValidateCode: (email, code) => {
+    },
+    ValidatePrevCode: code => {
+
+    }
   }
 }
 export {RegisterApiCallback}

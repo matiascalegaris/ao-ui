@@ -38,7 +38,7 @@ export default function LogIn() {
   }
   const DoLogin = event => {
     event.preventDefault();
-    dispatch(displayLoadingText('connecting-to-server'))
+    dispatch(displayLoadingText(t('connecting-to-server')))
     window.parent.BabelUI.Login(email, password, storeCredentials);
   }
 
