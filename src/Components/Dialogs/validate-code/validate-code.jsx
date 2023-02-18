@@ -40,8 +40,8 @@ export default function ValidateCode() {
       </div>
       <div class='bottom-line'>
           <div class='line'>
-            <AoButton caption='cancel' styles='split-area' onClick={cancel}/>
-            <AoButton caption='accept' disabled={!validCode} isRed={true} styles='split-area' onClick={send}/>
+            <AoButton styles='split-area' onClick={cancel}>{t('cancel').toUpperCase()}</AoButton>
+            <AoButton disabled={!validCode} isRed={true} styles='split-area' onClick={send}>{t('accept').toUpperCase()}</AoButton>
           </div>
       </div>
     </AoDialog>

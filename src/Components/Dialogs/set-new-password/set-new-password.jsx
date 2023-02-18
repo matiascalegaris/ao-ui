@@ -45,8 +45,8 @@ export default function SetNewPassword() {
       </div>
       <div className='bottom-line'>
           <div className='line'>
-            <AoButton caption='cancel' styles='split-area'/>
-            <AoButton caption='send' styles='split-area'/>
+            <AoButton styles='split-area'>{t('cancel').toUpperCase()}</AoButton>
+            <AoButton styles='split-area'>{t('send').toUpperCase()}</AoButton>
           </div>
       </div>
     </AoDialog>

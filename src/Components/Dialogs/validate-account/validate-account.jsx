@@ -24,11 +24,11 @@ export default function ValidateAccount() {
   }
   const resendCode = event => {
     event.preventDefault();
-    window.parent.APicallbacks.ResendValidationCode(email)
+    window.parent.BabelUI.ResendValidationCode(email)
   }
   const validateCode = event => {
     event.preventDefault();
-    window.parent.APicallbacks.ValidateCode(email, code)
+    window.parent.BabelUI.ValidateCode(email, code)
   }
 
   const validEmail = ValidateEmail(email)
@@ -57,12 +57,12 @@ export default function ValidateAccount() {
       </div>
       <div class='bottom-line'>
           <div class='line'>
-            <AoButton caption='resend-code' disabled={!validEmail || email.length === 0} styles='split-area' onClick={ resendCode }/>
+            <AoButton disabled={!validEmail || email.length === 0} styles='split-area' onClick={ resendCode }>{t('resend-code').toUpperCase()}</AoButton>
           </div>
           <div class='line'>
-            <AoButton caption='cancel' styles='split-area' onClick={ cancel } />
+            <AoButton styles='split-area' onClick={ cancel }>{t('cancel').toUpperCase()}</AoButton>
             <span className="horizontal-gap10"></span>
-            <AoButton caption='send' isRed={true} disabled={!buttonEnabled} styles='split-area' onClick={ validCode }/>
+            <AoButton isRed={true} disabled={!buttonEnabled} styles='split-area' onClick={ validateCode }>{t('send').toUpperCase()}</AoButton>
           </div>
       </div>
     </AoDialog>

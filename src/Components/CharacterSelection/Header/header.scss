@@ -1,0 +1,36 @@
+.header {
+  width: 100%;
+  position: relative;
+  .logo-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    width: 100%;
+    .logo {
+      margin: 0 auto;
+      height: 25vh;
+    }
+  }
+
+  .leather-frame {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .top-leather {
+      width: 100%;
+      background-image: url(../../../assets/Backgrounds/leather_brown.png);
+      background-repeat: repeat-x;
+      height: 10vh;
+      position:relative;
+      display: flex;
+      flex-direction: row;
+    }
+    .top-long-frame {
+      width: 100%;
+      background-image: url(../../../assets/Misc/divider_horizontal_big.png);
+    }
+  }
+  
+}
