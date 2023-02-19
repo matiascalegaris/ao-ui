@@ -8,6 +8,7 @@ import ValidateCode from "../Dialogs/validate-code/validate-code";
 import { selectActiveDialog, setActiveDialog } from '../../redux/UIFlowSlice'
 import {RegisterApiCallback} from '../../Api/Api'
 import RequestPasswordReset from '../Dialogs/request-password-reset/request-password-reset';
+import CharacterSelectionScreen from '../CharacterSelection/CharacterSelectionScreen/character-selection';
 
 
 export default function LogInFlow() {
@@ -26,7 +27,8 @@ export default function LogInFlow() {
           'create-account': <CreateAccount/>,
           'validate-account': <ValidateAccount/>,
           'validate-code': <ValidateCode />,
-          'reset-password-request': <RequestPasswordReset/>
+          'reset-password-request': <RequestPasswordReset/>,
+          'character-selection': <CharacterSelectionScreen/>
         }
         [activeDialog]
       }

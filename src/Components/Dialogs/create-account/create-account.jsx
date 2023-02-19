@@ -90,9 +90,12 @@ export default function CreateAccount() {
       </div>
       <div class='bottom-line'>
         <div class='line'>
-          <AoButton className='split-area' caption='cancel' styles='split-area'onClick={ returnToMain } />
+          <AoButton className='split-area' styles='split-area'onClick={ returnToMain }>{t('cancel').toUpperCase()}</AoButton>
           <span className="horizontal-gap10"></span>
-          <AoButton className='split-area' caption='create account' isRed={true} disabled={!validForm} styles='split-area' onClick={createAccount} />
+          <AoButton className='split-area' isRed={true} disabled={!validForm} 
+                    styles='split-area' onClick={createAccount}>
+            {t('create account').toUpperCase()}
+          </AoButton>
         </div>
         <span className="vertical-gap10"></span>
         <div class='line'>

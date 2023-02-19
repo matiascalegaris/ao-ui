@@ -1,8 +1,6 @@
 import './ao-button.scss'
-import { useTranslation } from 'react-i18next';
 
-export default function AoButton({caption, styles, disabled, isRed, ...otherProps}) {
-  const { t } = useTranslation();
+export default function AoButton({children, styles, disabled, isRed, ...otherProps}) {
   let style = 'button-container '
   if (isRed) {
     style += 'red-bg '
@@ -15,7 +13,7 @@ export default function AoButton({caption, styles, disabled, isRed, ...otherProp
   }
   return (
     <div {...otherProps} className={style + styles} disabled={true}>
-      <p>{t(caption).toUpperCase()}</p>
+      <div className='content'>{children}</div>
     </div>
   )
 }

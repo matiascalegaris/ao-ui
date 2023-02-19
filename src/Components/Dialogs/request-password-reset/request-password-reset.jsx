@@ -47,9 +47,9 @@ export default function RequestPasswordReset() {
       </div>
       <div className='bottom-line'>
         <div className='line'>
-          <AoButton className='split-area' caption='cancel' styles='split-area' onClick={ returnToMain } />
+          <AoButton className='split-area' styles='split-area' onClick={ returnToMain }>{t('cancel').toUpperCase()}</AoButton>
           <span className="horizontal-gap10"></span>
-          <AoButton className='split-area' caption='send' isRed={true} disabled={sendEnabled} styles='split-area'/>
+          <AoButton className='split-area' isRed={true} disabled={sendEnabled} styles='split-area'>{t('send').toUpperCase()}</AoButton>
         </div>
         <div className='line'>
           <AoLinkButton styles='links' onClick={validateCode} caption='I already have a recovery code' onclick={validateCode}/>

@@ -81,13 +81,13 @@ export default function LogIn() {
             <AoInput name="password" IsValid={validPwd} type="password" value={password} required handleChange={handleChange} />
           </div>
           <AoCheckbox label={t('Remember me')} name="storeCredentials" styles='split-area right-padding' handleChange={rememberLogin} state={storeCredentials} />
-          <AoButton caption='connect' styles='split-area' isRed={true} disabled={!enableLogin}  onClick={ DoLogin }/>
+          <AoButton styles='split-area' isRed={true} disabled={!enableLogin}  onClick={ DoLogin }>{t('connect').toUpperCase()}</AoButton>
       </div>
       <Select unstyled className="server-selector" classNamePrefix='selector-prop' options={ServerOptions} value={serverOption} onChange={SelectServer}  />
       <div className='bottom-line'>
-        <AoButton caption='account' styles='split-area' onClick={ updateDialog }/>
+        <AoButton styles='split-area' onClick={ updateDialog }>{t('account').toUpperCase()}</AoButton>
         <span className="horizontal-gap10"></span>
-        <AoButton caption='exit' styles='split-area' onClick={ DoClose }/>
+        <AoButton styles='split-area' onClick={ DoClose }>{t('exit').toUpperCase()}</AoButton>
       </div>
     </AoDialog>
   )
