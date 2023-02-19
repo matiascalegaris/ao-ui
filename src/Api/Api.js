@@ -30,8 +30,8 @@ if (process.env.NODE_ENV === 'development') {
     },
     ValidateCode: (email, code) => {
     },
-    ValidatePrevCode: code => {
-
+    SetHost: (environment) => {
+      console.log('set server: ' + environment);
     }
   }
 }

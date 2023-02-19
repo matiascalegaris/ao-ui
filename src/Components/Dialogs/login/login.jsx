@@ -8,10 +8,17 @@ import AoCheckbox from "../../Common/ao-checkbox/ao-checkbox";
 import { useDispatch } from 'react-redux';
 import { setActiveDialog, displayLoadingText } from '../../../redux/UIFlowSlice'
 import { ValidateEmail, ValidatePassword } from "../../../Tools/Utils";
+import Select from 'react-select';
 
+const ServerOptions = [
+  { value: 'Localhost', label: 'Localhost'},
+  { value: 'LocalHostPymmo', label: 'LocalHostPymmo'},
+  { value: 'Staging', label: 'Staging'},
+  { value: 'Production', label: 'Production'}
+]
 export default function LogIn() {
-  const [userCredentials, setCredentials] = useState({email:'', password:'', storeCredentials:false});
-  const {email, password, storeCredentials } = userCredentials;
+  const [userCredentials, setCredentials] = useState({email:'', password:'', storeCredentials:false, serverOption: ServerOptions[0]});
+  const {email, password, storeCredentials, serverOption } = userCredentials;
   const { t } = useTranslation();
   const dispatch = useDispatch()
   useEffect(() => {
@@ -23,6 +30,7 @@ export default function LogIn() {
         email: credentials.user,
         password: credentials.password});  
     }
+    window.parent.BabelUI.SetHost(serverOption.value)
   },[]);
   const handleChange = event => {
     const { value, name } = event.target;
@@ -40,6 +48,13 @@ export default function LogIn() {
     event.preventDefault();
     dispatch(displayLoadingText(t('connecting-to-server')))
     window.parent.BabelUI.Login(email, password, storeCredentials);
+  }
+
+  const SelectServer = event => {
+    setCredentials({ ...userCredentials, 
+      serverOption: event,
+    });  
+    window.parent.BabelUI.SetHost(event.value)
   }
 
   const DoClose = event => {
@@ -68,6 +83,7 @@ export default function LogIn() {
           <AoCheckbox label={t('Remember me')} name="storeCredentials" styles='split-area right-padding' handleChange={rememberLogin} state={storeCredentials} />
           <AoButton caption='connect' styles='split-area' isRed={true} disabled={!enableLogin}  onClick={ DoLogin }/>
       </div>
+      <Select unstyled className="server-selector" classNamePrefix='selector-prop' options={ServerOptions} value={serverOption} onChange={SelectServer}  />
       <div className='bottom-line'>
         <AoButton caption='account' styles='split-area' onClick={ updateDialog }/>
         <span className="horizontal-gap10"></span>

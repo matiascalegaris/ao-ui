@@ -1,7 +1,7 @@
 .login-header {
   text-align: center;
   font-weight: 900; 
-  border-bottom: #4443438f 2px solid;
+  border-bottom: #ffffff14 2px solid;
   margin: 5px 20px 10px;
   padding: 10px 20px;
   font-size: 1rem;
@@ -31,6 +31,28 @@
     grid-row: 1;
   }
 }
+.server-selector {
+  flex-grow: 1;
+}
+
+  .selector-prop__control {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 2px solid #494943;
+    background-image: url(../../../assets/background.png);
+    margin: 5px 20px;
+    padding: 0px 5px;
+    color: white;
+    &:hover {
+      border: none;
+    }
+  }
+  .selector-prop__value-container {
+    &:focus-visible {
+      border: none;
+    }
+  }
+
 .bottom-line {
   margin: 0;
   background-color: rgba(0, 0, 0, 0.5);
