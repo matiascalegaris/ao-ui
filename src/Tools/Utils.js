@@ -23,8 +23,12 @@ const ValidValidationCode = code => {
   return code.length === 8
 }
 
+const ValidResetPwdCode = code => {
+  return code.length === 6
+}
+
 const ValidateString = input => {
   var validRegex = /^[A-Za-z]+$/;
   return input.length === 0 || input.match(validRegex)
 }
-export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt, ValidateRoboCode, ValidateString, ValidValidationCode }
+export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt, ValidateRoboCode, ValidateString, ValidValidationCode, ValidResetPwdCode }

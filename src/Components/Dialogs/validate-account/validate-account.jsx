@@ -5,7 +5,7 @@ import AoButton from '../../Common/ao-button/ao-button';
 import AoInput from '../../Common/ao-input/ao-input';
 import AoDialog from '../../Common/ao-dialog/ao-dialog';
 import { useDispatch } from 'react-redux';
-import { setActiveDialog } from '../../../redux/UIFlowSlice'
+import { displayLoadingText, setActiveDialog } from '../../../redux/UIFlowSlice'
 import { ValidateEmail, ValidValidationCode } from "../../../Tools/Utils";
 
 export default function ValidateAccount() {
@@ -28,6 +28,7 @@ export default function ValidateAccount() {
   }
   const validateCode = event => {
     event.preventDefault();
+    dispatch(displayLoadingText(t('connecting-to-server')))
     window.parent.BabelUI.ValidateCode(email, code)
   }
 

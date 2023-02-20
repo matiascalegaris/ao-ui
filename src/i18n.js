@@ -16,7 +16,8 @@ const resources = {
       'connecting-to-server': `Connecting to server`,
       'connection-closed': `Connection closed by server`,
       'validation-code': `validation code`,
-      'resend-code': `resend validation code`
+      'resend-code': `resend validation code`,
+      'set new password': `set new password`
     }
   },
   es: {
@@ -32,7 +33,8 @@ const resources = {
       'validation-code': `código de validación`,
       'resend-code': `Reenviar código de activación`,
       'send': `enviar`,
-      'cancel': 'cancelar'
+      'cancel': 'cancelar',
+      'set new password': 'Nueva Contraseña'
     }
   }
 };

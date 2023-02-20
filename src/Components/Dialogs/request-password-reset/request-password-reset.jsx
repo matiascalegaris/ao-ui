@@ -6,7 +6,7 @@ import AoInput from '../../Common/ao-input/ao-input';
 import AoDialog from '../../Common/ao-dialog/ao-dialog';
 import AoLinkButton from "../../Common/ao-button/ao-link-button/ao-link-button";
 import { useDispatch } from 'react-redux';
-import { setActiveDialog } from '../../../redux/UIFlowSlice'
+import { displayLoadingText, setActiveDialog } from '../../../redux/UIFlowSlice'
 import { ValidateEmail } from "../../../Tools/Utils";
 
 export default function RequestPasswordReset() {
@@ -21,11 +21,17 @@ export default function RequestPasswordReset() {
   }
   const validateCode = event => {
     event.preventDefault();
-    dispatch(setActiveDialog('validate-code'));
+    dispatch(setActiveDialog('set-new-password'));
   }
   const returnToMain = event => {
     event.preventDefault();
     dispatch(setActiveDialog('create-account'));
+  }
+
+  const requestPasswordReset = event => {
+    event.preventDefault();
+    dispatch(displayLoadingText(t('connecting-to-server')))
+    window.parent.BabelUI.RequestPasswordReset(email);
   }
 
   const emailValid = ValidateEmail(email)
@@ -47,9 +53,9 @@ export default function RequestPasswordReset() {
       </div>
       <div className='bottom-line'>
         <div className='line'>
-          <AoButton className='split-area' styles='split-area' onClick={ returnToMain }>{t('cancel').toUpperCase()}</AoButton>
+          <AoButton className='split-area' styles='split-area' onClick={returnToMain}>{t('cancel').toUpperCase()}</AoButton>
           <span className="horizontal-gap10"></span>
-          <AoButton className='split-area' isRed={true} disabled={sendEnabled} styles='split-area'>{t('send').toUpperCase()}</AoButton>
+          <AoButton className='split-area' isRed={true} disabled={sendEnabled} styles='split-area' onClick={requestPasswordReset}>{t('send').toUpperCase()}</AoButton>
         </div>
         <div className='line'>
           <AoLinkButton styles='links' onClick={validateCode} caption='I already have a recovery code' onclick={validateCode}/>

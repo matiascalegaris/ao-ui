@@ -32,6 +32,10 @@ if (process.env.NODE_ENV === 'development') {
     },
     SetHost: (environment) => {
       console.log('set server: ' + environment);
+    },
+    RequestPasswordReset: email => {
+    },
+    NewPasswordRequest: (email, code, password) => {
     }
   }
 }

@@ -9,13 +9,14 @@ import { selectActiveDialog, setActiveDialog } from '../../redux/UIFlowSlice'
 import {RegisterApiCallback} from '../../Api/Api'
 import RequestPasswordReset from '../Dialogs/request-password-reset/request-password-reset';
 import CharacterSelectionScreen from '../CharacterSelection/CharacterSelectionScreen/character-selection';
+import SetNewPassword from '../Dialogs/set-new-password/set-new-password';
 
 
 export default function LogInFlow() {
   const activeDialog = useSelector(selectActiveDialog)
   const dispatch = useDispatch()
   useEffect(() => {
-    RegisterApiCallback('setActiveDialog', (dialog) => {
+    RegisterApiCallback('SetActiveDialog', (dialog) => {
       dispatch(setActiveDialog(dialog))
     });
   },[]);
@@ -28,7 +29,8 @@ export default function LogInFlow() {
           'validate-account': <ValidateAccount/>,
           'validate-code': <ValidateCode />,
           'reset-password-request': <RequestPasswordReset/>,
-          'character-selection': <CharacterSelectionScreen/>
+          'character-selection': <CharacterSelectionScreen/>,
+          'set-new-password': <SetNewPassword/>
         }
         [activeDialog]
       }
