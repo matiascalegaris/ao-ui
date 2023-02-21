@@ -26,10 +26,21 @@
       position:relative;
       display: flex;
       flex-direction: row;
+
+      .button {
+        margin: auto 40px;
+        display: flex;
+
+        .icon {
+          display: flex;
+        }
+      }
     }
     .top-long-frame {
       width: 100%;
-      background-image: url(../../../assets/Misc/divider_horizontal_big.png);
+        height: 40px;
+        background-repeat: repeat-x;
+        background-image: url(../../../assets/Misc/divider_horizontal_big.png);
     }
   }
   

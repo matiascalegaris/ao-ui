@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const UIFlowSlice = createSlice({
   name: 'uiFlow',
   initialState: {
-    activeDialog: 'login',
+    activeDialog: 'character-selection',
     loading: false,
     loadingText: '',
     errorMessage : null
