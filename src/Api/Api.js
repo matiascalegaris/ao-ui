@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
   window.parent.BabelUI = {
     Login: (email, password, storeCredentials) => {
       setTimeout(() => {
-        window.parent.APicallbacks.ErrorMessage('connection-failure', 1, 0)
+        window.parent.APicallbacks.SetActiveDialog('character-selection')
       }, 5000)
     },
     CloseClient: () => {
