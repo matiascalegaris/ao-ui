@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
     Login: (email, password, storeCredentials) => {
       setTimeout(() => {
         window.parent.APicallbacks.SetActiveDialog('character-selection')
-      }, 5000)
+      }, 500)
     },
     CloseClient: () => {
       console.log('close client')

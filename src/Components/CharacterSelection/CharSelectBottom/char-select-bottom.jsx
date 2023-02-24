@@ -6,15 +6,29 @@ export default function CharSelectBottom() {
   const { t } = useTranslation();
   return (
     <div className='char-selection-bottom'>
-      <div className='bottom-leather'></div>
+      <div className='character-details'>
+        <div className='section-divider'></div>
+        <div className='section-divider'>
+          <div className='seleccion-detais'>
+            <div className='text-area'>
+              <p>character name</p>
+              <p>character name</p>
+              <p>character name</p>
+            </div>
+          </div>
+        </div>
+        <div className='section-divider'></div>
+      </div>
+      <div className='bottom-leather'>
       <div className='button-area'>
         <div className='bar-layer'>
           <div className='bar-img'></div>
         </div>
         <div className='button-layer'>
-          <LoginButton isRed={true}>{t('create character').toUpperCase()}</LoginButton>
+          <LoginButton>{t('create character').toUpperCase()}</LoginButton>
           <LoginButton isRed={true}>{t('play').toUpperCase()}</LoginButton>
         </div>
+      </div>
       </div>
     </div>
   )

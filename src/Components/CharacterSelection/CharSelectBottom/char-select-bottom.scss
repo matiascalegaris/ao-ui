@@ -1,8 +1,16 @@
+@keyframes intro-in-bottom {
+  from {transform: translateY(100%)}
+  to {transform: translateY(0px);}
+}
+
 .char-selection-bottom {
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
+  animation-name: intro-in-bottom;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
 
   .bottom-leather {
     background-image: url(../../../assets/Backgrounds/leather_brown.png);
@@ -36,7 +44,31 @@
       width: 100%;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-evenly;
+    }
+  }
+
+  .character-details {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+
+    .section-divider {
+      flex-grow: 1;
+      display: flex;
+      .seleccion-detais {
+        margin: auto auto auto auto;
+        background-image: url(../../../assets/Misc/info_area.png);
+        width: 344px;
+        height: 208px;
+        display: flex;
+        .text-area {
+          display: flex;
+          flex-direction: column;
+          margin: auto;
+          color: white;
+        }
+      }
     }
   }
 }

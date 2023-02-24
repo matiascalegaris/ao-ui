@@ -1,10 +1,40 @@
+@keyframes intro-in-left {
+  from {transform: translateX(-100%)}
+  to {transform: translateX(0px);}
+}
+
+@keyframes intro-in-right {
+  from {transform: translateX(100%)}
+  to {transform: translateX(0px);}
+}
+
 .character-selection-screen {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  
+
   .char-list {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    .char-list-line {
+      display: flex;
+      flex-direction: row;
+      margin: auto;
+      margin: auto;
+    }
+
+    .animate-left {
+      animation-name: intro-in-left;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-out;
+    }
+    .animate-right {
+      animation-name: intro-in-right;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-out;
+    }
   }
 }

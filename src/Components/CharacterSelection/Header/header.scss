@@ -1,6 +1,13 @@
+@keyframes intro-in {
+  from {transform: translateY(-100%)}
+  to {transform: translateY(0px);}
+}
 .header {
   width: 100%;
   position: relative;
+  animation-name: intro-in;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
   .logo-container {
     position: absolute;
     left: 0;
