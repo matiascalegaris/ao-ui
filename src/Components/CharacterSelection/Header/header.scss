@@ -9,6 +9,7 @@
   animation-duration: 0.3s;
   animation-timing-function: ease-out;
   .logo-container {
+    pointer-events: none;
     position: absolute;
     left: 0;
     top: 0;
@@ -16,7 +17,7 @@
     width: 100%;
     .logo {
       margin: 0 auto;
-      height: 25vh;
+      height: 20vh;
     }
   }
 
@@ -29,7 +30,7 @@
       width: 100%;
       background-image: url(../../../assets/Backgrounds/leather_brown.png);
       background-repeat: repeat-x;
-      height: 10vh;
+      height: 8vh;
       position:relative;
       display: flex;
       flex-direction: row;

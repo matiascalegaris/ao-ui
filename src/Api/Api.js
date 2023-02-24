@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
     Login: (email, password, storeCredentials) => {
       setTimeout(() => {
         window.parent.APicallbacks.SetActiveDialog('character-selection')
-      }, 500)
+      }, 100)
     },
     CloseClient: () => {
       console.log('close client')
@@ -36,6 +36,11 @@ if (process.env.NODE_ENV === 'development') {
     RequestPasswordReset: email => {
     },
     NewPasswordRequest: (email, code, password) => {
+    },
+    ExitCharacterSelection: () => {
+      setTimeout(() => {
+        window.parent.APicallbacks.SetActiveDialog('login')
+      }, 100)
     }
   }
 }

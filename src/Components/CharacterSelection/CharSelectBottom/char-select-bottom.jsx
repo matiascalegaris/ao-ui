@@ -10,11 +10,12 @@ export default function CharSelectBottom() {
         <div className='section-divider'></div>
         <div className='section-divider'>
           <div className='seleccion-detais'>
-            <div className='text-area'>
-              <p>character name</p>
-              <p>character name</p>
-              <p>character name</p>
-            </div>
+             <div className='details-border-left'></div>
+             <div className='text-area'>
+               <p className='text'>{t('class', {className: t('Warrior')})}</p>
+               <p>{t('level', { level:10})}</p>
+             </div>
+             <div className='details-border-right'></div>
           </div>
         </div>
         <div className='section-divider'></div>
