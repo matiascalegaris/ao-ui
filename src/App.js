@@ -38,12 +38,12 @@ function App() {
     <div className='app'>
       <LogInFlow/>
       { showLogin &&
-        <div class='popups'>
+        <div className='popups'>
           <Loading styles='centered'>{loginMessage}</Loading>
         </div>
       }
       { errorMsg &&
-        <div class='popups'>
+        <div className='popups'>
           <ErrorMessage styles='centered'>{errorMsg}</ErrorMessage>
         </div>
       }

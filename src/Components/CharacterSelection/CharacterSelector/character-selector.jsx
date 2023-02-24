@@ -1,3 +1,4 @@
+import ManagedSprite from '../../Common/ManagedSprite/manged-sprite';
 import './character-selector.scss'
 
 export default function CharacterSelector({charInfo}) {
@@ -5,7 +6,9 @@ export default function CharacterSelector({charInfo}) {
     <div className='character-selector-container '>
       <div className='frame'>
         <span className='selection-marker'></span>
-        <div className='char-render-area'></div>
+        <div className='char-render-area'>
+          <ManagedSprite imageName="1148" x={26} y={0} width={26} height={53}></ManagedSprite>
+        </div>
       </div>
       <p className='char-name'>{charInfo.name}</p>
     </div>
