@@ -17,7 +17,10 @@ const resources = {
       'connection-closed': `Connection closed by server`,
       'validation-code': `validation code`,
       'resend-code': `resend validation code`,
-      'set new password': `set new password`
+      'set new password': `set new password`,
+      'class': `Class: {{className}}`,
+      'warrior': `Warrior`,
+      'level': `Level: {{level}}`
     }
   },
   es: {
@@ -34,7 +37,10 @@ const resources = {
       'resend-code': `Reenviar código de activación`,
       'send': `enviar`,
       'cancel': 'cancelar',
-      'set new password': 'Nueva Contraseña'
+      'set new password': 'Nueva Contraseña',
+      'class': `Clase: {{className}}`,
+      'warrior': `Guerrero`,
+      'level': `Nivel: {{level}}`
     }
   }
 };
