@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { GetRootDirectory } from '../../../Tools/Utils';
 import './managed-sprite.scss'
 
 const GetImageUrl = imageName =>  {
-  if (process.env.NODE_ENV === 'development') {
-    return (`${process.env.PUBLIC_URL}/Recursos/Graficos/${imageName}.png`)
-  }
-  else {
-    return (`${process.env.PUBLIC_URL}/../Graficos/${imageName}.png`)
-  }
+  return `${GetRootDirectory()}/Graficos/${imageName}.png`
 }
 
 const ManagedSprite = ({ imageName, x, y, width, height }) => {
