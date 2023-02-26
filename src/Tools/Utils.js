@@ -32,6 +32,24 @@ const ValidateString = input => {
   return input.length === 0 || input.match(validRegex)
 }
 
+const GetColorForCharacterStatus = status => {
+  switch(status)
+  {
+    case 0: //criminal
+      return '#ff0000'
+    case 1: //citizen
+      return '#0066ff'
+    case 2: //Chaos
+      return '#ff6633'
+    case 3: //Army
+      return '#0099ff'
+    case 7: //Army
+      return '#cc9933'
+    default: //undefined
+      return '#000'
+  }
+}
+
 const LoadIni = async filePath => {
   return await fetch(GetRootDirectory() + filePath)
       .then((response) => response.text())

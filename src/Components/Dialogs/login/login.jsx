@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setActiveDialog, displayLoadingText } from '../../../redux/UIFlowSlice'
 import { ValidateEmail, ValidatePassword } from "../../../Tools/Utils";
 import Select from 'react-select';
+import { clearCharList } from "../../../redux/CharSelectionSlice";
 
 const ServerOptions = [
   { value: 'Localhost', label: 'Localhost'},
@@ -46,6 +47,7 @@ export default function LogIn() {
   }
   const DoLogin = event => {
     event.preventDefault();
+    dispatch(clearCharList())
     dispatch(displayLoadingText(t('connecting-to-server')))
     window.parent.BabelUI.Login(email, password, storeCredentials);
   }
