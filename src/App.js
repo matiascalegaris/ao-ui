@@ -7,6 +7,8 @@ import { selectLoadingState, selectErrorMessage, displayErrorMessage, displayLoa
 import ErrorMessage from './Components/Dialogs/error-message/error-message';
 import {RegisterApiCallback} from './Api/Api'
 import { useTranslation } from 'react-i18next';
+import { LoadIni } from './Tools/Utils';
+import { setCharacter } from './redux/CharSelectionSlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -20,7 +22,6 @@ function App() {
       else {
         dispatch(displayErrorMessage(msg))
       }
-      
     })
     RegisterApiCallback('SetLoadingMessage', (msg, localize) => {
       if (localize) {
@@ -30,6 +31,9 @@ function App() {
         dispatch(displayLoading(msg))
       }
     })
+    RegisterApiCallback('SetCharacter', (charInfo) => {
+      dispatch(setCharacter(charInfo))
+    }) 
   },[]);
   
   const [showLogin, loginMessage] = useSelector(selectLoadingState)
