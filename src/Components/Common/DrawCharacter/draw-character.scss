@@ -1,0 +1,19 @@
+.character-container {
+  position: relative;
+  margin: auto;
+  .head-area {
+    position: absolute;
+    .head {
+      position: relative;
+    }
+  }
+  .body-area {
+    position: relative;
+    .body {
+      margin: auto auto auto 0;
+    }
+  }
+  
+
+  
+}

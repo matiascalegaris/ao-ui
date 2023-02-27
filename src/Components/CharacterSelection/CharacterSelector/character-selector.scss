@@ -1,6 +1,6 @@
 .character-selector-container {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   .frame {
     position: relative;
     background-image: url(../../../assets/Misc/pj_box.png);
@@ -20,6 +20,7 @@
       height: 100%;
       top: 0;
       left: 0;
+      display: flex;
     }
   }
 

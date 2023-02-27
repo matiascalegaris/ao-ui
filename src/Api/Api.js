@@ -52,7 +52,47 @@ if (process.env.NODE_ENV === 'development') {
       }, 100)
     },
     GetCharacterDrawInfo: (body, head, helm, shield, weapon) => {
-      return {}
+      return ({
+        body: {
+          body: {
+            height: 47,
+            imageNumber: 1147,
+            startX: 0,
+            startY: 0,
+            width: 27
+          },
+          HeadOffsetX: 0,
+          HeadOffsetY: -26
+        },
+        head: {
+            height: 31,
+            imageNumber: 428,
+            startX: 27,
+            startY: 0,
+            width: 27
+          },
+        helm: {
+            height: 0,
+            imageNumber: -1,
+            startX: 0,
+            startY: 0,
+            width: 0
+          },
+        shield: {
+            height: 0,
+            imageNumber: -1,
+            startX: 0,
+            startY: 0,
+            width: 0
+          },
+        weapon: {
+            height: 0,
+            imageNumber: -1,
+            startX: 0,
+            startY: 0,
+            width: 0
+          }
+        })
     }
   }
 }

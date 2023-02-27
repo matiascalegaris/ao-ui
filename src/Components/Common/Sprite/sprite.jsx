@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { GetRootDirectory } from '../../../Tools/Utils';
-import './managed-sprite.scss'
+import './sprite.scss'
 
 const GetImageUrl = imageName =>  {
   return `${GetRootDirectory()}/Graficos/${imageName}.png`
 }
 
-const ManagedSprite = ({ imageName, x, y, width, height }) => {
+const Sprite = ({ imageName, x, y, width, height }) => {
   const imageUrl =  GetImageUrl(imageName)
   var sectionStyle = { 
     width: `${width}px`,
@@ -23,4 +23,4 @@ const ManagedSprite = ({ imageName, x, y, width, height }) => {
   ) : null;
 };
 
-export default ManagedSprite;
+export default Sprite;
