@@ -20,14 +20,14 @@ export default function CharacterSelectionScreen() {
         <div className='char-list-line animate-left'>
           {
             availableCharacters.length > 0 ?
-            availableCharacters.slice(0,5).map( item => <CharacterSelector key={item.name} charInfo={item} onClick={ () => {seletCharacter(item)}}/>) :
+            availableCharacters.slice(0,5).map( item => <CharacterSelector key={item.index} charInfo={item} onClick={ () => {seletCharacter(item)}}/>) :
             null
           }
         </div>
         <div className='char-list-line animate-right'>
           {
             availableCharacters.length > 0 ?
-            availableCharacters.slice(5, 10).map( item => <CharacterSelector key={item.name} charInfo={item} onClick={ () => {seletCharacter(item)}}/>) :
+            availableCharacters.slice(5, 10).map( item => <CharacterSelector key={item.index} charInfo={item} onClick={ () => {seletCharacter(item)}}/>) :
             null
           }
         </div>
