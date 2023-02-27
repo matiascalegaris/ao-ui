@@ -29,4 +29,11 @@ export const selectSelectedIndex = (state) =>  state.charSelection.selectedIndex
 
 export const selectAvailableCharacters = (state) => state.charSelection.charactersList
 
+export const selectSelectedCharacter = (state) => {
+  if (state.charSelection.selectedIndex >= 0) {
+    return state.charSelection.charactersList[state.charSelection.selectedIndex]
+  }
+  return null;
+}
+
 export default CharSelectionSlice.reducer

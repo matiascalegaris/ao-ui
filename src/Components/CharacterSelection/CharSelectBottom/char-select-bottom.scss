@@ -15,7 +15,7 @@
   .bottom-leather {
     background-image: url(../../../assets/Backgrounds/leather_brown.png);
     background-repeat: repeat-x;
-    height: 6vh;
+    height: 8vh;
     position:relative;
     width: 100%;
   }
@@ -44,7 +44,7 @@
       width: 100%;
       display: flex;
       flex-direction: row;
-      justify-content: space-evenly;
+      justify-content: center;
     }
   }
 
