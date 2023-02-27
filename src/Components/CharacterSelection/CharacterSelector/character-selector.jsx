@@ -1,7 +1,9 @@
+import { GetColorForCharacterStatus } from '../../../Tools/Utils';
 import DrawCharacter from '../../Common/DrawCharacter/draw-character';
 import './character-selector.scss'
 
 export default function CharacterSelector({charInfo, ...otherProps}) {
+  const nameColor = GetColorForCharacterStatus(charInfo.status)
   return (
     <div className='character-selector-container ' {...otherProps}>
       <div className='frame'>
@@ -14,7 +16,7 @@ export default function CharacterSelector({charInfo, ...otherProps}) {
           }
         </div>
       </div>
-      <p className='char-name'>{charInfo.name}</p>
+      <p className={'char-name ' + nameColor}>{charInfo.name}</p>
     </div>
   );
 }

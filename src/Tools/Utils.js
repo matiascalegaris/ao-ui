@@ -36,18 +36,25 @@ const GetColorForCharacterStatus = status => {
   switch(status)
   {
     case 0: //criminal
-      return '#ff0000'
+      return 'criminal-color'
     case 1: //citizen
-      return '#0066ff'
+      return 'citizen-color'
     case 2: //Chaos
-      return '#ff6633'
+      return 'chaos-color'
     case 3: //Army
-      return '#0099ff'
-    case 7: //Army
-      return '#cc9933'
+      return 'army-color'
+    case 7: //Admin
+      return 'admin-color'
     default: //undefined
-      return '#000'
+      return ''
   }
+}
+
+const GetNameForClassId = id => {
+  switch(id)
+  {
+  }
+  return 'Warrior'
 }
 
 const LoadIni = async filePath => {
@@ -87,4 +94,5 @@ const GetRootDirectory = () => {
 }
 export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt,
         ValidateRoboCode, ValidateString, ValidValidationCode,
-        ValidResetPwdCode, GetRootDirectory, LoadIni }
+        ValidResetPwdCode, GetRootDirectory, LoadIni, GetColorForCharacterStatus,
+        GetNameForClassId }
