@@ -1,10 +1,15 @@
 .character-container {
   position: relative;
-  margin: auto;
+  margin: auto auto 15px auto;
   .head-area {
     position: absolute;
     .head {
       position: relative;
+    }     
+    .helm {
+      position: absolute;
+      top:0px;
+      left:0px;
     }
   }
   .body-area {
@@ -12,6 +17,17 @@
     .body {
       margin: auto auto auto 0;
     }
+
+    .weapon {
+      position: absolute;
+      top:0px;
+      left:0px;
+    }
+  }
+  .shield {
+    position: absolute;
+    top:0px;
+    left:0px;
   }
   
 

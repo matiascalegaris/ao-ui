@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const CharSelectionSlice = createSlice({
   name: 'charSelection',
   initialState: {
-    charactersList: [{}],
+    charactersList: [{index:0}, {index:1}, {index:2}, {index:3}, {index:4}, {index:5}, {index:6}, {index:7}, {index:8}, {index:9}],
     selectedIndex: -1,
   },
   reducers: {
@@ -17,7 +17,7 @@ export const CharSelectionSlice = createSlice({
       state.charactersList[action.payload.index] = action.payload
     },
     clearCharList: (state) => {
-      state.charactersList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+      state.charactersList = [{index:0}, {index:1}, {index:2}, {index:3}, {index:4}, {index:5}, {index:6}, {index:7}, {index:8}, {index:9}]
       state.selectedIndex = -1
     }
   },
