@@ -10,6 +10,7 @@ import {RegisterApiCallback} from '../../Api/Api'
 import RequestPasswordReset from '../Dialogs/request-password-reset/request-password-reset';
 import CharacterSelectionScreen from '../CharacterSelection/CharacterSelectionScreen/character-selection';
 import SetNewPassword from '../Dialogs/set-new-password/set-new-password';
+import CreateCharacterScreen from '../CreateCharacter/create-chatacter';
 
 
 export default function LogInFlow() {
@@ -30,7 +31,8 @@ export default function LogInFlow() {
           'validate-code': <ValidateCode />,
           'reset-password-request': <RequestPasswordReset/>,
           'character-selection': <CharacterSelectionScreen/>,
-          'set-new-password': <SetNewPassword/>
+          'set-new-password': <SetNewPassword/>,
+          'create-character': <CreateCharacterScreen/>
         }
         [activeDialog]
       }

@@ -10,7 +10,7 @@ export default function CharacterSelectionScreen() {
   const availableCharacters = useSelector(selectAvailableCharacters)
   const dispatch = useDispatch()
   const seletCharacter = event => {
-    const index = availableCharacters.findIndex(element => (element.name === event.name))
+    const index = availableCharacters.findIndex(element => (element.index === event.index))
     dispatch(selectCharacter(index));
   }
   return (

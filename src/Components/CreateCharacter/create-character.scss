@@ -1,0 +1,21 @@
+.create-charcter { 
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .config-area {
+    display: flex;
+    flex-direction: row;
+    .left-panel {
+
+    }
+
+    .mid-panel {
+      flex-grow: 1;
+    }
+    .right-panel {
+
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice';
-import { GetNameForClassId } from '../../../Tools/Utils';
+import { GetColorForCharacterStatus, GetNameForClassId } from '../../../Tools/Utils';
 import LoginButton from '../LogInButton/login-button'
 import './char-select-bottom.scss'
 
@@ -9,6 +9,7 @@ export default function CharSelectBottom() {
   const { t } = useTranslation();
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const loginEnabled = selectCharacter != null
+  const nameColor = GetColorForCharacterStatus(selectedCharacter.status)
   const doLogin = event => {
 
   }
@@ -23,10 +24,14 @@ export default function CharSelectBottom() {
         <div className='section-divider'>
           <div className='seleccion-detais'>
              <div className='details-border-left'></div>
+             <div className='details-box'>
+             <div className='border-left'></div>
              <div className='text-area'>
-               { selectedCharacter != null ? <p className='text'>{selectedCharacter.name}</p> : null }
+               { selectedCharacter != null ? <p className={'text ' + nameColor}>{selectedCharacter.name}</p> : null }
                { selectedCharacter != null ? <p className='text'>{t('class', {className: t(GetNameForClassId(selectCharacter.class))})}</p> : null }
-               { selectedCharacter != null ? <p>{t('level', { level: selectedCharacter.level})}</p> : null}
+               { selectedCharacter != null ? <p className='text'>{t('level', { level: selectedCharacter.level})}</p> : null}
+             </div>
+             <div className='border-right'></div>
              </div>
              <div className='details-border-right'></div>
           </div>

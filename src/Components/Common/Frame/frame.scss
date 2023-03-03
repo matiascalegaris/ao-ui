@@ -1,0 +1,69 @@
+.frame {
+  position: relative;
+  .content {
+    padding: 10px;
+    background-image: url(../../../assets/Backgrounds/leather_brown.png);
+  }
+
+  .frame-line-container {
+    display: flex;
+    flex-direction: row;
+    
+    .frame-center {
+      position: relative;
+      flex-grow: 1;
+      height: 9px;
+      background-repeat: repeat-x;
+    }
+    .image-top {
+      background-image: url(../../../assets/frames/box/top.png);
+      
+    }
+
+    .image-bottom {
+      background-image: url(../../../assets/frames/box/bottom.png);
+    }
+  }
+
+  .top {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+  }
+  .bottom {
+    position: absolute;
+    bottom:0px;
+    width: 100%;
+  }
+  .right {
+    position: absolute;
+    right: 0px;
+    height: 100%;
+  }
+  .left {
+    position: absolute;
+    left: 0px;
+    height: 100%;
+  }
+  .vertical {
+    flex-direction: column;
+  }
+  
+  .frame-side-container {
+    position: absolute;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    .frame-center {
+      position: relative;
+      flex-grow: 1;
+      background-image: url(../../../assets/frames/box/left.png);
+      width: 9px;
+      background-repeat: 'repeat-y';
+    }
+    .right-image{
+      background-image: url(../../../assets/frames/box/right.png),
+    }
+  }
+}
