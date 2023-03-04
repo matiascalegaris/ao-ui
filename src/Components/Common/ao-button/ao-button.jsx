@@ -1,6 +1,6 @@
 import './ao-button.scss'
 
-export default function AoButton({children, styles, disabled, isRed, ...otherProps}) {
+export default function AoButton({children, styles, contentStyles, disabled, isRed, ...otherProps}) {
   let style = 'button-container '
   if (isRed) {
     style += 'red-bg '
@@ -13,7 +13,7 @@ export default function AoButton({children, styles, disabled, isRed, ...otherPro
   }
   return (
     <div {...otherProps} className={style + styles} disabled={true}>
-      <div className='content'>{children}</div>
+      <div className={'button-content ' + contentStyles}>{children}</div>
     </div>
   )
 }

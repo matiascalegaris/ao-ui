@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice';
+import { setActiveDialog } from '../../../redux/UIFlowSlice';
 import { GetColorForCharacterStatus, GetNameForClassId } from '../../../Tools/Utils';
 import LoginButton from '../LogInButton/login-button'
 import './char-select-bottom.scss'
@@ -9,13 +10,17 @@ export default function CharSelectBottom() {
   const { t } = useTranslation();
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const loginEnabled = selectCharacter != null
-  const nameColor = GetColorForCharacterStatus(selectedCharacter.status)
-  const doLogin = event => {
-
+  const nameColor = selectedCharacter ? GetColorForCharacterStatus(selectedCharacter.status) : ''
+  const dispatch = useDispatch()
+  const doLogin = character => {
+    if (selectCharacter != null) {
+      window.parent.BabelUI.LoginCharacter(selectedCharacter.index)
+    }
   }
 
   const createCharacter = event => {
-
+    dispatch(setActiveDialog('create-character'))
+    window.parent.BabelUI.SelectCharacter(-1)
   }
   return (
     <div className='char-selection-bottom'>

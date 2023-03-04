@@ -1,9 +1,9 @@
 import './frame.scss'
 
-export default function Frame({children, contentStyles, sideSize}) {
+export default function Frame({children, contentStyles}) {
   var spacer = {
-    width: `${sideSize}px`,
-    height: `${sideSize}px`
+    width: `9px`,
+    height: `9px`
   }
   return (
   <div className='frame'>

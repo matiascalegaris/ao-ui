@@ -139,6 +139,12 @@ if (process.env.NODE_ENV === 'development') {
               }
             })
       }
+    },
+    SelectCharacter: character => {
+      console.log("select character " +character)
+    },
+    LoginCharacter: character => { 
+      console.log("login character" + character)     
     }
   }
 }

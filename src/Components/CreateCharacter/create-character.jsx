@@ -1,0 +1,121 @@
+import { useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
+import Header from '../CharacterSelection/Header/header'
+import LoginButton from '../CharacterSelection/LogInButton/login-button'
+import AoButton from '../Common/ao-button/ao-button'
+import AoInput from '../Common/ao-input/ao-input'
+import Frame from '../Common/Frame/frame'
+import RibbonTittle from '../Common/RibbonTittle/ribbon-tittle'
+import './create-character.scss'
+
+const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
+const raceList = ['Humano', 'Elfo', 'Drow', 'Gnomo', 'Enano',' Orco']
+const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
+export default function CreateCharacterScreen() {
+  const [characterDefinition, setCharacterDefinition] = useState({gender:0, race:0, cclass:0, face:0, name:''});
+  const {name, gender, race, cclass, face } = characterDefinition;
+  const attrValues = [21,18,17,18,15]
+  const attrColor = attrValues.map( value => {
+    if (value > 18) {
+      return 'attr-green'
+    }
+    else if (value < 18) {
+      return 'attr-red'
+    }
+    return ''
+  })
+  const { t } = useTranslation();
+  const createCharacter = event => {
+
+  }
+  const handleChange = event => {
+    const { value, name } = event.target;
+    setCharacterDefinition({ ...characterDefinition, [name]: value});
+  }
+
+  return (
+    <div className='create-charcter'>
+      <Header/>
+      <div className='config-area'>
+        <div className='left-panel'>
+          <Frame contentStyles='sub-panel sex-selection'>
+            <RibbonTittle text='género' />
+            <div className='button-area'>
+            <AoButton styles='button-style' contentStyles='button'>
+              <img className='icon' src={require('../../assets/Buttons/button_gender_man_default.png')} />
+            </AoButton>
+            <AoButton styles='button-style' contentStyles='button'>
+              <img className='icon' src={require('../../assets/Buttons/button_gender_woman_default.png')} />
+            </AoButton>
+            </div>
+          </Frame>
+          <Frame  contentStyles='sub-panel race-selection'>
+            <RibbonTittle text='raza' />
+            <div className='button-area'>
+            {
+              raceList.map( (race, index) => <AoButton key={index} styles='button-settings'>{t(race).toUpperCase()}</AoButton>)
+            }
+            </div>
+          </Frame>
+          <Frame contentStyles='sub-panel '>
+            <RibbonTittle text='atributos' />
+            <div className='attribute-list'>
+              {
+                attributeList.map( (attr, index) => (
+                  <div className='attrib-line' key={index}>
+                    <p className='attr-name'>{t(attr)}</p>
+                    <p className={'attr-value ' + attrColor[index] }>{attrValues[index]}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </Frame>
+        </div>
+        <div className='mid-panel'>
+          <div className='character-details'>
+            <div className='section-divider'></div>
+            <div className='section-divider'>
+              <div className='seleccion-detais'>
+                <div className='details-border-left'></div>
+                <div className='details-box'>
+                <div className='border-left'></div>
+                <div className='text-area'>
+                  <p className='char-name-tittle'>{t('character name').toUpperCase()}</p>
+                  <AoInput styles='name-input' inputStyles='inner-input' name="name" type="name" IsValid={true} value={name} required handleChange={handleChange}/>
+                  <p className='name-rules'><Trans i18nKey="rules-desc" count={1}>rules<span className='warning'>desc</span>.</Trans></p>
+                </div>
+                <div className='border-right'></div>
+                </div>
+                <div className='details-border-right'></div>
+              </div>
+            </div>
+            <div className='section-divider'></div>
+          </div>
+        </div>
+        <div className='right-panel'>
+        <Frame  contentStyles='sub-panel race-selection class-selection'>
+            <RibbonTittle text='class' />
+            <div className='button-area'>
+            {
+              classList.map( (uclass, index) => <AoButton key={index} styles='button-settings'>{t(uclass).toUpperCase()}</AoButton>)
+            }
+             <div className='select-class-details'>
+              
+             </div>
+            </div>
+          </Frame>
+        </div>
+      </div>
+      <div className='bottom-leather'>
+        <div className='button-area'>
+          <div className='bar-layer'>
+            <div className='bar-img'></div>
+          </div>
+          <div className='button-layer'>
+            <LoginButton onClick={createCharacter}>{t('create character').toUpperCase()}</LoginButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
