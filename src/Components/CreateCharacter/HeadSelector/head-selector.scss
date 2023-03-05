@@ -1,0 +1,53 @@
+.selector {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  max-width: 350px;
+  margin: 40px auto 40px auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    margin: 0 10px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .head-column {
+      display: flex;
+      flex-direction: column;
+      margin-right: 10px;
+    }
+  }
+
+  .head-button {
+    flex: 0 0 32px;
+    width: 25px;
+    height: 25px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    background-color: #ccc;
+  }
+
+  .offset-head {
+    margin-top: -7px;
+  }
+
+  .button-area {
+    display: flex;
+    .button {
+      margin: auto;
+      background: transparent;
+      .arrow-right {
+        transform: scaleX(-1);
+      }
+    }
+  }
+}

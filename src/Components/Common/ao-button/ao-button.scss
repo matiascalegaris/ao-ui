@@ -50,16 +50,3 @@
   border: 2px solid #21221F;
   background-image: url(../../../assets/Buttons/button_gray_off.png);
 }
-
-.multi-selection {
-  pointer-events:none;
-  color: #7F7F7F;
-  border: 2px solid #21221F;
-  background-image: url(../../../assets/Buttons/button_gray_off.png);
-
-  &:hover {
-    border: 2px solid #686865;
-    color: white;
-    background-image: url(../../../assets/Buttons/button_gray_over.png);
-  }
-}

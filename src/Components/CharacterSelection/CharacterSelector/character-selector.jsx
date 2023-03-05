@@ -8,7 +8,7 @@ export default function CharacterSelector({charInfo, selected, ...otherProps}) {
     <div className='character-selector-container ' {...otherProps}>
       <div className='frame'>
         <span className='selection-marker'></span>
-        <div className={'char-render-area' + (selected ? ' selected' : '')}>
+        <div className={'char-render-area' + (selected ? ' selected-char' : '')}>
           {
             charInfo.name != null ? 
             <DrawCharacter body={charInfo.body} head={charInfo.head} helm={charInfo.helm} shield={charInfo.shield} weapon={charInfo.weapon} /> 

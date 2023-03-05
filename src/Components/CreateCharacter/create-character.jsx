@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
+import { LoadJsonFile } from '../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
 import AoButton from '../Common/ao-button/ao-button'
 import AoInput from '../Common/ao-input/ao-input'
+import DrawCharacter from '../Common/DrawCharacter/draw-character'
 import Frame from '../Common/Frame/frame'
 import RibbonTittle from '../Common/RibbonTittle/ribbon-tittle'
 import SelectOption from '../Common/SelectOption/select-option'
 import './create-character.scss'
+import HeadSelector from './HeadSelector/head-selector'
 
 const getMaleImage = selected => {
   if (selected) {
@@ -25,13 +28,24 @@ const getFemaleImage = selected => {
     return require('../../assets/Buttons/button_gender_woman_off.png')
   }
 }
+
+const selectHeads= (bodyList, gender, race) => {
+  if (bodyList == null) return null
+  return bodyList.human.male
+}
+const getBody = (bodyList, gender, race) => {
+  if (bodyList == null) return null
+  return bodyList.human.male.body
+}
 const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
 const raceList = ['Humano', 'Elfo', 'Drow', 'Gnomo', 'Enano',' Orco']
 const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
 export default function CreateCharacterScreen() {
   const [characterDefinition, setCharacterDefinition] = useState({gender:0, raceIndex:0, classId:0, face:0, name:''});
-  const {name, gender, raceIndex, classId, face } = characterDefinition;
+  const {name, gender, raceIndex, classId, face, bodyListInfo } = characterDefinition;
   const attrValues = [21,18,17,18,15]
+  const heads = selectHeads(bodyListInfo, gender, raceIndex)
+  const body = getBody(bodyListInfo, gender, raceIndex)
   const attrColor = attrValues.map( value => {
     if (value > 18) {
       return 'attr-green'
@@ -43,8 +57,12 @@ export default function CreateCharacterScreen() {
   })
   const { t } = useTranslation();
   const createCharacter = event => {
-
   }
+  useEffect(() => {
+    LoadJsonFile('/init/HeadAndBodyData.json').then(data => {
+      setCharacterDefinition({ ...characterDefinition, bodyListInfo: data});
+    });
+  }, []);
   const handleChange = event => {
     const { value, name } = event.target;
     setCharacterDefinition({ ...characterDefinition, [name]: value});
@@ -97,6 +115,18 @@ export default function CreateCharacterScreen() {
           </Frame>
         </div>
         <div className='mid-panel'>
+          <div className='character-preview'>
+            {
+              body != null ?
+              <DrawCharacter body={body} head={face}/>
+              : null
+            }
+            {
+              heads != null ?
+              <HeadSelector start={heads.start} end={heads.end}/> :
+              null
+            }
+          </div>
           <div className='character-details'>
             <div className='section-divider'></div>
             <div className='section-divider'>

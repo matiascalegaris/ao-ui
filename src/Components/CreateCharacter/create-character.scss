@@ -19,6 +19,14 @@
     .mid-panel {
       flex-grow: 1;
       display:flex;
+      flex-direction: column;
+
+      .character-preview {
+        display: flex;
+        flex-direction: column;
+        margin-top: 100px;
+        flex-grow: 1;
+      }
       .character-details {
         display: flex;
         width: 100%;

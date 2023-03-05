@@ -80,9 +80,17 @@ const LoadIni = async filePath => {
           }
         }
         return configObject
-      })
-        
+      })   
 }
+const LoadJsonFile = async filePath => {
+  return await fetch(GetRootDirectory() + filePath)
+      .then((response) => response.text())
+      .then((text) => {      
+        return JSON.parse(text)
+      })
+}
+
+
 
 const GetRootDirectory = () => {
   if (process.env.NODE_ENV === 'development') {
@@ -95,4 +103,4 @@ const GetRootDirectory = () => {
 export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt,
         ValidateRoboCode, ValidateString, ValidValidationCode,
         ValidResetPwdCode, GetRootDirectory, LoadIni, GetColorForCharacterStatus,
-        GetNameForClassId }
+        GetNameForClassId, LoadJsonFile }

@@ -145,6 +145,15 @@ if (process.env.NODE_ENV === 'development') {
     },
     LoginCharacter: character => { 
       console.log("login character" + character)     
+    },
+    GetHeadDrawInfo: headIndex => {
+      return {
+        height: 32,
+        imageNumber: 420,
+        startX: 135,
+        startY: 0,
+        width: 27
+      }
     }
   }
 }
