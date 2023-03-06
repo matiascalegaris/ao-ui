@@ -3,7 +3,6 @@ import './draw-character.scss'
 
 const DrawCharacter = ({ body, head, helm, shield, weapon }) => {
   const charInfo = window.parent.BabelUI.GetCharacterDrawInfo(body, head, helm, shield, weapon)
-  console.log(charInfo)
   const bodyStyle = {
     width: `${charInfo.body.body.width}px`,
     height: `${charInfo.body.body.height}px`,

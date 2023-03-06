@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
 import CharacterSelector from '../CharacterSelector/character-selector'
@@ -12,14 +13,27 @@ export default function CharacterSelectionScreen() {
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
   const seletCharacter = selection => {
-    if ( selectedId < 1 || selectedCharacter.index != selection.index) {
+    if (selectedId < 1 || (selectedCharacter.index !== selection.index &&
+      selection.name != null )) {
       dispatch(selectCharacter(selection.index));
       window.parent.BabelUI.SelectCharacter(selection.index)
     }
   }
+  const doBack = event => {
+    event.preventDefault();
+    window.parent.BabelUI.ExitCharacterSelection();
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      if (availableCharacters[0].name != null) {
+        dispatch(selectCharacter(availableCharacters.index));
+        window.parent.BabelUI.SelectCharacter(availableCharacters.index)
+      }
+    }, 100)    
+  },[]);
   return (
     <div className='character-selection-screen'>
-      <Header/>
+      <Header goBack={doBack}/>
       <div className='char-list'>
         <div className='char-list-line animate-left'>
           {

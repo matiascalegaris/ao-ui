@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { setActiveDialog } from '../../redux/UIFlowSlice'
 import { LoadJsonFile } from '../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
@@ -29,21 +31,58 @@ const getFemaleImage = selected => {
   }
 }
 
+const getOptionsForRace = (bodyList, race) => {
+  switch(race) {
+    case 0:
+      return bodyList.Human
+    case 1:
+      return bodyList.Elf
+    case 2:
+      return bodyList.Drow
+    case 3:
+      return bodyList.Gnome
+    case 4:
+      return bodyList.Dwarf
+    case 5:
+      return bodyList.Orc
+  }
+  return null
+}
+
+const selectStats = (bodyList, race) => {
+  if (bodyList == null) return [18, 18, 18, 18, 18]
+  return getOptionsForRace(bodyList, race).stats
+}
 const selectHeads= (bodyList, gender, race) => {
   if (bodyList == null) return null
-  return bodyList.human.male
+  if (gender == 0) {
+    return getOptionsForRace(bodyList, race).male
+  }
+  else {
+    return getOptionsForRace(bodyList, race).female
+  }
 }
 const getBody = (bodyList, gender, race) => {
   if (bodyList == null) return null
-  return bodyList.human.male.body
+  if (gender == 0) {
+    return getOptionsForRace(bodyList, race).male.body
+  }
+  else {
+    return getOptionsForRace(bodyList, race).female.body
+  }
 }
 const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
 const raceList = ['Humano', 'Elfo', 'Drow', 'Gnomo', 'Enano',' Orco']
 const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
 export default function CreateCharacterScreen() {
-  const [characterDefinition, setCharacterDefinition] = useState({gender:0, raceIndex:0, classId:0, face:0, name:''});
+  const [characterDefinition, setCharacterDefinition] = useState({gender:0,
+                                                                 raceIndex:0,
+                                                                 classId:0,
+                                                                 face:0,
+                                                                 name:''
+                                                                });
   const {name, gender, raceIndex, classId, face, bodyListInfo } = characterDefinition;
-  const attrValues = [21,18,17,18,15]
+  const attrValues = selectStats(bodyListInfo, raceIndex)
   const heads = selectHeads(bodyListInfo, gender, raceIndex)
   const body = getBody(bodyListInfo, gender, raceIndex)
   const attrColor = attrValues.map( value => {
@@ -56,11 +95,13 @@ export default function CreateCharacterScreen() {
     return ''
   })
   const { t } = useTranslation();
+  const dispatch = useDispatch()
   const createCharacter = event => {
   }
   useEffect(() => {
     LoadJsonFile('/init/HeadAndBodyData.json').then(data => {
-      setCharacterDefinition({ ...characterDefinition, bodyListInfo: data});
+      setCharacterDefinition({ ...characterDefinition, bodyListInfo: data,
+                            face: selectHeads(data, gender, raceIndex).start});
     });
   }, []);
   const handleChange = event => {
@@ -68,17 +109,31 @@ export default function CreateCharacterScreen() {
     setCharacterDefinition({ ...characterDefinition, [name]: value});
   }
   const setGender = genderId => {
-    setCharacterDefinition({ ...characterDefinition, gender: genderId});
+    if (genderId !== gender) {
+      const newFace = selectHeads(bodyListInfo, genderId, raceIndex).start
+      setCharacterDefinition({ ...characterDefinition, gender: genderId,
+                              face:newFace });
+    }
   }
   const setRace = raceId => {
-    setCharacterDefinition({ ...characterDefinition, raceIndex: raceId});
+    if (raceId !== raceIndex) {
+      setCharacterDefinition({ ...characterDefinition, raceIndex: raceId,
+                               face: selectHeads(bodyListInfo, gender, raceId).start});
+    }
+  }
+  const updateHead = newHeadID => {
+    setCharacterDefinition({ ...characterDefinition, face: newHeadID});
   }
   const setClass = newClassId => {
     setCharacterDefinition({ ...characterDefinition, classId: newClassId});
   }
+  const doBack = event => {
+    event.preventDefault();
+    dispatch(setActiveDialog('character-selection'))
+  }
   return (
     <div className='create-charcter'>
-      <Header/>
+      <Header goBack={doBack}/>
       <div className='config-area'>
         <div className='left-panel'>
           <Frame contentStyles='sub-panel sex-selection'>
@@ -123,7 +178,7 @@ export default function CreateCharacterScreen() {
             }
             {
               heads != null ?
-              <HeadSelector start={heads.start} end={heads.end}/> :
+              <HeadSelector start={heads.start} end={heads.end} onUpdateSelection={updateHead} currentSelected={face}/> :
               null
             }
           </div>
