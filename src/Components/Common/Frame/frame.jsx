@@ -1,12 +1,12 @@
 import './frame.scss'
 
-export default function Frame({children, contentStyles}) {
+export default function Frame({children, contentStyles, styles}) {
   var spacer = {
     width: `9px`,
     height: `9px`
   }
   return (
-  <div className='frame'>
+  <div className={'frame ' + styles}>
     <div className='frame-side-container left'>
         <div style={spacer}></div>
         <div className='frame-center'></div>

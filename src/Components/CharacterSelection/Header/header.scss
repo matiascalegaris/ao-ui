@@ -2,6 +2,12 @@
   from {transform: translateY(-100%)}
   to {transform: translateY(0px);}
 }
+
+@keyframes animation-out {
+  from {transform: translateY(0px)}
+  to {transform: translateY(-110%);}
+}
+
 .header {
   width: 100%;
   position: relative;
@@ -50,6 +56,12 @@
         background-repeat: repeat-x;
         background-image: url(../../../assets/Misc/divider_horizontal_big.png);
     }
-  }
-  
+  } 
+}
+
+.exit-animation {
+  animation-name: animation-out;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+  transform: translateY(-110%);
 }

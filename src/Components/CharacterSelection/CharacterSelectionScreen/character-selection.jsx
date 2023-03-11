@@ -12,12 +12,15 @@ export default function CharacterSelectionScreen() {
   const dispatch = useDispatch()
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
-  const seletCharacter = selection => {
+  const selectOption = (selection) => {
     if (selectedId < 1 || (selectedCharacter.index !== selection.index &&
       selection.name != null )) {
       dispatch(selectCharacter(selection.index));
       window.parent.BabelUI.SelectCharacter(selection.index)
     }
+  }
+  const loginWithCharaceter = (charater) =>{
+    window.parent.BabelUI.LoginCharacter(charater)
   }
   const doBack = event => {
     event.preventDefault();
@@ -38,14 +41,17 @@ export default function CharacterSelectionScreen() {
         <div className='char-list-line animate-left'>
           {
             availableCharacters.length > 0 ?
-            availableCharacters.slice(0,5).map( item => <CharacterSelector selected={selectedId === item.index} key={item.index} charInfo={item} onClick={ () => {seletCharacter(item)}}/>) :
+            availableCharacters.slice(0,5).map( item => <CharacterSelector 
+                selected={selectedId === item.index} 
+                key={item.index} charInfo={item} 
+                onClick={  evt => {selectOption(item)}}/>) :
             null
           }
         </div>
         <div className='char-list-line animate-right'>
           {
             availableCharacters.length > 0 ?
-            availableCharacters.slice(5, 10).map( item => <CharacterSelector selected={selectedId === item.index} key={item.index} charInfo={item} onClick={ () => {seletCharacter(item)}}/>) :
+            availableCharacters.slice(5, 10).map( item => <CharacterSelector selected={selectedId === item.index} key={item.index} charInfo={item} onClick={ evt => {selectOption(item)}}/>) :
             null
           }
         </div>

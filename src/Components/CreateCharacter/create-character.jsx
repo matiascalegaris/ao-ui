@@ -1,35 +1,20 @@
 import { useEffect, useState } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { setActiveDialog } from '../../redux/UIFlowSlice'
 import { LoadJsonFile } from '../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
-import AoButton from '../Common/ao-button/ao-button'
-import AoInput from '../Common/ao-input/ao-input'
+
 import DrawCharacter from '../Common/DrawCharacter/draw-character'
 import Frame from '../Common/Frame/frame'
 import RibbonTittle from '../Common/RibbonTittle/ribbon-tittle'
 import SelectOption from '../Common/SelectOption/select-option'
 import './create-character.scss'
+import GenderSelector from './GenderSelector/gender-selector'
 import HeadSelector from './HeadSelector/head-selector'
-
-const getMaleImage = selected => {
-  if (selected) {
-    return require('../../assets/Buttons/button_gender_man_over.png')
-  }
-  else {
-    return require('../../assets/Buttons/button_gender_man_off.png')
-  }
-}
-const getFemaleImage = selected => {
-  if (selected) {
-    return require('../../assets/Buttons/button_gender_woman_over.png')
-  }
-  else {
-    return require('../../assets/Buttons/button_gender_woman_off.png')
-  }
-}
+import NameInputArea from './NameInputArea/name-input-area'
+import SelectionFrame from './SelectionFrame/selection-frame'
 
 const getOptionsForRace = (bodyList, race) => {
   switch(race) {
@@ -71,6 +56,11 @@ const getBody = (bodyList, gender, race) => {
     return getOptionsForRace(bodyList, race).female.body
   }
 }
+const getCityList = () => {
+  return [
+    'Ullathorpe', 'nix', 'Arghal', 'Banderbill', 'Lindos'
+  ]
+}
 const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
 const raceList = ['Humano', 'Elfo', 'Drow', 'Gnomo', 'Enano',' Orco']
 const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
@@ -79,12 +69,14 @@ export default function CreateCharacterScreen() {
                                                                  raceIndex:0,
                                                                  classId:0,
                                                                  face:0,
-                                                                 name:''
+                                                                 name:'',
+                                                                 homeCity:0
                                                                 });
-  const {name, gender, raceIndex, classId, face, bodyListInfo } = characterDefinition;
+  const {name, gender, raceIndex, classId, face, bodyListInfo, homeCity } = characterDefinition;
   const attrValues = selectStats(bodyListInfo, raceIndex)
   const heads = selectHeads(bodyListInfo, gender, raceIndex)
   const body = getBody(bodyListInfo, gender, raceIndex)
+  const availableCity = getCityList()
   const attrColor = attrValues.map( value => {
     if (value > 18) {
       return 'attr-green'
@@ -121,6 +113,11 @@ export default function CreateCharacterScreen() {
                                face: selectHeads(bodyListInfo, gender, raceId).start});
     }
   }
+  const setHome = cityID => {
+    if (cityID !== homeCity) {
+      setCharacterDefinition({ ...characterDefinition, homeCity: cityID});
+    }
+  }
   const updateHead = newHeadID => {
     setCharacterDefinition({ ...characterDefinition, face: newHeadID});
   }
@@ -136,25 +133,11 @@ export default function CreateCharacterScreen() {
       <Header goBack={doBack}/>
       <div className='config-area'>
         <div className='left-panel'>
-          <Frame contentStyles='sub-panel sex-selection'>
-            <RibbonTittle text='género' />
-            <div className='button-area'>
-            <SelectOption styles='button-style' selected={gender==0} onClick={ ()=> {setGender(0)}} contentStyles='button'>
-              <img className='icon' src={getMaleImage(gender==0)} />
-            </SelectOption>
-            <SelectOption styles='button-style' selected={gender==1} contentStyles='button' onClick={ ()=> {setGender(1)}}>
-              <img className='icon' src={getFemaleImage(gender==1)} />
-            </SelectOption>
-            </div>
-          </Frame>
-          <Frame  contentStyles='sub-panel race-selection'>
-            <RibbonTittle text='raza' />
-            <div className='button-area'>
-            {
-              raceList.map( (race, index) => <SelectOption key={index} selected={raceIndex===index} styles='button-settings' onClick={ ()=> {setRace(index)}}>{t(race).toUpperCase()}</SelectOption>)
-            }
-            </div>
-          </Frame>
+          <GenderSelector currentSelection={gender} onChange={setGender} />
+          <SelectionFrame optionList={raceList} 
+                          title={t('raza')} 
+                          selectedOptionId={raceIndex} 
+                          onChange={setRace}/>
           <Frame contentStyles='sub-panel '>
             <RibbonTittle text='atributos' />
             <div className='attribute-list'>
@@ -178,42 +161,26 @@ export default function CreateCharacterScreen() {
             }
             {
               heads != null ?
-              <HeadSelector start={heads.start} end={heads.end} onUpdateSelection={updateHead} currentSelected={face}/> :
+              <HeadSelector start={heads.start} 
+                            end={heads.end} 
+                            onUpdateSelection={updateHead} 
+                            currentSelected={face}/> :
               null
             }
           </div>
-          <div className='character-details'>
-            <div className='section-divider'></div>
-            <div className='section-divider'>
-              <div className='seleccion-detais'>
-                <div className='details-border-left'></div>
-                <div className='details-box'>
-                <div className='border-left'></div>
-                <div className='text-area'>
-                  <p className='char-name-tittle'>{t('character name').toUpperCase()}</p>
-                  <AoInput styles='name-input' inputStyles='inner-input' name="name" type="name" IsValid={true} value={name} required handleChange={handleChange}/>
-                  <p className='name-rules'><Trans i18nKey="rules-desc" count={1}>rules<span className='warning'>desc</span>.</Trans></p>
-                </div>
-                <div className='border-right'></div>
-                </div>
-                <div className='details-border-right'></div>
-              </div>
-            </div>
-            <div className='section-divider'></div>
-          </div>
+          <NameInputArea onChange={handleChange} currentName={name} />
         </div>
         <div className='right-panel'>
-        <Frame  contentStyles='sub-panel race-selection class-selection'>
-            <RibbonTittle text='class' />
-            <div className='button-area'>
-            {
-              classList.map( (uclass, index) => <SelectOption key={index} selected={classId===index} styles='button-settings' onClick={ ()=> {setClass(index)}}>{t(uclass).toUpperCase()}</SelectOption>)
-            }
-             <div className='select-class-details'>
-              
-             </div>
-            </div>
-          </Frame>
+          <SelectionFrame styles='extend-frame' 
+                          optionList={classList} 
+                          title={t('class-tittle')} 
+                          showDetails={true}
+                          selectedOptionId={classId} 
+                          onChange={setClass}/>
+          <SelectionFrame optionList={availableCity} 
+                          title={t('city')} 
+                          selectedOptionId={homeCity} 
+                          onChange={setHome}/>
         </div>
       </div>
       <div className='bottom-leather'>

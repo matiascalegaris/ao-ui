@@ -1,8 +1,16 @@
+import { useSelector } from 'react-redux'
+import { selectExitScreenActive } from '../../../redux/UIFlowSlice'
 import './ao-dialog.scss'
 
 export default function AoDialog({children, styles, contentStyles}) {
+  const transitionACtive = useSelector(selectExitScreenActive)
+  
+  let animStyles = ' intro-animation '
+  if (transitionACtive) {
+    animStyles= ' exit-animation '
+  }
   return (
-    <form className={'dialog-container ' + styles} autoComplete="off">
+    <form className={'dialog-container' + animStyles + styles} autoComplete="off">
       <div className='frame-side-container left'>
         <div className='corner-spacer'></div>
         <div className='left-img frame-center'></div>

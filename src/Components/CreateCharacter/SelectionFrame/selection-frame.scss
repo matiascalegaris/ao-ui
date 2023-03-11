@@ -1,0 +1,27 @@
+
+.option-area {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px 0px 10px;
+
+  .option-button {
+    width: 40px;
+    height: 40px;
+    margin: 2.5px;
+  }
+}
+
+.selected-option {
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  margin: 0px 0 10px;
+}
+
+.description-area {
+  color: white;
+  font-size: 0.6rem;
+  text-align: left;
+  margin: 0px 5px 10px;
+  white-space: pre-line;
+}

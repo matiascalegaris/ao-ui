@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { selectExitScreenActive } from '../../../redux/UIFlowSlice';
 import AoButton from '../../Common/ao-button/ao-button'
 import './header.scss'
 
@@ -6,8 +8,13 @@ export default function Header({goBack}) {
     event.preventDefault();
     window.parent.BabelUI.CloseClient();
   }
+  const transitionActive = useSelector(selectExitScreenActive)
+  let animStyles = ' '
+  if (transitionActive) {
+    animStyles = ' exit-animation '
+  }
   return (
-    <div className='header'>
+    <div className={'header' + animStyles}>
       <div className='leather-frame'>
         <div className='top-leather'>
           <AoButton styles='button' onClick={ goBack }>

@@ -43,7 +43,8 @@ const resources = {
       'sta-int': 'Inteligence',
       'sta-cha': 'Charisma',
       'sta-cons': 'Constitution',
-      'rules-desc': `The character's name must comply with our rules of coexistence. Any offensive and inappropriate name <1>will be penalized.<1>`
+      'rules-desc': `The character's name must comply with our rules of coexistence. Any offensive and inappropriate name <1>will be penalized.<1>`,
+      'Mage-desc': "Magic oriented class\n\nMages are the main magic class in argentum, they have a good balance between doing damage and adding effect to other but they normally has low hp"
     }
   },
   es: {

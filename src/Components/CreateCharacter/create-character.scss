@@ -26,90 +26,17 @@
         margin-top: 100px;
         flex-grow: 1;
       }
-      .character-details {
-        display: flex;
-        width: 100%;
-        flex-direction: row;
-        margin: auto auto 0 auto;
-        .section-divider {
-          flex-grow: 1;
-          display: flex;
-    
-          .seleccion-detais {
-            margin: auto auto auto auto;
-            display: flex;
-            flex-direction: row;
-            .details-border-left {
-              background-image: url(../../assets/Misc/info-area-left.png);
-              width: 18px;
-              height: 173px
-            }
-            .details-border-right {
-              background-image: url(../../assets/Misc/info-area-right.png);
-              width: 18px;
-              height: 173px;
-            }
-            .details-box {
-              display: flex;
-              flex-direction: row;
-              box-shadow: 0px 0px 16px 1px rgb(5 5 5);
-              .border-left {
-                background-image: url(../../assets/Misc/info-area-left-frame.png);
-                width: 11px;
-                height: 173px
-              }
-              .border-right{
-                background-image: url(../../assets/Misc/info-area-right-frame.png);
-                width: 12px;
-                height: 173px;
-              }
-              .text-area {
-                display: flex;
-                flex-direction: column;
-                margin: auto;
-                color: white;
-                height: 173px;
-                min-width: 350px;
-                flex-grow: 1;
-                background-image: url(../../assets/Misc/info-area-center.png);
-                background-repeat: repeat-x;
-                text-align: center;
-                justify-content: start;
-                .text {
-                  margin-top: 5px;
-                }
-                .char-name-tittle {
-                  margin-top: 25px;
-                  font-weight: 800;
-                }
-                .name-input {
-                  margin: 0px auto 10px;
-                  width: 250px;
-                  
-
-                  .inner-input {
-                    font-size: 1rem;
-                    font-family: Cardo;
-                    color: goldenrod;
-                  }
-                }
-                .name-rules {
-                  margin: 0 30px;
-                  max-width: 350px;
-                }
-                .warning {
-                  color:gold;
-                }
-              }
-            }
-            
-          }
-        }
-      }
     }
     .right-panel {
       margin: 0px 20px 20px;
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .extend-frame {
+        flex-grow: 1;
+        margin-bottom: 20px;
+      }
     }
     .ribbon-container {
       margin: auto auto;
@@ -119,31 +46,7 @@
       min-width: 200px;
       display: flex;
       flex-direction: column;
-    }
-    .sex-selection {      
-      .button-area {
-        display: flex;
-        flex-direction: row;
-        margin: 30px 0;
-        justify-content: space-evenly;
-        .button-style {
-          background-image: url(../../assets/Backgrounds/leather_black.png);
-        }
-        .button {
-          background-image: url(../../assets/Backgrounds/leather_black.png);
-          margin: 5px 5px;
-          display: flex;
-          width: 25px;
-          height: 25px;
-  
-          .icon {
-            display: flex;
-            background: transparent;
-            background-image: none;
-            margin: auto;
-          }
-        }
-      }
+      width: 240px;
     }
 
     .race-selection {
