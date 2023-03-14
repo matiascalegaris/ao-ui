@@ -3,11 +3,11 @@ import { selectExitScreenActive } from '../../../redux/UIFlowSlice'
 import './ao-dialog.scss'
 
 export default function AoDialog({children, styles, contentStyles}) {
-  const transitionACtive = useSelector(selectExitScreenActive)
+  const transitionActive = useSelector(selectExitScreenActive)
   
-  let animStyles = ' intro-animation '
-  if (transitionACtive) {
-    animStyles= ' exit-animation '
+  let animStyles = ' dialog-intro-animation '
+  if (transitionActive) {
+    animStyles= ' dialog-exit-animation '
   }
   return (
     <form className={'dialog-container' + animStyles + styles} autoComplete="off">

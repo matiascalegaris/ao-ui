@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice';
-import { setActiveDialog } from '../../../redux/UIFlowSlice';
+import { selectExitScreenActive, setActiveDialog } from '../../../redux/UIFlowSlice';
 import { GetColorForCharacterStatus, GetNameForClassId } from '../../../Tools/Utils';
 import LoginButton from '../LogInButton/login-button'
 import './char-select-bottom.scss'
@@ -17,13 +17,18 @@ export default function CharSelectBottom() {
       window.parent.BabelUI.LoginCharacter(selectedCharacter.index)
     }
   }
+  const transitionActive = useSelector(selectExitScreenActive)
+  let animStyles = ' char-select-bottom-intro-animation'
+  if (transitionActive) {
+    animStyles = ' char-select-bottom-exit-animation'
+  }
 
   const createCharacter = event => {
     dispatch(setActiveDialog('create-character'))
     window.parent.BabelUI.SelectCharacter(-1)
   }
   return (
-    <div className='char-selection-bottom'>
+    <div className={'char-selection-bottom' + animStyles}>
       <div className='character-details'>
         <div className='section-divider'></div>
         <div className='section-divider'>

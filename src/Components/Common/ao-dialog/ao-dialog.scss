@@ -1,10 +1,10 @@
-@keyframes fade-in {
+@keyframes dialog-fade-in {
   from {transform: translateY(100%)}
   to {transform: translateY(0px);}
 }
 
-@keyframes fade-out {
-  from {transform: translateY(0)}
+@keyframes dialog-fade-out {
+  from {transform: translateY(0px)}
   to {transform: translateY(100%);}
 }
 .dialog-container {
@@ -107,14 +107,14 @@
   }
 }
 
-.intro-animation {
-  animation-name: fade-in;
+.dialog-intro-animation {
+  animation-name: dialog-fade-in;
   animation-duration: 0.3s;
   animation-timing-function: ease-out;
   transform: translateY(0px)
 }
-.exit-animation {
-  animation-name: fade-out;
+.dialog-exit-animation {
+  animation-name: dialog-fade-out;
   animation-duration: 0.3s;
   animation-timing-function: ease-in;
   transform: translateY(110%);

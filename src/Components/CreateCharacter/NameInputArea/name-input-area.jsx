@@ -2,10 +2,10 @@ import { Trans, useTranslation } from 'react-i18next'
 import AoInput from '../../Common/ao-input/ao-input'
 import './name-input-area.scss'
 
-export default function NameInputArea ({currentName, onChange}) {
+export default function NameInputArea ({currentName, onChange, styles}) {
   const { t } = useTranslation();
   return (
-    <div className='character-details'>
+    <div className={'character-details' + styles}>
       <div className='section-divider'></div>
       <div className='section-divider'>
         <div className='seleccion-detais'>

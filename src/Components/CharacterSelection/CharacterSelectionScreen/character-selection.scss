@@ -8,6 +8,15 @@
   to {transform: translateX(0px);}
 }
 
+@keyframes anim-out-left {
+  from {transform: translateX(0px)}
+  to {transform: translateX(-100%);}
+}
+
+@keyframes anim-out-right {
+  from {transform: translateX(0px)}
+  to {transform: translateX(100%);}
+}
 .character-selection-screen {
   width: 100%;
   height: 100%;
@@ -35,6 +44,19 @@
       animation-name: intro-in-right;
       animation-duration: 0.3s;
       animation-timing-function: ease-out;
+    }
+
+    .exit-animation-left {
+      animation-name: anim-out-left;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-in;
+      transform:translateX(-100%);
+    }
+    .exit-animation-right {
+      animation-name: anim-out-right;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-in;
+      transform: translateX(100%);
     }
   }
 }

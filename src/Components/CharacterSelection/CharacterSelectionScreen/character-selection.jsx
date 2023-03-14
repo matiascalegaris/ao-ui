@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
+import { selectExitScreenActive } from '../../../redux/UIFlowSlice'
 import CharacterSelector from '../CharacterSelector/character-selector'
 import CharSelectBottom from '../CharSelectBottom/char-select-bottom'
 import Header from '../Header/header'
@@ -26,6 +27,13 @@ export default function CharacterSelectionScreen() {
     event.preventDefault();
     window.parent.BabelUI.ExitCharacterSelection();
   }
+  const transitionActive = useSelector(selectExitScreenActive)
+  let animLeftStyles = ' animate-left'
+  let animRightStyles = ' animate-right'
+  if (transitionActive) {
+    animLeftStyles = ' exit-animation-left'
+    animRightStyles = ' exit-animation-right'
+  }
   useEffect(() => {
     setTimeout(() => {
       if (availableCharacters[0].name != null) {
@@ -38,7 +46,7 @@ export default function CharacterSelectionScreen() {
     <div className='character-selection-screen'>
       <Header goBack={doBack}/>
       <div className='char-list'>
-        <div className='char-list-line animate-left'>
+        <div className={'char-list-line' + animLeftStyles}>
           {
             availableCharacters.length > 0 ?
             availableCharacters.slice(0,5).map( item => <CharacterSelector 
@@ -48,7 +56,7 @@ export default function CharacterSelectionScreen() {
             null
           }
         </div>
-        <div className='char-list-line animate-right'>
+        <div className={'char-list-line' + animRightStyles}>
           {
             availableCharacters.length > 0 ?
             availableCharacters.slice(5, 10).map( item => <CharacterSelector selected={selectedId === item.index} key={item.index} charInfo={item} onClick={ evt => {selectOption(item)}}/>) :

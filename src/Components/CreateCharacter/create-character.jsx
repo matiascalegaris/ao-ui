@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
-import { setActiveDialog } from '../../redux/UIFlowSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectExitScreenActive, setActiveDialog } from '../../redux/UIFlowSlice'
 import { LoadJsonFile } from '../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
@@ -77,6 +77,15 @@ export default function CreateCharacterScreen() {
   const heads = selectHeads(bodyListInfo, gender, raceIndex)
   const body = getBody(bodyListInfo, gender, raceIndex)
   const availableCity = getCityList()
+  const transitionActive = useSelector(selectExitScreenActive)
+  let animLeftStyles = ' animate-left'
+  let animRightStyles = ' animate-right'
+  let animBottomSytles = ' cc-animate-bottom-in'
+  if (transitionActive) {
+    animLeftStyles = ' exit-animation-left'
+    animRightStyles = ' exit-animation-right'
+    animBottomSytles = ' cc-animate-bottom-out'
+  }
   const attrColor = attrValues.map( value => {
     if (value > 18) {
       return 'attr-green'
@@ -132,7 +141,7 @@ export default function CreateCharacterScreen() {
     <div className='create-charcter'>
       <Header goBack={doBack}/>
       <div className='config-area'>
-        <div className='left-panel'>
+        <div className={'left-panel'+ animLeftStyles}>
           <GenderSelector currentSelection={gender} onChange={setGender} />
           <SelectionFrame optionList={raceList} 
                           title={t('raza')} 
@@ -168,9 +177,9 @@ export default function CreateCharacterScreen() {
               null
             }
           </div>
-          <NameInputArea onChange={handleChange} currentName={name} />
+          <NameInputArea styles={animBottomSytles} onChange={handleChange} currentName={name} />
         </div>
-        <div className='right-panel'>
+        <div className={'right-panel' + animRightStyles}>
           <SelectionFrame styles='extend-frame' 
                           optionList={classList} 
                           title={t('class-tittle')} 
@@ -183,7 +192,7 @@ export default function CreateCharacterScreen() {
                           onChange={setHome}/>
         </div>
       </div>
-      <div className='bottom-leather'>
+      <div className={'bottom-leather' + animBottomSytles}>
         <div className='button-area'>
           <div className='bar-layer'>
             <div className='bar-img'></div>
