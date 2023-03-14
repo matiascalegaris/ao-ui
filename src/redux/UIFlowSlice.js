@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 
 export const UIFlowSlice = createSlice({
   name: 'uiFlow',
@@ -36,10 +37,10 @@ export const UIFlowSlice = createSlice({
       state.nextScreen = action.payload
     },
     transitionComplete: (state) => {
+      console.log('translation complete: ' + state.nextScreen)
       state.transitionActive = false
       state.loading = false
       state.activeDialog = state.nextScreen
-      state.nextScreen = ''
     }
   },
 })
@@ -56,6 +57,7 @@ export const selectErrorMessage = (state) => state.uiFlow.errorMessage
 export const selectExitScreenActive = (state) => state.uiFlow.transitionActive
 
 export const setActiveDialog = (dialog) => (dispatch) => {
+  console.log('set secreen: ' + dialog)
   dispatch(startTransition(dialog))
   setTimeout(() => {
     dispatch(transitionComplete())
