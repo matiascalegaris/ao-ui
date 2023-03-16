@@ -58,12 +58,40 @@ const getBody = (bodyList, gender, race) => {
 }
 const getCityList = () => {
   return [
-    'Ullathorpe', 'nix', 'Arghal', 'Banderbill', 'Lindos'
+    'Ullathorpe', 'Nix', 'Arghal', 'Banderbill', 'Lindos'
   ]
 }
 const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
-const raceList = ['Humano', 'Elfo', 'Drow', 'Gnomo', 'Enano',' Orco']
+const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf',' Orc']
 const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
+
+const mapRaces = ( gender, raceList) => {
+  return raceList.map( race => (
+    {
+      name: race,
+      description: null,
+      icon: require(`../../assets/icons/race/${race}${gender}.png`)
+    }
+  ))
+}
+const mapClass = ( classList) => {
+  return classList.map( className => (
+    {
+      name: className,
+      description: `${className}-desc`,
+      icon: `../../../assets/icons/class/${className}.png`
+    }
+  ))
+}
+const mapHomeCity = ( cityNames) => {
+  return cityNames.map( cityName => (
+    {
+      name: cityName,
+      description: null,
+      icon: `../../../assets/icons/cities/${cityName}.png`
+    }
+  ))
+}
 export default function CreateCharacterScreen() {
   const [characterDefinition, setCharacterDefinition] = useState({gender:0,
                                                                  raceIndex:0,
@@ -143,7 +171,7 @@ export default function CreateCharacterScreen() {
       <div className='config-area'>
         <div className={'left-panel'+ animLeftStyles}>
           <GenderSelector currentSelection={gender} onChange={setGender} />
-          <SelectionFrame optionList={raceList} 
+          <SelectionFrame optionList={mapRaces(gender, raceList)} 
                           title={t('raza')} 
                           selectedOptionId={raceIndex} 
                           onChange={setRace}/>
@@ -181,12 +209,12 @@ export default function CreateCharacterScreen() {
         </div>
         <div className={'right-panel' + animRightStyles}>
           <SelectionFrame styles='extend-frame' 
-                          optionList={classList} 
+                          optionList={mapClass(classList)} 
                           title={t('class-tittle')} 
                           showDetails={true}
                           selectedOptionId={classId} 
                           onChange={setClass}/>
-          <SelectionFrame optionList={availableCity} 
+          <SelectionFrame optionList={mapHomeCity(availableCity)} 
                           title={t('city')} 
                           selectedOptionId={homeCity} 
                           onChange={setHome}/>

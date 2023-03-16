@@ -4,7 +4,7 @@ import './loading.scss'
 
 export default function Loading({children, styles}) {
   return (
-    <AoDialog styles={styles} >
+    <AoDialog styles={styles} ignoreAnimation={true} >
       <div className='loading'>
         <Spinner styles="spinner"/>
         <div className='content'>

@@ -97,20 +97,20 @@ const LoadJsonFile = async filePath => {
 export function useSingleAndDoubleClick(
     handleSingleClick,
     handleDoubleClick,
-    delay = 250
+    delay = 250,
+    value
 ) {
   const [click, setClick] = useState(0);
-
-  useEffect(() => {
+  useEffect((e) => {
     const timer = setTimeout(() => {
       if (click === 1) {
-        handleSingleClick();
+        handleSingleClick(e, value);
       }
       setClick(0);
     }, delay);
 
     if (click === 2) {
-      handleDoubleClick();
+      handleDoubleClick(e, value);
     }
 
     return () => clearTimeout(timer);

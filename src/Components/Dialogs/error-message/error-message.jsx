@@ -10,7 +10,7 @@ export default function ErrorMessage({children, styles}) {
   const dispatch = useDispatch()
   const { t } = useTranslation();
   return (
-    <AoDialog styles={styles}>
+    <AoDialog styles={styles} ignoreAnimation={true}>
       <div className='message'>
         <div className='text'>
           {children}

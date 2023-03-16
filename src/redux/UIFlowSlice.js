@@ -33,8 +33,11 @@ export const UIFlowSlice = createSlice({
       state.errorMessage = undefined
     },
     startTransition : (state, action) => {
-      state.transitionActive = true
-      state.nextScreen = action.payload
+      if (state.activeDialog !== action.payload ||
+          state.transitionActive) {
+        state.transitionActive = true
+        state.nextScreen = action.payload
+      }
     },
     transitionComplete: (state) => {
       console.log('translation complete: ' + state.nextScreen)

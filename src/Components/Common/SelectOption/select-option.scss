@@ -1,10 +1,9 @@
 .select-option-container {
   border-style: inset;
-  border: 2px solid #21221F;
+  border: 2px solid #21221f00;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   color: #7F7F7F;
-  border: 2px solid #21221F;
   background-image: url(../../../assets/Buttons/button_gray_off.png);
   display: flex;
   flex-direction: column;
@@ -17,7 +16,7 @@
     margin: auto;
   }
   &:hover {
-    border: 2px solid #686865;
+    border: 2px solid #facd07;
     color: white;
     background-image: url(../../../assets/Buttons/button_gray_over.png);
   }

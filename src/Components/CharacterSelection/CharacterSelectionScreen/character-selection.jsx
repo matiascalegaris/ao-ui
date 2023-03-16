@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
 import { selectExitScreenActive } from '../../../redux/UIFlowSlice'
+import { useSingleAndDoubleClick } from '../../../Tools/Utils'
 import CharacterSelector from '../CharacterSelector/character-selector'
 import CharSelectBottom from '../CharSelectBottom/char-select-bottom'
 import Header from '../Header/header'
@@ -13,15 +14,18 @@ export default function CharacterSelectionScreen() {
   const dispatch = useDispatch()
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
-  const selectOption = (selection) => {
+  const selectOption = (evt, selection) => {
+    console.log('select chacater ' + selection.index)
     if (selectedId < 1 || (selectedCharacter.index !== selection.index &&
       selection.name != null )) {
       dispatch(selectCharacter(selection.index));
       window.parent.BabelUI.SelectCharacter(selection.index)
     }
   }
-  const loginWithCharaceter = (charater) =>{
-    window.parent.BabelUI.LoginCharacter(charater)
+
+  const loginWithCharaceter = (evt, charater) =>{
+    console.log('login with chacater ' + charater.index)
+    window.parent.BabelUI.LoginCharacter(charater.index)
   }
   const doBack = event => {
     event.preventDefault();
@@ -34,6 +38,7 @@ export default function CharacterSelectionScreen() {
     animLeftStyles = ' exit-animation-left'
     animRightStyles = ' exit-animation-right'
   }
+  
   useEffect(() => {
     setTimeout(() => {
       if (availableCharacters[0].name != null) {
@@ -52,14 +57,17 @@ export default function CharacterSelectionScreen() {
             availableCharacters.slice(0,5).map( item => <CharacterSelector 
                 selected={selectedId === item.index} 
                 key={item.index} charInfo={item} 
-                onClick={  evt => {selectOption(item)}}/>) :
+                onClick={ evt => {selectOption(evt,item)}}/>) :
             null
           }
         </div>
         <div className={'char-list-line' + animRightStyles}>
           {
             availableCharacters.length > 0 ?
-            availableCharacters.slice(5, 10).map( item => <CharacterSelector selected={selectedId === item.index} key={item.index} charInfo={item} onClick={ evt => {selectOption(item)}}/>) :
+            availableCharacters.slice(5, 10).map( item => <CharacterSelector 
+              selected={selectedId === item.index} 
+              key={item.index} charInfo={item} 
+              onClick={ evt => {selectOption(evt,item)}}/>) :
             null
           }
         </div>
