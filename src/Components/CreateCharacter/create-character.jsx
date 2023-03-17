@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { displayLoadingText, selectExitScreenActive, setActiveDialog } from '../../redux/UIFlowSlice'
-import { LoadJsonFile } from '../../Tools/Utils'
+import { GetImage, LoadJsonFile } from '../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
 
@@ -70,7 +70,7 @@ const mapRaces = ( gender, raceList) => {
     {
       name: race,
       description: null,
-      icon: require(`../../assets/icons/race/${race}${gender}.png`)
+      icon: GetImage(`../../assets/icons/race/${race}${gender}.png`)
     }
   ))
 }
@@ -79,7 +79,7 @@ const mapClass = ( classList) => {
     {
       name: className,
       description: `${className}-desc`,
-      icon: `../../../assets/icons/class/${className}.png`
+      icon: GetImage(`../../../assets/icons/class/${className}.png`)
     }
   ))
 }
@@ -88,7 +88,7 @@ const mapHomeCity = ( cityNames) => {
     {
       name: cityName,
       description: null,
-      icon: `../../../assets/icons/cities/${cityName}.png`
+      icon: GetImage(`../../../assets/icons/cities/${cityName}.png`)
     }
   ))
 }

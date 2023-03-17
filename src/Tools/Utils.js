@@ -34,6 +34,14 @@ const ValidateString = input => {
   return input.length === 0 || input.match(validRegex)
 }
 
+const GetImage = path => {
+  if (process.env.NODE_ENV === 'development') {
+    return path
+  }
+  else {
+    return require(path)
+  }
+}
 const GetColorForCharacterStatus = status => {
   switch(status)
   {
@@ -133,4 +141,4 @@ const GetRootDirectory = () => {
 export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt,
         ValidateRoboCode, ValidateString, ValidValidationCode,
         ValidResetPwdCode, GetRootDirectory, LoadIni, GetColorForCharacterStatus,
-        GetNameForClassId, LoadJsonFile }
+        GetNameForClassId, LoadJsonFile, GetImage }
