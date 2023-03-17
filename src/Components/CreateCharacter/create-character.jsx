@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectExitScreenActive, setActiveDialog } from '../../redux/UIFlowSlice'
+import { displayLoadingText, selectExitScreenActive, setActiveDialog } from '../../redux/UIFlowSlice'
 import { LoadJsonFile } from '../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
@@ -62,7 +62,7 @@ const getCityList = () => {
   ]
 }
 const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
-const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf',' Orc']
+const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf','Orc']
 const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
 
 const mapRaces = ( gender, raceList) => {
@@ -126,6 +126,9 @@ export default function CreateCharacterScreen() {
   const { t } = useTranslation();
   const dispatch = useDispatch()
   const createCharacter = event => {
+    event.preventDefault()
+    dispatch(displayLoadingText(t('connecting-to-server')))
+    window.parent.BabelUI.CreateCharacter(name, gender, raceIndex, face, classId, homeCity)
   }
   useEffect(() => {
     LoadJsonFile('/init/HeadAndBodyData.json').then(data => {

@@ -154,6 +154,9 @@ if (process.env.NODE_ENV === 'development') {
         startY: 0,
         width: 27
       }
+    },
+    CreateCharacter: (name, gender, race, head, classId, homeCity) => {
+      return true
     }
   }
 }

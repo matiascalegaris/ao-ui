@@ -35,15 +35,21 @@ export const UIFlowSlice = createSlice({
     startTransition : (state, action) => {
       if (state.activeDialog !== action.payload ||
           state.transitionActive) {
+        console.log('startTransition: ' + action.payload)
         state.transitionActive = true
         state.nextScreen = action.payload
+      }
+      else {
+        console.log('ignoreTransition: ' + action.payload)
       }
     },
     transitionComplete: (state) => {
       console.log('translation complete: ' + state.nextScreen)
-      state.transitionActive = false
-      state.loading = false
-      state.activeDialog = state.nextScreen
+      if (state.transitionActive) {
+        state.transitionActive = false
+        state.loading = false
+        state.activeDialog = state.nextScreen
+      }
     }
   },
 })
