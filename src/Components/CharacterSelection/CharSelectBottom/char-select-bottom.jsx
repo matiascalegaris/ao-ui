@@ -13,8 +13,9 @@ export default function CharSelectBottom() {
   const nameColor = selectedCharacter ? GetColorForCharacterStatus(selectedCharacter.status) : ''
   const dispatch = useDispatch()
   const doLogin = character => {
-    if (selectCharacter != null) {
+    if (selectCharacter != null && selectCharacter.name != null) {
       window.parent.BabelUI.LoginCharacter(selectedCharacter.index)
+      dispatch(setActiveDialog(''))
     }
   }
   const transitionActive = useSelector(selectExitScreenActive)

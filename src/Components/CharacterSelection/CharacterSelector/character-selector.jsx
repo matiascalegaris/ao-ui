@@ -1,11 +1,16 @@
-import { GetColorForCharacterStatus } from '../../../Tools/Utils';
+import { GetColorForCharacterStatus, useSingleAndDoubleClick } from '../../../Tools/Utils';
 import DrawCharacter from '../../Common/DrawCharacter/draw-character';
 import './character-selector.scss'
 
-export default function CharacterSelector({charInfo, selected, ...otherProps}) {
+export default function CharacterSelector({charInfo, selected, onSingleClick, onDoubleClick, ...otherProps}) {
   const nameColor = GetColorForCharacterStatus(charInfo.status)
+  const onClick = useSingleAndDoubleClick(
+    () => onSingleClick(charInfo),
+    () => onDoubleClick(charInfo),
+    250, true
+  );
   return (
-    <div className='character-selector-container ' {...otherProps}>
+    <div className='character-selector-container ' {...otherProps} onClick={onClick}>
       <div className='frame'>
         <span className='selection-marker'></span>
         <div className={'char-render-area' + (selected ? ' selected-char' : '')}>

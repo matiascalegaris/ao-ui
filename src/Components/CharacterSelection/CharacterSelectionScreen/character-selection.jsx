@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
-import { selectExitScreenActive } from '../../../redux/UIFlowSlice'
-import { useSingleAndDoubleClick } from '../../../Tools/Utils'
+import { selectExitScreenActive, setActiveDialog } from '../../../redux/UIFlowSlice'
 import CharacterSelector from '../CharacterSelector/character-selector'
 import CharSelectBottom from '../CharSelectBottom/char-select-bottom'
 import Header from '../Header/header'
@@ -14,8 +13,7 @@ export default function CharacterSelectionScreen() {
   const dispatch = useDispatch()
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
-  const selectOption = (evt, selection) => {
-    console.log('select chacater ' + selection.index)
+  const selectOption = (selection) => {
     if (selectedId < 1 || (selectedCharacter.index !== selection.index &&
       selection.name != null )) {
       dispatch(selectCharacter(selection.index));
@@ -23,9 +21,11 @@ export default function CharacterSelectionScreen() {
     }
   }
 
-  const loginWithCharaceter = (evt, charater) =>{
-    console.log('login with chacater ' + charater.index)
-    window.parent.BabelUI.LoginCharacter(charater.index)
+  const loginWithCharaceter = (charater) =>{
+    if (charater != null && charater.name != null) {
+      window.parent.BabelUI.LoginCharacter(charater.index)
+      dispatch(setActiveDialog(''))
+    }
   }
   const doBack = event => {
     event.preventDefault();
@@ -42,8 +42,8 @@ export default function CharacterSelectionScreen() {
   useEffect(() => {
     setTimeout(() => {
       if (availableCharacters[0].name != null) {
-        dispatch(selectCharacter(availableCharacters.index));
-        window.parent.BabelUI.SelectCharacter(availableCharacters.index)
+        dispatch(selectCharacter(availableCharacters[0].index));
+        window.parent.BabelUI.SelectCharacter(availableCharacters[0].index)
       }
     }, 100)    
   },[]);
@@ -57,7 +57,8 @@ export default function CharacterSelectionScreen() {
             availableCharacters.slice(0,5).map( item => <CharacterSelector 
                 selected={selectedId === item.index} 
                 key={item.index} charInfo={item} 
-                onClick={ evt => {selectOption(evt,item)}}/>) :
+                onSingleClick={ selectOption}
+                onDoubleClick={ loginWithCharaceter}/>) :
             null
           }
         </div>
@@ -67,7 +68,8 @@ export default function CharacterSelectionScreen() {
             availableCharacters.slice(5, 10).map( item => <CharacterSelector 
               selected={selectedId === item.index} 
               key={item.index} charInfo={item} 
-              onClick={ evt => {selectOption(evt,item)}}/>) :
+              onSingleClick={ selectOption}
+              onDoubleClick={ loginWithCharaceter}/>) :
             null
           }
         </div>

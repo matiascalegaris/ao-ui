@@ -10,12 +10,12 @@
 
 @keyframes anim-out-left {
   from {transform: translateX(0px)}
-  to {transform: translateX(-100%);}
+  to {transform: translateX(-150%);}
 }
 
 @keyframes anim-out-right {
   from {transform: translateX(0px)}
-  to {transform: translateX(100%);}
+  to {transform: translateX(150%);}
 }
 .character-selection-screen {
   width: 100%;
@@ -48,15 +48,15 @@
 
     .exit-animation-left {
       animation-name: anim-out-left;
-      animation-duration: 0.3s;
+      animation-duration: 0.2s;
       animation-timing-function: ease-in;
-      transform:translateX(-100%);
+      transform:translateX(-150%);
     }
     .exit-animation-right {
       animation-name: anim-out-right;
-      animation-duration: 0.3s;
+      animation-duration: 0.2s;
       animation-timing-function: ease-in;
-      transform: translateX(100%);
+      transform: translateX(150%);
     }
   }
 }

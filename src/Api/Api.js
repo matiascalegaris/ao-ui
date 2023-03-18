@@ -144,7 +144,18 @@ if (process.env.NODE_ENV === 'development') {
       console.log("select character " +character)
     },
     LoginCharacter: character => { 
-      console.log("login character" + character)     
+      setTimeout(() => {
+        window.parent.APicallbacks.SetActiveDialog('character-selection')
+        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 1, index: 0})
+        window.parent.APicallbacks.SetCharacter({name:'Macho en zunga', head: 0, body: 1, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 1})
+        window.parent.APicallbacks.SetCharacter({name:'no c', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 2})
+        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 1, helm: 0, shield: 0, weapon:0, level: 20, status: 3, index: 3})
+        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 4, index: 4})
+        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 7, index: 5})
+        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 6})
+        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 7})
+        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 8})
+      }, 100)
     },
     GetHeadDrawInfo: headIndex => {
       return {

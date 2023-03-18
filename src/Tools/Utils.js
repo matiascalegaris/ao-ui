@@ -106,19 +106,21 @@ export function useSingleAndDoubleClick(
     handleSingleClick,
     handleDoubleClick,
     delay = 250,
-    value
+    forceHandleFirstClick = false
 ) {
   const [click, setClick] = useState(0);
-  useEffect((e) => {
+  useEffect(() => {
     const timer = setTimeout(() => {
-      if (click === 1) {
-        handleSingleClick(e, value);
+      if (!forceHandleFirstClick && click === 1) {
+        handleSingleClick();
       }
       setClick(0);
     }, delay);
-
+    if (forceHandleFirstClick && click === 1) {
+      handleSingleClick();
+    }
     if (click === 2) {
-      handleDoubleClick(e, value);
+      handleDoubleClick();
     }
 
     return () => clearTimeout(timer);
