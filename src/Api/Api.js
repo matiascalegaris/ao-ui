@@ -157,6 +157,12 @@ if (process.env.NODE_ENV === 'development') {
     },
     CreateCharacter: (name, gender, race, head, classId, homeCity) => {
       return true
+    },
+    GetStoredLocale: () => {
+      return "es"
+    },
+    EnableDebug: ()=> {
+      return true
     }
   }
 }

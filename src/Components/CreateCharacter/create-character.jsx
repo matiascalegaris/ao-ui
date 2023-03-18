@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { displayLoadingText, selectExitScreenActive, setActiveDialog } from '../../redux/UIFlowSlice'
-import { GetImage, LoadJsonFile } from '../../Tools/Utils'
+import { LoadJsonFile } from '../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
 
 import DrawCharacter from '../Common/DrawCharacter/draw-character'
 import Frame from '../Common/Frame/frame'
 import RibbonTittle from '../Common/RibbonTittle/ribbon-tittle'
-import SelectOption from '../Common/SelectOption/select-option'
 import './create-character.scss'
 import GenderSelector from './GenderSelector/gender-selector'
 import HeadSelector from './HeadSelector/head-selector'
@@ -58,7 +57,7 @@ const getBody = (bodyList, gender, race) => {
 }
 const getCityList = () => {
   return [
-    'Ullathorpe', 'Nix', 'Arghal', 'Banderbill', 'Lindos'
+    'Ullathorpe', 'Nix', 'Banderbill', 'Lindos', 'Arghal'
   ]
 }
 const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
@@ -70,7 +69,7 @@ const mapRaces = ( gender, raceList) => {
     {
       name: race,
       description: null,
-      icon: GetImage(`../../assets/icons/race/${race}${gender}.png`)
+      icon: process.env.NODE_ENV === 'development' ? `../../assets/icons/race/${race}${gender}.png`: require(`../../assets/icons/race/${race}${gender}.png`)
     }
   ))
 }
@@ -79,7 +78,7 @@ const mapClass = ( classList) => {
     {
       name: className,
       description: `${className}-desc`,
-      icon: GetImage(`../../../assets/icons/class/${className}.png`)
+      icon: process.env.NODE_ENV === 'development' ? `../../assets/icons/class/${className}.png`: require(`../../assets/icons/class/${className}.png`)
     }
   ))
 }
@@ -88,7 +87,7 @@ const mapHomeCity = ( cityNames) => {
     {
       name: cityName,
       description: null,
-      icon: GetImage(`../../../assets/icons/cities/${cityName}.png`)
+      icon: process.env.NODE_ENV === 'development' ? `../../assets/icons/cities/${cityName}.png`: require(`../../assets/icons/cities/${cityName}.png`)
     }
   ))
 }
@@ -180,6 +179,7 @@ export default function CreateCharacterScreen() {
                           onChange={setRace}/>
           <Frame contentStyles='sub-panel '>
             <RibbonTittle text='atributos' />
+            <div className='gradient-bg'></div>
             <div className='attribute-list'>
               {
                 attributeList.map( (attr, index) => (

@@ -26,6 +26,7 @@ export default function GenderSelector ({currentSelection, onChange}) {
   return (
     <Frame contentStyles='sub-panel sex-selection'>
       <RibbonTittle text={t('género')} />
+      <div className='gradient-bg'></div>
       <div className='button-area'>
         <SelectOption styles='button-style' selected={currentSelection==0} onClick={ ()=> {onChange(0)}} contentStyles='button'>
           <img className='icon' src={getMaleImage(currentSelection==0)} />

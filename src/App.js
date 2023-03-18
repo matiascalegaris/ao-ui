@@ -7,12 +7,11 @@ import { selectLoadingState, selectErrorMessage, displayErrorMessage, displayLoa
 import ErrorMessage from './Components/Dialogs/error-message/error-message';
 import {RegisterApiCallback} from './Api/Api'
 import { useTranslation } from 'react-i18next';
-import { LoadIni } from './Tools/Utils';
 import { setCharacter } from './redux/CharSelectionSlice';
 
 function App() {
   const dispatch = useDispatch()
-  const { t } = useTranslation();
+  const { t, i18n  } = useTranslation();
   useEffect(() => {
     RegisterApiCallback('ErrorMessage', (msg, localize, action) => {
       console.log('message:' + msg + ' ' + localize + '' + action )
@@ -34,6 +33,9 @@ function App() {
     RegisterApiCallback('SetCharacter', (charInfo) => {
       dispatch(setCharacter(charInfo))
     }) 
+    const language = window.parent.BabelUI.GetStoredLocale()
+    console.log("setting current language to:" + language)
+    i18n.changeLanguage(language)
   },[]);
   
   const [showLogin, loginMessage] = useSelector(selectLoadingState)

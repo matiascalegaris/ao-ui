@@ -40,7 +40,7 @@ export default function SetNewPassword() {
     <AoDialog styles='set-new-password login-dialog-pos'>
       <h1 className='dialog-header'>{t('set new password').toUpperCase()}</h1>
       <div className='content-area'>
-        <p className='desc-text'>{t('Enter the validation code sent to the email you used for registering.')}</p>
+        <p className='desc-text'>{t('validation-code-intro')}</p>
         <div className="vertical-gap10"></div>
         <div className='code-area'>
           <p className='code'>

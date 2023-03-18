@@ -4,6 +4,7 @@
     flex-direction: row;
     margin: 30px 0 0 0;
     justify-content: space-evenly;
+    position: relative;
     .button-style {
       background-image: url(../../../assets/Backgrounds/leather_black.png);
     }
@@ -27,5 +28,6 @@
     font-size: 1rem;
     text-align: center;
     margin: 20px 0;
+    position: relative;
   }
 }

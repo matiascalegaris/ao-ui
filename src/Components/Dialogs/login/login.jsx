@@ -5,23 +5,26 @@ import AoButton from '../../Common/ao-button/ao-button';
 import AoInput from '../../Common/ao-input/ao-input';
 import AoDialog from '../../Common/ao-dialog/ao-dialog';
 import AoCheckbox from "../../Common/ao-checkbox/ao-checkbox";
-import { useDispatch } from 'react-redux';
-import { setActiveDialog, displayLoadingText } from '../../../redux/UIFlowSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveDialog, displayLoadingText, updateEndpoint, selectActiveEndPoint } from '../../../redux/UIFlowSlice'
 import { ValidateEmail, ValidatePassword } from "../../../Tools/Utils";
 import Select from 'react-select';
 import { clearCharList } from "../../../redux/CharSelectionSlice";
 
 const ServerOptions = [
-  { value: 'Localhost', label: 'Localhost'},
-  { value: 'LocalHostPymmo', label: 'LocalHostPymmo'},
-  { value: 'Staging', label: 'Staging'},
-  { value: 'Production', label: 'Production'}
+  { value: 'Localhost', label: 'Localhost', index: 0},
+  { value: 'LocalHostPymmo', label: 'LocalHostPymmo', index: 1},
+  { value: 'Staging', label: 'Staging', index: 2},
+  { value: 'Production', label: 'Production', index: 3}
 ]
 export default function LogIn() {
-  const [userCredentials, setCredentials] = useState({email:'', password:'', storeCredentials:false, serverOption: ServerOptions[0]});
-  const {email, password, storeCredentials, serverOption } = userCredentials;
+  const [userCredentials, setCredentials] = useState({email:'', password:'', storeCredentials:false});
+  const {email, password, storeCredentials } = userCredentials;
   const { t } = useTranslation();
   const dispatch = useDispatch()
+  const displayServerSelection = window.parent.BabelUI.EnableDebug()
+  const selectedServerIndex = useSelector(selectActiveEndPoint)
+  const serverOption = ServerOptions[selectedServerIndex]
   useEffect(() => {
     const credentials = window.parent.BabelUI.GetCredentials()
     console.log(credentials);
@@ -52,11 +55,9 @@ export default function LogIn() {
     window.parent.BabelUI.Login(email, password, storeCredentials);
   }
 
-  const SelectServer = event => {
-    setCredentials({ ...userCredentials, 
-      serverOption: event,
-    });  
+  const SelectServer = event => {  
     window.parent.BabelUI.SetHost(event.value)
+    dispatch(updateEndpoint(event.index))
   }
 
   const DoClose = event => {
@@ -85,7 +86,9 @@ export default function LogIn() {
           <AoCheckbox label={t('Remember me')} name="storeCredentials" styles='split-area right-padding' handleChange={rememberLogin} state={storeCredentials} />
           <AoButton styles='split-area' isRed={true} disabled={!enableLogin}  onClick={ DoLogin }>{t('connect').toUpperCase()}</AoButton>
       </div>
-      <Select unstyled className="server-selector" classNamePrefix='selector-prop' options={ServerOptions} value={serverOption} onChange={SelectServer}  />
+      {
+        displayServerSelection && <Select unstyled className="server-selector" classNamePrefix='selector-prop' options={ServerOptions} value={serverOption} onChange={SelectServer}  />
+      }
       <div className='bottom-line'>
         <AoButton styles='split-area' onClick={ updateDialog }>{t('account').toUpperCase()}</AoButton>
         <span className="horizontal-gap10"></span>

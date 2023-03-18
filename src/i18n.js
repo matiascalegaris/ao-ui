@@ -44,11 +44,14 @@ const resources = {
       'sta-cha': 'Charisma',
       'sta-cons': 'Constitution',
       'rules-desc': `The character's name must comply with our rules of coexistence. Any offensive and inappropriate name <1>will be penalized.<1>`,
-      'Mage-desc': "Magic oriented class\n\nMages are the main magic class in argentum, they have a good balance between doing damage and adding effect to other but they normally has low hp"
+      'Mage-desc': "Magic oriented class\n\nMages are the main magic class in argentum, they have a good balance between doing damage and adding effect to other but they normally has low hp",
+      'validate-code-intro': 'Enter the validation code sent to the email you used for registering.',
+      'already-have-code': 'I already have a recovery code',
     }
   },
   es: {
     translation: {
+      'log in': 'ingresar',
       "SETTINGS": "Configuración",
       'recovery-mail-hint': `Si no recibiste el email de recuperacion, revisa la carpeta de "Spam".`,
       'recover-password-text': `Ingresa el mail que usaste para crear la cuenta y te enviaremos un codigo de recuperacion`,
@@ -87,7 +90,30 @@ const resources = {
       'sta-int': 'Inteligencia',
       'sta-cha': 'Carisma',
       'sta-cons': 'Constitucion',
-      'rules-desc': 'El nombre del personaje debe cumplir nuestras normas de convivencia. Cualquier nombre ofensivo y desubicado <1>será sancionado.<1>'
+      'rules-desc': 'El nombre del personaje debe cumplir nuestras normas de convivencia. Cualquier nombre ofensivo y desubicado <1>será sancionado.<1>',
+      'name': 'nombre',
+      'surname': 'apellido',
+      'password': 'contraseña',
+      'create account': 'crear cuenta',
+      'Validate account': 'Validar cuenta',
+      'Recover passoword': 'Recuperar contraseña',
+      'Rememer me': 'Recordarme',
+      'account': 'cuenta',
+      'exit': 'salir',
+      'connect': 'connectar',
+      "recover password": 'recuperar contraseña',
+      "Recover password": 'Recuperar contraseña',
+      'create character': 'Crear Personaje',
+      'play': 'jugar',
+      'validation-code-intro': 'Ingrese el código de validación enviado al correo electrónico que utilizó para registrarse.',
+      'already-have-code': 'Ya tengo un codigo de recuperacion.',
+      'enter recovery code': 'codigo de recuperacion',
+      'new password': 'nueva constraseña',
+      'confirm new password': 'confirmar nueva contraseña',
+      'validate account': 'validar cuenta',
+      'character name': 'nombre del personaje',
+      'male': 'hombre',
+      'female': 'mujer'
     }
   }
 };

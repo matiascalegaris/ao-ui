@@ -38,7 +38,7 @@ export default function RequestPasswordReset() {
   const sendEnabled = !(emailValid && email.length > 0)
   return (
     <AoDialog styles='request-password-reset login-dialog-pos'>
-      <h1 className='dialog-header'>{t('recover pasword').toUpperCase()}</h1>
+      <h1 className='dialog-header'>{t('recover password').toUpperCase()}</h1>
       <div className='content-area'>
         <p className='desc-text'>{t('recover-password-text')}</p>
         <span className="vertical-gap10"></span>
@@ -58,7 +58,7 @@ export default function RequestPasswordReset() {
           <AoButton className='split-area' isRed={true} disabled={sendEnabled} styles='split-area' onClick={requestPasswordReset}>{t('send').toUpperCase()}</AoButton>
         </div>
         <div className='line'>
-          <AoLinkButton styles='links' onClick={validateCode} caption='I already have a recovery code' onclick={validateCode}/>
+          <AoLinkButton styles='links' onClick={validateCode} caption={t('already-have-code')} onclick={validateCode}/>
         </div>
       </div>
     </AoDialog>

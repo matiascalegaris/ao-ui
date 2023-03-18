@@ -8,6 +8,7 @@ export default function SelectionFrame({optionList, title, selectedOptionId, sty
   const { t } = useTranslation();
   return (
     <Frame styles={styles} contentStyles='sub-panel'>
+      <div className='gradient-bg'></div>
       <RibbonTittle text={title} />
       <div className='option-area'>
         {

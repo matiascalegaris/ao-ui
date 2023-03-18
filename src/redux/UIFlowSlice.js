@@ -9,7 +9,8 @@ export const UIFlowSlice = createSlice({
     loadingText: '',
     nextScreen: '',
     transitionActive: false,
-    errorMessage : null
+    errorMessage : null,
+    selectedEndpoint: 0
   },
   reducers: {
     setActiveScreen : (state, action) => {
@@ -50,20 +51,23 @@ export const UIFlowSlice = createSlice({
         state.loading = false
         state.activeDialog = state.nextScreen
       }
+    },
+    updateEndpoint: (state, action) => {
+      state.selectedEndpoint = action.payload
     }
   },
 })
 
-export const { setActiveScreen, displayLoading, displayLoadingText, displayErrorMessage, hideErrorMessage, startTransition, transitionComplete } = UIFlowSlice.actions
+export const { setActiveScreen, displayLoading, displayLoadingText, displayErrorMessage, hideErrorMessage, startTransition, transitionComplete, updateEndpoint } = UIFlowSlice.actions
 
 export const selectActiveDialog = (state) =>  state.uiFlow.activeDialog
 
 export const selectLoadingState = (state) => {
   return [state.uiFlow.loading, state.uiFlow.loadingText]
 }
-
 export const selectErrorMessage = (state) => state.uiFlow.errorMessage
 export const selectExitScreenActive = (state) => state.uiFlow.transitionActive
+export const selectActiveEndPoint = (state) => state.uiFlow.selectedEndpoint
 
 export const setActiveDialog = (dialog) => (dispatch) => {
   console.log('set secreen: ' + dialog)
