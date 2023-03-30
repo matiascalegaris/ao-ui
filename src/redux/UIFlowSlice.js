@@ -4,13 +4,12 @@ import { useSelector } from 'react-redux'
 export const UIFlowSlice = createSlice({
   name: 'uiFlow',
   initialState: {
-    activeDialog: 'login',
-    loading: false,
-    loadingText: '',
+    activeDialog: 'validate-code',
+    activePopup: '',
     nextScreen: '',
     transitionActive: false,
-    errorMessage : null,
-    selectedEndpoint: 0
+    selectedEndpoint: 0,
+    popupData: null
   },
   reducers: {
     setActiveScreen : (state, action) => {
@@ -20,18 +19,23 @@ export const UIFlowSlice = createSlice({
       state.activeDialog = action.payload
     },
     displayLoading : (state, action) => {
-      state.loading = action.payload
+      state.activePopup = action.payload ? 'loading' : ''
     },
     displayLoadingText : (state, action) => {
-      state.loading = true
-      state.loadingText = action.payload
+      state.activePopup = 'loading'
+      state.popupData = action.payload
     },
     displayErrorMessage : (state, action) => {
-      state.errorMessage = action.payload
-      state.loading = false
+      state.activePopup = 'error-message'
+      state.popupData = action.payload
     },
     hideErrorMessage : (state) => {
-      state.errorMessage = undefined
+      state.activePopup = ''
+      state.popupData = null
+    },
+    setActivePopup : (state, action) => {
+      state.activePopup = action.payload.popup
+      state.popupData = action.payload.data
     },
     startTransition : (state, action) => {
       if (state.activeDialog !== action.payload ||
@@ -48,24 +52,31 @@ export const UIFlowSlice = createSlice({
       console.log('translation complete: ' + state.nextScreen)
       if (state.transitionActive) {
         state.transitionActive = false
-        state.loading = false
+        state.activePopup = ''
         state.activeDialog = state.nextScreen
       }
     },
     updateEndpoint: (state, action) => {
       state.selectedEndpoint = action.payload
+    },
+    setOptionDialog: (state, action) => {
+      state.activePopup = 'option-dialog'
+      state.popupData = action.payload
+    },
+    hidePopup: (state) => {
+      state.activePopup = ''
+      state.popupData = null
     }
   },
 })
 
-export const { setActiveScreen, displayLoading, displayLoadingText, displayErrorMessage, hideErrorMessage, startTransition, transitionComplete, updateEndpoint } = UIFlowSlice.actions
+export const { setActiveScreen, displayLoading, displayLoadingText, displayErrorMessage,
+               hideErrorMessage, startTransition, transitionComplete, updateEndpoint,
+                setOptionDialog, setActivePopup, hidePopup } = UIFlowSlice.actions
 
 export const selectActiveDialog = (state) =>  state.uiFlow.activeDialog
-
-export const selectLoadingState = (state) => {
-  return [state.uiFlow.loading, state.uiFlow.loadingText]
-}
-export const selectErrorMessage = (state) => state.uiFlow.errorMessage
+export const selectActivePopup = (state) => state.uiFlow.activePopup
+export const selectPopupData = (state) => state.uiFlow.popupData
 export const selectExitScreenActive = (state) => state.uiFlow.transitionActive
 export const selectActiveEndPoint = (state) => state.uiFlow.selectedEndpoint
 

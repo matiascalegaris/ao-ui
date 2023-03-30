@@ -70,6 +70,17 @@
     .section-divider {
       flex-grow: 1;
       display: flex;
+      position: relative;
+      .delete-button {
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+      }
+      .transfer-button {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+      }
 
       .seleccion-detais {
         margin: auto auto auto auto;

@@ -105,7 +105,7 @@ const LoadJsonFile = async filePath => {
 export function useSingleAndDoubleClick(
     handleSingleClick,
     handleDoubleClick,
-    delay = 250,
+    delay = 350,
     forceHandleFirstClick = false
 ) {
   const [click, setClick] = useState(0);

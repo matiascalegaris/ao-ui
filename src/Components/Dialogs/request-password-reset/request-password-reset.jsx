@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { displayLoadingText, setActiveDialog } from '../../../redux/UIFlowSlice'
 import { ValidateEmail } from "../../../Tools/Utils";
 
-export default function RequestPasswordReset() {
+export default function RequestPasswordReset({styles}) {
   const [userCredentials, setCredentials] = useState({email:''});
   const {email} = userCredentials;
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ export default function RequestPasswordReset() {
   const emailValid = ValidateEmail(email)
   const sendEnabled = !(emailValid && email.length > 0)
   return (
-    <AoDialog styles='request-password-reset login-dialog-pos'>
+    <AoDialog styles={'request-password-reset ' + styles}>
       <h1 className='dialog-header'>{t('recover password').toUpperCase()}</h1>
       <div className='content-area'>
         <p className='desc-text'>{t('recover-password-text')}</p>

@@ -1,0 +1,25 @@
+.option-dialog {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  min-width: 160px;
+  max-width: 380px;
+  .text {
+    margin: auto;
+    min-width: 200px;
+    min-height: 40px;
+    text-align: center;
+    max-width: 400px;
+  }
+  .button-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-width: 200px;
+  }
+
+  .button-settings {
+    padding: 3px 10px;
+    margin: 2px;
+  }
+}

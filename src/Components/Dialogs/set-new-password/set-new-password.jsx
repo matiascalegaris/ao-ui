@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { displayLoadingText, setActiveDialog } from '../../../redux/UIFlowSlice'
 import { ValidateEmail, ValidatePassword, ValidResetPwdCode } from "../../../Tools/Utils";
 
-export default function SetNewPassword() {
+export default function SetNewPassword({styles}) {
   const [userCredentials, setCredentials] = useState({email: '',password:'', passwordValidation:'', code:''});
   const {password, passwordValidation, code, email } = userCredentials;
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ export default function SetNewPassword() {
   const enableSend = validEmail && validSecondPassword && email.length > 0 && password.length > 0 && code.length > 0
 
   return (
-    <AoDialog styles='set-new-password login-dialog-pos'>
+    <AoDialog styles={'set-new-password ' + styles}>
       <h1 className='dialog-header'>{t('set new password').toUpperCase()}</h1>
       <div className='content-area'>
         <p className='desc-text'>{t('validation-code-intro')}</p>

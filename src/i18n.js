@@ -47,6 +47,7 @@ const resources = {
       'Mage-desc': "Magic oriented class\n\nMages are the main magic class in argentum, they have a good balance between doing damage and adding effect to other but they normally has low hp",
       'validate-code-intro': 'Enter the validation code sent to the email you used for registering.',
       'already-have-code': 'I already have a recovery code',
+      'verification-code-input': 'Enter the validation code sent to the email you used for registering.'
     }
   },
   es: {
@@ -100,7 +101,7 @@ const resources = {
       'Rememer me': 'Recordarme',
       'account': 'cuenta',
       'exit': 'salir',
-      'connect': 'connectar',
+      'connect': 'conectar',
       "recover password": 'recuperar contraseña',
       "Recover password": 'Recuperar contraseña',
       'create character': 'Crear Personaje',
@@ -113,7 +114,11 @@ const resources = {
       'validate account': 'validar cuenta',
       'character name': 'nombre del personaje',
       'male': 'hombre',
-      'female': 'mujer'
+      'female': 'mujer',
+      'continue': 'Continuar',
+      'accept': 'Aceptar',
+      'verification': 'Validacion',
+      'verification-code-input': 'Ingresa el código de validación enviado al correo electrónico que utilizaste para registrarte.'
     }
   }
 };

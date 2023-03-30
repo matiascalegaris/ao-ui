@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setActiveDialog, displayLoadingText } from '../../../redux/UIFlowSlice'
 import { GetRandomInt, ValidatePassword, ValidateEmail, ValidateRoboCode, ValidateString } from "../../../Tools/Utils";
 
-export default function CreateAccount() {
+export default function CreateAccount({styles}) {
   const [userCredentials, setCredentials] = useState({
     name:'',
     surname:'',
@@ -52,7 +52,7 @@ export default function CreateAccount() {
   const hasValues = name.length > 0 && surname.length > 0 && email.length > 0 && password.length > 0 && validateField.length > 0
   const validForm = hasValues && validName && validSurName && validEmail && validPassword && validateRobotCode
   return (
-    <AoDialog styles='create-account login-dialog-pos'>
+    <AoDialog styles={'create-account ' + styles}>
       <h1 className='dialog-header'>{t('create account').toUpperCase()}</h1>
         <div class="input-area">
         <div class='named-input name'>
