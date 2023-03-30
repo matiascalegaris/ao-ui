@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 import LogIn from "../Dialogs/login/login";
 import CreateAccount from "../Dialogs/create-account/create-account";
 import ValidateAccount from "../Dialogs/validate-account/validate-account";
-import ValidateCode from "../Dialogs/validate-code/validate-code";
 import { selectActiveDialog, setActiveDialog } from '../../redux/UIFlowSlice'
 import {RegisterApiCallback} from '../../Api/Api'
 import RequestPasswordReset from '../Dialogs/request-password-reset/request-password-reset';
 import CharacterSelectionScreen from '../CharacterSelection/CharacterSelectionScreen/character-selection';
 import SetNewPassword from '../Dialogs/set-new-password/set-new-password';
 import CreateCharacterScreen from '../CreateCharacter/create-character';
+import ValidateCodeScreen from '../Dialogs/ValidateCodeScreen/validate-code-screen';
 
 
 export default function LogInFlow() {
@@ -25,13 +25,13 @@ export default function LogInFlow() {
     <div className='login-flow'>
       {
         {
-          'login':<LogIn/>,
-          'create-account': <CreateAccount/>,
-          'validate-account': <ValidateAccount/>,
-          'validate-code': <ValidateCode />,
-          'reset-password-request': <RequestPasswordReset/>,
+          'login':<LogIn styles='login-dialog-pos'/>,
+          'create-account': <CreateAccount styles='login-dialog-pos'/>,
+          'validate-account': <ValidateAccount styles='login-dialog-pos'/>,
+          'validate-code': <ValidateCodeScreen styles='login-dialog-pos'/>,
+          'reset-password-request': <RequestPasswordReset styles='login-dialog-pos' />,
           'character-selection': <CharacterSelectionScreen/>,
-          'set-new-password': <SetNewPassword/>,
+          'set-new-password': <SetNewPassword styles='login-dialog-pos'/>,
           'create-character': <CreateCharacterScreen/>
         }
         [activeDialog]

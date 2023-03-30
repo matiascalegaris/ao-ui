@@ -3,11 +3,14 @@ import Loading from './Components/Dialogs/Loading/loading';
 import LogInFlow from './Components/Login-flow/login-flow';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLoadingState, selectErrorMessage, displayErrorMessage, displayLoading } from './redux/UIFlowSlice'
+import { displayErrorMessage, displayLoading, selectActivePopup, selectPopupData } from './redux/UIFlowSlice'
 import ErrorMessage from './Components/Dialogs/error-message/error-message';
 import {RegisterApiCallback} from './Api/Api'
 import { useTranslation } from 'react-i18next';
 import { setCharacter } from './redux/CharSelectionSlice';
+import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
+import ValidateCode from './Components/Dialogs/validate-code/validate-code';
+import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
 
 function App() {
   const dispatch = useDispatch()
@@ -38,20 +41,27 @@ function App() {
     i18n.changeLanguage(language)
   },[]);
   
-  const [showLogin, loginMessage] = useSelector(selectLoadingState)
-  const errorMsg = useSelector(selectErrorMessage)
+  const activePopup = useSelector(selectActivePopup)
+  const popupData = useSelector(selectPopupData)
   return (
     <div className='app'>
       <LogInFlow/>
-      { showLogin &&
-        <div className='popups'>
-          <Loading styles='centered'>{loginMessage}</Loading>
-        </div>
-      }
-      { errorMsg &&
-        <div className='popups'>
-          <ErrorMessage styles='centered'>{errorMsg}</ErrorMessage>
-        </div>
+      {
+          activePopup !== '' ?
+          <div className='popups'>
+          {
+            {
+                'loading':<Loading styles='centered'>{popupData}</Loading>,
+                'error-message':<ErrorMessage styles='centered'>{popupData}</ErrorMessage>,
+                'option-dialog':<OptionDialog styles='centered' settings={popupData}/>,
+                'validate-code':<ValidateCode styles='centered'/>,
+                'transfer-character':<TransferCharacter styles='centered' settings={popupData}/>
+            }
+            [activePopup]
+          }
+          </div>
+          :
+          null
       }
     </div>
   );

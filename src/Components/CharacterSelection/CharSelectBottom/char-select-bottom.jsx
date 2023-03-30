@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice';
-import { selectExitScreenActive, setActiveDialog } from '../../../redux/UIFlowSlice';
+import { selectExitScreenActive, setActiveDialog, setActivePopup, setOptionDialog } from '../../../redux/UIFlowSlice';
 import { GetColorForCharacterStatus, GetNameForClassId } from '../../../Tools/Utils';
 import LoginButton from '../LogInButton/login-button'
 import './char-select-bottom.scss'
 
-export default function CharSelectBottom() {
+export default function CharSelectBottom({onDeleteChar, onTransferChar}) {
   const { t } = useTranslation();
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const loginEnabled = selectCharacter != null
@@ -31,7 +31,11 @@ export default function CharSelectBottom() {
   return (
     <div className={'char-selection-bottom' + animStyles}>
       <div className='character-details'>
-        <div className='section-divider'></div>
+        <div className='section-divider'>
+          <div className='delete-button' onClick={onDeleteChar}>
+            <img src='../../../assets/Icons/ico_trash.png'/>
+          </div>
+        </div>
         <div className='section-divider'>
           <div className='seleccion-detais'>
              <div className='details-border-left'></div>
@@ -47,7 +51,11 @@ export default function CharSelectBottom() {
              <div className='details-border-right'></div>
           </div>
         </div>
-        <div className='section-divider'></div>
+        <div className='section-divider'>
+          <div className='transfer-button' onClick={onTransferChar}>
+            <img src='../../../assets/Icons/ico_trash.png'/>
+          </div>
+        </div>
       </div>
       <div className='bottom-leather'>
       <div className='button-area'>

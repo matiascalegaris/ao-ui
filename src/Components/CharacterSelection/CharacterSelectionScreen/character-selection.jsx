@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
 import { selectExitScreenActive, setActiveDialog } from '../../../redux/UIFlowSlice'
+import OptionDialog from '../../Dialogs/OptionDialog/option-dialog'
 import CharacterSelector from '../CharacterSelector/character-selector'
 import CharSelectBottom from '../CharSelectBottom/char-select-bottom'
 import Header from '../Header/header'
@@ -9,8 +11,10 @@ import './character-selection.scss'
 
 
 export default function CharacterSelectionScreen() {
+  const [selectionState, setSelectionState] = useState({popUp:null});
   const availableCharacters = useSelector(selectAvailableCharacters)
   const dispatch = useDispatch()
+  const { t } = useTranslation();
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
   const selectOption = (selection) => {
@@ -47,6 +51,41 @@ export default function CharacterSelectionScreen() {
       }
     }, 100)    
   },[]);
+
+  const onDeleteCharPress = event => {
+    if (selectedCharacter != null && selectedCharacter.name != null) {
+      setSelectionState({...selectionState, popUp:{
+        text: t('delete-message'),
+        actions: [{
+          caption: t('cancel').toUpperCase(),
+          action:  evt => {
+            setSelectionState({...selectionState, popUp:null})
+          }}, {
+          caption: t('continue').toUpperCase(),
+          action:  evt => {
+          },
+          isRed: true}
+        ]
+      }})
+    }
+  }
+  const onTransferCharPress = event => {
+    if (selectedCharacter != null && selectedCharacter.name != null) {
+      setSelectionState({...selectionState, popUp:{
+        text: t('delete-message'),
+        actions: [{
+          caption: t('cancel').toUpperCase(),
+          action:  evt => {
+            setSelectionState({...selectionState, popUp:null})
+          }}, {
+          caption: t('continue').toUpperCase(),
+          action:  evt => {
+          },
+          isRed: true}
+        ]
+      }})
+    }
+  }
   return (
     <div className='character-selection-screen'>
       <Header goBack={doBack}/>
@@ -74,7 +113,12 @@ export default function CharacterSelectionScreen() {
           }
         </div>
       </div>
-      <CharSelectBottom/>
+      <CharSelectBottom onDeleteChar={onDeleteCharPress} onTransferChar={onTransferCharPress}/>
+      {
+        selectionState.popUp ?
+        <div className='popups'><OptionDialog styles='centered' settings={selectionState.popUp}/></div> :
+        null
+      }
     </div>
   )
 }

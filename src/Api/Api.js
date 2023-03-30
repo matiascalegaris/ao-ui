@@ -33,8 +33,11 @@ if (process.env.NODE_ENV === 'development') {
       user: "test@a.com",
       password: "pwdd",
     }),
-    CreateAccount: (email, password, name, surname) => ({
-    }),
+    CreateAccount: (email, password, name, surname) => {
+      setTimeout(() => {
+        window.parent.APicallbacks.ErrorMessage('error test', 1 ,0)
+      }, 100)
+    },
     ResendValidationCode: email => {
     },
     ValidateCode: (email, code) => {
@@ -174,6 +177,15 @@ if (process.env.NODE_ENV === 'development') {
     },
     EnableDebug: ()=> {
       return true
+    },
+    TransferCharacter: (index, email) => {
+
+    },
+    Deletecharcter : (index, code) => {
+
+    },
+    ValidatePrevCode: (code) => {
+
     }
   }
 }

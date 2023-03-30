@@ -17,7 +17,7 @@ const ServerOptions = [
   { value: 'Staging', label: 'Staging', index: 2},
   { value: 'Production', label: 'Production', index: 3}
 ]
-export default function LogIn() {
+export default function LogIn({styles}) {
   const [userCredentials, setCredentials] = useState({email:'', password:'', storeCredentials:false});
   const {email, password, storeCredentials } = userCredentials;
   const { t } = useTranslation();
@@ -68,7 +68,7 @@ export default function LogIn() {
   const validPwd = ValidatePassword(password)
   const enableLogin = validUser && validPwd && email.length > 0 && password.length > 0
   return (
-    <AoDialog styles='login-dialog-pos'>
+    <AoDialog styles={styles}>
       <h1 className='login-header'>{t('log in').toUpperCase()}</h1>
         <div className="input-area">
           <div className='named-input user'>
