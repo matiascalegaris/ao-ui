@@ -49,7 +49,9 @@ const resources = {
       'already-have-code': 'I already have a recovery code',
       'verification-code-input': 'Enter the validation code sent to the email you used for registering.',
       'delete-char-message': `Are you sure you want to delete the character {{charName}} from the account?`,
-      'transfer-char-message': `Are you sure you want to transfer the character {{charName}} from the account?`
+      'transfer-char-message': `Are you sure you want to transfer the character {{charName}} from the account?`,
+      'transfer-character': 'transfer character',
+      'dest-email': 'Enter the email of the account to which you want to transfer the character.'
     }
   },
   es: {
@@ -122,7 +124,9 @@ const resources = {
       'verification': 'Validacion',
       'verification-code-input': 'Ingresa el código de validación enviado al correo electrónico que utilizaste para registrarte.',
       'delete-char-message': `¿Esta seguro que desea borrar el personaje {{charName}} de la cuenta?`,
-      'transfer-char-message': `¿Esta seguro que desea transferir el personaje {{charName}} de la cuenta?`
+      'transfer-char-message': `¿Esta seguro que desea transferir el personaje {{charName}} de la cuenta?`,
+      'transfer-character': 'Transferir personaje',
+      'dest-email': 'Ingrese el email de la cuenta a la cual quire transferir el personaje'
     }
   }
 };

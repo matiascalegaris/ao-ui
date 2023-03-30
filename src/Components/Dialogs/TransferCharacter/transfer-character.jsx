@@ -30,7 +30,7 @@ export default function TransferCharacter({styles, settings}) {
     window.parent.BabelUI.TransferCharacter(settings.index, email);
   }
   return(
-    <AoDialog styles={styles} ignoreAnimation={true}>
+    <AoDialog styles={'transfer-character ' + styles} ignoreAnimation={true}>
       <h1 className='dialog-header'>{t('transfer-character').toUpperCase()}</h1>
       <div className='content-area'>
         <p className='desc-text'>{t('dest-email')}</p>

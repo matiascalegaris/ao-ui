@@ -5,7 +5,6 @@ import { RegisterApiCallback } from '../../../Api/Api'
 import { removeCharacter, selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
 import { displayLoading, displayLoadingText, selectExitScreenActive, setActiveDialog, setActivePopup } from '../../../redux/UIFlowSlice'
 import OptionDialog from '../../Dialogs/OptionDialog/option-dialog'
-import TransferCharacter from '../../Dialogs/TransferCharacter/transfer-character'
 import ValidateCode from '../../Dialogs/validate-code/validate-code'
 import CharacterSelector from '../CharacterSelector/character-selector'
 import CharSelectBottom from '../CharSelectBottom/char-select-bottom'
@@ -33,7 +32,7 @@ export default function CharacterSelectionScreen() {
     console.log('login with char ' + character.index)
     if (character != null && character.name != null) {
       window.parent.BabelUI.LoginCharacter(character.index)
-      dispatch(setActiveDialog(''))
+      //dispatch(setActiveDialog(''))
     }
   }
   const doBack = event => {
