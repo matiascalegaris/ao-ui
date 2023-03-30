@@ -11,7 +11,16 @@ export const CharSelectionSlice = createSlice({
       state.selectedIndex = action.payload
     },
     removeCharacter : (state, action) => {
-      state.charactersList[action.payload] = {}
+      console.log("remove char " + action.payload)
+      state.charactersList.splice(action.payload, 1);
+      state.charactersList = state.charactersList.map( element => {
+        if (element.index > action.payload) {
+          element.index -= 1
+        }
+        return element
+      })
+      state.selectedIndex = 0
+      state.charactersList.push({index:9})
     },
     setCharacter : (state, action) => {
       state.charactersList[action.payload.index] = action.payload

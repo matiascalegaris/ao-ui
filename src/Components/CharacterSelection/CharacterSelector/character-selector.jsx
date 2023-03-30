@@ -7,7 +7,7 @@ export default function CharacterSelector({charInfo, selected, onSingleClick, on
   const onClick = useSingleAndDoubleClick(
     () => onSingleClick(charInfo),
     () => onDoubleClick(charInfo),
-    250, true
+    550, true
   );
   return (
     <div className='character-selector-container ' {...otherProps} onClick={onClick}>

@@ -17,7 +17,7 @@ export default function OptionDialog({styles, settings}) {
         <div className={'button-line ' + settings.optionStyle}>
           {
             settings.actions.map( (action, index) => (
-              <AoButton styles={'button-settings'} isRed={action.isRed} onClick={action.action }>{action.caption}</AoButton>
+              <AoButton styles={'button-settings'} key={index} isRed={action.isRed} onClick={action.action }>{action.caption}</AoButton>
             ))
           }
         </div>

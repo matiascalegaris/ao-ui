@@ -33,7 +33,7 @@ export default function CharSelectBottom({onDeleteChar, onTransferChar}) {
       <div className='character-details'>
         <div className='section-divider'>
           <div className='delete-button' onClick={onDeleteChar}>
-            <img src='../../../assets/Icons/ico_trash.png'/>
+            <img src={require('../../../assets/Icons/ico_trash.png')}/>
           </div>
         </div>
         <div className='section-divider'>
@@ -53,7 +53,7 @@ export default function CharSelectBottom({onDeleteChar, onTransferChar}) {
         </div>
         <div className='section-divider'>
           <div className='transfer-button' onClick={onTransferChar}>
-            <img src='../../../assets/Icons/ico_trash.png'/>
+            <img src={require('../../../assets/Icons/ico_trash.png')}/>
           </div>
         </div>
       </div>

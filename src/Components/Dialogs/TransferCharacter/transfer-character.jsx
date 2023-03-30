@@ -27,19 +27,19 @@ export default function TransferCharacter({styles, settings}) {
   const send = event => {
     event.preventDefault();
     dispatch(displayLoadingText(t('connecting-to-server')))
-    window.parent.BabelUI.TransferCharacter(settings.index ,email);
+    window.parent.BabelUI.TransferCharacter(settings.index, email);
   }
   return(
     <AoDialog styles={styles} ignoreAnimation={true}>
-      <h1 class='dialog-header'>{t('transfer-character').toUpperCase()}</h1>
-      <div class='content-area'>
-        <p class='desc-text'>{t('dest-email')}</p>
-        <div class='code-area'>
+      <h1 className='dialog-header'>{t('transfer-character').toUpperCase()}</h1>
+      <div className='content-area'>
+        <p className='desc-text'>{t('dest-email')}</p>
+        <div className='code-area'>
           <AoInput name="email" styles="code" value={email} IsValid={validEmail || email.length === 0} required handleChange={handleChange} />
         </div>
       </div>
-      <div class='bottom-line'>
-          <div class='line'>
+      <div className='bottom-line'>
+          <div className='line'>
             <AoButton styles='split-area' onClick={cancel}>{t('cancel').toUpperCase()}</AoButton>
             <AoButton disabled={!validEmail} isRed={true} styles='split-area' onClick={send}>{t('accept').toUpperCase()}</AoButton>
           </div>

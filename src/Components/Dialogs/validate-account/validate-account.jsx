@@ -37,30 +37,30 @@ export default function ValidateAccount() {
   const buttonEnabled = validEmail && validCode
   return (
     <AoDialog styles='validate-account login-dialog-pos'>
-      <h1 class='dialog-header'>{t('validate account').toUpperCase()}</h1>
-      <div class='content-area'>
-        <p class='desc-text'>{t('Enter the validation code sent to the email you used for registering.')}</p>
+      <h1 className='dialog-header'>{t('validate account').toUpperCase()}</h1>
+      <div className='content-area'>
+        <p className='desc-text'>{t('Enter the validation code sent to the email you used for registering.')}</p>
         <span className="vertical-gap10"></span>
-        <div class='named-input user'>
-          <p class='name'>
+        <div className='named-input user'>
+          <p className='name'>
             {t('email').toUpperCase()}
           </p>
           <AoInput name="email" type="email" value={email} IsValid={validEmail || email.length === 0} required handleChange={handleChange} />
         </div>
         <span className="vertical-gap10"></span>
-        <div class='code-area'>
-          <p class='code'>
+        <div className='code-area'>
+          <p className='code'>
             {t('validation-code').toUpperCase()}
           </p>
           <span className="horizontal-gap10"></span>
           <AoInput name="code" value={code} IsValid={validCode || email.length === 0} required handleChange={handleChange} />
         </div>
       </div>
-      <div class='bottom-line'>
-          <div class='line'>
+      <div className='bottom-line'>
+          <div className='line'>
             <AoButton disabled={!validEmail || email.length === 0} styles='split-area' onClick={ resendCode }>{t('resend-code').toUpperCase()}</AoButton>
           </div>
-          <div class='line'>
+          <div className='line'>
             <AoButton styles='split-area' onClick={ cancel }>{t('cancel').toUpperCase()}</AoButton>
             <span className="horizontal-gap10"></span>
             <AoButton isRed={true} disabled={!buttonEnabled} styles='split-area' onClick={ validateCode }>{t('send').toUpperCase()}</AoButton>

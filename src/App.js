@@ -7,7 +7,7 @@ import { displayErrorMessage, displayLoading, selectActivePopup, selectPopupData
 import ErrorMessage from './Components/Dialogs/error-message/error-message';
 import {RegisterApiCallback} from './Api/Api'
 import { useTranslation } from 'react-i18next';
-import { setCharacter } from './redux/CharSelectionSlice';
+import { removeCharacter, setCharacter } from './redux/CharSelectionSlice';
 import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
 import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
@@ -35,7 +35,10 @@ function App() {
     })
     RegisterApiCallback('SetCharacter', (charInfo) => {
       dispatch(setCharacter(charInfo))
-    }) 
+    })
+    RegisterApiCallback('DeleteCharacterFromList', (charIndex) => {
+      dispatch(removeCharacter(charIndex))
+    })
     const language = window.parent.BabelUI.GetStoredLocale()
     console.log("setting current language to:" + language)
     i18n.changeLanguage(language)

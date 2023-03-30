@@ -181,11 +181,20 @@ if (process.env.NODE_ENV === 'development') {
     TransferCharacter: (index, email) => {
 
     },
-    Deletecharcter : (index, code) => {
-
+    RequestDeleteCharacter: index => {
+      setTimeout(() => {
+        window.parent.APicallbacks.RequestDeleteCode()
+      }, 1000)
+    },
+    ConfirmDeleteCharacter : (index, code) => {
+      setTimeout(() => {
+        window.parent.APicallbacks.ConfirmDeleteChar(index)
+      }, 1000)
     },
     ValidatePrevCode: (code) => {
-
+    },
+    RequestCharacterTransfer: (index, destEmail) => {
+      console.log("trasnfering char " + index + "to email " + destEmail)
     }
   }
 }

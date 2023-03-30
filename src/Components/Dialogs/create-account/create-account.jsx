@@ -54,42 +54,42 @@ export default function CreateAccount({styles}) {
   return (
     <AoDialog styles={'create-account ' + styles}>
       <h1 className='dialog-header'>{t('create account').toUpperCase()}</h1>
-        <div class="input-area">
-        <div class='named-input name'>
-            <p class='name'>
+        <div className="input-area">
+        <div className='named-input name'>
+            <p className='name'>
               {t('name').toUpperCase()}
             </p>
             <AoInput name="name" value={name} IsValid={validName} required handleChange={handleChange} />
           </div>
-          <div class='named-input create-account surname'>
-            <p class='name'>
+          <div className='named-input create-account surname'>
+            <p className='name'>
               {t('surname').toUpperCase()}
             </p>
-            <AoInput name="surname" value={surname} IsValid={validSurName} required handleChange={handleChange} />
+            <AoInput className="surname" value={surname} IsValid={validSurName} required handleChange={handleChange} />
           </div>
-          <div class='named-input user'>
-            <p class='name'>
+          <div className='named-input user'>
+            <p className='name'>
               {t('email').toUpperCase()}
             </p>
             <AoInput name="email" type="email" IsValid={validEmail} value={email} required handleChange={handleChange} />
           </div>
-          <div class='named-input password'>
-            <p class='name'>
+          <div className='named-input password'>
+            <p className='name'>
               {t('password').toUpperCase()}
             </p>
             <AoInput name="password" type="password" IsValid={validPassword} value={password} required handleChange={handleChange} />
           </div>
-          <div class='named-input'>
-            <p class='question'>
+          <div className='named-input'>
+            <p className='question'>
               {t('robot-code', {first:validationParam1, second: validationParam2})}
             </p>
           </div>
-          <div class='named-input'>          
+          <div className='named-input'>          
             <AoInput name="validateField" value={validateField} IsValid={validateRobotCode} required handleChange={handleChange} />
           </div>
       </div>
-      <div class='bottom-line'>
-        <div class='line'>
+      <div className='bottom-line'>
+        <div className='line'>
           <AoButton className='split-area' styles='split-area'onClick={ returnToMain }>{t('cancel').toUpperCase()}</AoButton>
           <span className="horizontal-gap10"></span>
           <AoButton className='split-area' isRed={true} disabled={!validForm} 
@@ -98,7 +98,7 @@ export default function CreateAccount({styles}) {
           </AoButton>
         </div>
         <span className="vertical-gap10"></span>
-        <div class='line'>
+        <div className='line'>
           <AoLinkButton styles='split-area' onClick={validateAccount} caption={t('Validate account')}/>
           <span className="horizontal-gap10"></span>
           <AoLinkButton styles='split-area' onClick={passwordReset} caption={t('Recover password')}/>

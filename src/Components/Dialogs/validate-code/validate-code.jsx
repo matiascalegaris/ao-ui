@@ -22,15 +22,15 @@ export default function ValidateCode({styles, onCancel, onAccept}) {
   const validCode = ValidValidationCode(code)
   return (
     <AoDialog styles={'validate-code ' + styles}>
-      <h1 class='dialog-header'>{t('verification').toUpperCase()}</h1>
-      <div class='content-area'>
-        <p class='desc-text'>{t('verification-code-input')}</p>
-        <div class='code-area'>
+      <h1 className='dialog-header'>{t('verification').toUpperCase()}</h1>
+      <div className='content-area'>
+        <p className='desc-text'>{t('verification-code-input')}</p>
+        <div className='code-area'>
           <AoInput name="code" styles="code" value={code} IsValid={validCode || code.length === 0} required handleChange={handleChange} />
         </div>
       </div>
-      <div class='bottom-line'>
-          <div class='line'>
+      <div className='bottom-line'>
+          <div className='line'>
             <AoButton styles='split-area' onClick={onCancel}>{t('cancel').toUpperCase()}</AoButton>
             <AoButton disabled={!validCode} isRed={true} styles='split-area' onClick={send}>{t('accept').toUpperCase()}</AoButton>
           </div>

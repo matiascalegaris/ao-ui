@@ -7,7 +7,7 @@ export default function Loading({children, styles}) {
     <AoDialog styles={styles} ignoreAnimation={true} >
       <div className='loading'>
         <Spinner styles="spinner"/>
-        <div className='content'>
+        <div className='loading-content'>
           {children}
         </div>
       </div>

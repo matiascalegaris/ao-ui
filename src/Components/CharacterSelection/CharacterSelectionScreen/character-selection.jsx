@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
-import { selectExitScreenActive, setActiveDialog } from '../../../redux/UIFlowSlice'
+import { RegisterApiCallback } from '../../../Api/Api'
+import { removeCharacter, selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
+import { displayLoading, displayLoadingText, selectExitScreenActive, setActiveDialog, setActivePopup } from '../../../redux/UIFlowSlice'
 import OptionDialog from '../../Dialogs/OptionDialog/option-dialog'
+import TransferCharacter from '../../Dialogs/TransferCharacter/transfer-character'
+import ValidateCode from '../../Dialogs/validate-code/validate-code'
 import CharacterSelector from '../CharacterSelector/character-selector'
 import CharSelectBottom from '../CharSelectBottom/char-select-bottom'
 import Header from '../Header/header'
@@ -18,6 +21,7 @@ export default function CharacterSelectionScreen() {
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
   const selectOption = (selection) => {
+    console.log('Select char')
     if (selectedId < 1 || (selectedCharacter.index !== selection.index &&
       selection.name != null )) {
       dispatch(selectCharacter(selection.index));
@@ -25,9 +29,10 @@ export default function CharacterSelectionScreen() {
     }
   }
 
-  const loginWithCharaceter = (charater) =>{
-    if (charater != null && charater.name != null) {
-      window.parent.BabelUI.LoginCharacter(charater.index)
+  const loginWithCharaceter = (character) =>{
+    console.log('login with char ' + character.index)
+    if (character != null && character.name != null) {
+      window.parent.BabelUI.LoginCharacter(character.index)
       dispatch(setActiveDialog(''))
     }
   }
@@ -49,13 +54,26 @@ export default function CharacterSelectionScreen() {
         dispatch(selectCharacter(availableCharacters[0].index));
         window.parent.BabelUI.SelectCharacter(availableCharacters[0].index)
       }
-    }, 100)    
+    }, 100)
+    RegisterApiCallback('RequestDeleteCode', (charInfo) => {
+      dispatch(displayLoading(false))
+      setSelectionState({...selectionState, popUp:{popUp:'validate-erase-code'}})
+    })
+    RegisterApiCallback('ConfirmDeleteChar', (charInfo) => {
+      dispatch(displayLoading(false))
+      dispatch(removeCharacter(charInfo));
+      setSelectionState({...selectionState, popUp:null})
+    }) 
   },[]);
-
+  useEffect( () => () => {
+    RegisterApiCallback('RequestDeleteCode', (charInfo) => {})
+    RegisterApiCallback('ConfirmDeleteChar', (charInfo) => {})
+  }, [] );
   const onDeleteCharPress = event => {
     if (selectedCharacter != null && selectedCharacter.name != null) {
       setSelectionState({...selectionState, popUp:{
-        text: t('delete-message'),
+        popUp:'option-dialog',
+        text: t('delete-char-message', { charName: selectedCharacter.name}),
         actions: [{
           caption: t('cancel').toUpperCase(),
           action:  evt => {
@@ -63,23 +81,35 @@ export default function CharacterSelectionScreen() {
           }}, {
           caption: t('continue').toUpperCase(),
           action:  evt => {
+            dispatch(displayLoadingText(t('connecting-to-server')))
+            window.parent.BabelUI.RequestDeleteCharacter(selectedCharacter.index)
           },
           isRed: true}
         ]
       }})
     }
   }
+  const deleteChar = code => {
+    dispatch(displayLoadingText(t('connecting-to-server')))
+    window.parent.BabelUI.ConfirmDeleteCharacter(selectedCharacter.index, code)
+  }
+  const closePopUp = evt => {
+    setSelectionState({...selectionState, popUp:null})
+  }
   const onTransferCharPress = event => {
     if (selectedCharacter != null && selectedCharacter.name != null) {
       setSelectionState({...selectionState, popUp:{
-        text: t('delete-message'),
+        popUp:'option-dialog',
+        text: t('transfer-char-message', { charName: selectedCharacter.name}),
         actions: [{
           caption: t('cancel').toUpperCase(),
           action:  evt => {
-            setSelectionState({...selectionState, popUp:null})
+            closePopUp(evt)
           }}, {
           caption: t('continue').toUpperCase(),
           action:  evt => {
+            closePopUp(evt)
+            dispatch(setActivePopup({popUp:'transfer-character', data: selectedCharacter.index}))
           },
           isRed: true}
         ]
@@ -96,8 +126,8 @@ export default function CharacterSelectionScreen() {
             availableCharacters.slice(0,5).map( item => <CharacterSelector 
                 selected={selectedId === item.index} 
                 key={item.index} charInfo={item} 
-                onSingleClick={ selectOption}
-                onDoubleClick={ loginWithCharaceter}/>) :
+                onSingleClick={selectOption}
+                onDoubleClick={loginWithCharaceter}/>) :
             null
           }
         </div>
@@ -107,8 +137,8 @@ export default function CharacterSelectionScreen() {
             availableCharacters.slice(5, 10).map( item => <CharacterSelector 
               selected={selectedId === item.index} 
               key={item.index} charInfo={item} 
-              onSingleClick={ selectOption}
-              onDoubleClick={ loginWithCharaceter}/>) :
+              onSingleClick={selectOption}
+              onDoubleClick={loginWithCharaceter}/>) :
             null
           }
         </div>
@@ -116,7 +146,14 @@ export default function CharacterSelectionScreen() {
       <CharSelectBottom onDeleteChar={onDeleteCharPress} onTransferChar={onTransferCharPress}/>
       {
         selectionState.popUp ?
-        <div className='popups'><OptionDialog styles='centered' settings={selectionState.popUp}/></div> :
+        <div className='popups'>
+          {{
+              'option-dialog':<OptionDialog styles='centered' settings={selectionState.popUp}/>,
+              'validate-erase-code':<ValidateCode styles='centered' onCancel={closePopUp} onAccept={deleteChar}/>,
+            }
+            [selectionState.popUp.popUp]
+          }
+        </div> :
         null
       }
     </div>

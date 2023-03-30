@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 export const UIFlowSlice = createSlice({
   name: 'uiFlow',
   initialState: {
-    activeDialog: 'validate-code',
+    activeDialog: 'login',
     activePopup: '',
     nextScreen: '',
     transitionActive: false,
@@ -34,7 +34,7 @@ export const UIFlowSlice = createSlice({
       state.popupData = null
     },
     setActivePopup : (state, action) => {
-      state.activePopup = action.payload.popup
+      state.activePopup = action.payload.popUp
       state.popupData = action.payload.data
     },
     startTransition : (state, action) => {

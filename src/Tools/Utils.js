@@ -121,6 +121,7 @@ export function useSingleAndDoubleClick(
     }
     if (click === 2) {
       handleDoubleClick();
+      setClick(0)
     }
 
     return () => clearTimeout(timer);
