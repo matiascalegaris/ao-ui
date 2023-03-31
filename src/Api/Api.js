@@ -188,7 +188,7 @@ if (process.env.NODE_ENV === 'development') {
     },
     ConfirmDeleteCharacter : (index, code) => {
       setTimeout(() => {
-        window.parent.APicallbacks.ConfirmDeleteChar(index)
+        window.parent.APicallbacks.DeleteCharacterFromList(index)
       }, 1000)
     },
     ValidatePrevCode: (code) => {

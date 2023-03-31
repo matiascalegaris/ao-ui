@@ -3,7 +3,7 @@ import Loading from './Components/Dialogs/Loading/loading';
 import LogInFlow from './Components/Login-flow/login-flow';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { displayErrorMessage, displayLoading, selectActivePopup, selectPopupData } from './redux/UIFlowSlice'
+import { displayErrorMessage, displayLoading, displayLoadingText, selectActivePopup, selectPopupData } from './redux/UIFlowSlice'
 import ErrorMessage from './Components/Dialogs/error-message/error-message';
 import {RegisterApiCallback} from './Api/Api'
 import { useTranslation } from 'react-i18next';
@@ -27,16 +27,17 @@ function App() {
     })
     RegisterApiCallback('SetLoadingMessage', (msg, localize) => {
       if (localize) {
-        dispatch(displayLoading(t(msg)))
+        dispatch(displayLoadingText(t(msg)))
       }
       else {
-        dispatch(displayLoading(msg))
+        dispatch(displayLoadingText(msg))
       }
     })
     RegisterApiCallback('SetCharacter', (charInfo) => {
       dispatch(setCharacter(charInfo))
     })
     RegisterApiCallback('DeleteCharacterFromList', (charIndex) => {
+      window.parent.APicallbacks.ConfirmDeleteChar(charIndex)
       dispatch(removeCharacter(charIndex))
     })
     const language = window.parent.BabelUI.GetStoredLocale()

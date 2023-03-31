@@ -27,7 +27,7 @@ export default function TransferCharacter({styles, settings}) {
   const send = event => {
     event.preventDefault();
     dispatch(displayLoadingText(t('connecting-to-server')))
-    window.parent.BabelUI.TransferCharacter(settings.index, email);
+    window.parent.BabelUI.RequestCharacterTransfer(settings.index, email);
   }
   return(
     <AoDialog styles={'transfer-character ' + styles} ignoreAnimation={true}>
@@ -41,6 +41,7 @@ export default function TransferCharacter({styles, settings}) {
       <div className='bottom-line'>
           <div className='line'>
             <AoButton styles='split-area' onClick={cancel}>{t('cancel').toUpperCase()}</AoButton>
+            <div className="horizontal-gap10"></div>
             <AoButton disabled={!validEmail} isRed={true} styles='split-area' onClick={send}>{t('accept').toUpperCase()}</AoButton>
           </div>
       </div>

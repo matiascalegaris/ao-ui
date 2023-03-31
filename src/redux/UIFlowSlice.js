@@ -20,6 +20,9 @@ export const UIFlowSlice = createSlice({
     },
     displayLoading : (state, action) => {
       state.activePopup = action.payload ? 'loading' : ''
+      if (!state.activePopup) {
+        state.popupData = null
+      }
     },
     displayLoadingText : (state, action) => {
       state.activePopup = 'loading'

@@ -32,6 +32,7 @@ export default function ValidateCode({styles, onCancel, onAccept}) {
       <div className='bottom-line'>
           <div className='line'>
             <AoButton styles='split-area' onClick={onCancel}>{t('cancel').toUpperCase()}</AoButton>
+            <div className="horizontal-gap10"></div>
             <AoButton disabled={!validCode} isRed={true} styles='split-area' onClick={send}>{t('accept').toUpperCase()}</AoButton>
           </div>
       </div>

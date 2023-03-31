@@ -32,7 +32,7 @@ export default function CharacterSelectionScreen() {
     console.log('login with char ' + character.index)
     if (character != null && character.name != null) {
       window.parent.BabelUI.LoginCharacter(character.index)
-      //dispatch(setActiveDialog(''))
+      dispatch(setActiveDialog(''))
     }
   }
   const doBack = event => {
@@ -108,7 +108,7 @@ export default function CharacterSelectionScreen() {
           caption: t('continue').toUpperCase(),
           action:  evt => {
             closePopUp(evt)
-            dispatch(setActivePopup({popUp:'transfer-character', data: selectedCharacter.index}))
+            dispatch(setActivePopup({popUp:'transfer-character', data: selectedCharacter}))
           },
           isRed: true}
         ]
