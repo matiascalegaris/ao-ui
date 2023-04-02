@@ -11,6 +11,7 @@ import { removeCharacter, setCharacter } from './redux/CharSelectionSlice';
 import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
 import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
+import GameplayScreen from './Components/Gameplay/gameplay-screen';
 
 function App() {
   const dispatch = useDispatch()

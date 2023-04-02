@@ -1,0 +1,21 @@
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  .exp-area {
+    height: 100px;
+    width: 100%;
+    background-color: rgb(110, 180, 52);
+  }
+
+  .inventory-spells-area {
+    width: 100%;
+    flex-grow: 1;
+    background-color: rgb(87, 0, 145);
+  }
+
+  .stats-and-menu-area {
+    width: 100%;
+    min-height: 200px;
+    background-color: rgb(219, 0, 84);
+  }
+}

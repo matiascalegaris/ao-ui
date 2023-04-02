@@ -11,6 +11,7 @@ import CharacterSelectionScreen from '../CharacterSelection/CharacterSelectionSc
 import SetNewPassword from '../Dialogs/set-new-password/set-new-password';
 import CreateCharacterScreen from '../CreateCharacter/create-character';
 import ValidateCodeScreen from '../Dialogs/ValidateCodeScreen/validate-code-screen';
+import GameplayScreen from '../Gameplay/gameplay-screen';
 
 
 export default function LogInFlow() {
@@ -32,7 +33,8 @@ export default function LogInFlow() {
           'reset-password-request': <RequestPasswordReset styles='login-dialog-pos' />,
           'character-selection': <CharacterSelectionScreen/>,
           'set-new-password': <SetNewPassword styles='login-dialog-pos'/>,
-          'create-character': <CreateCharacterScreen/>
+          'create-character': <CreateCharacterScreen/>,
+          'gameplay':<GameplayScreen/>
         }
         [activeDialog]
       }
