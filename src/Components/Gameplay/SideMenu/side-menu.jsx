@@ -1,3 +1,4 @@
+import StatsAndMenu from './StatsAndMenu/stats-and-menu'
 import './side-menu.scss'
 
 export default function SideMenu({styles}) {
@@ -5,7 +6,7 @@ export default function SideMenu({styles}) {
     <div className={'side-menu ' + styles}>
       <div className='exp-area'></div>
       <div className='inventory-spells-area'></div>
-      <div className='stats-and-menu-area'></div>
+      <StatsAndMenu styles='stats-and-menu-area'/>
     </div>
   )
 }

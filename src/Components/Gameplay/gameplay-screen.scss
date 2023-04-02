@@ -32,16 +32,14 @@
     }
     .map-area {
       height: 100%;
+      width: 200px;
       background-color: rgb(94, 255, 0);
-      .map-content {
-        aspect-ratio: 1/1;
-      }
-    
+          
     }
   }
   .gameplay-window {
     width: 736px;
-    height: 608px;
+    padding-top: 82.60869562%;
   }
   .right-panel {
     flex-grow: 1;
