@@ -1,0 +1,16 @@
+.stat-area {
+  display: flex;
+  flex-direction: row;
+  .stat-icon {
+    background-image: linear-gradient(to right,rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.548)); ;
+  }
+  .content {
+    background-color: rgba(0, 0, 0, 0.548);
+    border-radius: 0px 15px 15px 0px;
+    flex-grow: 1;
+    color: white;
+    text-align: center;
+    font-family: Alegra-AO;
+    font-weight: 800;
+  }
+}

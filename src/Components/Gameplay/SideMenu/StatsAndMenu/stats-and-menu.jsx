@@ -1,6 +1,7 @@
 import SelectOption from '../../../Common/SelectOption/select-option'
 import AoButton from '../../../Common/ao-button/ao-button'
 import './stats-and-menu.scss'
+import StatsPanel from './StatsPanel/stats-panel'
 
 export default function StatsAndMenu ({styles}) {
 
@@ -14,7 +15,7 @@ export default function StatsAndMenu ({styles}) {
         <AoButton styles='stats-opt-button'>{"menu".toUpperCase()}</AoButton>
       </div>
       <div className='content-area'>
-
+        <StatsPanel/>
       </div>
     </div>
   )

@@ -1,0 +1,100 @@
+.stats-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .gold-line {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 20px;
+    p {
+      margin: 0;
+      padding: 0;
+    }
+    .gold {
+      flex-grow: 1;
+      color: rgb(240, 177, 61);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .str {
+      color: white;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .agi {
+      color: white;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0px 10px;
+    }
+  }
+
+  .separator-line{
+    border-bottom: solid rgba(90, 84, 84, 0.322) 2px;
+    margin: 10px 20px;
+  }
+
+  .hp-line {
+    margin: 0 20px;
+    .hp-bar-outer {
+      height: 15px;
+      font-size: 0.83rem;
+      .hp-bar {
+        background-color: rgb(179, 21, 21);
+      }
+    }
+  }
+  .mana-line {
+    margin: 5px 20px;
+    .mana-bar-outer {
+      height: 15px;
+      font-size: 0.83rem;
+      .mana-bar {
+        background-color: rgb(4, 16, 177);
+      }
+    }
+  }
+
+  .energy-line {
+    margin: 0 20px;
+    display: flex;
+    flex-direction: row;
+    font-size: 0.63rem;
+    .energy-bar-outer {
+      height: 12px;
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    .energy-bar {
+      background-color: rgb(201, 190, 39);
+    }
+
+    .drink-bar-outer {
+      height: 12px;
+      width: 40px;
+      margin-right: 10px;
+    }
+    .drink-bar {
+      background-color: rgb(57, 180, 180);
+    }
+    .food-bar-outer {
+      height: 12px;
+      width: 40px;
+    }
+    .food-bar {
+      background-color: rgb(36, 141, 41);
+    }
+  }
+
+  .defense-area {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    display: grid;
+    gap: 5px;
+    margin: 0px 20px;
+  }
+}
