@@ -1,10 +1,12 @@
 import './stat-value.scss'
 
-export default function StatValue ({icon, children, styles}) {
+export default function StatValue ({icon, children, styles, iconStyle}) {
   return (
     <div className={'stat-area ' + styles}>
-      <img className='stat-icon' src={require('../../../../../../assets/Icons/ico_trash.png')} />
-      <span className='content'>{children}</span>
+      <span className={'stat-icon ' + iconStyle}>
+        <img src={icon} />
+      </span>
+      <div className='content'><span className='centered-content'>{children}</span></div>
     </div>
   )
 }

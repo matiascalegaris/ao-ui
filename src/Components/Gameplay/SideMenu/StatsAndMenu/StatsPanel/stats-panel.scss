@@ -6,7 +6,12 @@
   .gold-line {
     display: flex;
     flex-direction: row;
-    margin: 5px 20px;
+    margin: 5px 20px 0px 20px;
+    font-family: Alegra-AO;
+    font-weight: 800;
+    .stats-icon {
+      margin-right: 5px;
+    }
     p {
       margin: 0;
       padding: 0;
@@ -34,15 +39,18 @@
   }
 
   .separator-line{
-    border-bottom: solid rgba(90, 84, 84, 0.322) 2px;
+    border-bottom: solid rgba(90, 84, 84, 0.122) 3px;
     margin: 10px 20px;
   }
 
   .hp-line {
     margin: 0 20px;
+    display: flex;
+    flex-direction: row;
     .hp-bar-outer {
       height: 15px;
       font-size: 0.83rem;
+      flex-grow: 1;
       .hp-bar {
         background-color: rgb(179, 21, 21);
       }
@@ -50,9 +58,12 @@
   }
   .mana-line {
     margin: 5px 20px;
+    display: flex;
+    flex-direction: row;
     .mana-bar-outer {
       height: 15px;
       font-size: 0.83rem;
+      flex-grow: 1;
       .mana-bar {
         background-color: rgb(4, 16, 177);
       }
@@ -63,27 +74,35 @@
     margin: 0 20px;
     display: flex;
     flex-direction: row;
-    font-size: 0.63rem;
+    font-size: 0.54rem;
+    align-items: center;
+
+    .stats-icon {
+      margin-right: 5px;
+    }
     .energy-bar-outer {
-      height: 12px;
+      height: 10px;
       flex-grow: 1;
       margin-right: 10px;
+      border: rgba(114, 108, 108, 0.445) solid 2px;
     }
     .energy-bar {
       background-color: rgb(201, 190, 39);
     }
 
     .drink-bar-outer {
-      height: 12px;
-      width: 40px;
+      height: 10px;
+      width: 30px;
       margin-right: 10px;
+      border: rgba(114, 108, 108, 0.445) solid 2px;
     }
     .drink-bar {
       background-color: rgb(57, 180, 180);
     }
     .food-bar-outer {
-      height: 12px;
-      width: 40px;
+      height: 10px;
+      width: 30px;
+      border: rgba(114, 108, 108, 0.345) solid 2px;
     }
     .food-bar {
       background-color: rgb(36, 141, 41);
@@ -95,6 +114,10 @@
     grid-auto-rows: auto;
     display: grid;
     gap: 5px;
-    margin: 0px 20px;
+    row-gap: 10px;
+    margin: 0px 20px 20px 20px;
+    .magic-armor {
+      margin-left: -7px;
+    }
   }
 }

@@ -14,6 +14,7 @@
   text-align: center;
   .button-content {
     margin: auto;
+    display: flex;
   }
   &:hover {
     border: 2px solid #686865;

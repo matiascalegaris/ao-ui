@@ -1,0 +1,39 @@
+.menu-panel {
+  display: flex;
+  flex-direction: column;
+  .button-section {
+    flex-grow: 1;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    display: grid;
+    gap: 5px;
+    margin: 5px 10px;
+  }
+  .toggles-bar {
+    background-image: url('../../../../../assets/Backgrounds/main_right_bottom.png');
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .report-bug{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      align-items: center;
+      
+      margin-right: 10px;
+      .reportText {
+        font-weight: 400;
+        font-size: 12px;
+        font-family: Alegra-AO;
+        color: #5C5C58;
+        text-align: right;
+        white-space: pre-line;
+        margin-right: 5px;
+      }
+    }
+  }
+}

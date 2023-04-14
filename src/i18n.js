@@ -78,6 +78,7 @@ const resources = {
       'Pirate-desc': '',
       'Thief-desc': '',
       'Bandit-desc': '',
+      'report-bug': "Report\nbugs"
     }
   },
   es: {
@@ -180,6 +181,7 @@ const resources = {
       'Pirate-desc': '',
       'Thief-desc': '',
       'Bandit-desc': '',
+      'report-bug': "Reportar\nBugs"
     }
   }
 };
