@@ -14,8 +14,10 @@ export default function InventoryAndSpells ({styles}) {
   return (
     <div className='inventory-and-spells'>
       <div className='button-line'>
+        <span className='button-line-content'>
         <AoButton styles={'stats-opt-button ' + (activePannel === 'inventory' ? 'selected' : 'unselected')} onClick={() => onChange('inventory')}>{t("inventory").toUpperCase()}</AoButton>
         <AoButton styles={'stats-opt-button ' + (activePannel === 'spells' ? 'selected' : 'unselected')} onClick={() => onChange('spells')}>{t("spells").toUpperCase()}</AoButton>
+        </span>
       </div>
       <div className='content-area'>
       {

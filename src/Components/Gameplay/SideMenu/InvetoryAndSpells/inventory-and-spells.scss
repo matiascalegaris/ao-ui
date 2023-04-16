@@ -6,21 +6,28 @@
   flex-grow: 1;
   .button-line {
     margin: 10px 20px 0 20px;
+    
     display: flex;
     flex-direction: row;
-    .stats-opt-button {
-      flex-grow: 1;
-      margin: 2px;
+    .button-line-content {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      .stats-opt-button {
+        width: 50%;
+        margin: 2px;
+      }
+      .unselected {
+        color: #ffffff70;
+        border-color: #21221F;
+      }
+      .selected {
+        border: 2px solid #686865;
+        color: white;
+        background-image: url(../../../../assets/Buttons/button_gray_over.png);
+      }
     }
-    .unselected {
-      color: #ffffff70;
-      border-color: #21221F;
-    }
-    .selected {
-      border: 2px solid #686865;
-      color: white;
-      background-image: url(../../../../assets/Buttons/button_gray_over.png);
-    }
+    
   }
   .content-area {
     width: 100%;
