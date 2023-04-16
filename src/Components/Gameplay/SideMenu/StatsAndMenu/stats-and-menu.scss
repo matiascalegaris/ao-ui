@@ -9,7 +9,16 @@
     flex-direction: row;
     .stats-opt-button {
       flex-grow: 1;
-      margin: 4px;
+      margin: 2px;
+    }
+    .unselected {
+      color: #ffffff70;
+      border-color: #21221F;
+    }
+    .selected {
+      border: 2px solid #686865;
+      color: white;
+      background-image: url(../../../../assets/Buttons/button_gray_over.png);
     }
   }
   .content-area {
