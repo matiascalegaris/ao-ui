@@ -6,6 +6,7 @@ export default function GameplayScreen() {
     <div className='gameplay-screen'>
       <div className='top-bar'></div>
       <div className='gameplay-area'>
+      <div className='menu-separator'></div>
         <div className='gameplay-and-chat'>
           <div className='chat-section'>
             <div className='chat-area'></div>
@@ -15,6 +16,7 @@ export default function GameplayScreen() {
           </div>
           <div className='gameplay-window'></div>
         </div>
+        <div className='menu-separator'></div>
         <SideMenu styles='right-panel'/>
       </div>
     </div>

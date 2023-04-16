@@ -1,0 +1,28 @@
+.inventory-and-spells {
+  display: flex;
+  flex-direction: column;
+  background-image: url(../../../../assets/Backgrounds/leather_brown.png);
+  width: 100%;
+  flex-grow: 1;
+  .button-line {
+    margin: 10px 20px 0 20px;
+    display: flex;
+    flex-direction: row;
+    .stats-opt-button {
+      flex-grow: 1;
+      margin: 2px;
+    }
+    .unselected {
+      color: #ffffff70;
+      border-color: #21221F;
+    }
+    .selected {
+      border: 2px solid #686865;
+      color: white;
+      background-image: url(../../../../assets/Buttons/button_gray_over.png);
+    }
+  }
+  .content-area {
+    width: 100%;
+  }
+}

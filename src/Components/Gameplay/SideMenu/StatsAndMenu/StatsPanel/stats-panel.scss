@@ -52,7 +52,7 @@
       font-size: 0.83rem;
       flex-grow: 1;
       .hp-bar {
-        background-color: rgb(179, 21, 21);
+        background-image: linear-gradient(to top,rgb(61, 10, 10), rgb(207, 6, 6));
       }
     }
   }
@@ -65,7 +65,7 @@
       font-size: 0.83rem;
       flex-grow: 1;
       .mana-bar {
-        background-color: rgb(4, 16, 177);
+        background-image: linear-gradient(to top,rgb(10, 16, 95), rgb(16, 29, 214));
       }
     }
   }
@@ -87,7 +87,7 @@
       border: rgba(114, 108, 108, 0.445) solid 2px;
     }
     .energy-bar {
-      background-color: rgb(201, 190, 39);
+      background-image: linear-gradient(to top,rgb(119, 113, 23), rgb(192, 179, 4));
     }
 
     .drink-bar-outer {
@@ -97,7 +97,7 @@
       border: rgba(114, 108, 108, 0.445) solid 2px;
     }
     .drink-bar {
-      background-color: rgb(57, 180, 180);
+      background-image: linear-gradient(to top,rgb(29, 102, 102), rgb(57, 180, 180));
     }
     .food-bar-outer {
       height: 10px;
@@ -105,7 +105,7 @@
       border: rgba(114, 108, 108, 0.345) solid 2px;
     }
     .food-bar {
-      background-color: rgb(36, 141, 41);
+      background-image: linear-gradient(to top,rgb(26, 85, 29), rgb(36, 141, 41));
     }
   }
 
