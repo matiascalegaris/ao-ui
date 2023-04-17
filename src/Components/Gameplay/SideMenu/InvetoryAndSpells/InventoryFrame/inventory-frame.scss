@@ -2,9 +2,11 @@
   position: relative;
   display: flex;
   .content {
-    margin: 9px;
+    margin: 13px;
     background-image: url(../../../../../assets/Backgrounds/main_spells_slots.png);
     position: relative;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
 
   .frame-line-container {
@@ -14,7 +16,7 @@
     .frame-center {
       position: relative;
       flex-grow: 1;
-      height: 9px;
+      height: 13px;
       background-repeat: repeat-x;
     }
     .image-top {
@@ -61,7 +63,7 @@
       position: relative;
       flex-grow: 1;
       background-image: url(../../../../../assets/frames/inventory/left-center.png);
-      width: 9px;
+      width: 13px;
       background-repeat: 'repeat-y';
     }
     .right-image{

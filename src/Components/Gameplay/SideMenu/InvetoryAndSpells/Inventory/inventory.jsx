@@ -1,6 +1,7 @@
 import './inventory.scss'
 import InventoryFrame from '../InventoryFrame/inventory-frame'
 import InventorySlot from '../../../../Common/InventorySlot/inventory-slot'
+import ExtraSlotLine from './ExtraSlotLine/extra-slot-line'
 
 export default function Inventory() {
   const inventory = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
@@ -9,21 +10,18 @@ export default function Inventory() {
       <InventoryFrame styles='item-list'>
         <div className='main-inv'>
         {
-          inventory.slice(0,39).map( (item,index) => (
+          inventory.slice(0,24).map( (item,index) => (
             <InventorySlot id={index} />
           ))
         }
         </div>
         <div className='locked-lines'>
-          <div className='locked-line'>
-            {
-              inventory.slice(40,46).map( (item,index) => (
-                <InventorySlot id={index} />
-              ))
-            }
-          </div>
+          <ExtraSlotLine locked={false} inventory={inventory} start={24} />
+          <ExtraSlotLine locked={false} inventory={inventory} start={30} />
+          <ExtraSlotLine locked={true} inventory={inventory} start={36} />
         </div>
       </InventoryFrame>
+      <span className='delete-item'></span>
     </div>
   )
 }

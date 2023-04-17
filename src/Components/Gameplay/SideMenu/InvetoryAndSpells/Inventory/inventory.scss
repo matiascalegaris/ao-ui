@@ -11,23 +11,27 @@
       grid-auto-rows: auto;
       margin: 5px;
       gap: 1px;
-      margin-top: 10px;
     }
 
     .locked-lines {
       display: flex;
       flex-direction: column;
-      margin-top: 10px;
-
-      .locked-line {
-        display: flex;
-        flex-direction: row;
-        margin: 0px 5px;
-      }
-    }
-    
+      margin: 5px 0px; 
+    }    
   }
-  .trash-line {
+  .delete-item {
+    background-image: url(../../../../../assets/Icons/ico_trash.png);
+    width: 20px;
+    height: 20px;
+    margin: 5px 10px;
+    filter: grayscale(100%);
 
+    &:hover {
+      filter: none
+    }
+  
+    &:active {
+      filter: grayscale(500%);
+    }
   }
 }
