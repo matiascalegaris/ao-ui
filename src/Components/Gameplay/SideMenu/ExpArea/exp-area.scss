@@ -1,0 +1,68 @@
+.exp-area {
+  height: 125px;
+  width: 100%;
+  background-image: url(../../../../assets//Backgrounds/main_pj_info.png);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .name-line {
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    margin: 10px 0 0 0;
+    font-weight: 800;
+  }
+  .class-line {
+    position: relative;
+    width: 100%;
+    display: flex;
+    .class-and-level {
+      color: white;
+      text-align: center;
+      margin: 0;
+      font-weight: 800;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .skill-button {
+      position: absolute;
+      right: 10px;
+    }
+  }
+  
+
+  .exp-bar-container{
+    padding: 15px 20px;
+    display: flex;
+    .exp-bar-outer{
+      height: 18px;
+      font-size: 0.70rem;
+      width: 100%;
+      display: flex;
+      border: none;
+      padding: 1px;
+      background-image: url(../../../../assets/Backgrounds/main_exp_bar.png);
+      .exp-bar-inner{
+        background-image: linear-gradient(to top,rgb(2, 64, 75), rgb(70, 208, 226));
+      }
+    }
+  }
+
+  .time-bar{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -12px;
+    height: 32px;
+    background-image: url(../../../../assets/Backgrounds/main_hora.png);
+    display: flex;
+    .timer {
+      margin: auto;
+      color: white;
+      font-weight: 800;
+      text-align: end;
+      width: 40px;
+      font-family: Alegra-AO;
+    }
+  }
+}

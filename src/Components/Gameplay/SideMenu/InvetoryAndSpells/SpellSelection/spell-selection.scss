@@ -1,0 +1,29 @@
+.spell-selection {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .spell-list {
+    flex-grow: 1;
+    margin: 0px 10px;
+
+    .spell-content {
+      display: flex;
+      flex-direction: column;
+      overflow: scroll;
+      max-height: 230px;
+    }
+  }
+  
+  .button-area {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 10px;
+
+    .throw-button {
+      width: 70%;
+      height: 30px;
+      font-size: 1rem;
+    }
+  }
+}

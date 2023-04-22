@@ -78,7 +78,9 @@ const resources = {
       'Pirate-desc': '',
       'Thief-desc': '',
       'Bandit-desc': '',
-      'report-bug': "Report\nbugs"
+      'report-bug': "Report\nbugs",
+      'spell-use': 'Throw',
+      'user-class-and-level': `{{class}} - Level {{level}}`
     }
   },
   es: {
@@ -181,7 +183,9 @@ const resources = {
       'Pirate-desc': '',
       'Thief-desc': '',
       'Bandit-desc': '',
-      'report-bug': "Reportar\nBugs"
+      'report-bug': "Reportar\nBugs",
+      'spell-use': 'Lanzar',
+      'user-class-and-level': `{{class}} - Nivel {{level}}`
     }
   }
 };

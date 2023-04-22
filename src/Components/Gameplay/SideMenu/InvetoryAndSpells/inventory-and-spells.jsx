@@ -3,6 +3,7 @@ import Inventory from './Inventory/inventory';
 import './inventory-and-spells.scss'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import SpellSelection from './SpellSelection/spell-selection';
 
 export default function InventoryAndSpells ({styles}) {
   const [currentState, setCurrentState] = useState({activePannel:'inventory'});
@@ -23,6 +24,7 @@ export default function InventoryAndSpells ({styles}) {
       {
         {
           'inventory':<Inventory/>,
+          'spells':<SpellSelection/>,
         }
         [activePannel]
       }

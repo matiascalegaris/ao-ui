@@ -4,14 +4,14 @@ import InventorySlot from '../../../../Common/InventorySlot/inventory-slot'
 import ExtraSlotLine from './ExtraSlotLine/extra-slot-line'
 
 export default function Inventory() {
-  const inventory = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
+  const inventory = Array(48).fill({grh:5, count:7})
   return (
     <div className='inventory-area'>
       <InventoryFrame styles='item-list'>
         <div className='main-inv'>
         {
           inventory.slice(0,24).map( (item,index) => (
-            <InventorySlot id={index} />
+            <InventorySlot key={index} item={item}/>
           ))
         }
         </div>

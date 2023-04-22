@@ -195,6 +195,15 @@ if (process.env.NODE_ENV === 'development') {
     },
     RequestCharacterTransfer: (index, destEmail) => {
       console.log("trasnfering char " + index + "to email " + destEmail)
+    },
+    GetGrhDrawInfo: (grhIndex) => {
+      return {
+        height: 32,
+        imageNumber: 420,
+        startX: 135,
+        startY: 0,
+        width: 27
+      }
     }
   }
 }

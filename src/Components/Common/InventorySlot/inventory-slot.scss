@@ -2,4 +2,38 @@
   width: 34px;
   height: 34px;
   background-image: url(../../../assets/Backgrounds/inventory-slot.png);
+  position: relative;
+
+  .item-icon {
+    position: absolute;
+    left: 0;
+    top:0;
+    right:0;
+    bottom: 0;
+  }
+
+  .item-count {
+    position: absolute;
+    left: 0;
+    right:0;
+    bottom: 0px;
+    margin: 0;
+    color: white;
+    font-family: Alegra-AO;
+    text-align: center;
+    font-weight: 800;
+  }
+
+  .equied {
+    position: absolute;
+    top: 0;
+    right:0;
+  }
+}
+
+.locked-slot {
+  width: 34px;
+  height: 34px;
+  background-image: url(../../../assets/Backgrounds/inventory-slot.png);
+  position: relative;
 }
