@@ -19,8 +19,8 @@ export default function CharacterSelectionScreen() {
   const { t } = useTranslation();
   const selectedCharacter = useSelector(selectSelectedCharacter)
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
+  const transitionActive = useSelector(selectExitScreenActive)
   const selectOption = (selection) => {
-    console.log('Select char')
     if (selectedId < 1 || (selectedCharacter.index !== selection.index &&
       selection.name != null )) {
       dispatch(selectCharacter(selection.index));
@@ -29,7 +29,7 @@ export default function CharacterSelectionScreen() {
   }
 
   const loginWithCharaceter = (character) =>{
-    console.log('login with char ' + character.index)
+    if (transitionActive) return
     if (character != null && character.name != null) {
       window.parent.BabelUI.LoginCharacter(character.index)
       dispatch(setActiveDialog(''))
@@ -39,7 +39,7 @@ export default function CharacterSelectionScreen() {
     event.preventDefault();
     window.parent.BabelUI.ExitCharacterSelection();
   }
-  const transitionActive = useSelector(selectExitScreenActive)
+  
   let animLeftStyles = ' animate-left'
   let animRightStyles = ' animate-right'
   if (transitionActive) {

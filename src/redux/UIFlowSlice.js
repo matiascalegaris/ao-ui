@@ -84,7 +84,6 @@ export const selectExitScreenActive = (state) => state.uiFlow.transitionActive
 export const selectActiveEndPoint = (state) => state.uiFlow.selectedEndpoint
 
 export const setActiveDialog = (dialog) => (dispatch) => {
-  console.log('set secreen: ' + dialog)
   dispatch(startTransition(dialog))
   setTimeout(() => {
     dispatch(transitionComplete())
