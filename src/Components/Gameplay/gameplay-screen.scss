@@ -18,36 +18,56 @@
   .top-bar {
     width: 100%;
     height: 40px;
-    background-color: rgb(255, 115, 0);
+    background-size: 100% 100%;
+    background-image: url(../../assets//Backgrounds/main_top.png);
+    background-repeat: no-repeat;
   }
   .chat-section{
     flex-grow: 1;
     width: 100%;
     display: flex;
     flex-direction: row;
-    .chat-area {
-      flex-grow: 1;
-      height: 100%;
-      background-color: yellow;
-    }
-    .map-area {
-      height: 100%;
-      width: 200px;
-      background-color: rgb(94, 255, 0);
-          
-    }
+    border-bottom: solid 2px #4c493a;
+  }
+  .gameplay-divider {
+    height: 2px;
+    width: 100%;
+    background-image: url(../../assets/frames/gameplay/main_border_bottom.png);
+  }
+  .gameplay-bottom-frame {
+    height: 10px;
+    width: 100%;
+    background-image: url(../../assets/frames/gameplay/main_frame_horizontal.png);
+  }
+  .frame-corner {
+    width: 10px;
+    height: 10px;
+  }
+  .bot-left {
+    background-image: url(../../assets/frames/gameplay/main_frame_angle_bl.png);
+    position: absolute;
+    bottom: 0;
+  }
+  .bot-right {
+    background-image: url(../../assets/frames/gameplay/main_frame_angle_br.png);
+    position: absolute;
+    bottom: 0;
   }
   .gameplay-window {
-    width: 736px;
+    width: 100%;
     padding-top: 82.60869562%;
   }
   .menu-separator {
+    position: relative;
     height: 100%;
     width: 10px;
-    background-image: url(../../assets/Backgrounds/main_frame_vertical.png);
+    min-width: 10px;
+    background-image: url(../../assets/frames/gameplay/main_frame_vertical.png);
   }
   .right-panel {
-    flex-grow: 1;
+    width: 266px;
+    min-width: 266px;
+    max-width: 266px;
     height: 100%;
   }
 }

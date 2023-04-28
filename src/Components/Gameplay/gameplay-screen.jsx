@@ -1,4 +1,6 @@
+import Chat from './Chat/chat'
 import './gameplay-screen.scss'
+import MiniMap from './MiniMap/mini-map'
 import SideMenu from './SideMenu/side-menu'
 
 export default function GameplayScreen() {
@@ -6,17 +8,16 @@ export default function GameplayScreen() {
     <div className='gameplay-screen'>
       <div className='top-bar'></div>
       <div className='gameplay-area'>
-      <div className='menu-separator'></div>
+      <span className='menu-separator'><span className='frame-corner bot-left'></span></span>
         <div className='gameplay-and-chat'>
           <div className='chat-section'>
-            <div className='chat-area'></div>
-            <div className='map-area'>
-              <div className='map-content'></div>
-            </div>
+            <Chat/>
+            <MiniMap/>
           </div>
           <div className='gameplay-window'></div>
+          <span className='gameplay-bottom-frame'></span>
         </div>
-        <div className='menu-separator'></div>
+        <span className='menu-separator'><span className='frame-corner bot-right'></span></span>
         <SideMenu styles='right-panel'/>
       </div>
     </div>
