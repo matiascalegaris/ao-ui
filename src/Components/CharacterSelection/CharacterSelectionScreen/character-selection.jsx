@@ -13,7 +13,7 @@ import './character-selection.scss'
 
 
 export default function CharacterSelectionScreen() {
-  const [selectionState, setSelectionState] = useState({popUp:null});
+  const [selectionState, setSelectionState] = useState({popUp:null, lastSelectTime: 0, lastSelected:-1});
   const availableCharacters = useSelector(selectAvailableCharacters)
   const dispatch = useDispatch()
   const { t } = useTranslation();
@@ -21,10 +21,19 @@ export default function CharacterSelectionScreen() {
   const selectedId = selectedCharacter == null ? -1 : selectedCharacter.index
   const transitionActive = useSelector(selectExitScreenActive)
   const selectOption = (selection) => {
-    if (selectedId < 1 || (selectedCharacter.index !== selection.index &&
-      selection.name != null )) {
+    const timeStamp = Date.now()
+    if (selectedId < 0 || (selectedCharacter.index !== selection.index &&
+        selection.name != null )) {
       dispatch(selectCharacter(selection.index));
       window.parent.BabelUI.SelectCharacter(selection.index)
+      setSelectionState({...selectionState, lastSelectTime:timeStamp, lastSelected:selection})
+    }
+    else if (selection === selectionState.lastSelected &&
+             timeStamp - selectionState.lastSelectTime < 350) {
+      loginWithCharaceter(selection)
+    }
+    else if(selectedCharacter.index === selection.index) {
+      setSelectionState({...selectionState, lastSelectTime:timeStamp, lastSelected:selection})
     }
   }
 
@@ -125,8 +134,7 @@ export default function CharacterSelectionScreen() {
             availableCharacters.slice(0,5).map( item => <CharacterSelector 
                 selected={selectedId === item.index} 
                 key={item.index} charInfo={item} 
-                onSingleClick={selectOption}
-                onDoubleClick={loginWithCharaceter}/>) :
+                onClick={() =>selectOption(item)} />) :
             null
           }
         </div>
@@ -136,8 +144,7 @@ export default function CharacterSelectionScreen() {
             availableCharacters.slice(5, 10).map( item => <CharacterSelector 
               selected={selectedId === item.index} 
               key={item.index} charInfo={item} 
-              onSingleClick={selectOption}
-              onDoubleClick={loginWithCharaceter}/>) :
+              onClick={() =>selectOption(item)}/>) :
             null
           }
         </div>

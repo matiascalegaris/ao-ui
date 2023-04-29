@@ -53,6 +53,10 @@ const GetColorForCharacterStatus = status => {
       return 'chaos-color'
     case 3: //Army
       return 'army-color'
+    case 4: //chaos -council 
+      return 'chaos-council-color'
+    case 5: //army - council
+      return 'army-council-color'
     case 7: //Admin
       return 'admin-color'
     default: //undefined
@@ -115,11 +119,14 @@ export function useSingleAndDoubleClick(
         handleSingleClick();
       }
       setClick(0);
+      console.log('reseting click timer for delay: ' + delay)
     }, delay);
     if (forceHandleFirstClick && click === 1) {
       handleSingleClick();
+      console.log('got single click!')
     }
     if (click === 2) {
+      console.log('got double click!')
       handleDoubleClick();
       setClick(0)
     }

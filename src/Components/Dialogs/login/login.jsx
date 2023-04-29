@@ -27,7 +27,6 @@ export default function LogIn({styles}) {
   const serverOption = ServerOptions[selectedServerIndex]
   useEffect(() => {
     const credentials = window.parent.BabelUI.GetCredentials()
-    console.log(credentials);
     if (credentials.user.length > 0 || credentials.password.length > 0) {
       setCredentials({ ...userCredentials, 
         storeCredentials: true,

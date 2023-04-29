@@ -1,13 +1,9 @@
 
 const RegisterApiCallback = (name,callback) => {
-  console.log('registering callback ' + name);
   if (window.parent.APicallbacks == null) {
-    console.log('creating empty ' + name);
-    window.parent.APicallbacks = {}
-    
+    window.parent.APicallbacks = {}    
   }
   window.parent.APicallbacks[name] = callback
-  console.log('registering callback done');
 }
 
 if (process.env.NODE_ENV === 'development') {
@@ -20,7 +16,7 @@ if (process.env.NODE_ENV === 'development') {
         window.parent.APicallbacks.SetCharacter({name:'no c', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 2})
         window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 1, helm: 0, shield: 0, weapon:0, level: 20, status: 3, index: 3})
         window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 4, index: 4})
-        window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 7, index: 5})
+        window.parent.APicallbacks.SetCharacter({name:'tute', head: 0, body: 1268, helm: 2, shield: 2, weapon:2, level: 47, status: 7, index: 5})
         window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 6})
         window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 7})
         window.parent.APicallbacks.SetCharacter({name:'gordo en zunga', head: 0, body: 0, helm: 0, shield: 0, weapon:0, level: 20, status: 0, index: 8})
@@ -99,6 +95,48 @@ if (process.env.NODE_ENV === 'development') {
                 width: 27
               }
             })
+        case 1268:
+          return  ({
+          body: {
+            body: {
+              height: 128,
+              imageNumber: 386,
+              startX: 0,
+              startY: 512,
+              width: 128
+            },
+            HeadOffsetX: 0,
+            HeadOffsetY: -35
+          },
+          head: {
+              height: 0,
+              imageNumber: 0,
+              startX: 0,
+              startY: 0,
+              width: 0
+            },
+          helm: {
+              height: 0,
+              imageNumber: 0,
+              startX: 0,
+              startY: 0,
+              width: 0
+            },
+          shield: {
+            height: 0,
+            imageNumber: 0,
+            startX: 0,
+            startY: 0,
+            width: 0
+          },
+          weapon: {
+              height: 0,
+              imageNumber: 0,
+              startX: 0,
+              startY: 0,
+              width: 0
+            }
+          })
         default:
           return ({
             body: {

@@ -18,7 +18,6 @@ function App() {
   const { t, i18n  } = useTranslation();
   useEffect(() => {
     RegisterApiCallback('ErrorMessage', (msg, localize, action) => {
-      console.log('message:' + msg + ' ' + localize + '' + action )
       if (localize) {
         dispatch(displayErrorMessage(t(msg)))
       }
@@ -42,7 +41,6 @@ function App() {
       dispatch(removeCharacter(charIndex))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
-    console.log("setting current language to:" + language)
     i18n.changeLanguage(language)
   },[]);
   
