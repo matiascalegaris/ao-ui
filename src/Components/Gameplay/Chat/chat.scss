@@ -1,0 +1,51 @@
+.game-chat {
+  flex-grow: 1;
+  height: 116px;
+  background-size: 100% 100%;
+  background-image: url(../../../assets//Backgrounds/main_chat.png);
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  .message-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: scroll;
+    margin: 2px 5px;
+  }
+  .input-line {
+    border-top: 1px solid #32332D;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    height: 28px;
+    .chat-input-selection {
+      margin: 0px 5px;
+      height: 15px;
+    }
+    .chat-input {
+      flex-grow: 1;
+      border: none;
+      background: transparent;
+      .chat-input-area {
+        width: 100%;
+      }
+    }
+    .chat-display-options {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.45rem;
+      margin: 0px 5px;
+      color: #32332D;
+      .option {
+        margin: 0px;
+        border: 1px solid #32332D;
+        margin: 1px;
+        border-radius: 5px;
+        padding: 0px 2px;
+        text-align: center;
+      }
+    }
+  }
+}

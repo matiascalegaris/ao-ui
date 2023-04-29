@@ -1,0 +1,18 @@
+.mini-map {
+  position: relative;
+  background-size: 100% 100%;
+  background-image: url(../../../assets//Backgrounds/main_map_bg.png);
+  background-repeat: no-repeat;
+  width: 115px;
+  min-width: 115px;
+  height: 116px;
+  .mini-map-image {
+    position: absolute;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    top: 8px;
+    left: 8px;
+    right: 7px;
+    bottom: 8px;
+  }
+}
