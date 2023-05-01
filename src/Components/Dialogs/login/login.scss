@@ -52,6 +52,32 @@
       border: none;
     }
   }
+  .selector-prop__menu {
+    
+    .selector-prop__menu-list {
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      border: 1px solid #494943;
+      background-image: url(../../../assets/background.png);
+      margin: 0px 30px;
+      border-radius: 5px;
+      .selector-prop__option{
+        color: white;
+        margin: 2px 10px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.096);
+        font-size: 0.95rem;
+        &:hover {
+          color: red;
+        }
+        &:focus {
+          color: red;
+        }
+      }
+    }
+    
+    
+  }
 
 .bottom-line {
   margin: 0;

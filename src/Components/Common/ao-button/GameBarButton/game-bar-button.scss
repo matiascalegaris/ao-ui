@@ -1,0 +1,52 @@
+.game-bar-button-container {
+  border-style: inset;
+  border-radius: 3px;
+  border: solid 1px rgba(0, 0, 0, 0.308);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url(../../../../assets/Buttons/button_gray_default.png);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding:  1px 1px;
+  font-weight: 900;
+  font-family: Cardo, Arial;
+  font-size: 0.7rem;
+  text-align: center;
+  .button-content {
+    margin: auto;
+    display: flex;
+  }
+  &:hover {
+    color: white;
+    background-image: url(../../../../assets/Buttons/button_gray_over.png);
+  }
+
+  &:active {
+    color: #ffffff70;
+    background-image: url(../../../../assets/Buttons/button_gray_off.png);
+  }
+}
+
+.red-bg {
+  background-image: url(../../../../assets/Buttons/button_red_default.png);
+  &:hover {
+    background-image: url(../../../../assets/Buttons/button_red_over.png);
+  }
+
+  &:active {
+    background-image: url(../../../../assets/Buttons/button_red_off.png);
+  }
+}
+
+.red-disabled {
+  background-image: url(../../../../assets/Buttons/button_red_off.png);
+  pointer-events:none;
+}
+
+.disabled {
+  pointer-events:none;
+  color: #7F7F7F;
+  border: 2px solid #21221F;
+  background-image: url(../../../../assets/Buttons/button_gray_off.png);
+}

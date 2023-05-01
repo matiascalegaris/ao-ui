@@ -1,5 +1,38 @@
+@import '../../../_constants.scss';
+
 .top-bar {
   width: 100%;
   display: flex;
   flex-direction: row;
+
+  .ao-logo {
+    margin: 5px;
+  }
+
+  .gm-command-area {
+    flex-grow: 1;
+  }
+
+  .fps-area {
+
+  }
+
+  .location-coords {
+
+  }
+
+  .button-online-area{
+    width: $menu-width;
+    min-width: $menu-width;
+    max-width: $menu-width;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 4px;
+    .bar-button {
+      margin: auto 2px;
+    }
+    .spacer {
+      flex-grow: 1;
+    }
+  }
 }
