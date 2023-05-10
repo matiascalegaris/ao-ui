@@ -65,7 +65,7 @@ export default function CreateAccount({styles}) {
             <p className='name'>
               {t('surname').toUpperCase()}
             </p>
-            <AoInput className="surname" value={surname} IsValid={validSurName} required handleChange={handleChange} />
+            <AoInput name="surname" value={surname} IsValid={validSurName} required handleChange={handleChange} />
           </div>
           <div className='named-input user'>
             <p className='name'>

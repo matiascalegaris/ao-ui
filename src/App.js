@@ -38,7 +38,6 @@ function App() {
     })
     RegisterApiCallback('DeleteCharacterFromList', (charIndex) => {
       window.parent.APicallbacks.ConfirmDeleteChar(charIndex)
-      dispatch(removeCharacter(charIndex))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
