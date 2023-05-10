@@ -1,10 +1,12 @@
+@import '../../../_constants.scss';
+
 .mini-map {
   position: relative;
   background-size: 100% 100%;
   background-image: url(../../../assets//Backgrounds/main_map_bg.png);
   background-repeat: no-repeat;
-  width: 115px;
-  min-width: 115px;
+  width: $map-width;
+  min-width: $map-width;
   height: 116px;
   .mini-map-image {
     position: absolute;

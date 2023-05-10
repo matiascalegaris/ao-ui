@@ -9,13 +9,13 @@ const getIconForStatus = status => {
     return require('../../../../../../assets/Icons/gameplay/ico_cross_red.png')
   }
 }
-export default function MenuToggle({children}){
+export default function MenuToggle({children, status}){
   return (
     <div className='menu-toggle'>
       <AoButton styles='button'>
         {children}
       </AoButton>
-      <img className='status' src={getIconForStatus(true)}/>
+      <img className='status' src={getIconForStatus(status)}/>
     </div>
   )
 

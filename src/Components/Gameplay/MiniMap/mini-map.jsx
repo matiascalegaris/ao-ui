@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux'
+import { selectMapNumber } from '../../../redux/GameplaySlices/MapInfoSlice'
 import { GetRootDirectory } from '../../../Tools/Utils'
 import './mini-map.scss'
 
@@ -6,8 +8,9 @@ const GetMapUrl = imageName =>  {
 }
 
 export default function MiniMap() {
+  const mapNumber = useSelector(selectMapNumber)
   const mapStyle = {
-    backgroundImage: `url(${GetMapUrl(1)})`
+    backgroundImage: `url(${GetMapUrl(mapNumber)})`
   }
   return (
     <div className='mini-map'>

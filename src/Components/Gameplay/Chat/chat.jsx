@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectMessageList } from '../../../redux/GameplaySlices/ChatSlice';
 import AoInput from '../../Common/ao-input/ao-input'
 import './chat.scss'
 import ChatEntry from './ChatEntry/chat-entry';
@@ -12,12 +14,12 @@ export default function Chat() {
     const { value, name } = event.target;
     setChatState({ ...chatState, [name]: value});
   }
-  const chatEnties = Array(100).fill({style:'chaos-color', senderStyle:'chaos-color', sender:'Some Guy', text:'some test text so i might need to generate a really long text line to test word wrapping in this chat fuck my life and that still not enought, how much can anyone write?'})
+  const chatEnties = useSelector(selectMessageList)
   return (
     <div className='game-chat'>
       <div className='message-list'>
       {
-          chatEnties.slice(0,24).map( (item,index) => (
+          chatEnties.map( (item,index) => (
             <ChatEntry key={index} chat={item}/>
           ))
         }

@@ -64,6 +64,10 @@ const GetColorForCharacterStatus = status => {
   }
 }
 
+function FormatNumberWithDots(value) {
+  return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+}
+
 const GetNameForClassId = id => {
   switch(id)
   {
@@ -151,4 +155,4 @@ const GetRootDirectory = () => {
 export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt,
         ValidateRoboCode, ValidateString, ValidValidationCode,
         ValidResetPwdCode, GetRootDirectory, LoadIni, GetColorForCharacterStatus,
-        GetNameForClassId, LoadJsonFile, GetImage }
+        GetNameForClassId, LoadJsonFile, GetImage, FormatNumberWithDots }
