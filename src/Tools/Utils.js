@@ -71,8 +71,33 @@ function FormatNumberWithDots(value) {
 const GetNameForClassId = id => {
   switch(id)
   {
-  }
-  return 'Warrior'
+    case 1:
+      return "Mage"
+    case 2:
+      return "Cleric"
+    case 3:
+      return "Warrior"
+    case 4:
+      return "Assasin"
+    case 5:
+      return "Bard"
+    case 6:
+      return "Druid"
+    case 7:
+      return "Paladin"
+    case 8:
+      return "Hunter"
+    case 9:
+      return "Worker"
+    case 10:
+      return "Pirate"
+    case 11:
+      return "Thief"
+    case 12:
+      return "Bandit"
+    default:
+      return 'Warrior'
+  }  
 }
 
 const LoadIni = async filePath => {
@@ -123,14 +148,11 @@ export function useSingleAndDoubleClick(
         handleSingleClick();
       }
       setClick(0);
-      console.log('reseting click timer for delay: ' + delay)
     }, delay);
     if (forceHandleFirstClick && click === 1) {
       handleSingleClick();
-      console.log('got single click!')
     }
     if (click === 2) {
-      console.log('got double click!')
       handleDoubleClick();
       setClick(0)
     }

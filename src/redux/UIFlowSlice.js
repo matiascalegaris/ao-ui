@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 export const UIFlowSlice = createSlice({
   name: 'uiFlow',
   initialState: {
-    activeDialog: 'gameplay',
+    activeDialog: 'login',
     activePopup: '',
     nextScreen: '',
     transitionActive: false,

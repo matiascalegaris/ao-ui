@@ -43,7 +43,7 @@ export default function CharSelectBottom({onDeleteChar, onTransferChar}) {
              <div className='border-left'></div>
              <div className='text-area'>
                { selectedCharacter != null ? <p className={'text ' + nameColor}>{selectedCharacter.name}</p> : null }
-               { selectedCharacter != null ? <p className='text'>{t('class', {className: t(GetNameForClassId(selectCharacter.class))})}</p> : null }
+               { selectedCharacter != null ? <p className='text'>{t('class', {className: t(GetNameForClassId(selectedCharacter.class))})}</p> : null }
                { selectedCharacter != null ? <p className='text'>{t('level', { level: selectedCharacter.level})}</p> : null}
              </div>
              <div className='border-right'></div>
