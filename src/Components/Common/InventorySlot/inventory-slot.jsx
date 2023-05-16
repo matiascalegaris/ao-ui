@@ -1,19 +1,26 @@
 import Sprite from '../Sprite/sprite'
 import './inventory-slot.scss'
+import { useDrop } from 'react-dnd'
+import { DragDropTypes } from '../../../constants'
+import InventoryItem from './InventoryItem/inventory-item'
 
+const moveItem = (item) => {
+  console.log('move item!')
+}
 export default function InventorySlot({item, locked}) {
   const style = locked ? 'locked-slot': 'inv-slot'
-  const grhInfo = window.parent.BabelUI.GetHeadDrawInfo(item.grh)
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: DragDropTypes.ITEM,
+    drop: () => moveItem(item),
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }), [item])
   return (
     <div className={style}>
       { item.grh && !locked > 0 ?
-      <Sprite
-        styles="item-icon"
-        imageName={grhInfo.imageNumber}
-        x={grhInfo.startX}
-        y={grhInfo.startY}
-        width={grhInfo.width}
-        height={grhInfo.height}
+      <InventoryItem
+        item={item}
       /> : null
       }
       {

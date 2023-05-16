@@ -4,6 +4,8 @@ import InventorySlot from '../../../../Common/InventorySlot/inventory-slot'
 import ExtraSlotLine from './ExtraSlotLine/extra-slot-line'
 import { useSelector } from 'react-redux'
 import { selectExtraSlotState, selectInventorySlots } from '../../../../../redux/GameplaySlices/InventorySlice'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 export default function Inventory() {
   const inventory = useSelector(selectInventorySlots)
@@ -11,6 +13,7 @@ export default function Inventory() {
   return (
     <div className='inventory-area'>
       <InventoryFrame styles='item-list'>
+        <DndProvider backend={HTML5Backend}>
         <div className='main-inv'>
         {
           inventory.slice(0,24).map( (item,index) => (
@@ -23,6 +26,7 @@ export default function Inventory() {
           <ExtraSlotLine locked={!extraSlotLines[1]} inventory={inventory} start={30} />
           <ExtraSlotLine locked={!extraSlotLines[2]} inventory={inventory} start={36} />
         </div>
+        </DndProvider>
       </InventoryFrame>
       <span className='delete-item'></span>
     </div>

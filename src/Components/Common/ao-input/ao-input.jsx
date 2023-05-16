@@ -3,7 +3,7 @@ import { SanitazeInput } from '../../../Tools/Utils';
 import './ao-input.scss';
 
 
-const AoInput = ({handleChange, IsValid, styles, inputStyles, ...otherProps}) => {
+const AoInput = ({handleChange, IsValid, styles, inputStyles, innerRef, ...otherProps}) => {
   let errStyle = ''
   if (!IsValid) {
     errStyle = 'error '
@@ -13,7 +13,7 @@ const AoInput = ({handleChange, IsValid, styles, inputStyles, ...otherProps}) =>
   }
   return (  
   <div className={'group ' + errStyle + styles }>
-    <input className={'form-input ' + inputStyles} onChange={HandleChange} {...otherProps} />
+    <input className={'form-input ' + inputStyles} onChange={HandleChange} ref={innerRef} {...otherProps} />
   </div>
 )}
 

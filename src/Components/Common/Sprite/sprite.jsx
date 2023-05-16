@@ -6,7 +6,7 @@ const GetImageUrl = imageName =>  {
   return `${GetRootDirectory()}/Graficos/${imageName}.png`
 }
 
-const Sprite = ({ imageName, x, y, width, height, styles}) => {
+const Sprite = ({ imageName, x, y, width, height, styles, innerRef}) => {
   const imageUrl =  GetImageUrl(imageName)
   var sectionStyle = { 
     width: `${width}px`,
@@ -17,7 +17,7 @@ const Sprite = ({ imageName, x, y, width, height, styles}) => {
     top: `${-y}px`
   }
   return imageUrl ? (
-    <div className={'managed-sprite ' + styles} style={sectionStyle}>
+    <div ref={innerRef} className={'managed-sprite ' + styles} style={sectionStyle}>
       <img src={imageUrl} className="image"  style={innerStyle} />
     </div>
   ) : null;

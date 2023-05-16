@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const InventorySlice = createSlice({
   name: 'inventory',
   initialState: {
-    itemList: Array(48).fill({grh:5, count:7}),
+    itemList: Array(48).fill({grh:5, count:7}).map((element, index) => ({...element, count: index})),
     selectedItemIndex: -1,
     extraInventorySlotState:[ false, false, false],
     spellList: Array(40).fill('<Vacio>')

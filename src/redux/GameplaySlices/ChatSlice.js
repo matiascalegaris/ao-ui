@@ -6,22 +6,23 @@ export const ChatSlice = createSlice({
     messageList: Array(100)
                 .fill({style:'chaos-color', senderStyle:'chaos-color', sender:'', text:''})
                 .map((element, index) => ({...element,text:`entry ${index + 20}`})),
-    startPos: 20,
-    endPos: 120
+    startPos: 0,
+    endPos: 0
   },
   reducers: {
-    addMessage: (state, action) => {
+    postChatMessage: (state, action) => {
+      const insertionPos = state.endPos%state.messageList.length
       state.endPos += 1
-      if (state.endPos  - state.startPos > state.messageList.length()) {
+      if (state.endPos  - state.startPos > state.messageList.length) {
         state.startPos += 1
       }
-      state.messageList[state.endPos%state.messageList.length()] = action.payload.name
-      state.interestPoints = action.payload.interestPoints
+      console.log(`tail ${state.endPos} start:${state.startPos} insertPos:${insertionPos}`)
+      state.messageList[insertionPos] = action.payload
     }
   },
 })
 
-export const { addMessage } = ChatSlice.actions
+export const { postChatMessage } = ChatSlice.actions
 
 export const selectMessageList = (state) => {
   const size = state.chat.endPos - state.chat.startPos

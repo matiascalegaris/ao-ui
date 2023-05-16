@@ -239,6 +239,11 @@ if (process.env.NODE_ENV === 'development') {
         startY: 0,
         width: 27
       }
+    },
+    sendChat: msg => {
+      setTimeout(() => {
+        window.parent.APicallbacks.PostChatMsg({style:'chaos-color', senderStyle:'chaos-color', sender:'Tester', text:msg})
+      }, 25)
     }
   }
 }
