@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 export const PlayerStats = createSlice({
   name: 'playerStats',
   initialState: {
-    currentHp:0,
+    currentHp:100,
     maxHp : 100,
     currentMana: 50,
     maxMana: 100,
-    currentShield:100,
+    currentShield:0,
     gold:0,
     str:19,
     agi:19,

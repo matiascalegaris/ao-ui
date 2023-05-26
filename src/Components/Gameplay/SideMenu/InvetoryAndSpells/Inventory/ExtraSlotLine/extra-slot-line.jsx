@@ -15,7 +15,7 @@ export default function ExtraSlotLine({locked, inventory, start}) {
       <img className='extra-slot' src={getImageForState(locked)}/>
       {
         inventory.slice(start, start+6).map( (item,index) => (
-          <InventorySlot key={index} item={item} locked={locked}/>
+          <InventorySlot key={index} content={item} locked={locked}/>
         ))
       }
     </div>

@@ -24,6 +24,10 @@
   }
 }
 
+.selected-slot {
+  box-shadow: inset 0px 0px 10px 0 rgba(0, 144, 199, 0.59);
+}
+
 .locked-slot {
   width: 34px;
   height: 34px;

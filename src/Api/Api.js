@@ -244,7 +244,14 @@ if (process.env.NODE_ENV === 'development') {
       setTimeout(() => {
         window.parent.APicallbacks.PostChatMsg({style:'chaos-color', senderStyle:'chaos-color', sender:'Tester', text:msg})
       }, 25)
-    }
+    },
+    updateSelectedInvSlot: slotIndex => {
+    },
+    useInvSlotIndex: slotIndex => {
+    },
+    updateSelectedSpellSlot: slotIndex => {
+    },
+
   }
 }
 export {RegisterApiCallback}

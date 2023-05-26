@@ -1,30 +1,37 @@
 import Sprite from '../Sprite/sprite'
 import './inventory-slot.scss'
-import { useDrop } from 'react-dnd'
 import { DragDropTypes } from '../../../constants'
 import InventoryItem from './InventoryItem/inventory-item'
+import { useDrop } from 'react-dnd'
 
-const moveItem = (item) => {
+const moveItem = (item, dest) => {
   console.log('move item!')
+  console.log(item)
+  console.log(dest)
 }
-export default function InventorySlot({item, locked}) {
-  const style = locked ? 'locked-slot': 'inv-slot'
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: DragDropTypes.ITEM,
-    drop: () => moveItem(item),
-    collect: monitor => ({
-      isOver: !!monitor.isOver(),
+export default function InventorySlot({content, locked, selected, onSelect, onActivate}) {
+  let style = locked ? 'locked-slot ': 'inv-slot '
+  if (selected) {
+    style += 'selected-slot'
+  }
+  const [, drop] = useDrop(
+    () => ({
+      accept: DragDropTypes.ITEM,
+      drop: (item, monitor) => moveItem(item, content)
     }),
-  }), [item])
+    [content]
+  )
   return (
-    <div className={style}>
-      { item.grh && !locked > 0 ?
+    <div className={style} ref={drop}>
+      { content.grh && !locked > 0 ?
       <InventoryItem
-        item={item}
+        item={content}
+        onActivate={onActivate}
+        onSelect={onSelect}
       /> : null
       }
       {
-        item.count > 0 && !locked ? <p className='item-count'>{item.count}</p> : null
+        content.count > 0 && !locked ? <p className='item-count'>{content.count}</p> : null
       }
     </div>
   )

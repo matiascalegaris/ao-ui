@@ -6,7 +6,7 @@
   .gold-line {
     display: flex;
     flex-direction: row;
-    margin: 5px 20px 0px 20px;
+    margin: 5px 10px 0px 10px;
     font-family: Alegra-AO;
     font-weight: 800;
     .stats-icon {
@@ -49,28 +49,32 @@
 
   .separator-line{
     border-bottom: solid rgba(90, 84, 84, 0.122) 3px;
-    margin: 10px 20px;
+    margin: 10px 10px;
   }
 
   .hp-line {
-    margin: 0 20px;
+    margin: 0 10px;
     display: flex;
     flex-direction: row;
     .hp-bar-outer {
-      height: 15px;
+      height: 18px;
       font-size: 0.83rem;
       flex-grow: 1;
       .hp-bar {
         background-image: linear-gradient(to top,rgb(61, 10, 10), rgb(207, 6, 6));
       }
+      .extra-style {
+        background-image: linear-gradient(to top,rgb(129, 84, 16), rgb(238, 151, 20));
+      }
     }
+
   }
   .mana-line {
-    margin: 5px 20px;
+    margin: 5px 10px;
     display: flex;
     flex-direction: row;
     .mana-bar-outer {
-      height: 15px;
+      height: 18px;
       font-size: 0.83rem;
       flex-grow: 1;
       .mana-bar {
@@ -80,7 +84,7 @@
   }
 
   .energy-line {
-    margin: 0 20px;
+    margin: 0 10px;
     display: flex;
     flex-direction: row;
     font-size: 0.54rem;
@@ -90,7 +94,7 @@
       margin-right: 5px;
     }
     .energy-bar-outer {
-      height: 10px;
+      height: 12px;
       flex-grow: 1;
       margin-right: 10px;
       border: rgba(114, 108, 108, 0.445) solid 2px;
@@ -100,7 +104,7 @@
     }
 
     .drink-bar-outer {
-      height: 10px;
+      height: 12px;
       width: 30px;
       margin-right: 10px;
       border: rgba(114, 108, 108, 0.445) solid 2px;
@@ -109,7 +113,7 @@
       background-image: linear-gradient(to top,rgb(29, 102, 102), rgb(57, 180, 180));
     }
     .food-bar-outer {
-      height: 10px;
+      height: 12px;
       width: 30px;
       border: rgba(114, 108, 108, 0.345) solid 2px;
     }
@@ -124,7 +128,7 @@
     display: grid;
     gap: 5px;
     row-gap: 10px;
-    margin: 0px 20px 20px 20px;
+    margin: 0px 10px 20px 10px;
     .magic-armor {
       margin-left: -7px;
     }

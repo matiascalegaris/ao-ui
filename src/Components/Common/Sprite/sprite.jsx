@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Children } from 'react';
 import { GetRootDirectory } from '../../../Tools/Utils';
 import './sprite.scss'
 
@@ -6,7 +7,7 @@ const GetImageUrl = imageName =>  {
   return `${GetRootDirectory()}/Graficos/${imageName}.png`
 }
 
-const Sprite = ({ imageName, x, y, width, height, styles, innerRef}) => {
+const Sprite = ({imageName, x, y, width, height, styles, innerRef,...otherProps}) => {
   const imageUrl =  GetImageUrl(imageName)
   var sectionStyle = { 
     width: `${width}px`,
@@ -17,7 +18,7 @@ const Sprite = ({ imageName, x, y, width, height, styles, innerRef}) => {
     top: `${-y}px`
   }
   return imageUrl ? (
-    <div ref={innerRef} className={'managed-sprite ' + styles} style={sectionStyle}>
+    <div ref={innerRef} className={'managed-sprite ' + styles} style={sectionStyle} {...otherProps}>
       <img src={imageUrl} className="image"  style={innerStyle} />
     </div>
   ) : null;

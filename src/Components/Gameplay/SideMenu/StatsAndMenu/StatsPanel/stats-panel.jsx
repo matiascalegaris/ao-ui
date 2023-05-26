@@ -26,7 +26,11 @@ export default function StatsPanel({styles}) {
       <span className='separator-line'></span>
       <div className='hp-line'>
         <img className='' src={require('../../../../../assets/Icons/gameplay/ico_stats_health.png')} />
-        <ProgressBar styles='hp-bar-outer' currentVal={userStats.currentHp} MaxValue={userStats.maxHp} displayMax={true} barStyle='hp-bar'/>
+        <ProgressBar styles='hp-bar-outer' 
+                    currentVal={userStats.currentHp} 
+                    MaxValue={userStats.maxHp} 
+                    displayMax={true} barStyle='hp-bar'
+                    extraFill={userStats.currentShield} extraStyle='extra-style'/>
       </div>
       <div className='mana-line'>
         <img className='' src={require('../../../../../assets/Icons/gameplay/ico_stats_mana.png')} />

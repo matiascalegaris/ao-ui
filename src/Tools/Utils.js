@@ -109,7 +109,7 @@ const LoadIni = async filePath => {
         const configObject = {};
         let currSectionName = ''
         for (let line of lines) {
-          if (line.at(0) == '[') {
+          if (line.at(0) === '[') {
             currSectionName = line.slice(1, line.length -2)
             configObject[currSectionName] = {}
           }
@@ -159,7 +159,7 @@ export function useSingleAndDoubleClick(
 
     return () => clearTimeout(timer);
 
-  }, [click, handleSingleClick, handleDoubleClick, delay]);
+  }, [click, handleSingleClick, forceHandleFirstClick, handleDoubleClick, delay]);
 
   return () => setClick(prev => prev + 1);
 }
