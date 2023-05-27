@@ -176,5 +176,5 @@ const GetRootDirectory = () => {
 }
 export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt,
         ValidateRoboCode, ValidateString, ValidValidationCode,
-        ValidResetPwdCode, GetRootDirectory, LoadIni, GetColorForCharacterStatus,
+        ValidResetPwdCode, GetRootDirectory, GetColorForCharacterStatus,
         GetNameForClassId, LoadJsonFile, GetImage, FormatNumberWithDots }
