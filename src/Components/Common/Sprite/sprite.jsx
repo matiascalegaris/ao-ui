@@ -11,14 +11,15 @@ const Sprite = ({imageName, x, y, width, height, styles, innerRef,...otherProps}
   const imageUrl =  GetImageUrl(imageName)
   var sectionStyle = { 
     width: `${width}px`,
-    height: `${height}px`
+    height: `${height}px`,
+    overflow: 'hidden'
   };
   var innerStyle = {
     left: `${-x}px`,
     top: `${-y}px`
   }
   return imageUrl ? (
-    <div ref={innerRef} className={'managed-sprite ' + styles} style={sectionStyle} {...otherProps}>
+    <div ref={innerRef} style={sectionStyle} className={'managed-sprite ' + styles} {...otherProps}>
       <img src={imageUrl} className="image"  style={innerStyle} />
     </div>
   ) : null;

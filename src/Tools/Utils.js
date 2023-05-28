@@ -65,7 +65,7 @@ const GetColorForCharacterStatus = status => {
 }
 
 function FormatNumberWithDots(value) {
-  return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+  return value.toString().replace(/\B(?:!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
 }
 
 const GetNameForClassId = id => {

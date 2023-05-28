@@ -1,5 +1,5 @@
 .exp-area {
-  height: 125px;
+  height: 115px;
   width: 100%;
   background-image: url(../../../../assets//Backgrounds/main_pj_info.png);
   display: flex;
@@ -26,13 +26,14 @@
     }
     .skill-button {
       position: absolute;
-      right: 10px;
+      right: 20px;
+      top: -5px;
     }
   }
   
 
   .exp-bar-container{
-    padding: 15px 20px;
+    padding: 5px 20px;
     display: flex;
     .exp-bar-outer{
       height: 18px;
