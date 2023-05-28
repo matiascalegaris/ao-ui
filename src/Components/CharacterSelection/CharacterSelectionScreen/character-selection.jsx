@@ -41,7 +41,6 @@ export default function CharacterSelectionScreen() {
     if (transitionActive) return
     if (character != null && character.name != null) {
       window.parent.BabelUI.LoginCharacter(character.index)
-      dispatch(setActiveDialog(''))
     }
   }
   const doBack = event => {

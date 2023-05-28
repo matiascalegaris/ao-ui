@@ -15,7 +15,6 @@ export default function CharSelectBottom({onDeleteChar, onTransferChar}) {
   const doLogin = character => {
     if (selectCharacter != null && selectCharacter.name != null) {
       window.parent.BabelUI.LoginCharacter(selectedCharacter.index)
-      dispatch(setActiveDialog(''))
     }
   }
   const transitionActive = useSelector(selectExitScreenActive)

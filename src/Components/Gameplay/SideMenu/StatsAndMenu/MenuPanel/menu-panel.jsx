@@ -28,6 +28,8 @@ export default function MenuPanel() {
         <MenuToggle status={groupLock}><img src={require('../../../../../assets/Icons/gameplay/ico_chat.png')}/></MenuToggle>
         <MenuToggle status={clanLock}><img src={require('../../../../../assets/Icons/gameplay/ico_clanes.png')}/></MenuToggle>
         <MenuToggle status={attackLock}><img src={require('../../../../../assets/Icons/gameplay/ico_key.png')}/></MenuToggle>
+        <MenuToggle status={attackLock}><img src={require('../../../../../assets/Icons/gameplay/ico_key.png')}/></MenuToggle>
+        <span className='spacer'></span>
         <div className='report-bug'>
           <p className='reportText'>{t('report-bug')}</p>
           <img src={require('../../../../../assets/Icons/gameplay/ico_bugs.png')}/>
