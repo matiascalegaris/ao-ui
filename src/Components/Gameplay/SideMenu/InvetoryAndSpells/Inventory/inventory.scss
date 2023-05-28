@@ -5,6 +5,7 @@
   .item-list {
     width: fit-content;
     margin: 0 10px;
+    position: relative;
     .main-inv {
       display: grid;
       grid-template-columns: repeat(6, 1fr);

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectExtraSlotState, selectInventorySlots, selectInvSlot, selectSelectedItemIndex } from '../../../../../redux/GameplaySlices/InventorySlice'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DragLayer } from '../../../../Common/DragLayer/drag-layer'
 
 export default function Inventory() {
   const inventory = useSelector(selectInventorySlots)
@@ -29,6 +30,7 @@ export default function Inventory() {
     <div className='inventory-area'>
       <InventoryFrame styles='item-list' >
         <DndProvider backend={HTML5Backend}>
+          <DragLayer/>
         <div className='main-inv'>
         {
           inventory.slice(0,24).map( (item,index) => (
