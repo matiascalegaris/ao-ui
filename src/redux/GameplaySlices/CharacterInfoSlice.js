@@ -3,25 +3,28 @@ import { createSlice } from '@reduxjs/toolkit'
 export const CharacterInfoSlice = createSlice({
   name: 'characterInfo',
   initialState: {
-    name: 'Osim',
-    class: 'Warrior',
-    exp: {min:0, max:10},
+    name: 'Uff al sudar',
+    class: 1,
+    exp: {min:0, max:0},
     level: 1,
     time: '00:05'
   },
   reducers: {
     setCharacterInfo: (state, action) => {
-      state.name = action.payload.name
       state.class = action.payload.class
       state.exp = action.payload.exp
+      state.level = action.payload.level
     },
     updateExp: (state, action)=> {
       state.exp = action.payload.exp
+    },
+    setUserName: (state, action) => {
+      state.name = action.payload
     }
   },
 })
 
-export const { setCharacterInfo, updateExp } = CharacterInfoSlice.actions
+export const { setCharacterInfo, updateExp, setUserName } = CharacterInfoSlice.actions
 
 export const selectCharacterName = (state) =>  state.characterInfo.name
 export const selectCharacterLevel = (state) => state.characterInfo.level

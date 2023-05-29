@@ -1,7 +1,8 @@
 .inventory-and-spells {
   display: flex;
   flex-direction: column;
-  background-image: url(../../../../assets/Backgrounds/leather_brown.png);
+  background-image: url(../../../../assets/Backgrounds/inventory-bg.png);
+  background-size: 100% 100%;
   width: 100%;
   flex-grow: 1;
   .button-line {

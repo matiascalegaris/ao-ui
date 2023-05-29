@@ -4,14 +4,16 @@ import { selectCharacterClass, selectCharacterExp, selectCharacterLevel, selectC
 import AoButton from '../../../Common/ao-button/ao-button';
 import ProgressBar from '../../../Common/ProgressBar/progress-bar';
 import './exp-area.scss'
+import { classList } from '../../../../constants';
 
 export default function ExpArea() {
   const { t } = useTranslation();
   const charName = useSelector(selectCharacterName)
-  const className = useSelector(selectCharacterClass)
+  const className = classList[useSelector(selectCharacterClass)]
   const userLevel = useSelector(selectCharacterLevel)
   const expBar = useSelector(selectCharacterExp)
   const gameTime = useSelector(selectGameTime)
+  const expBarText = expBar.max === 0 ? t('max-level-exp') : undefined;
   return (
     <div className='exp-area'>
       <p className='name-line'>{charName}</p>
@@ -20,7 +22,9 @@ export default function ExpArea() {
         <AoButton styles='skill-button'><img src={require('../../../../assets/Icons/gameplay/ico_skillpoints.png')}/></AoButton>
       </span>
       <span className='exp-bar-container'>
-        <ProgressBar styles='exp-bar-outer' barStyle='exp-bar-inner' currentVal={expBar.min} MaxValue={expBar.max} displayMax={true} />
+        <ProgressBar styles='exp-bar-outer' barStyle='exp-bar-inner'
+                     currentVal={expBar.min} MaxValue={expBar.max} 
+                     displayMax={true} customText={expBarText}/>
       </span>
       <span className='time-bar'>
         <p className='timer'>{gameTime}</p>

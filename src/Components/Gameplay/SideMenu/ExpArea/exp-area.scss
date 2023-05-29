@@ -1,16 +1,18 @@
 .exp-area {
-  height: 115px;
+  height: 110px;
+  max-height: 110px;
   width: 100%;
   background-image: url(../../../../assets//Backgrounds/main_pj_info.png);
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   .name-line {
     text-align: center;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin: 10px 0 0 0;
-    font-weight: 800;
+    font-weight: 400;
   }
   .class-line {
     position: relative;
@@ -20,20 +22,21 @@
       color: white;
       text-align: center;
       margin: 0;
-      font-weight: 800;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      font-family: 'Alegra-AO';
       width: 100%;
     }
     .skill-button {
       position: absolute;
-      right: 20px;
-      top: -5px;
+      right: 10px;
+      top: -10px;
     }
   }
   
 
   .exp-bar-container{
-    padding: 5px 20px;
+    padding: 5px 10px 5px 10px;
     display: flex;
     .exp-bar-outer{
       height: 18px;
@@ -44,7 +47,12 @@
       padding: 1px;
       background-image: url(../../../../assets/Backgrounds/main_exp_bar.png);
       .exp-bar-inner{
-        background-image: linear-gradient(to top,rgb(2, 64, 75), rgb(70, 208, 226));
+        
+        background-image: linear-gradient(to top, rgb(2 75 48), rgb(16 143 125));
+      }
+      .number {
+        font-size: 0.85rem;
+        font-weight: 400;
       }
     }
   }

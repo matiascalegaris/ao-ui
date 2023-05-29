@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
+  word-break: break-all;
   .message-list {
     display: flex;
     flex-direction: column;

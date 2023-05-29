@@ -14,6 +14,7 @@ import GenderSelector from './GenderSelector/gender-selector'
 import HeadSelector from './HeadSelector/head-selector'
 import NameInputArea from './NameInputArea/name-input-area'
 import SelectionFrame from './SelectionFrame/selection-frame'
+import { raceList, attributeList, classList } from '../../constants'
 
 const getOptionsForRace = (bodyList, race) => {
   switch(race) {
@@ -60,9 +61,6 @@ const getCityList = () => {
     'Ullathorpe', 'Nix', 'Banderbill', 'Lindos', 'Arghal'
   ]
 }
-const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
-const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf','Orc']
-const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
 
 const mapRaces = ( gender, raceList) => {
   return raceList.map( race => (

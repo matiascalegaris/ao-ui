@@ -80,7 +80,8 @@ const resources = {
       'Bandit-desc': 'Master in the art of stealth.\n\n It is the only class capable of moving completely hidden in the shadows, escaping the sight of the simplest mortals.\n Its main characteristic is to fight hand-to-hand, inflicting powerful critical blows that will leave anyone who dares to stand in their way dancing with death.',
       'report-bug': "Report\nbugs",
       'spell-use': 'Throw',
-      'user-class-and-level': `{{class}} - Level {{level}}`
+      'user-class-and-level': `{{class}} - Level  {{level}}`,
+      'max-level-exp': 'Max level!'
     }
   },
   es: {
@@ -185,7 +186,8 @@ const resources = {
       'Bandit-desc': 'Maestro en el arte del sigilo.\n\n Es la única clase capaz de moverse completamente oculto entre las sombras, escapando a la vista de los más simples mortales.\nSu característica principal es la de combatir a puño cerrado, infligiendo poderosos golpes críticos que dejarán bailando con la muerte a cualquiera que se atreva a interponerse en su camino.',
       'report-bug': "Reportar\nBugs",
       'spell-use': 'Lanzar',
-      'user-class-and-level': `{{class}} - Nivel {{level}}`
+      'user-class-and-level': `{{class}} - Nivel  {{level}}`,
+      'max-level-exp': '¡Nivel máximo!'
     }
   }
 };

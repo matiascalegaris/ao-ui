@@ -4,7 +4,7 @@ export const ChatSlice = createSlice({
   name: 'chat',
   initialState: {
     messageList: Array(100)
-                .fill({style:'chaos-color', senderStyle:'chaos-color', sender:'', text:''})
+                .fill({textStyle:0, senderColor:{R:255,G:0,B:0}, textColor:{R:0,G:255,B:0}, sender:'pepe', text:''})
                 .map((element, index) => ({...element,text:`entry ${index + 20}`})),
     startPos: 0,
     endPos: 0
@@ -16,7 +16,6 @@ export const ChatSlice = createSlice({
       if (state.endPos  - state.startPos > state.messageList.length) {
         state.startPos += 1
       }
-      console.log(`tail ${state.endPos} start:${state.startPos} insertPos:${insertionPos}`)
       state.messageList[insertionPos] = action.payload
     }
   },

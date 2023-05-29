@@ -133,8 +133,6 @@ const LoadJsonFile = async filePath => {
       })
 }
 
-
-
 export function useSingleAndDoubleClick(
     handleSingleClick,
     handleDoubleClick,

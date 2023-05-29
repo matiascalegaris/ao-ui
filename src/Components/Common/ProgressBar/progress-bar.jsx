@@ -1,8 +1,15 @@
 import './progress-bar.scss'
 
-export default function ProgressBar({styles, currentVal, MaxValue, displayMax, extraFill, barStyle, extraStyle}) {
+export default function ProgressBar({styles, currentVal, MaxValue, displayMax, extraFill, barStyle, extraStyle, customText}) {
   if (extraFill === undefined) {
     extraFill = 0
+  }
+  if (MaxValue === 0) {
+    MaxValue = currentVal
+    if (MaxValue === 0) {
+      MaxValue = 1
+      currentVal = 1
+    }
   }
   const progress = currentVal / (MaxValue+extraFill) * 100
   const extraSize = extraFill / (MaxValue+extraFill) * 100
@@ -16,6 +23,7 @@ export default function ProgressBar({styles, currentVal, MaxValue, displayMax, e
   var bonusSize = {
     width: `${extraSize}%`
   }
+  displayText = customText !== undefined ? customText : displayText
   return (
 
     <div className={'progress-bar ' + styles}>

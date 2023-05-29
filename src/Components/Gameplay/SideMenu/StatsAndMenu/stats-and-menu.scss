@@ -1,7 +1,8 @@
 .stats-menu-area {
   display: flex;
   flex-direction: column;
-  background-image: url(../../../../assets/Backgrounds/leather_brown.png);
+  background-image: url(../../../../assets/Backgrounds/stats-bg.png);
+  background-size: 100% 100%;
   width: 100%;
   .button-line {
     width: 100%;
@@ -9,11 +10,11 @@
     flex-direction: row;
     .stats-opt-button {
       flex-grow: 1;
-      margin: 2px;
+      margin: 1px;
     }
     .unselected {
       color: #ffffff70;
-      border-color: #21221F;
+      border: 2px solid #21221F;
     }
     .selected {
       border: 2px solid #686865;
