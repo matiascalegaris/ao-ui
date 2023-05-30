@@ -1,5 +1,6 @@
 import { useDragLayer } from 'react-dnd'
 import { DragDropTypes } from '../../../constants'
+import SpellEntry from '../../Gameplay/SideMenu/InvetoryAndSpells/SpellSelection/SpellEntry/spell-entry'
 import Sprite from '../Sprite/sprite'
 import './drag-layer.scss'
 
@@ -36,6 +37,8 @@ export const DragLayer = () => {
                     width={grhInfo.width}
                     height={grhInfo.height} 
                   />
+        case DragDropTypes.SPELL:
+          <SpellEntry spell={item}/>
         default:
           return null
       }
