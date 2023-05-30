@@ -231,18 +231,20 @@ if (process.env.NODE_ENV === 'development') {
         width: 27
       }
     },
-    sendChat: msg => {
+    SendChat: msg => {
       setTimeout(() => {
-        window.parent.APicallbacks.PostChatMsg({style:'chaos-color', senderStyle:'chaos-color', sender:'Tester', text:msg})
+        window.parent.APicallbacks.PostChatMsg({sender:'Tester', text:msg, senderColor: {R:255, G:0, B: 0}, textColor: {R:255, G:255, B: 255}, italic:true, bold: true })
       }, 25)
     },
-    updateSelectedInvSlot: slotIndex => {
+    UpdateSelectedInvSlot: slotIndex => {
     },
-    useInvSlotIndex: slotIndex => {
+    UseInvSlotIndex: slotIndex => {
     },
-    updateSelectedSpellSlot: slotIndex => {
+    UpdateSelectedSpellSlot: slotIndex => {
     },
-
+    OpenVBDialog: dialogName => {
+      
+    }
   }
 }
 export {RegisterApiCallback}

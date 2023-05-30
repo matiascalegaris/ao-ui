@@ -16,11 +16,11 @@ export default function Inventory() {
   const onSelectItem = item => {
     if (item.index !== selectedItem) {
       dispatch(selectInvSlot(item.index))
-      window.parent.BabelUI.updateSelectedInvSlot(item.index)
+      window.parent.BabelUI.UpdateSelectedInvSlot(item.index)
     }
   }
   const onActivateItem = item => {
-    window.parent.BabelUI.useInvSlotIndex(item.index)
+    window.parent.BabelUI.UseInvSlotIndex(item.index)
   }
   const onDragEnd = result => {
     console.log(' drag end')

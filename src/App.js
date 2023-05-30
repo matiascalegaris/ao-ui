@@ -43,7 +43,6 @@ function App() {
       window.parent.APicallbacks.ConfirmDeleteChar(charIndex)
     })
     RegisterApiCallback('PostChatMsg', (msg) => {
-      console.log(msg)
       dispatch(postChatMessage(msg))
     })
     RegisterApiCallback('UpdateUserStats', (stats) => {

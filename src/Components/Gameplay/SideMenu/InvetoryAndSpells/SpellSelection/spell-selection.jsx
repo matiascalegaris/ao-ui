@@ -14,7 +14,7 @@ export default function SpellSelection () {
   const selectNewSpell = spellInfo => {
     if (spellInfo.index !== selectedSpellIndex) {
       dispatch(selectSpellSlot(spellInfo.index))
-      window.parent.BabelUI.updateSelectedSpellSlot(spellInfo.index)
+      window.parent.BabelUI.UpdateSelectedSpellSlot(spellInfo.index)
     }
   }
   return (

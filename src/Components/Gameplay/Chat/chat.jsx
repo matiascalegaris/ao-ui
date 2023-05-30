@@ -20,7 +20,7 @@ export default function Chat() {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       console.log('send chat: ' + chatInput)
-      window.parent.BabelUI.sendChat(chatInput)
+      window.parent.BabelUI.SendChat(chatInput)
       setChatState({ ...chatState, chatInput: ''});
       chatInputElement.current.blur();
     }

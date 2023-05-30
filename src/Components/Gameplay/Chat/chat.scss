@@ -12,7 +12,7 @@
     flex-direction: column;
     flex-grow: 1;
     overflow-y: scroll;
-    margin: 2px 5px;
+    margin: 2px 0px;
   }
   .input-line {
     border-top: 1px solid #32332D;
@@ -21,6 +21,7 @@
     width: 100%;
     align-items: center;
     height: 28px;
+    min-height: 28px;
     .chat-input-selection {
       margin: 0px 5px;
       height: 15px;

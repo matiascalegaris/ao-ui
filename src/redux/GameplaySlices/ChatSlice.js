@@ -4,7 +4,7 @@ export const ChatSlice = createSlice({
   name: 'chat',
   initialState: {
     messageList: Array(100)
-                .fill({textStyle:0, senderColor:{R:255,G:0,B:0}, textColor:{R:0,G:255,B:0}, sender:'pepe', text:''})
+                .fill({senderColor:{R:255,G:0,B:0}, textColor:{R:0,G:255,B:0}, sender:'pepe', text:''})
                 .map((element, index) => ({...element,text:`entry ${index + 20}`})),
     startPos: 0,
     endPos: 0
