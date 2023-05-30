@@ -6,6 +6,7 @@ import InventorySlice from './GameplaySlices/InventorySlice'
 import MapInfoSlice from './GameplaySlices/MapInfoSlice'
 import PlayerStatsSlice from './GameplaySlices/PlayerStatsSlice'
 import UIFlowReducer from './UIFlowSlice'
+import GameStateSlice from './GameplaySlices/GameStateSlice'
 
 export default configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
     inventory: InventorySlice,
     characterInfo: CharacterInfoSlice,
     mapInfo: MapInfoSlice,
-    chat: ChatSlice
+    chat: ChatSlice,
+    gameState: GameStateSlice
   }
 })

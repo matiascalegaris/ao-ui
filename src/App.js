@@ -15,6 +15,8 @@ import GameplayScreen from './Components/Gameplay/gameplay-screen';
 import { setStats } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
+import { setFps } from './redux/GameplaySlices/GameStateSlice';
+import { setInvLevel, updateInvSlot } from './redux/GameplaySlices/InventorySlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -46,8 +48,6 @@ function App() {
       dispatch(postChatMessage(msg))
     })
     RegisterApiCallback('UpdateUserStats', (stats) => {
-      console.log('Update stats')
-      console.log(stats)
       dispatch(setStats({
         currentHp:stats.minHp,
         maxHp : stats.maxHp,
@@ -80,6 +80,17 @@ function App() {
     RegisterApiCallback('SetUserName', (name) => {
       dispatch(setUserName(name))
     })
+    RegisterApiCallback('UpdateFps', (fps) => {
+      dispatch(setFps(fps))
+    })
+    RegisterApiCallback('SetInventoryLevel', (level) => {
+      dispatch(setInvLevel(level))
+    })
+    RegisterApiCallback('UpdateInvSlot', (slotInfo) => {
+      console.log(slotInfo)
+      dispatch(updateInvSlot(slotInfo))
+    })
+    
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
   },[]);

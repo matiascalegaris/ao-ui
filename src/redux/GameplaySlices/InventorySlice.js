@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const InventorySlice = createSlice({
   name: 'inventory',
   initialState: {
-    itemList: Array(48).fill({grh:5, count:7}).map((element, index) => ({...element, count: index, id:`item_${index}`, index:index})),
+    itemList: Array(48).fill({grh:5, count:7}).map((element, index) => ({...element, count: index, index:index})),
     selectedItemIndex: -1,
     extraInventorySlotState:[ false, false, false],
     spellList: Array(40).fill({ name:'<Vacio>', index: 0}).map((element, index) => ({...element, index:index})),
@@ -11,10 +11,15 @@ export const InventorySlice = createSlice({
   },
   reducers: {
     updateInvSlot: (state, action) => {
-      state.itemList[action.payload.index] = action.payload.data
+      state.itemList[action.payload.index] = action.payload
     },
-    setBonusSlot: (state, action)=> {
-      state.extraInventorySlotState[action.payload.index] = action.payload.state
+    setInvLevel: (state, action)=> {
+      for (let i = 0; i < action.payload; i++) {
+        state.extraInventorySlotState[i] = true
+      }
+      for (let i = action.payload; i < 3; i++) {
+        state.extraInventorySlotState[i] = false
+      }
     },
     selectInvSlot: (state, action) => {
       state.selectedItemIndex = action.payload
@@ -25,7 +30,7 @@ export const InventorySlice = createSlice({
   },
 })
 
-export const { updateInvSlot, setBonusSlot, selectInvSlot, selectSpellSlot } = InventorySlice.actions
+export const { updateInvSlot, setInvLevel, selectInvSlot, selectSpellSlot } = InventorySlice.actions
 
 export const selectSelectedItemIndex = (state) =>  state.inventory.selectedItemIndex
 

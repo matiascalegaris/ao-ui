@@ -25,7 +25,7 @@ export default function Inventory() {
         <div className='main-inv'>
         {
           inventory.slice(0,24).map( (item,index) => (
-            <InventorySlot key={item.id} content={item} 
+            <InventorySlot key={item.index} content={item} 
                             onSelect={onSelectItem} 
                             onActivate={onActivateItem}
                             selected={index === selectedItem}/>

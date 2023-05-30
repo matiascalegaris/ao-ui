@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 
 export default function InventoryItem ({item, onSelect, onActivate}) {
-  const grhInfo = window.parent.BabelUI.GetHeadDrawInfo(item.grh)
+  const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(item.grh)
   const click = useSingleAndDoubleClick(()=>{onSelect(item)}, ()=>{onActivate(item)}, 350, true);
   const [{ isDragging }, drag, preview] = useDrag(() => ({
     type: DragDropTypes.ITEM,
