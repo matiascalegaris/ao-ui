@@ -1,10 +1,17 @@
+import { useDrop } from 'react-dnd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { DragDropTypes } from '../../../../../constants';
 import { selectSelectedSpellSlotIndex, selectSpellList, selectSpellSlot } from '../../../../../redux/GameplaySlices/InventorySlice';
 import AoButton from '../../../../Common/ao-button/ao-button'
 import InventoryFrame from '../InventoryFrame/inventory-frame'
 import './spell-selection.scss'
 import SpellEntry from './SpellEntry/spell-entry';
+
+const moveItem = (item) => {
+  console.log('move spell!')
+  console.log(item)
+}
 
 export default function SpellSelection () {
   const { t } = useTranslation();
@@ -17,9 +24,16 @@ export default function SpellSelection () {
       window.parent.BabelUI.UpdateSelectedSpellSlot(spellInfo.index)
     }
   }
+  const [, drop] = useDrop(
+    () => ({
+      accept: DragDropTypes.SPELL,
+      drop: (item, monitor) => moveItem(item)
+    }),
+    []
+  )
   return (
     <div className='spell-selection'>
-      <InventoryFrame styles='spell-list' contentStyles='spell-content'>
+      <InventoryFrame styles='spell-list' contentStyles='spell-content' ref={drop}>
       {
         spellList.map( (spell, index) => (
           <SpellEntry key={index} spell={spell} 

@@ -4,9 +4,6 @@ import InventorySlot from '../../../../Common/InventorySlot/inventory-slot'
 import ExtraSlotLine from './ExtraSlotLine/extra-slot-line'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectExtraSlotState, selectInventorySlots, selectInvSlot, selectSelectedItemIndex } from '../../../../../redux/GameplaySlices/InventorySlice'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DragLayer } from '../../../../Common/DragLayer/drag-layer'
 
 export default function Inventory() {
   const inventory = useSelector(selectInventorySlots)
@@ -22,15 +19,9 @@ export default function Inventory() {
   const onActivateItem = item => {
     window.parent.BabelUI.UseInvSlotIndex(item.index)
   }
-  const onDragEnd = result => {
-    console.log(' drag end')
-    console.log(result)
-  }
   return (
     <div className='inventory-area'>
       <InventoryFrame styles='item-list' >
-        <DndProvider backend={HTML5Backend}>
-          <DragLayer/>
         <div className='main-inv'>
         {
           inventory.slice(0,24).map( (item,index) => (
@@ -46,7 +37,6 @@ export default function Inventory() {
           <ExtraSlotLine locked={!extraSlotLines[1]} inventory={inventory} start={30} />
           <ExtraSlotLine locked={!extraSlotLines[2]} inventory={inventory} start={36} />
         </div>
-      </DndProvider>
       </InventoryFrame>
       <span className='delete-item'></span>
     </div>

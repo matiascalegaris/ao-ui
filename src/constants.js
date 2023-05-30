@@ -1,5 +1,6 @@
 export const DragDropTypes = {
-  ITEM: 'Item'
+  ITEM: 'Item',
+  SPELL: 'Spell'
 }
 
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
