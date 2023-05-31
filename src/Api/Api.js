@@ -242,6 +242,8 @@ if (process.env.NODE_ENV === 'development') {
     },
     UpdateSelectedSpellSlot: slotIndex => {
     },
+    UseSpellSlot: slotIndex => {
+    },
     OpenVBDialog: dialogName => {
       
     }

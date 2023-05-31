@@ -33,9 +33,21 @@ export default function Inventory() {
         }
         </div>
         <div className='locked-lines'>
-          <ExtraSlotLine locked={!extraSlotLines[0]} inventory={inventory} start={24} />
-          <ExtraSlotLine locked={!extraSlotLines[1]} inventory={inventory} start={30} />
-          <ExtraSlotLine locked={!extraSlotLines[2]} inventory={inventory} start={36} />
+          <ExtraSlotLine locked={!extraSlotLines[0]} 
+                          inventory={inventory} start={24} 
+                          selectedItem={selectedItem}
+                          onSelect={onSelectItem} 
+                          onActivate={onActivateItem}/>
+          <ExtraSlotLine locked={!extraSlotLines[1]} 
+                         inventory={inventory} start={30} 
+                         selectedItem={selectedItem}
+                         onSelect={onSelectItem} 
+                         onActivate={onActivateItem}/>
+          <ExtraSlotLine locked={!extraSlotLines[2]} 
+                         inventory={inventory} start={36} 
+                         selectedItem={selectedItem}
+                         onSelect={onSelectItem} 
+                         onActivate={onActivateItem}/>
         </div>
       </InventoryFrame>
       <span className='delete-item'></span>

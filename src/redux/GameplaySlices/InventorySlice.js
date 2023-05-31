@@ -5,7 +5,7 @@ export const InventorySlice = createSlice({
   initialState: {
     itemList: Array(48).fill({grh:5, count:7}).map((element, index) => ({...element, count: index, index:index})),
     selectedItemIndex: -1,
-    extraInventorySlotState:[ false, false, false],
+    extraInventorySlotState:[ true, false, false],
     spellList: Array(40).fill({ name:'<Vacio>', index: 0}).map((element, index) => ({...element, index:index})),
     selectedSpellIndex: -1
   },
