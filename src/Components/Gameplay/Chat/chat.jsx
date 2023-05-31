@@ -19,12 +19,17 @@ export default function Chat() {
   const chatInputElement = useRef(null);
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      console.log('send chat: ' + chatInput)
       window.parent.BabelUI.SendChat(chatInput)
       setChatState({ ...chatState, chatInput: ''});
       chatInputElement.current.blur();
     }
   };
+  const selectUser = user => {
+    setChatState({ ...chatState, chatInput: `\\${user}`});
+    if (document.activeElement !== chatInputElement.current) {
+      chatInputElement.current && chatInputElement.current.focus()
+    }
+  }
   const handleGlobalKeyPress = evt => {
     if (evt.key === 'Enter' &&
         document.activeElement !== chatInputElement.current) {
@@ -46,7 +51,7 @@ export default function Chat() {
       <div className='message-list'>
       {
           chatEnties.map( (item,index) => (
-            <ChatEntry key={index} chat={item}/>
+            <ChatEntry key={index} chat={item} onUserSelect={selectUser}/>
           ))
         }
         <div className='scrollEnd' ref={messagesEndRef}></div>

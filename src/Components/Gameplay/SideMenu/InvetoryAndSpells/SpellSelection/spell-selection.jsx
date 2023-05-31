@@ -31,6 +31,9 @@ export default function SpellSelection () {
     }),
     []
   )
+  const useSpell = evt => {
+    window.parent.BabelUI.UseSpellSlot(selectedSpellIndex)
+  }
   return (
     <div className='spell-selection'>
       <InventoryFrame styles='spell-list' contentStyles='spell-content' ref={drop}>
@@ -43,7 +46,7 @@ export default function SpellSelection () {
       }
       </InventoryFrame>
       <div className='button-area'>
-        <AoButton styles='throw-button' isRed={true} >{t('spell-use')}</AoButton>
+        <AoButton styles='throw-button' isRed={true} onClick={useSpell}>{t('spell-use')}</AoButton>
       </div>
     </div>
   )

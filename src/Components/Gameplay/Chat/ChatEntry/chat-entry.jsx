@@ -1,6 +1,6 @@
 import './chat-entry.scss'
 
-export default function ChatEntry({chat}) {
+export default function ChatEntry({chat, onUserSelect}) {
   const senderStyle = {
     color: `rgb(${chat.senderColor.R},${chat.senderColor.G},${chat.senderColor.B})`
   }
@@ -12,7 +12,7 @@ export default function ChatEntry({chat}) {
   return (
     <p className={'chat-entry'} style={textStyle}>
       { chat.sender ? 
-        <span className={'sender'} style={senderStyle}>[{chat.sender}] </span> 
+        <span className={'sender'} style={senderStyle} onClick={()=>onUserSelect(chat.sender)}>[{chat.sender}]</span> 
         : null
       }
       {chat.text}
