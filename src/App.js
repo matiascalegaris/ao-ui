@@ -16,7 +16,7 @@ import { setStats } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
 import { setFps } from './redux/GameplaySlices/GameStateSlice';
-import { setInvLevel, updateInvSlot } from './redux/GameplaySlices/InventorySlice';
+import { setInvLevel, updateInvSlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -90,7 +90,18 @@ function App() {
       console.log(slotInfo)
       dispatch(updateInvSlot(slotInfo))
     })
-    
+    RegisterApiCallback('UpdateSpellSlot', (slotInfo) => {
+      console.log(slotInfo)
+      dispatch(updateSpellSlot(slotInfo))
+    })
+    RegisterApiCallback('UpdateHp', (slotInfo) => {
+      console.log(slotInfo)
+      dispatch(updateSpellSlot(slotInfo))
+    })
+    RegisterApiCallback('UpdateMana', (slotInfo) => {
+      console.log(slotInfo)
+      dispatch(updateSpellSlot(slotInfo))
+    })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
   },[]);
