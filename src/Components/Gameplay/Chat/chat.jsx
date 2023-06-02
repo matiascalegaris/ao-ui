@@ -7,7 +7,7 @@ import ChatEntry from './ChatEntry/chat-entry';
 
 export default function Chat() {
   const [chatState, setChatState] = useState({
-    chatInput:'',
+    chatInput:'', scrollTarget:100.0
   });
   const messagesEndRef = useRef(null)
   const {chatInput} = chatState;
@@ -46,9 +46,13 @@ export default function Chat() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
+  const onScroll = evt => {
+    console.log('scroll evt')
+    console.log(evt.currentTarget)
+  }
   return (
     <div className='game-chat'>
-      <div className='message-list'>
+      <div className='message-list' onScroll={onScroll}>
       {
           chatEnties.map( (item,index) => (
             <ChatEntry key={index} chat={item} onUserSelect={selectUser}/>

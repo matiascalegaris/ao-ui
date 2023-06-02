@@ -249,6 +249,9 @@ if (process.env.NODE_ENV === 'development') {
     },
     OpenVBDialog: dialogName => {
       
+    },
+    OpenLink: link => {
+      console.log('open link ' + link)
     }
   }
 }
