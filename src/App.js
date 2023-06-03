@@ -12,8 +12,8 @@ import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
 import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
 import GameplayScreen from './Components/Gameplay/gameplay-screen';
-import { setStats } from './redux/GameplaySlices/PlayerStatsSlice';
-import { setCharacterInfo, setUserName } from './redux/GameplaySlices/CharacterInfoSlice';
+import { setStats, updateDrink, updateFood, updateGold, updateHp, updateMana, updateStamina } from './redux/GameplaySlices/PlayerStatsSlice';
+import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
 import { setFps } from './redux/GameplaySlices/GameStateSlice';
 import { setInvLevel, updateInvSlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
@@ -87,20 +87,31 @@ function App() {
       dispatch(setInvLevel(level))
     })
     RegisterApiCallback('UpdateInvSlot', (slotInfo) => {
-      console.log(slotInfo)
       dispatch(updateInvSlot(slotInfo))
     })
     RegisterApiCallback('UpdateSpellSlot', (slotInfo) => {
-      console.log(slotInfo)
       dispatch(updateSpellSlot(slotInfo))
     })
     RegisterApiCallback('UpdateHp', (slotInfo) => {
-      console.log(slotInfo)
-      dispatch(updateSpellSlot(slotInfo))
+      dispatch(updateHp(slotInfo))
     })
     RegisterApiCallback('UpdateMana', (slotInfo) => {
-      console.log(slotInfo)
-      dispatch(updateSpellSlot(slotInfo))
+      dispatch(updateMana(slotInfo))
+    })
+    RegisterApiCallback('UpdateStamina', (slotInfo) => {
+      dispatch(updateStamina(slotInfo))
+    })
+    RegisterApiCallback('UpdateFood', (slotInfo) => {
+      dispatch(updateFood(slotInfo))
+    })
+    RegisterApiCallback('UpdateDrink', (slotInfo) => {
+      dispatch(updateDrink(slotInfo))
+    })
+    RegisterApiCallback('UpdateGold', (gold) => {
+      dispatch(updateGold(gold))
+    })
+    RegisterApiCallback('UpdateExp', (curremt, max) => {
+      dispatch(updateExp({min: curremt, max: max}))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

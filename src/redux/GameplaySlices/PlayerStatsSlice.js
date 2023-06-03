@@ -48,11 +48,31 @@ export const PlayerStats = createSlice({
       state.attackLock = action.payload.attackLock
       state.clanLock = action.payload.clanLock
       state.groupLock = action.payload.groupLock
+    },
+    updateHp: (state, action) => {
+      state.currentHp = action.payload.hp
+      state.currentShield = action.payload.shield
+    },
+    updateMana: (state, action) => {
+      state.currentMana = action.payload
+    },
+    updateStamina: (state, action) => {
+      state.currentEnergy = action.payload
+    },
+    updateDrink: (state, action) => {
+      state.drink = action.payload
+    },
+    updateFood: (state, action) => {
+      state.food = action.payload
+    },
+    updateGold: (state, action) => {
+      state.gold = action.payload
     }
+    
   },
 })
 
-export const { setStats } = PlayerStats.actions
+export const { setStats, updateHp, updateMana, updateStamina, updateDrink, updateFood, updateGold } = PlayerStats.actions
 
 export const selectCharacterStats = (state) => {
   return {

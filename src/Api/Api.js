@@ -237,21 +237,20 @@ if (process.env.NODE_ENV === 'development') {
       }, 25)
     },
     UpdateSelectedInvSlot: slotIndex => {
-      console.log('item selected')
     },
-    UseInvSlotIndex: slotIndex => {
-      console.log('use inv selected')
-      console.log(slotIndex)
+    UseInvSlotIndex: slotIndex => {      
     },
     UpdateSelectedSpellSlot: slotIndex => {
     },
     UseSpellSlot: slotIndex => {
     },
     OpenVBDialog: dialogName => {
-      
     },
-    OpenLink: link => {
-      console.log('open link ' + link)
+    UpdateInputFocus: newState => {
+    },
+    OpenLink: link => {      
+    },
+    GoldClick: () => {
     }
   }
 }

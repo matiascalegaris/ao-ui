@@ -8,5 +8,8 @@
 
   .link-style {
     text-decoration: underline;
+    &:hover {
+      font-size: 1.1em;
+    }
   }
 }

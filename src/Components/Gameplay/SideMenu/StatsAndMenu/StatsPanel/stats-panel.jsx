@@ -1,18 +1,27 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCharacterStats } from '../../../../../redux/GameplaySlices/PlayerStatsSlice'
 import { FormatNumberWithDots } from '../../../../../Tools/Utils'
 import ProgressBar from '../../../../Common/ProgressBar/progress-bar'
 import './stats-panel.scss'
 import StatValue from './StatValue/stat-value'
+import { selectInvSlot } from '../../../../../redux/GameplaySlices/InventorySlice'
 
 export default function StatsPanel({styles}) {
   const userStats = useSelector(selectCharacterStats)
+  const dispatch = useDispatch()
+  const onGoldClick = evt => {
+    window.parent.BabelUI.GoldClick()
+    dispatch(selectInvSlot(0))
+  }
   return (
     <div className={'stats-panel'}>
       <div className='gold-line'>
-        <span className='gold'>
-          <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_coins.png')} />
-          <p>{FormatNumberWithDots(userStats.gold)}</p>
+        <span className='gold' >
+          <img className='stats-icon' 
+            onClick={onGoldClick}
+            src={require('../../../../../assets/Icons/gameplay/ico_stats_coins.png')} 
+          />
+          <p onClick={onGoldClick}>{FormatNumberWithDots(userStats.gold)}</p>
         </span>
         <span className='agi'>
           <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_agi.png')} />
