@@ -67,6 +67,7 @@ export default function Chat() {
   const onBlur = evt => {
     window.parent.BabelUI.UpdateInputFocus(false)
   }
+  //scrollToBottom()
   return (
     <div className='game-chat'>
       <div className='message-list' onScroll={onScroll}>

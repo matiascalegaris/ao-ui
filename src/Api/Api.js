@@ -5,7 +5,7 @@ const RegisterApiCallback = (name,callback) => {
   }
   window.parent.APicallbacks[name] = callback
 }
-
+let CallCount = 1
 if (process.env.NODE_ENV === 'development') {
   window.parent.BabelUI = {
     Login: (email, password, storeCredentials) => {
@@ -232,9 +232,16 @@ if (process.env.NODE_ENV === 'development') {
       }
     },
     SendChat: msg => {
-      setTimeout(() => {
-        window.parent.APicallbacks.PostChatMsg({sender:'Tester', text:msg, senderColor: {R:255, G:0, B: 0}, textColor: {R:255, G:255, B: 255}, italic:true, bold: true })
-      }, 25)
+      if (CallCount < 100) {
+        setTimeout(() => {
+          window.parent.APicallbacks.PostChatMsg({sender:'Tester', text:(msg + CallCount), senderColor: {R:255, G:0, B: 0}, textColor: {R:255, G:255, B: 255}, italic:true, bold: true })
+          window.parent.BabelUI.SendChat(msg)
+          CallCount += 1
+        }, 25)
+      }
+      else {
+        CallCount = 0
+      }
     },
     UpdateSelectedInvSlot: slotIndex => {
     },
