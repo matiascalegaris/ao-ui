@@ -1,13 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCharacterStats } from '../../../../../redux/GameplaySlices/PlayerStatsSlice'
+import { selectAgiState, selectCharacterStats, selectStrState } from '../../../../../redux/GameplaySlices/PlayerStatsSlice'
 import { FormatNumberWithDots } from '../../../../../Tools/Utils'
 import ProgressBar from '../../../../Common/ProgressBar/progress-bar'
 import './stats-panel.scss'
 import StatValue from './StatValue/stat-value'
 import { selectInvSlot } from '../../../../../redux/GameplaySlices/InventorySlice'
 
+const GetStateStyle = state => {
+  switch (state)
+  {
+    case 1:
+      return 'min-buff'
+    case 2:
+      return 'max-buff'
+    case 3:
+      return 'animate-color-change'
+    default:
+      return 'default-state'
+  }
+}
+
 export default function StatsPanel({styles}) {
   const userStats = useSelector(selectCharacterStats)
+  const strState = useSelector(selectStrState)
+  const agiState = useSelector(selectAgiState)
   const dispatch = useDispatch()
   const onGoldClick = evt => {
     window.parent.BabelUI.GoldClick()
@@ -23,11 +39,11 @@ export default function StatsPanel({styles}) {
           />
           <p onClick={onGoldClick}>{FormatNumberWithDots(userStats.gold)}</p>
         </span>
-        <span className='agi'>
+        <span className={'agi ' + GetStateStyle(agiState)}>
           <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_agi.png')} />
           <p>{userStats.agi}</p>
         </span>
-        <span className='str'>
+        <span className={'str ' + GetStateStyle(strState)}>
           <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_str.png')} />
           <p>{userStats.str}</p>
         </span>

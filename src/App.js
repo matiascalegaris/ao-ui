@@ -12,7 +12,7 @@ import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
 import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
 import GameplayScreen from './Components/Gameplay/gameplay-screen';
-import { setStats, updateDrink, updateFood, updateGold, updateHp, updateMana, updateStamina } from './redux/GameplaySlices/PlayerStatsSlice';
+import { setStats, updateDrink, updateFood, updateGold, updateHp, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
 import { setFps } from './redux/GameplaySlices/GameStateSlice';
@@ -55,8 +55,6 @@ function App() {
         maxMana: stats.maxMan,
         currentShield: stats.hpShield,
         gold: stats.gold,
-        str:19,
-        agi:19,
         currentEnergy: stats.minSta,
         maxEnergy: stats.maxSta,
         drink: stats.minAgu,
@@ -112,6 +110,16 @@ function App() {
     })
     RegisterApiCallback('UpdateExp', (curremt, max) => {
       dispatch(updateExp({min: curremt, max: max}))
+    })
+    RegisterApiCallback('UpdateStrAndAgi', (str, agi, strState, agiState) => {
+      dispatch(updateStrandAgi({str:str, agi:agi, strState:strState, agiState:agiState}))
+    })
+    RegisterApiCallback('UpdateMapNumber', (mapName, mapNumber, isSafe) => {
+    })
+    RegisterApiCallback('UpdateMapNpc', (data) => {
+      console.log("Update npc")
+      console.log(arguments.length)
+      console.log(data)
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

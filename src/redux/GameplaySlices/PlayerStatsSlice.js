@@ -9,8 +9,8 @@ export const PlayerStats = createSlice({
     maxMana: 100,
     currentShield:0,
     gold:56946218,
-    str:19,
-    agi:19,
+    str:18,
+    agi:18,
     currentEnergy:0,
     maxEnergy:100,
     drink:100,
@@ -23,18 +23,19 @@ export const PlayerStats = createSlice({
     magicBonus:0,
     attackLock: true,
     clanLock: true,
-    groupLock: true
+    groupLock: true,
+    strState: 0,
+    agiState: 0
   },
   reducers: {
     setStats: (state, action) => {
+      console.log("update user stats")
       state.currentHp = action.payload.currentHp
       state.maxHp = action.payload.maxHp
       state.currentMana = action.payload.currentMana
       state.maxMana = action.payload.maxMana
       state.currentShield = action.payload.currentShield
       state.gold = action.payload.gold
-      state.str = action.payload.str
-      state.agi = action.payload.agi
       state.currentEnergy = action.payload.currentEnergy
       state.maxEnergy = action.payload.maxEnergy
       state.drink = action.payload.drink
@@ -67,12 +68,18 @@ export const PlayerStats = createSlice({
     },
     updateGold: (state, action) => {
       state.gold = action.payload
+    },
+    updateStrandAgi: (state, action) => {
+      state.str = action.payload.str;
+      state.agi = action.payload.agi;
+      state.strState = action.payload.strState;
+      state.agiState = action.payload.agiState;
     }
     
   },
 })
 
-export const { setStats, updateHp, updateMana, updateStamina, updateDrink, updateFood, updateGold } = PlayerStats.actions
+export const { setStats, updateHp, updateMana, updateStamina, updateDrink, updateFood, updateGold, updateStrandAgi } = PlayerStats.actions
 
 export const selectCharacterStats = (state) => {
   return {
@@ -104,6 +111,8 @@ export const selectCurrentShield = (state) =>  state.playerStats.currentShield
 export const selectGold = (state) =>  state.playerStats.gold
 export const selectStr = (state) =>  state.playerStats.str
 export const selectAgi = (state) =>  state.playerStats.agi
+export const selectStrState = (state) =>  state.playerStats.strState
+export const selectAgiState = (state) =>  state.playerStats.agiState
 export const selectEnergy = (state) =>  state.playerStats.energy
 export const selectDrink = (state) =>  state.playerStats.drink
 export const selectFood = (state) =>  state.playerStats.food

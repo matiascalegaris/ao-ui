@@ -12,6 +12,10 @@ export const MapInfoSlice = createSlice({
     setMapInfo: (state, action) => {
       state.mapName = action.payload.name
       state.interestPoints = action.payload.interestPoints
+      state.mapNumber = action.payload.mapNumber
+    },
+    setCoordinates: (state, action) => {
+      state.coordinates = action.payload
     }
   },
 })
