@@ -9,7 +9,7 @@ import { RegisterApiCallback } from '../../../Api/Api';
 export default function Chat() {
   const [chatState, setChatState] = useState({
     chatInput:'', scrollTarget:100.0,
-    chatMode:0
+    chatMode:0, lastMessage: 0
   });
   const messagesEndRef = useRef(null)
   const {chatInput} = chatState;
@@ -17,7 +17,7 @@ export default function Chat() {
     const { value, name } = event.target;
     setChatState({ ...chatState, [name]: value});
   }
-  const chatEnties = useSelector(selectMessageList)
+  const chatEntries = useSelector(selectMessageList)
   const chatInputElement = useRef(null);
   const handleKeyUp = (event) => {
     if (event.key === 'Enter') {
@@ -55,7 +55,7 @@ export default function Chat() {
     RegisterApiCallback('OpenChat', (chatMode) => {})
   }, [] );
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: 'nearest', inline: 'start'  })
   }
   const onScroll = evt => {
     console.log('scroll evt')
@@ -67,12 +67,17 @@ export default function Chat() {
   const onBlur = evt => {
     window.parent.BabelUI.UpdateInputFocus(false)
   }
-  //scrollToBottom()
+  if (chatState.lastMessage < chatEntries.length) {
+    setChatState({ ...chatState, lastMessage: chatEntries.length})
+    if (chatState.scrollTarget === 100.0) {
+      scrollToBottom()
+    }
+  }
   return (
     <div className='game-chat'>
       <div className='message-list' onScroll={onScroll}>
       {
-          chatEnties.map( (item,index) => (
+          chatEntries.map( (item,index) => (
             <ChatEntry key={index} chat={item} onUserSelect={selectUser}/>
           ))
         }

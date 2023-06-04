@@ -17,6 +17,7 @@ import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
 import { setFps } from './redux/GameplaySlices/GameStateSlice';
 import { setInvLevel, updateInvSlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
+import { setCoordinates, setInterestPoints, setMapInfo } from './redux/GameplaySlices/MapInfoSlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -115,11 +116,13 @@ function App() {
       dispatch(updateStrandAgi({str:str, agi:agi, strState:strState, agiState:agiState}))
     })
     RegisterApiCallback('UpdateMapNumber', (mapName, mapNumber, isSafe) => {
+      dispatch(setMapInfo({mapName, mapNumber, isSafe}))
     })
     RegisterApiCallback('UpdateMapNpc', (data) => {
-      console.log("Update npc")
-      console.log(arguments.length)
-      console.log(data)
+      dispatch(setInterestPoints(data))
+    })
+    RegisterApiCallback('UpdatePlayerCoord', (posX, PosY) => {
+      dispatch(setCoordinates({x:posX, y:PosY}))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

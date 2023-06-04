@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { selectMapNumber } from '../../../redux/GameplaySlices/MapInfoSlice'
+import { selectCurrentCoordinates, selectInterestPoints, selectMapNumber } from '../../../redux/GameplaySlices/MapInfoSlice'
 import { GetRootDirectory } from '../../../Tools/Utils'
 import './mini-map.scss'
 
@@ -9,6 +9,8 @@ const GetMapUrl = imageName =>  {
 
 export default function MiniMap() {
   const mapNumber = useSelector(selectMapNumber)
+  const interesPoins = useSelector(selectInterestPoints)
+  const userPos = useSelector(selectCurrentCoordinates)
   const mapStyle = {
     backgroundImage: `url(${GetMapUrl(mapNumber)})`
   }

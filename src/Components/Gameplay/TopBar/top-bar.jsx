@@ -2,12 +2,15 @@ import { useSelector } from 'react-redux'
 import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
 import './top-bar.scss'
 import { selectFps } from '../../../redux/GameplaySlices/GameStateSlice'
+import { selectIsSafeMap, selectMapName } from '../../../redux/GameplaySlices/MapInfoSlice'
 
 export default function TopBar({styles}) {
   const fps = useSelector(selectFps)
   const onClose = evt => {
     window.parent.BabelUI.OpenVBDialog('frmCerrar')
   }
+  const mapName = useSelector(selectMapName)
+  const isSafe = useSelector(selectIsSafeMap)
   return (
     <div className={'top-bar ' + styles}>
       <img className='ao-logo' src={require('../../../assets/Misc/ao20_horizontal.png')} />
@@ -16,8 +19,8 @@ export default function TopBar({styles}) {
         <p className='fps'>FPS: {fps}</p>
       </div>
       <div className='location-coords'>
-        <p className='map-name'>ciudad de ullathorpe</p>
-        <p className='map-coords'>100-54-40</p>
+        <p className='map-name'>{mapName}</p>
+        <p className={ 'map-coords ' + (isSafe ? 'safe-area' : '') }>100-54-40</p>
       </div>
       <div className='button-online-area'>
         <GameBarButton styles='bar-button'>
