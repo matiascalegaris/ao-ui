@@ -3,7 +3,7 @@
   height: 34px;
   background-image: url(../../../assets/Backgrounds/inventory-slot.png);
   position: relative;
-
+  overflow: hidden;
   .item-count {
     position: absolute;
     left: 0;
@@ -17,10 +17,11 @@
     pointer-events:none;
   }
 
-  .equied {
+  .equiped {
     position: absolute;
     top: 0;
-    right:0;
+    right:5px;
+    color: red;
   }
 }
 

@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "i18next": "^22.0.6",
     "react": "^18.2.0",
+    "react-circular-progressbar": "^2.1.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
