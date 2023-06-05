@@ -16,5 +16,41 @@
     left: 8px;
     right: 7px;
     bottom: 8px;
+
+    .user-marker {
+      fill: rgb(230, 25, 25);
+      stroke-width: 1;
+      stroke: rgb(255, 255, 255);
+    }
+
+    .group-marker1 {
+      fill: rgb(230, 25, 25);
+      stroke-width: 0;
+    }
+
+    .group-marker2 {
+      fill: rgb(230, 25, 25);
+      stroke-width: 0;
+    }
+
+    .group-marker3 {
+      fill: rgb(230, 25, 25);
+      stroke-width: 0;
+    }
+
+    .group-marker4 {
+      fill: rgb(230, 25, 25);
+      stroke-width: 0;
+    }
+
+    .group-marker5 {
+      fill: rgb(230, 25, 25);
+      stroke-width: 0;
+    }
+    
+    .group-marker6 {
+      fill: rgb(230, 25, 25);
+      stroke-width: 0;
+    }
   }
 }

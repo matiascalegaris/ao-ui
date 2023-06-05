@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
+
+export const resetGameplay = createAction('gaemplay/reset')
 
 export const GameStateSlice = createSlice({
   name: 'gameState',

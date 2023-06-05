@@ -15,13 +15,6 @@ export default function ChatEntry({chat, onUserSelect}) {
   const onLinkClick = evt => {
     window.parent.BabelUI.OpenLink(evt)
   }
-  const renderLink = ({ attributes, content }) => {
-    const { href, ...props } = attributes;
-    const onClick = evt => {
-      window.parent.BabelUI.OpenLink(href)
-    }
-    return <p onClick={onClick} {...props}>fuck</p>;
-  };
   return (
     <p className={'chat-entry'} style={textStyle}>
       { chat.sender ? 

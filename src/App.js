@@ -3,21 +3,20 @@ import Loading from './Components/Dialogs/Loading/loading';
 import LogInFlow from './Components/Login-flow/login-flow';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { displayErrorMessage, displayLoading, displayLoadingText, selectActivePopup, selectPopupData } from './redux/UIFlowSlice'
+import { displayErrorMessage, displayLoadingText, selectActivePopup, selectPopupData } from './redux/UIFlowSlice'
 import ErrorMessage from './Components/Dialogs/error-message/error-message';
 import {RegisterApiCallback} from './Api/Api'
 import { useTranslation } from 'react-i18next';
-import { removeCharacter, setCharacter } from './redux/CharSelectionSlice';
+import { setCharacter } from './redux/CharSelectionSlice';
 import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
 import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
-import GameplayScreen from './Components/Gameplay/gameplay-screen';
 import { setStats, updateDrink, updateFood, updateGold, updateHp, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
-import { setFps } from './redux/GameplaySlices/GameStateSlice';
+import { resetGameplay, setFps } from './redux/GameplaySlices/GameStateSlice';
 import { setInvLevel, updateInvSlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
-import { setCoordinates, setInterestPoints, setMapInfo } from './redux/GameplaySlices/MapInfoSlice';
+import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -116,13 +115,20 @@ function App() {
       dispatch(updateStrandAgi({str:str, agi:agi, strState:strState, agiState:agiState}))
     })
     RegisterApiCallback('UpdateMapNumber', (mapName, mapNumber, isSafe) => {
+      console.log('update map number')
       dispatch(setMapInfo({mapName, mapNumber, isSafe}))
     })
     RegisterApiCallback('UpdateMapNpc', (data) => {
       dispatch(setInterestPoints(data))
     })
-    RegisterApiCallback('UpdatePlayerCoord', (posX, PosY) => {
-      dispatch(setCoordinates({x:posX, y:PosY}))
+    RegisterApiCallback('UpdatePlayerCoord', (posX, PosY, MapPosX, MapPosY) => {
+      dispatch(setCoordinates({x:posX, y:PosY, mapPos: {x:MapPosX, y: MapPosY}}))
+    })
+    RegisterApiCallback('UpdateGroupMarker', (posX, PosY, index) => {
+      dispatch(updateGroupMarker({ mapPos: {x:posX, y: PosY}, index: index}))
+    })
+    RegisterApiCallback('PrepareGemplayScreen', () => {
+      dispatch(resetGameplay)
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

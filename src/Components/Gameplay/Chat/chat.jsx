@@ -55,11 +55,12 @@ export default function Chat() {
     RegisterApiCallback('OpenChat', (chatMode) => {})
   }, [] );
   const scrollToBottom = () => {
+    console.log('scroll to bottom')
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: 'nearest', inline: 'start'  })
   }
   const onScroll = evt => {
-    console.log('scroll evt')
-    console.log(evt.currentTarget)
+    //console.log('scroll evt')
+    //console.log(evt.currentTarget)
   }
   const onFocus = evt => {
     window.parent.BabelUI.UpdateInputFocus(true)
