@@ -2,7 +2,6 @@ import Sprite from '../Sprite/sprite'
 import './inventory-slot.scss'
 import { DragDropTypes } from '../../../constants'
 import InventoryItem from './InventoryItem/inventory-item'
-import { useDrop } from 'react-dnd'
 import { CooldownIndicator } from './CooldownIndicator/cooldown-indicator'
 
 const moveItem = (item, dest) => {
@@ -15,15 +14,9 @@ export default function InventorySlot({content, locked, selected, onSelect, onAc
   if (selected) {
     style += 'selected-slot'
   }
-  const [, drop] = useDrop(
-    () => ({
-      accept: DragDropTypes.ITEM,
-      drop: (item, monitor) => moveItem(item, content)
-    }),
-    [content]
-  )
+ 
   return (
-    <div className={style} ref={drop}>
+    <div className={style}>
       { content.grh && !locked > 0 ?
       <InventoryItem
         item={content}
@@ -35,7 +28,7 @@ export default function InventorySlot({content, locked, selected, onSelect, onAc
         content.count > 0 && !locked ? <p className='item-count'>{content.count}</p> : null
       }
       {
-        content.equiped ? <span className='equiped'>+</span> : null
+        content.equipped ? <span className='equiped'>+</span> : null
       }
       <CooldownIndicator/>
     </div>

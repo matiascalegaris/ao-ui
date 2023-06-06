@@ -1,4 +1,4 @@
-import { useDrop } from 'react-dnd';
+
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { DragDropTypes } from '../../../../../constants';
@@ -24,19 +24,12 @@ export default function SpellSelection () {
       window.parent.BabelUI.UpdateSelectedSpellSlot(spellInfo.index)
     }
   }
-  const [, drop] = useDrop(
-    () => ({
-      accept: DragDropTypes.SPELL,
-      drop: (item, monitor) => moveItem(item)
-    }),
-    []
-  )
   const useSpell = evt => {
     window.parent.BabelUI.UseSpellSlot(selectedSpellIndex)
   }
   return (
     <div className='spell-selection'>
-      <InventoryFrame styles='spell-list' contentStyles='spell-content' ref={drop}>
+      <InventoryFrame styles='spell-list' contentStyles='spell-content'>
       {
         spellList.map( (spell, index) => (
           <SpellEntry key={index} spell={spell} 
