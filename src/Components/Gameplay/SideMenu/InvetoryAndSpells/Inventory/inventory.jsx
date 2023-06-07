@@ -5,6 +5,11 @@ import ExtraSlotLine from './ExtraSlotLine/extra-slot-line'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectExtraSlotState, selectInventorySlots, selectInvSlot, selectSelectedItemIndex } from '../../../../../redux/GameplaySlices/InventorySlice'
 
+const onDropItem = (item, container) => {
+  console.log('drop item!')
+  console.log(item)
+  console.log(container)
+}
 export default function Inventory() {
   const inventory = useSelector(selectInventorySlots)
   const extraSlotLines = useSelector(selectExtraSlotState)
@@ -29,7 +34,8 @@ export default function Inventory() {
                             onSelect={onSelectItem} 
                             onActivate={onActivateItem}
                             selected={index === selectedItem}
-                            dropId={'item' + index}/>
+                            dropId={{type:'inventory', id:item.index}}
+                            onDropAction={onDropItem}/>
           ))
         }
         </div>
@@ -38,17 +44,20 @@ export default function Inventory() {
                           inventory={inventory} start={24} 
                           selectedItem={selectedItem}
                           onSelect={onSelectItem} 
-                          onActivate={onActivateItem}/>
+                          onActivate={onActivateItem}
+                          onDropAction={onDropItem}/>
           <ExtraSlotLine locked={!extraSlotLines[1]} 
                          inventory={inventory} start={30} 
                          selectedItem={selectedItem}
                          onSelect={onSelectItem} 
-                         onActivate={onActivateItem}/>
+                         onActivate={onActivateItem}
+                         onDropAction={onDropItem}/>
           <ExtraSlotLine locked={!extraSlotLines[2]} 
                          inventory={inventory} start={36} 
                          selectedItem={selectedItem}
                          onSelect={onSelectItem} 
-                         onActivate={onActivateItem}/>
+                         onActivate={onActivateItem}
+                         onDropAction={onDropItem}/>
         </div>
       </InventoryFrame>
       <span className='delete-item'></span>

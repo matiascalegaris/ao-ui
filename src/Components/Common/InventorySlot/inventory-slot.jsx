@@ -5,15 +5,18 @@ import InventoryItem from './InventoryItem/inventory-item'
 import { CooldownIndicator } from './CooldownIndicator/cooldown-indicator'
 import { DropArea } from '../DropArea'
 
-export default function InventorySlot({content, locked, selected, onSelect, onActivate, dropId}) {
+export default function InventorySlot({content, locked, selected, onSelect,
+                                       onActivate, dropId, onDropAction}) {
   let style = locked ? 'locked-slot ': 'inv-slot '
   if (selected) {
     style += 'selected-slot'
   }
- 
+  const onDrop = dragInfo => {
+    onDropAction(dragInfo.item, dropId)
+  }
   return (
     <div className={style}>
-      <DropArea id={dropId} acceptTypes={[DragDropTypes.ITEM]}>
+      <DropArea id={{...dropId, onDrop:onDrop}} acceptTypes={[DragDropTypes.ITEM]}>
       { content.grh && !locked > 0 ?
       <InventoryItem
         item={content}

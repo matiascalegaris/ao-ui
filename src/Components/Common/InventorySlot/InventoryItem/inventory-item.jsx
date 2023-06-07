@@ -20,7 +20,7 @@ export default function InventoryItem ({item, onSelect, onActivate}) {
     }
   }
   const onMouseDown = evt => {
-    dragDropContext.MouseDownOnDragable(evt, item, DragDropTypes.ITEM,  Date.now())
+    dragDropContext.MouseDownOnDragable(item, DragDropTypes.ITEM,  Date.now())
   }
   return (
     <Sprite

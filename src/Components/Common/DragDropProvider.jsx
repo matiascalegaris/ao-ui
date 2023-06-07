@@ -10,25 +10,25 @@ export const DragDropProvider = ({ children }) => {
     itemType: null,
     startTime: null,
     activeContainer: null,
-    MouseDownOnDragable : (mouseEvt, item, itemType, startTime) => {
+    MouseDownOnDragable : (item, itemType, startTime) => {
       setContextValue({...contextValue,
         item: item,
         itemType: itemType,
         startTime: startTime,
       })
-      console.log("drag start!")
     },      
-    DragEnd: () => {
-      console.log('drag end!')
-      setContextValue({...contextValue,
+    DragEnd: (context) => {
+      if (context.activeContainer && context.activeContainer.onDrop) {
+        context.activeContainer.onDrop(context)
+      }
+      setContextValue({...context,
         item: null,
         itemType: null,
         startTime: 0
       })
     },
-    SetActiveContainer: (containerId) => {
-      console.log('Update container ' + containerId)
-      setContextValue({...contextValue,
+    SetActiveContainer: ( prevState, containerId) => {
+      setContextValue({...prevState,
         activeContainer: containerId
       })
     }
