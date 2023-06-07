@@ -1,12 +1,14 @@
 import Sprite from '../../Sprite/sprite'
 import './inventory-item.scss'
 import { DragDropTypes } from '../../../../constants'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { DragDropContext } from '../../DragDropProvider';
 
 export default function InventoryItem ({item, onSelect, onActivate}) {
   const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(item.grh)
   const [slotState, setSlotState] = useState({lastSelectTime: 0})
-  
+  const dragDropContext = React.useContext(DragDropContext);
+
   const onClick = evt => {
     const timeStamp = Date.now()
     if (timeStamp - slotState.lastSelectTime < 350) {
@@ -17,6 +19,9 @@ export default function InventoryItem ({item, onSelect, onActivate}) {
       onSelect(item)
     }
   }
+  const onMouseDown = evt => {
+    dragDropContext.MouseDownOnDragable(evt, item, DragDropTypes.ITEM,  Date.now())
+  }
   return (
     <Sprite
           styles="item-icon"
@@ -26,6 +31,7 @@ export default function InventoryItem ({item, onSelect, onActivate}) {
           width={grhInfo.width}
           height={grhInfo.height}
           onClick={onClick}
+          onMouseDown={onMouseDown}
         />
   )
 }

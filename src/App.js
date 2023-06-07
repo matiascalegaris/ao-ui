@@ -115,7 +115,6 @@ function App() {
       dispatch(updateStrandAgi({str:str, agi:agi, strState:strState, agiState:agiState}))
     })
     RegisterApiCallback('UpdateMapNumber', (mapName, mapNumber, isSafe) => {
-      console.log('update map number')
       dispatch(setMapInfo({mapName, mapNumber, isSafe}))
     })
     RegisterApiCallback('UpdateMapNpc', (data) => {

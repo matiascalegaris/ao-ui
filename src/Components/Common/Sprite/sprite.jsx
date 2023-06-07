@@ -19,7 +19,8 @@ const Sprite = ({imageName, x, y, width, height, styles, innerRef,...otherProps}
     top: `${-y}px`
   }
   return imageUrl ? (
-    <div ref={innerRef} style={sectionStyle} className={'managed-sprite ' + styles} {...otherProps}>
+    <div ref={innerRef} style={sectionStyle} className={'managed-sprite ' + styles} {...otherProps}
+      onDragStart={ evt => {evt.preventDefault(); return false;}}>
       <img src={imageUrl} className="image"  style={innerStyle} />
     </div>
   ) : null;

@@ -60,6 +60,7 @@
   }
   .gameplay-window {
     flex-grow: 1;
+    pointer-events: none;
   }
   .menu-separator {
     position: relative;

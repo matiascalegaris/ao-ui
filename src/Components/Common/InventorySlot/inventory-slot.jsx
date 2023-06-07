@@ -3,13 +3,9 @@ import './inventory-slot.scss'
 import { DragDropTypes } from '../../../constants'
 import InventoryItem from './InventoryItem/inventory-item'
 import { CooldownIndicator } from './CooldownIndicator/cooldown-indicator'
+import { DropArea } from '../DropArea'
 
-const moveItem = (item, dest) => {
-  console.log('move item!')
-  console.log(item)
-  console.log(dest)
-}
-export default function InventorySlot({content, locked, selected, onSelect, onActivate}) {
+export default function InventorySlot({content, locked, selected, onSelect, onActivate, dropId}) {
   let style = locked ? 'locked-slot ': 'inv-slot '
   if (selected) {
     style += 'selected-slot'
@@ -17,6 +13,7 @@ export default function InventorySlot({content, locked, selected, onSelect, onAc
  
   return (
     <div className={style}>
+      <DropArea id={dropId} acceptTypes={[DragDropTypes.ITEM]}>
       { content.grh && !locked > 0 ?
       <InventoryItem
         item={content}
@@ -31,6 +28,7 @@ export default function InventorySlot({content, locked, selected, onSelect, onAc
         content.equipped ? <span className='equiped'>+</span> : null
       }
       <CooldownIndicator/>
+      </DropArea>
     </div>
   )
 }

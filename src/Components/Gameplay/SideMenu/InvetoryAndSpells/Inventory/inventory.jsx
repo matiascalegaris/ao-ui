@@ -28,7 +28,8 @@ export default function Inventory() {
             <InventorySlot key={item.index} content={item} 
                             onSelect={onSelectItem} 
                             onActivate={onActivateItem}
-                            selected={index === selectedItem}/>
+                            selected={index === selectedItem}
+                            dropId={'item' + index}/>
           ))
         }
         </div>
