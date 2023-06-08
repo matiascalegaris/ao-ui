@@ -260,6 +260,9 @@ if (process.env.NODE_ENV === 'development') {
     },
     MoveInvItem: (source, dest) => {
       console.log("move item from " + source + " to " + dest)
+    },
+    RequestAction: action => {
+      
     }
   }
 }

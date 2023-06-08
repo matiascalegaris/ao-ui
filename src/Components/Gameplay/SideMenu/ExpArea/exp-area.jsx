@@ -4,7 +4,7 @@ import { selectCharacterClass, selectCharacterExp, selectCharacterLevel, selectC
 import AoButton from '../../../Common/ao-button/ao-button';
 import ProgressBar from '../../../Common/ProgressBar/progress-bar';
 import './exp-area.scss'
-import { classList } from '../../../../constants';
+import { Actions, classList } from '../../../../constants';
 
 export default function ExpArea() {
   const { t } = useTranslation();
@@ -14,12 +14,17 @@ export default function ExpArea() {
   const expBar = useSelector(selectCharacterExp)
   const gameTime = useSelector(selectGameTime)
   const expBarText = expBar.max === 0 ? t('max-level-exp') : undefined;
+  const openStats = evt => {
+    window.parent.BabelUI.RequestAction(Actions.RequestSkill)
+  }
   return (
     <div className='exp-area'>
       <p className='name-line'>{charName}</p>
       <span className='class-line'>
         <p className='class-and-level'>{t('user-class-and-level',{class:t(className), level: userLevel})}</p>
-        <AoButton styles='skill-button'><img src={require('../../../../assets/Icons/gameplay/ico_skillpoints.png')}/></AoButton>
+        <AoButton styles='skill-button' onClick={openStats}>
+          <img src={require('../../../../assets/Icons/gameplay/ico_skillpoints.png')}/>
+        </AoButton>
       </span>
       <span className='exp-bar-container'>
         <ProgressBar styles='exp-bar-outer' barStyle='exp-bar-inner'

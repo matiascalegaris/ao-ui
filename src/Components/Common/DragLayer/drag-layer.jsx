@@ -12,11 +12,6 @@ function getItemStyles(x, y, context) {
       display: 'none',
     }
   }
-  // const transform = `translate(${x}px, ${y}px)`
-  // return {
-  //   transform,
-  //   WebkitTransform: transform,
-  // }
   const transform = `translate(-50%, -50%)`
   return {
     position: 'absolute',
