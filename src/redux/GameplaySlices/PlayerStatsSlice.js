@@ -29,7 +29,6 @@ export const PlayerStats = createSlice({
   },
   reducers: {
     setStats: (state, action) => {
-      console.log("update user stats")
       state.currentHp = action.payload.currentHp
       state.maxHp = action.payload.maxHp
       state.currentMana = action.payload.currentMana

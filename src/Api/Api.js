@@ -257,6 +257,9 @@ if (process.env.NODE_ENV === 'development') {
     OpenLink: link => {      
     },
     GoldClick: () => {
+    },
+    MoveInvItem: (source, dest) => {
+      console.log("move item from " + source + " to " + dest)
     }
   }
 }

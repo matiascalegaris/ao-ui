@@ -6,10 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectExtraSlotState, selectInventorySlots, selectInvSlot, selectSelectedItemIndex } from '../../../../../redux/GameplaySlices/InventorySlice'
 
 const onDropItem = (item, container) => {
-  console.log('drop item!')
-  console.log(item)
-  console.log(container)
+  window.parent.BabelUI.MoveInvItem(item.index, container.id)
 }
+
 export default function Inventory() {
   const inventory = useSelector(selectInventorySlots)
   const extraSlotLines = useSelector(selectExtraSlotState)
