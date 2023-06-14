@@ -1,8 +1,18 @@
 .keys-header {
   text-align: center;
   font-weight: 900; 
-  border-bottom: #ffffff14 2px solid;
-  margin: 5px 20px 10px;
-  padding: 10px 20px;
+  margin: 15px 20px 5px;
   font-size: 1rem;
+  color: white
+}
+
+.key-area {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: auto;
+  gap: 1px;
+  background-image: url(../../../assets/Backgrounds/leather_black.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 15px;
 }

@@ -34,8 +34,8 @@ export default function TopBar({styles}) {
         <p className='map-name'>{mapName}</p>
         <p className={ 'map-coords ' + (isSafe ? 'safe-area' : '') }>{`${mapNumber}-${mapCoords.x}-${mapCoords.y}`}</p>
       </div>
-      <div className='button-online-area' onClick={openSettings}>
-        <GameBarButton styles='bar-button'>
+      <div className='button-online-area'>
+        <GameBarButton styles='bar-button' onClick={openSettings}>
           <img src={require('../../../assets/Icons/gameplay/ico_gear.png')}></img>
         </GameBarButton>
         <GameBarButton styles='bar-button' onClick={showHelp}>

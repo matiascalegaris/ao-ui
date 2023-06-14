@@ -8,7 +8,7 @@ export const InventorySlice = createSlice({
     extraInventorySlotState:[ true, false, false],
     spellList: Array(40).fill({ name:'(Vacio)', index: 0, spellIndex: 0}).map((element, index) => ({...element, index:index})),
     selectedSpellIndex: -1,
-    keys: Array(16).fill({grh:5, count:1, equipped: true}).map((element, index) => ({...element, count: index, index:index})),
+    keys: Array(10).fill({grh:5, count:1, equipped: true}).map((element, index) => ({...element, count: index, index:index})),
   },
   reducers: {
     updateInvSlot: (state, action) => {
@@ -42,5 +42,6 @@ export const selectInventorySlots = (state) => state.inventory.itemList
 export const selectSpellList = (state) => state.inventory.spellList
 export const selectSelectedSpellSlotIndex = (state) => state.inventory.selectedSpellIndex
 export const selectExtraSlotState = (state) => state.inventory.extraInventorySlotState
+export const selectKeys = (state) => state.inventory.keys
 
 export default InventorySlice.reducer
