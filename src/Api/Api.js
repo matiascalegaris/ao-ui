@@ -265,8 +265,12 @@ if (process.env.NODE_ENV === 'development') {
     },
     ClickMiniMapPos: (posX, posY) => {
       console.log(`click minimap at ${posX}, ${posY}` )
+    },
+    UpdateSelectedKeySlot: (slot) => {
+    },
+    UseKeySlotIndex: (slot) => {
+      
     }
-
   }
 }
 export {RegisterApiCallback}

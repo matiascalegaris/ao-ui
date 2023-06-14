@@ -3,7 +3,8 @@
   font-weight: 900; 
   margin: 15px 20px 5px;
   font-size: 1rem;
-  color: white
+  color: white;
+  position: relative;
 }
 
 .key-area {
@@ -15,4 +16,10 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 15px;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }

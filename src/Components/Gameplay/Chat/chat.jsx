@@ -42,7 +42,6 @@ export default function Chat() {
     if (process.env.NODE_ENV === 'development') {
       window.addEventListener("keyup", handleGlobalKeyPress);
     }
-    scrollToBottom()
     RegisterApiCallback('OpenChat', (chatMode) => {
       setChatState({ ...chatState, chatMode:chatMode});
       chatInputElement.current &&  chatInputElement.current.focus()
@@ -55,8 +54,7 @@ export default function Chat() {
     RegisterApiCallback('OpenChat', (chatMode) => {})
   }, [] );
   const scrollToBottom = () => {
-    console.log('scroll to bottom')
-    messagesEndRef.current?.scrollIntoView(true)
+    messagesEndRef.current?.scrollIntoView(false)
   }
   const onScroll = evt => {
     //console.log('scroll evt')
@@ -77,7 +75,7 @@ export default function Chat() {
   return (
     <div className='game-chat'>
       <div className='message-list' onScroll={onScroll}>
-      {
+        {
           chatEntries.map( (item,index) => (
             <ChatEntry key={index} chat={item} onUserSelect={selectUser}/>
           ))

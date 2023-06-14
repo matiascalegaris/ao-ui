@@ -20,6 +20,9 @@ export default function MenuPanel() {
   const showKeysMenu = evt => {
     setShowKey({...showKey,displayKeys:true})
   }
+  const closeKeyMenu = evt => {
+    setShowKey({...showKey,displayKeys:false})
+  }
   return (
     <div className='menu-panel'>
       <div className='button-section'>
@@ -70,7 +73,7 @@ export default function MenuPanel() {
         </div>
       </div>
       {
-        showKey.displayKeys ? <KeysDialog styles='keys-menu'></KeysDialog> : null
+        showKey.displayKeys ? <KeysDialog styles='keys-menu' onClose={closeKeyMenu}></KeysDialog> : null
       }
     </div>
   )

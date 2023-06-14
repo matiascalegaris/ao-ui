@@ -13,6 +13,10 @@
     flex-grow: 1;
     overflow-y: scroll;
     margin: 2px 0px;
+    .scrollEnd {
+      margin-top: 20px;
+      height: 2px;
+    }
   }
   .input-line {
     border-top: 1px solid #32332D;
