@@ -9,6 +9,7 @@ export const InventorySlice = createSlice({
     spellList: Array(40).fill({ name:'(Vacio)', index: 0, spellIndex: 0}).map((element, index) => ({...element, index:index})),
     selectedSpellIndex: -1,
     keys: Array(10).fill({grh:5, count:1, equipped: true}).map((element, index) => ({...element, count: index, index:index})),
+    selectedKeyIndex: -1
   },
   reducers: {
     updateInvSlot: (state, action) => {
@@ -30,11 +31,17 @@ export const InventorySlice = createSlice({
     },
     selectSpellSlot: (state, action) => {
       state.selectedSpellIndex = action.payload
+    },
+    updateKeySlot: (state, action) => {
+      state.keys[action.payload.index] = action.payload
+    },
+    selectKeySlot: (state, action) => {
+      state.selectedKeyIndex = action.payload
     }
   },
 })
 
-export const { updateInvSlot, setInvLevel, selectInvSlot, selectSpellSlot, updateSpellSlot } = InventorySlice.actions
+export const { updateInvSlot, setInvLevel, selectInvSlot, selectSpellSlot, updateSpellSlot, updateKeySlot, selectKeySlot } = InventorySlice.actions
 
 export const selectSelectedItemIndex = (state) =>  state.inventory.selectedItemIndex
 
@@ -43,5 +50,6 @@ export const selectSpellList = (state) => state.inventory.spellList
 export const selectSelectedSpellSlotIndex = (state) => state.inventory.selectedSpellIndex
 export const selectExtraSlotState = (state) => state.inventory.extraInventorySlotState
 export const selectKeys = (state) => state.inventory.keys
+export const selectSelectedKeyIdex = (state) => state.inventory.selectedKeyIndex
 
 export default InventorySlice.reducer

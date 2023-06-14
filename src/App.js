@@ -15,7 +15,7 @@ import { setStats, updateDrink, updateFood, updateGold, updateHp, updateMana, up
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
 import { resetGameplay, setFps } from './redux/GameplaySlices/GameStateSlice';
-import { setInvLevel, updateInvSlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
+import { setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 
 function App() {
@@ -128,6 +128,9 @@ function App() {
     })
     RegisterApiCallback('PrepareGemplayScreen', () => {
       dispatch(resetGameplay)
+    })
+    RegisterApiCallback('UpdateKeySlot', (slotInfo) => {
+      dispatch(updateKeySlot(slotInfo))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
