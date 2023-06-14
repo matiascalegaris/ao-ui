@@ -1,19 +1,20 @@
 import './progress-bar.scss'
 
-export default function ProgressBar({styles, currentVal, MaxValue, displayMax, extraFill, barStyle, extraStyle, customText}) {
+export default function ProgressBar({styles, currentVal, maxValue, displayMax, extraFill, barStyle, extraStyle, customText}) {
   if (extraFill === undefined) {
     extraFill = 0
   }
-  if (MaxValue === 0) {
-    MaxValue = currentVal
-    if (MaxValue === 0) {
-      MaxValue = 1
+  let safeMaxVal = maxValue
+  if (safeMaxVal === 0) {
+    safeMaxVal = currentVal
+    if (safeMaxVal === 0) {
+      safeMaxVal = 1
       currentVal = 1
     }
   }
-  const progress = currentVal / (MaxValue+extraFill) * 100
-  const extraSize = extraFill / (MaxValue+extraFill) * 100
-  let displayText = displayMax ? `${currentVal} / ${MaxValue}` : `${currentVal}`
+  const progress = currentVal / (safeMaxVal+extraFill) * 100
+  const extraSize = extraFill / (safeMaxVal+extraFill) * 100
+  let displayText = displayMax ? `${currentVal} / ${safeMaxVal}` : `${currentVal}`
   if (extraFill > 0) {
     displayText += `+ ${extraFill}`
   }
@@ -27,9 +28,16 @@ export default function ProgressBar({styles, currentVal, MaxValue, displayMax, e
   return (
 
     <div className={'progress-bar ' + styles}>
-      <div className={'inner-bar ' + barStyle} style={progressStyle}></div>
-      { extraFill > 0 ? <div className={'inner-bar ' + extraStyle} style={bonusSize}></div> : null }
-      <div className='number'><p className='number-text'>{displayText}</p></div>
+      {
+        maxValue > 0 || customText ?
+          <>
+          <div className={'inner-bar ' + barStyle} style={progressStyle}></div>
+          { extraFill > 0 ? <div className={'inner-bar ' + extraStyle} style={bonusSize}></div> : null }
+          <div className='number'><p className='number-text'>{displayText}</p></div>
+          </>
+        : null
+      }
+      
     </div>
   )
 

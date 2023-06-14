@@ -81,7 +81,8 @@ const resources = {
       'report-bug': "Report\nbugs",
       'spell-use': 'Throw',
       'user-class-and-level': `{{class}} - Level  {{level}}`,
-      'max-level-exp': 'Max level!'
+      'max-level-exp': 'Max level!',
+      'keys': 'Keys'
     }
   },
   es: {
@@ -187,7 +188,8 @@ const resources = {
       'report-bug': "Reportar\nBugs",
       'spell-use': 'Lanzar',
       'user-class-and-level': `{{class}} - Nivel  {{level}}`,
-      'max-level-exp': '¡Nivel máximo!'
+      'max-level-exp': '¡Nivel máximo!',
+      'keys': 'Llaves'
     }
   }
 };

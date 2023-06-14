@@ -5,8 +5,8 @@ export const PlayerStats = createSlice({
   initialState: {
     currentHp:100,
     maxHp : 100,
-    currentMana: 50,
-    maxMana: 100,
+    currentMana: 0,
+    maxMana: 0,
     currentShield:0,
     gold:56946218,
     str:18,

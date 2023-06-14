@@ -1,6 +1,12 @@
 .menu-panel {
   display: flex;
   flex-direction: column;
+  position: relative;
+  .keys-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
   .button-section {
     flex-grow: 1;
     grid-template-columns: repeat(2, 1fr);

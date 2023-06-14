@@ -53,21 +53,21 @@ export default function StatsPanel({styles}) {
         <img className='' src={require('../../../../../assets/Icons/gameplay/ico_stats_health.png')} />
         <ProgressBar styles='hp-bar-outer' 
                     currentVal={userStats.currentHp} 
-                    MaxValue={userStats.maxHp} 
+                    maxValue={userStats.maxHp} 
                     displayMax={true} barStyle='hp-bar'
                     extraFill={userStats.currentShield} extraStyle='extra-style'/>
       </div>
       <div className='mana-line'>
         <img className='' src={require('../../../../../assets/Icons/gameplay/ico_stats_mana.png')} />
-        <ProgressBar styles='mana-bar-outer' currentVal={userStats.currentMana} MaxValue={userStats.maxMana} displayMax={true} barStyle='mana-bar'/>
+        <ProgressBar styles='mana-bar-outer' currentVal={userStats.currentMana} maxValue={userStats.maxMana} displayMax={true} barStyle='mana-bar'/>
       </div>
       <div className='energy-line'>
       <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_stamina.png')} />
-      <ProgressBar styles='energy-bar-outer' currentVal={userStats.currnetEnergy} MaxValue={userStats.maxEnergy} displayMax={true} barStyle='energy-bar'/>
+      <ProgressBar styles='energy-bar-outer' currentVal={userStats.currnetEnergy} maxValue={userStats.maxEnergy} displayMax={true} barStyle='energy-bar'/>
       <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_thirst.png')} />
-      <ProgressBar styles='drink-bar-outer' currentVal={userStats.drink} MaxValue={100} displayMax={false} barStyle='drink-bar'/>
+      <ProgressBar styles='drink-bar-outer' currentVal={userStats.drink} maxValue={100} displayMax={false} barStyle='drink-bar'/>
       <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_hunger.png')} />
-      <ProgressBar styles='food-bar-outer' currentVal={userStats.food} MaxValue={100} displayMax={false} barStyle='food-bar'/>
+      <ProgressBar styles='food-bar-outer' currentVal={userStats.food} maxValue={100} displayMax={false} barStyle='food-bar'/>
       </div>
       <span className='separator-line'></span>
       <div className='defense-area'>

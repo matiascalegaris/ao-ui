@@ -14,6 +14,11 @@ export default function InventorySlot({content, locked, selected, onSelect,
   const onDrop = dragInfo => {
     onDropAction(dragInfo.item, dropId)
   }
+  const progress = 1
+  const fillRate = progress * 360
+  const fillStyle = {
+    background: `conic-gradient(transparent 0deg ${fillRate}deg, rgba(255, 0, 0, 0.514) 0deg 360deg)`
+  }
   return (
     <div className={style}>
       <DropArea id={{...dropId, onDrop:onDrop}} acceptTypes={[DragDropTypes.ITEM]}>
@@ -30,7 +35,9 @@ export default function InventorySlot({content, locked, selected, onSelect,
       {
         content.equipped ? <span className='equiped'>+</span> : null
       }
-      <CooldownIndicator/>
+      {
+        progress < 1 ? <span className='cooldown' style={fillStyle}></span> : null
+      }
       </DropArea>
     </div>
   )

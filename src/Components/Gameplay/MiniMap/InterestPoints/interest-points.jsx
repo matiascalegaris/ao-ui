@@ -8,7 +8,7 @@ const selectColor = color => {
       return 'rgb(255, 201, 14)'
   }
 }
-export const InterestPoint = ({pos, color}) => {
+export const InterestPoint = ({pos, color, ...otherProps}) => {
   const style = {
     position: 'absolute',
     left: `${pos.tileX-2}px`,
@@ -25,7 +25,7 @@ export const InterestPoint = ({pos, color}) => {
   }
   const svgID = "ipointGrad-" + color;
   return ( 
-  <svg height="5px" width="5px" style={style}>
+  <svg height="5px" width="5px" style={style} {...otherProps}>
     <circle cx="2.5" cy="2.5" r="1.5"   style={innerStyle} />
   </svg>
   )

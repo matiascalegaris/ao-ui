@@ -56,7 +56,7 @@ export default function Chat() {
   }, [] );
   const scrollToBottom = () => {
     console.log('scroll to bottom')
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: 'nearest', inline: 'start'  })
+    messagesEndRef.current?.scrollIntoView(true)
   }
   const onScroll = evt => {
     //console.log('scroll evt')

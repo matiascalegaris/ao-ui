@@ -5,8 +5,11 @@ import './menu-panel.scss'
 import MenuButton from './MenuButton/menu-button'
 import MenuToggle from './MenuToggle/menu-toggle';
 import { Actions } from '../../../../../constants';
+import { KeysDialog } from '../../../KeysDialog/keys-dialog';
+import { useState } from 'react';
 
 export default function MenuPanel() {
+  const [showKey, setShowKey ] = useState({displayKeys:false})
   const { t } = useTranslation();
   const groupLock = useSelector(selectGroupLock)
   const clanLock = useSelector(selectClanLock)
@@ -15,7 +18,7 @@ export default function MenuPanel() {
     window.parent.BabelUI.RequestAction(action)
   }
   const showKeysMenu = evt => {
-
+    setShowKey({...showKey,displayKeys:true})
   }
   return (
     <div className='menu-panel'>
@@ -66,6 +69,9 @@ export default function MenuPanel() {
           <img src={require('../../../../../assets/Icons/gameplay/ico_bugs.png')}/>
         </div>
       </div>
+      {
+        showKey.displayKeys ? <KeysDialog styles='keys-menu'></KeysDialog> : null
+      }
     </div>
   )
 }

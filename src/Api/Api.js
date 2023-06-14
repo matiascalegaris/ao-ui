@@ -262,8 +262,11 @@ if (process.env.NODE_ENV === 'development') {
       console.log("move item from " + source + " to " + dest)
     },
     RequestAction: action => {
-      
+    },
+    ClickMiniMapPos: (posX, posY) => {
+      console.log(`click minimap at ${posX}, ${posY}` )
     }
+
   }
 }
 export {RegisterApiCallback}

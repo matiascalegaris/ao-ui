@@ -28,7 +28,7 @@ export default function ExpArea() {
       </span>
       <span className='exp-bar-container'>
         <ProgressBar styles='exp-bar-outer' barStyle='exp-bar-inner'
-                     currentVal={expBar.min} MaxValue={expBar.max} 
+                     currentVal={expBar.min} maxValue={expBar.max} 
                      displayMax={true} customText={expBarText}/>
       </span>
       <span className='time-bar'>
