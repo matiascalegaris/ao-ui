@@ -19,7 +19,12 @@ export const Actions = {
   UpdateResurrectionLock: 13,
   ReportBug: 14,
   RequestSkill: 15,
-  OpenGroupDialog: 16
+  OpenGroupDialog: 16,
+  OpenGmPannel: 17,
+  OpenCreateObjMenu: 18,
+  OpenSpawnMenu: 19,
+  SetGmInvisible: 20
+
 }
 
 export const eObjType = {

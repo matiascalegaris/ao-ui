@@ -19,6 +19,10 @@ export default function TopBar({styles}) {
   const showHelp = evt => {
     
   }
+
+  const gmCommand = action => {
+    window.parent.BabelUI.RequestAction(action)
+  }
   const mapName = useSelector(selectMapName)
   const isSafe = useSelector(selectIsSafeMap)
   const mapNumber = useSelector(selectMapNumber)
@@ -26,7 +30,12 @@ export default function TopBar({styles}) {
   return (
     <div className={'top-bar ' + styles}>
       <img className='ao-logo' src={require('../../../assets/Misc/ao20_horizontal.png')} />
-      <div className='gm-command-area'></div>
+      <div className='gm-command-area'>
+        <span className='gm-option'>Panel GM</span>
+        <span className='gm-option'>Crear Obj</span>
+        <span className='gm-option'>Spawn Npc</span>
+        <span className='gm-option'>Invisible</span>
+      </div>
       <div className='fps-area'>
         <p className='fps'>FPS: {fps}</p>
       </div>

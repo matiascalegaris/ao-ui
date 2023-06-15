@@ -4,7 +4,7 @@ import { FormatNumberWithDots } from '../../../../../Tools/Utils'
 import ProgressBar from '../../../../Common/ProgressBar/progress-bar'
 import './stats-panel.scss'
 import StatValue from './StatValue/stat-value'
-import { selectInvSlot } from '../../../../../redux/GameplaySlices/InventorySlice'
+import { selectEquipedItems, selectInvSlot } from '../../../../../redux/GameplaySlices/InventorySlice'
 
 const GetStateStyle = state => {
   switch (state)
@@ -25,10 +25,13 @@ export default function StatsPanel({styles}) {
   const strState = useSelector(selectStrState)
   const agiState = useSelector(selectAgiState)
   const dispatch = useDispatch()
+  const equippedItems = useSelector(selectEquipedItems)
   const onGoldClick = evt => {
     window.parent.BabelUI.GoldClick()
     dispatch(selectInvSlot(0))
   }
+  const showArrowBonus = equippedItems.amunition.min > 0 ||
+                         equippedItems.amunition.max > 0
   return (
     <div className={'stats-panel'}>
       <div className='gold-line'>
@@ -71,10 +74,15 @@ export default function StatsPanel({styles}) {
       </div>
       <span className='separator-line'></span>
       <div className='defense-area'>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_sword.png')}>{userStats.weapon.min + "/" + userStats.weapon.max}</StatValue>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_shield.png')}>{userStats.shield.min + "/" + userStats.shield.max}</StatValue>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_helmet.png')}>{userStats.helm.min + "/" + userStats.helm.max}</StatValue>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_armor.png')}>{userStats.armor.min + "/" + userStats.armor.max}</StatValue>
+        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_sword.png')}>
+          {equippedItems.weapon.min + "/" + equippedItems.weapon.max}
+          {
+            showArrowBonus ? `+${equippedItems.amunition.min}/${equippedItems.amunition.max}` : null
+          }
+        </StatValue>
+        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_shield.png')}>{equippedItems.shield.min + "/" + equippedItems.shield.max}</StatValue>
+        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_helmet.png')}>{equippedItems.helm.min + "/" + equippedItems.helm.max}</StatValue>
+        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_armor.png')}>{equippedItems.armor.min + "/" + equippedItems.armor.max}</StatValue>
         <StatValue iconStyle='magic-armor' icon={require('../../../../../assets/Icons/gameplay/ico_stats_magicshield.png')}>+{userStats.magicBonus}</StatValue>
         <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_magic.png')}>+{userStats.magicDef}%</StatValue>
       </div>

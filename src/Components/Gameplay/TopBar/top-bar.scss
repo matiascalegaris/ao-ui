@@ -13,6 +13,15 @@ $searator-color: #1F1F1C;
 
   .gm-command-area {
     flex-grow: 1;
+    justify-content: space-between;
+    display: flex;
+    .gm-option {
+      margin: auto;
+      color: white;
+      &:hover {
+        font-weight: 800;
+      }
+    }
   }
 
   .fps-area {

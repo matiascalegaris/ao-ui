@@ -15,10 +15,6 @@ export const PlayerStats = createSlice({
     maxEnergy:100,
     drink:100,
     food:100,
-    shield: {min:0, max:0},
-    weapon: {min:0, max:0},
-    helm: {min:0, max:0},
-    armor: {min:0, max:0},
     magicDef:0,
     magicBonus:0,
     attackLock: true,
@@ -39,10 +35,6 @@ export const PlayerStats = createSlice({
       state.maxEnergy = action.payload.maxEnergy
       state.drink = action.payload.drink
       state.food = action.payload.food
-      state.shield = action.payload.shield
-      state.weapon = action.payload.weapon
-      state.helm = action.payload.helm
-      state.armor = action.payload.armor
       state.magicDef = action.payload.magicDef
       state.magicBonus = action.payload.magicBonus
       state.attackLock = action.payload.attackLock
@@ -94,10 +86,6 @@ export const selectCharacterStats = (state) => {
     maxEnergy: state.playerStats.maxEnergy,
     drink: state.playerStats.drink,
     food: state.playerStats.food,
-    shield: state.playerStats.shield,
-    weapon: state.playerStats.weapon,
-    helm: state.playerStats.helm,
-    armor: state.playerStats.armor,
     magicDef: state.playerStats.magicDef,
     magicBonus: state.playerStats.magicBonus,
   }

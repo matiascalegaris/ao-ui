@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { eObjType } from '../../constants'
 import { resetGameplay } from './GameStateSlice'
 
 const defaultValues = {
-  itemList: Array(48).fill({name:'', count:0, canUse: false, equipped: false, grh:0,
-                           maxDef:0, minDef:0, maxHit:0, objIndex: 0, type: 0,
+  itemList: Array(48).fill({name:'', count:1, canUse: false, equipped: true, grh:0,
+                           maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: eObjType.otArrows,
                            value: 0, coolddown:0, cdType:0, cdMask:0})
                       .map((element, index) => ({...element, count: 0, index:index})),
   selectedItemIndex: -1,
@@ -67,5 +68,38 @@ export const selectSelectedSpellSlotIndex = (state) => state.inventory.selectedS
 export const selectExtraSlotState = (state) => state.inventory.extraInventorySlotState
 export const selectKeys = (state) => state.inventory.keys
 export const selectSelectedKeyIdex = (state) => state.inventory.selectedKeyIndex
+export const selectEquipedItems = (state) => {
+  let equippedSlots = {
+    armor: { min: 0, max: 0},
+    shield: { min: 0, max: 0},
+    helm: { min: 0, max: 0},
+    amunition: { min: 0, max: 0},
+    weapon: { min: 0, max: 0}
+  }
+  state.inventory.itemList.forEach( item => {
+    if (item.equipped) {
+      switch(item.type) {
+        case eObjType.otWeapon:
+          equippedSlots.weapon = { min: item.minHit, max: item.maxHit}
+          break
+        case eObjType.otArmor:
+          equippedSlots.armor = { min: item.minDef, max: item.maxDef}
+          break
+        case eObjType.otArrows:
+          equippedSlots.amunition = { min: item.minHit, max: item.maxHit}
+          break
+        case eObjType.otHELMET:
+          equippedSlots.helm = { min: item.minDef, max: item.maxDef}
+          break
+        case eObjType.otSHIELD:
+          equippedSlots.shield = { min: item.minDef, max: item.maxDef}
+          break
+      default:
+        break
+      }
+    }
+  });
+  return equippedSlots
+}
 
 export default InventorySlice.reducer
