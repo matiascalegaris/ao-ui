@@ -1,16 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { resetGameplay } from './GameStateSlice'
+
+const defaultValues = {
+  itemList: Array(48).fill({name:'', count:0, canUse: false, equipped: false, grh:0,
+                           maxDef:0, minDef:0, maxHit:0, objIndex: 0, type: 0,
+                           value: 0, coolddown:0, cdType:0, cdMask:0})
+                      .map((element, index) => ({...element, count: 0, index:index})),
+  selectedItemIndex: -1,
+  extraInventorySlotState:[ true, false, false],
+  spellList: Array(40).fill({ name:'(Vacio)', index: 0, spellIndex: 0})
+                      .map((element, index) => ({...element, index:index})),
+  selectedSpellIndex: -1,
+  keys: Array(10).fill({name:'', count:0, canUse: false, equipped: false, 
+                        grh:0, maxDef:0, minDef:0, maxHit:0, objIndex: 0,
+                        type: 0, value: 0, coolddown:0, cdType:0, cdMask:0})
+                 .map((element, index) => ({...element, count: 0, index:index})),
+  selectedKeyIndex: -1
+}
 
 export const InventorySlice = createSlice({
   name: 'inventory',
-  initialState: {
-    itemList: Array(48).fill({grh:5, count:7, equipped: true}).map((element, index) => ({...element, count: index, index:index})),
-    selectedItemIndex: -1,
-    extraInventorySlotState:[ true, false, false],
-    spellList: Array(40).fill({ name:'(Vacio)', index: 0, spellIndex: 0}).map((element, index) => ({...element, index:index})),
-    selectedSpellIndex: -1,
-    keys: Array(10).fill({grh:5, count:1, equipped: true}).map((element, index) => ({...element, count: index, index:index})),
-    selectedKeyIndex: -1
-  },
+  initialState: defaultValues,
   reducers: {
     updateInvSlot: (state, action) => {
       state.itemList[action.payload.index] = action.payload
@@ -37,7 +47,13 @@ export const InventorySlice = createSlice({
     },
     selectKeySlot: (state, action) => {
       state.selectedKeyIndex = action.payload
-    }
+    },
+    extraReducers: (builder) => {
+      builder
+        .addCase(resetGameplay, (state) => {
+          state = defaultValues
+        })
+    },
   },
 })
 

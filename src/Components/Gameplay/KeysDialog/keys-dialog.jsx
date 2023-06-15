@@ -15,7 +15,6 @@ export const KeysDialog = ({styles, onClose}) => {
   const onSelecKey = item => {
     if (item.index !== selectedKey) {
       dispatch(selectKeySlot(item.index))
-      window.parent.BabelUI.UpdateSelectedKeySlot(item.index)
     }
   }
   const onUseKey = item => {
