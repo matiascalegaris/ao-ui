@@ -72,24 +72,6 @@ export const PlayerStats = createSlice({
 
 export const { setStats, updateHp, updateMana, updateStamina, updateDrink, updateFood, updateGold, updateStrandAgi } = PlayerStats.actions
 
-export const selectCharacterStats = (state) => {
-  return {
-    currentHp: state.playerStats.currentHp,
-    maxHp : state.playerStats.maxHp,
-    currentMana: state.playerStats.currentMana,
-    maxMana: state.playerStats.maxMana,
-    currentShield: state.playerStats.currentShield,
-    gold: state.playerStats.gold,
-    str: state.playerStats.str,
-    agi: state.playerStats.agi,
-    currnetEnergy: state.playerStats.currentEnergy,
-    maxEnergy: state.playerStats.maxEnergy,
-    drink: state.playerStats.drink,
-    food: state.playerStats.food,
-    magicDef: state.playerStats.magicDef,
-    magicBonus: state.playerStats.magicBonus,
-  }
-}
 export const selectCurrentHp = (state) =>  state.playerStats.currentHp
 export const selectMaxHp = (state) =>  state.playerStats.maxHp
 export const selectCurrentMana = (state) =>  state.playerStats.currentMana
@@ -100,7 +82,8 @@ export const selectStr = (state) =>  state.playerStats.str
 export const selectAgi = (state) =>  state.playerStats.agi
 export const selectStrState = (state) =>  state.playerStats.strState
 export const selectAgiState = (state) =>  state.playerStats.agiState
-export const selectEnergy = (state) =>  state.playerStats.energy
+export const selectCurrentEnergy = (state) =>  state.playerStats.currentEnergy
+export const selectMaxEnergy = (state) =>  state.playerStats.maxEnergy
 export const selectDrink = (state) =>  state.playerStats.drink
 export const selectFood = (state) =>  state.playerStats.food
 export const selectShield = (state) =>  state.playerStats.shield

@@ -74,6 +74,14 @@ export const eObjType = {
   otAny: 1000
 };
 
+export const e_CDTypeMask = {
+  eBasicAttack: 1,
+  eRangedAttack: 2,
+  eMagic: 4,
+  eUsable: 8,
+  eCustom: 16
+};
+
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
 export const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf','Orc']
 export const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']

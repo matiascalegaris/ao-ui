@@ -268,8 +268,12 @@ if (process.env.NODE_ENV === 'development') {
     },
     UpdateSelectedKeySlot: (slot) => {
     },
-    UseKeySlotIndex: (slot) => {
-      
+    UseKeySlotIndex: (slot) => {      
+    },
+    FakeHitEvent: () => {
+      setTimeout(() => {
+        window.parent.APicallbacks.StartInterval(1, 0)
+      }, 25)
     }
   }
 }

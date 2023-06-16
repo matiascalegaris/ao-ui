@@ -14,9 +14,10 @@ import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-c
 import { setStats, updateDrink, updateFood, updateGold, updateHp, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
-import { resetGameplay, setFps, updateIntervals } from './redux/GameplaySlices/GameStateSlice';
+import { resetGameplay, setFps } from './redux/GameplaySlices/GameStateSlice';
 import { setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
+import { fireInterval, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 
 function App() {
   const dispatch = useDispatch()
@@ -134,6 +135,9 @@ function App() {
     })
     RegisterApiCallback('UpdateIntervals', (intervals) => {
       dispatch(updateIntervals(intervals))
+    })
+    RegisterApiCallback('StartInterval', (intervalType, tunnelDelay) => {
+      dispatch(fireInterval({intervalType: intervalType, startTime: Date.now() - tunnelDelay}))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

@@ -7,6 +7,7 @@ import SideMenu from './SideMenu/side-menu'
 import TopBar from './TopBar/top-bar'
 
 export default function GameplayScreen() {
+  console.log('gameplay render')
   return (
     <div className='gameplay-screen'>
       <TopBar styles='top-bar'/>

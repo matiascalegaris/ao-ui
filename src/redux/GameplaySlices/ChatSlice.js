@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 
 export const ChatSlice = createSlice({
   name: 'chat',
@@ -23,15 +23,17 @@ export const ChatSlice = createSlice({
 
 export const { postChatMessage } = ChatSlice.actions
 
-export const selectMessageList = (state) => {
-  const size = state.chat.endPos - state.chat.startPos
-  let messageList = Array(size)
-  for (let i = 0; i < size; i++) {
-    messageList[i] = state.chat.messageList[ (state.chat.startPos + i)% size]
+export const selectMessageList = createSelector(
+  (state) => state.chat,
+  (chat) => {
+    const size = chat.endPos - chat.startPos
+    let messageList = Array(size)
+    for (let i = 0; i < size; i++) {
+      messageList[i] = chat.messageList[ (chat.startPos + i)% size]
+    }
+    return messageList
   }
-  return messageList
-}
-
+)
 
 
 export default ChatSlice.reducer

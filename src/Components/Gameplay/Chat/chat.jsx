@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectMessageList } from '../../../redux/GameplaySlices/ChatSlice';
 import AoInput from '../../Common/ao-input/ao-input'
 import './chat.scss'
 import ChatEntry from './ChatEntry/chat-entry';
 import { RegisterApiCallback } from '../../../Api/Api';
+import { fireInterval } from '../../../redux/GameplaySlices/Cooldowns';
 
 export default function Chat() {
   const [chatState, setChatState] = useState({
@@ -32,10 +33,15 @@ export default function Chat() {
       chatInputElement.current && chatInputElement.current.focus()
     }
   }
+  
   const handleGlobalKeyPress = evt => {
     if (evt.key === 'Enter' &&
         document.activeElement !== chatInputElement.current) {
           chatInputElement.current &&  chatInputElement.current.focus()
+    }
+    if (evt.key === ' ' &&
+        document.activeElement !== chatInputElement.current) {
+          window.parent.BabelUI.FakeHitEvent()
     }
   }
   useEffect(() => {
@@ -72,6 +78,7 @@ export default function Chat() {
       scrollToBottom()
     }
   }
+  console.log('chat render')
   return (
     <div className='game-chat'>
       <div className='message-list' onScroll={onScroll}>

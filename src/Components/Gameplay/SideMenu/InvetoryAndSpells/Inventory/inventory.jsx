@@ -23,6 +23,7 @@ export default function Inventory() {
   const onActivateItem = item => {
     window.parent.BabelUI.UseInvSlotIndex(item.index)
   }
+  console.log('inventory render')
   return (
     <div className='inventory-area'>
       <InventoryFrame styles='item-list' >

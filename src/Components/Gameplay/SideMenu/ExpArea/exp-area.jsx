@@ -17,6 +17,7 @@ export default function ExpArea() {
   const openStats = evt => {
     window.parent.BabelUI.RequestAction(Actions.RequestSkill)
   }
+  console.log('exp area render')
   return (
     <div className='exp-area'>
       <p className='name-line'>{charName}</p>

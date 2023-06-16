@@ -27,6 +27,7 @@ export default function TopBar({styles}) {
   const isSafe = useSelector(selectIsSafeMap)
   const mapNumber = useSelector(selectMapNumber)
   const mapCoords = useSelector(selectCurrentCoordinates)
+  console.log('top bar render')
   return (
     <div className={'top-bar ' + styles}>
       <img className='ao-logo' src={require('../../../assets/Misc/ao20_horizontal.png')} />

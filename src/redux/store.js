@@ -7,6 +7,7 @@ import MapInfoSlice from './GameplaySlices/MapInfoSlice'
 import PlayerStatsSlice from './GameplaySlices/PlayerStatsSlice'
 import UIFlowReducer from './UIFlowSlice'
 import GameStateSlice from './GameplaySlices/GameStateSlice'
+import CooldownSlice from './GameplaySlices/Cooldowns'
 
 export default configureStore({
   reducer: {
@@ -17,6 +18,8 @@ export default configureStore({
     characterInfo: CharacterInfoSlice,
     mapInfo: MapInfoSlice,
     chat: ChatSlice,
+    cooldowns: CooldownSlice,
     gameState: GameStateSlice
+    
   }
 })
