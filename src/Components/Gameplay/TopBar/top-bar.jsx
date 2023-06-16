@@ -4,9 +4,10 @@ import './top-bar.scss'
 import { selectFps } from '../../../redux/GameplaySlices/GameStateSlice'
 import { selectCurrentCoordinates, selectIsSafeMap, selectMapName, selectMapNumber } from '../../../redux/GameplaySlices/MapInfoSlice'
 import { Actions } from '../../../constants'
+import { FpsCounter } from './FpsCounter/fps-counter'
+import { MapCoords } from './MapCoords/MapCoords'
 
 export default function TopBar({styles}) {
-  const fps = useSelector(selectFps)
   const onClose = evt => {
     window.parent.BabelUI.OpenVBDialog('frmCerrar')
   }
@@ -26,23 +27,22 @@ export default function TopBar({styles}) {
   const mapName = useSelector(selectMapName)
   const isSafe = useSelector(selectIsSafeMap)
   const mapNumber = useSelector(selectMapNumber)
-  const mapCoords = useSelector(selectCurrentCoordinates)
   console.log('top bar render')
   return (
     <div className={'top-bar ' + styles}>
       <img className='ao-logo' src={require('../../../assets/Misc/ao20_horizontal.png')} />
       <div className='gm-command-area'>
-        <span className='gm-option'>Panel GM</span>
-        <span className='gm-option'>Crear Obj</span>
-        <span className='gm-option'>Spawn Npc</span>
-        <span className='gm-option'>Invisible</span>
+        <span className='gm-option' onClick={() => {gmCommand(Actions.OpenGmPannel)}}>Panel GM</span>
+        <span className='gm-option' onClick={() => {gmCommand(Actions.OpenCreateObjMenu)}}>Crear Obj</span>
+        <span className='gm-option' onClick={() => {gmCommand(Actions.OpenSpawnMenu)}}>Spawn Npc</span>
+        <span className='gm-option' onClick={() => {gmCommand(Actions.SetGmInvisible)}}>Invisible</span>
       </div>
       <div className='fps-area'>
-        <p className='fps'>FPS: {fps}</p>
+        <FpsCounter/>
       </div>
       <div className='location-coords'>
         <p className='map-name'>{mapName}</p>
-        <p className={ 'map-coords ' + (isSafe ? 'safe-area' : '') }>{`${mapNumber}-${mapCoords.x}-${mapCoords.y}`}</p>
+        <MapCoords isSafe={isSafe} mapNumber={mapNumber} />
       </div>
       <div className='button-online-area'>
         <GameBarButton styles='bar-button' onClick={openSettings}>

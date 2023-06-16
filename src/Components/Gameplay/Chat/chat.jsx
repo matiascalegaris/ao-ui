@@ -1,24 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectMessageList } from '../../../redux/GameplaySlices/ChatSlice';
 import AoInput from '../../Common/ao-input/ao-input'
 import './chat.scss'
-import ChatEntry from './ChatEntry/chat-entry';
+import ChatEntry from './ChatHistory/ChatEntry/chat-entry';
 import { RegisterApiCallback } from '../../../Api/Api';
-import { fireInterval } from '../../../redux/GameplaySlices/Cooldowns';
+import { ChatHistory } from './ChatHistory/ChatHistory';
+
 
 export default function Chat() {
   const [chatState, setChatState] = useState({
-    chatInput:'', scrollTarget:100.0,
-    chatMode:0, lastMessage: 0
+    chatInput:'', chatMode:0, 
   });
-  const messagesEndRef = useRef(null)
+  
   const {chatInput} = chatState;
   const handleChange = event => {
     const { value, name } = event.target;
     setChatState({ ...chatState, [name]: value});
   }
-  const chatEntries = useSelector(selectMessageList)
   const chatInputElement = useRef(null);
   const handleKeyUp = (event) => {
     if (event.key === 'Enter') {
@@ -59,36 +56,18 @@ export default function Chat() {
     }
     RegisterApiCallback('OpenChat', (chatMode) => {})
   }, [] );
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView(false)
-  }
-  const onScroll = evt => {
-    //console.log('scroll evt')
-    //console.log(evt.currentTarget)
-  }
+  
   const onFocus = evt => {
     window.parent.BabelUI.UpdateInputFocus(true)
   }
   const onBlur = evt => {
     window.parent.BabelUI.UpdateInputFocus(false)
   }
-  if (chatState.lastMessage < chatEntries.length) {
-    setChatState({ ...chatState, lastMessage: chatEntries.length})
-    if (chatState.scrollTarget === 100.0) {
-      scrollToBottom()
-    }
-  }
+  
   console.log('chat render')
   return (
     <div className='game-chat'>
-      <div className='message-list' onScroll={onScroll}>
-        {
-          chatEntries.map( (item,index) => (
-            <ChatEntry key={index} chat={item} onUserSelect={selectUser}/>
-          ))
-        }
-        <div className='scrollEnd' ref={messagesEndRef}></div>
-      </div>
+      <ChatHistory selectUser={selectUser} />
       <div className='input-line'>
         <img src={require('../../../assets/Icons/gameplay/ico_dialog.png')} className='chat-input-selection'/>
         <AoInput styles='chat-input' inputStyles='chat-input-area' 
