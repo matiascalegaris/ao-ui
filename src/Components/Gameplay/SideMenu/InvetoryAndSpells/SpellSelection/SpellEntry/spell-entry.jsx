@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { DragDropTypes } from '../../../../../../constants'
 import './spell-entry.scss'
+import { Spell } from './Spell/spell'
 
 const dropSpell = (item, dest) => {
   console.log('drop spell!')
@@ -14,6 +15,6 @@ const moveSpell = (item, dest) => {
 }
 export default function SpellEntry({spell, selected, ...otherProps}) {
   return (
-    <p className={'spell-entry ' + (selected ? 'selected-spell' : '')} {...otherProps}>{spell.name}</p>
+    <Spell spellInfo={spell} selected={selected} {...otherProps}/>
   )
 }

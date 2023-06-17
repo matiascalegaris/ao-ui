@@ -24,16 +24,16 @@ const GetLongestIntervalTime = (cdMask, cdType, customCd, intervals, activeInter
     cdDuration: 0
   }
   let currentTime = Date.now()
-  if (cdMask & e_CDTypeMask.eBasicAttack > 0) {
+  if ((cdMask & e_CDTypeMask.eBasicAttack) > 0) {
     if (considerInterval(currentTime, activeIntervals[e_CdTypes.eMelee], intervals.hit, currentCdState)) { console.log("delay fisical attack  for hit")}
     if (considerInterval(currentTime, activeIntervals[e_CdTypes.eMagic], intervals.magicHit, currentCdState)) { console.log("delay fisical attack  for magic")}
   }
-  if (cdMask & e_CDTypeMask.eRangedAttack > 0) {
+  if ((cdMask & e_CDTypeMask.eRangedAttack) > 0) {
     if (considerInterval(currentTime, activeIntervals[e_CdTypes.eRanged], intervals.bow, currentCdState)) 
       { console.log("delay ranged  for ranged")
     }
   }
-  if (cdMask & e_CDTypeMask.eCustom && cdType > 0 && cdType < activeIntervals.length) {
+  if ((cdMask & e_CDTypeMask.eCustom) > 0 && cdType > 0 && cdType < activeIntervals.length) {
     if (considerInterval(currentTime, activeIntervals[cdType], customCd, currentCdState)) { 
       console.log("delay ranged  for custom")
     }

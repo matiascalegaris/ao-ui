@@ -272,7 +272,7 @@ if (process.env.NODE_ENV === 'development') {
     },
     FakeHitEvent: () => {
       setTimeout(() => {
-        window.parent.APicallbacks.StartInterval(4, 0)
+        window.parent.APicallbacks.StartInterval(8, 0)
       }, 25)
     },
     SetInventory: () => {
