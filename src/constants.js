@@ -82,6 +82,19 @@ export const e_CDTypeMask = {
   eCustom: 16
 };
 
+export const e_CdTypes = {
+  eMagic: 1,
+  eMelee: 2,
+  ePotions: 3,
+  eRanged: 4,
+  eThrowing: 5,
+  eResurrection: 6,
+  eTraps: 7,
+  eWeaponPoison: 8,
+  eArpon: 9,
+  eHandCannon: 10,
+};
+
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
 export const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf','Orc']
 export const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']

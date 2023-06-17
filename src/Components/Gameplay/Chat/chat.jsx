@@ -40,6 +40,10 @@ export default function Chat() {
         document.activeElement !== chatInputElement.current) {
           window.parent.BabelUI.FakeHitEvent()
     }
+    if (evt.key === '-' &&
+        document.activeElement !== chatInputElement.current) {
+          window.parent.BabelUI.SetInventory()
+    }
   }
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {

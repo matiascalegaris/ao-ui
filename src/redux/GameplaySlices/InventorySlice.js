@@ -7,17 +7,7 @@ const defaultValues = {
   itemList: Array(48).fill({name:'', count:1, canUse: false, equipped: true, grh:0,
                            maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: 0,
                            value: 0, coolddown:0, cdType:0, cdMask:0})
-                      .map((element, index) => ({...element, count: 0, index:index}))
-                      .map((element, index) => {
-                        if (index < 1) {
-                          return { ...element,name:'espada test', count:1, canUse: false, equipped: true, grh:36467,
-                           maxDef:0, minDef:0, minHit:5000, maxHit:5000, objIndex: 1812, type: 2,
-                           value: 0, coolddown:0, cdType:0, cdMask:1}
-                        }
-                        else {
-                          return element;
-                        }
-                      }),
+                      .map((element, index) => ({...element, count: 0, index:index})),
   selectedItemIndex: -1,
   extraInventorySlotState:[ true, false, false],
   spellList: Array(40).fill({ name:'(Vacio)', index: 0, spellIndex: 0})
@@ -35,6 +25,7 @@ export const InventorySlice = createSlice({
   initialState: defaultValues,
   reducers: {
     updateInvSlot: (state, action) => {
+      console.log(JSON.stringify(action.payload))
       state.itemList[action.payload.index] = action.payload
     },
     setInvLevel: (state, action)=> {

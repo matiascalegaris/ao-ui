@@ -30,7 +30,7 @@ export default function InventorySlot({content, locked, selected, onSelect,
         content.equipped ? <span className='equiped'>+</span> : null
       }
       {
-        content.cdType < 1 ? <CooldownIndicator cdMask={content.cdMask} 
+        content.cdMask > 0 ? <CooldownIndicator cdMask={content.cdMask} 
                                           cdType={content.cdType} 
                                           elementCD={content.coolddown} /> 
         : null

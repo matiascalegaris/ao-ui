@@ -1,17 +1,21 @@
 
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { e_CDTypeMask } from '../../../../constants'
+import { e_CDTypeMask, e_CdTypes } from '../../../../constants'
 import { selectActiveIntervals, selectIntervals } from '../../../../redux/GameplaySlices/Cooldowns'
 import './cooldown-indicator.scss'
+import { CdFiller } from '../../CdFiller/cd-filler'
 
+// need to replace with this implementation : https://www.smashingmagazine.com/2015/07/designing-simple-pie-charts-with-css/
 const considerInterval = (currentTime, lastStartTime, intervalTime, currentCdState) => {
   let attackInterval = intervalTime - (currentTime - lastStartTime)
-    if (attackInterval > currentCdState.longerCd) {
-      currentCdState.longerCd = attackInterval
-      currentCdState.startTime = lastStartTime
-      currentCdState.cdDuration = intervalTime
-    }
+  if (attackInterval > currentCdState.longerCd) {
+    currentCdState.longerCd = attackInterval
+    currentCdState.startTime = lastStartTime
+    currentCdState.cdDuration = intervalTime
+    return true
+  }
+  return false
 }
 const GetLongestIntervalTime = (cdMask, cdType, customCd, intervals, activeIntervals) => {
   let currentCdState = {
@@ -21,17 +25,18 @@ const GetLongestIntervalTime = (cdMask, cdType, customCd, intervals, activeInter
   }
   let currentTime = Date.now()
   if (cdMask & e_CDTypeMask.eBasicAttack > 0) {
-    considerInterval(currentTime, activeIntervals[e_CDTypeMask.eBasicAttack], intervals.hit, currentCdState)
-    considerInterval(currentTime, activeIntervals[e_CDTypeMask.eMagic], intervals.magicHit, currentCdState)
+    if (considerInterval(currentTime, activeIntervals[e_CdTypes.eMelee], intervals.hit, currentCdState)) { console.log("delay fisical attack  for hit")}
+    if (considerInterval(currentTime, activeIntervals[e_CdTypes.eMagic], intervals.magicHit, currentCdState)) { console.log("delay fisical attack  for magic")}
   }
   if (cdMask & e_CDTypeMask.eRangedAttack > 0) {
-    considerInterval(currentTime, activeIntervals[e_CDTypeMask.eRangedAttack], intervals.bow, currentCdState)
-  }
-  if (cdMask & e_CDTypeMask.eRangedAttack > 0) {
-    considerInterval(currentTime, activeIntervals[e_CDTypeMask.eRangedAttack], intervals.bow, currentCdState)
+    if (considerInterval(currentTime, activeIntervals[e_CdTypes.eRanged], intervals.bow, currentCdState)) 
+      { console.log("delay ranged  for ranged")
+    }
   }
   if (cdMask & e_CDTypeMask.eCustom && cdType > 0 && cdType < activeIntervals.length) {
-    considerInterval(currentTime, activeIntervals[cdType], customCd, currentCdState)
+    if (considerInterval(currentTime, activeIntervals[cdType], customCd, currentCdState)) { 
+      console.log("delay ranged  for custom")
+    }
   }
   return currentCdState
 }
@@ -41,12 +46,11 @@ export const CooldownIndicator = ({cdMask, cdType, elementCD}) => {
   const activeIntervals = useSelector(selectActiveIntervals)
   const [cdState, setcdState] = useState({progress:1})
 
-  let progress = 0.3
+  let progress = cdState.progress
   if (cdMask > 0) {
     const intervalState = GetLongestIntervalTime(cdMask, cdType, elementCD,
                                                     gIntervals, activeIntervals)
     if (intervalState.longerCd > 0) {
-      console.log('start interval')
       progress = (Date.now() - intervalState.startTime) / intervalState.cdDuration
     }
     else {
@@ -74,13 +78,9 @@ export const CooldownIndicator = ({cdMask, cdType, elementCD}) => {
     return () => interval && clearInterval(interval);
   }, [gIntervals, activeIntervals, cdMask, cdType, elementCD]);
 
-  const fillRate = progress * 360
-  const fillStyle = {
-    background: `conic-gradient(transparent 0deg ${fillRate}deg, rgba(255, 0, 0, 0.514) 0deg 360deg)`
-  }
   return (
     <>
-    {progress < 1 ? <span className='progress-filler-style' style={fillStyle}></span> : null}
+    {progress < 1 ? <CdFiller percent={1-progress}/> : null}
     </>
   )
 }
