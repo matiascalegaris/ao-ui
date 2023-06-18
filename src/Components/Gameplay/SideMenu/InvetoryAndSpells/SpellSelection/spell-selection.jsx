@@ -25,12 +25,12 @@ export default function SpellSelection () {
     window.parent.BabelUI.UseSpellSlot(selectedSpellIndex)
   }
   const onDrop = dragInfo => {
-    onDropAction(dragInfo.item, dropId)
+    
   }
   return (
     <div className='spell-selection'>
       <InventoryFrame styles='spell-list' contentStyles='spell-content'>
-      <DropArea id={{...dropId, onDrop:onDrop}} acceptTypes={[DragDropTypes.SPELL]}>
+      <DropArea id={{onDrop:onDrop}} acceptTypes={[DragDropTypes.SPELL]}>
         {
           spellList.map( (spell, index) => (
             <SpellEntry key={index} spell={spell} 

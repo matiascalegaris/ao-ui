@@ -70,8 +70,17 @@ export const selectExtraSlotState = (state) => state.inventory.extraInventorySlo
 export const selectKeys = (state) => state.inventory.keys
 export const selectSelectedKeyIdex = (state) => state.inventory.selectedKeyIndex
 
-export const selectEquipedItems = createSelector(
+export const selectEquippedItems = createSelector(
   (state) => state.inventory.itemList,
+  (itemList) => {
+    return itemList.filter( element => {
+      return element.equipped
+    })
+  }
+)
+
+export const selectEquippedBonus = createSelector(
+  selectEquippedItems,
   (itemList) => {
     let equippedSlots = {
       armor: { min: 0, max: 0},
