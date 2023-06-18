@@ -25,18 +25,15 @@ const GetLongestIntervalTime = (cdMask, cdType, customCd, intervals, activeInter
   }
   let currentTime = Date.now()
   if ((cdMask & e_CDTypeMask.eBasicAttack) > 0) {
-    if (considerInterval(currentTime, activeIntervals[e_CdTypes.eMelee], intervals.hit, currentCdState)) { console.log("delay fisical attack  for hit")}
-    if (considerInterval(currentTime, activeIntervals[e_CdTypes.eMagic], intervals.magicHit, currentCdState)) { console.log("delay fisical attack  for magic")}
+    considerInterval(currentTime, activeIntervals[e_CdTypes.eMelee], intervals.hit, currentCdState)
+    considerInterval(currentTime, activeIntervals[e_CdTypes.eMagic], intervals.magicHit, currentCdState)
   }
   if ((cdMask & e_CDTypeMask.eRangedAttack) > 0) {
-    if (considerInterval(currentTime, activeIntervals[e_CdTypes.eRanged], intervals.bow, currentCdState)) 
-      { console.log("delay ranged  for ranged")
-    }
+    considerInterval(currentTime, activeIntervals[e_CdTypes.eRanged], intervals.bow, currentCdState)
   }
-  if ((cdMask & e_CDTypeMask.eCustom) > 0 && cdType > 0 && cdType < activeIntervals.length) {
-    if (considerInterval(currentTime, activeIntervals[cdType], customCd, currentCdState)) { 
-      console.log("delay ranged  for custom")
-    }
+  
+  if (cdType > 0 && cdType < activeIntervals.length) {
+    considerInterval(currentTime, activeIntervals[cdType], customCd, currentCdState)
   }
   return currentCdState
 }
@@ -80,7 +77,7 @@ export const CooldownIndicator = ({cdMask, cdType, elementCD}) => {
 
   return (
     <>
-    {progress < 1 ? <CdFiller percent={1-progress}/> : null}
+    {progress > 0  ? <CdFiller percent={1-progress}/> : null}
     </>
   )
 }

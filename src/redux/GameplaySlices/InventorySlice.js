@@ -6,7 +6,7 @@ import { createSelector } from 'reselect'
 const defaultValues = {
   itemList: Array(48).fill({name:'', count:1, canUse: false, equipped: true, grh:0,
                            maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: 0,
-                           value: 0, coolddown:0, cdType:0, cdMask:0})
+                           value: 0, cooldown:0, cdType:0, cdMask:0})
                       .map((element, index) => ({...element, count: 0, index:index})),
   selectedItemIndex: -1,
   extraInventorySlotState:[ true, false, false],
@@ -15,7 +15,7 @@ const defaultValues = {
   selectedSpellIndex: -1,
   keys: Array(10).fill({name:'', count:0, canUse: false, equipped: false, 
                         grh:0, maxDef:0, minDef:0, maxHit:0, objIndex: 0,
-                        type: 0, value: 0, coolddown:0, cdType:0, cdMask:0})
+                        type: 0, value: 0, cooldown:0, cdType:0, cdMask:0})
                  .map((element, index) => ({...element, count: 0, index:index})),
   selectedKeyIndex: -1
 }
@@ -25,7 +25,6 @@ export const InventorySlice = createSlice({
   initialState: defaultValues,
   reducers: {
     updateInvSlot: (state, action) => {
-      console.log(JSON.stringify(action.payload))
       state.itemList[action.payload.index] = action.payload
     },
     setInvLevel: (state, action)=> {

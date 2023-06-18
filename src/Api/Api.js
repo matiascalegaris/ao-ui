@@ -272,7 +272,7 @@ if (process.env.NODE_ENV === 'development') {
     },
     FakeHitEvent: () => {
       setTimeout(() => {
-        window.parent.APicallbacks.StartInterval(8, 0)
+        window.parent.APicallbacks.StartInterval(10, 0)
       }, 25)
     },
     SetInventory: () => {
@@ -281,22 +281,22 @@ if (process.env.NODE_ENV === 'development') {
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
-                                                  coolddown:4000, cdType:5, cdMask:19, index:1})
+                                                  cooldown:4000, cdType:5, cdMask:19, index:1})
         window.parent.APicallbacks.UpdateInvSlot({name:'algun arco', count:1, canUse: false, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
-                                                  coolddown:0, cdType:0, cdMask:2, index:2})
+                                                  cooldown:0, cdType:0, cdMask:2, index:2})
         window.parent.APicallbacks.UpdateInvSlot({name:'alguna espada', count:1, canUse: false, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
-                                                  coolddown:0, cdType:0, cdMask:1, index:3})
+                                                  cooldown:0, cdType:0, cdMask:1, index:3})
         window.parent.APicallbacks.UpdateInvSlot({name:'algun usable', count:1, canUse: false, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
-                                                  objIndex: 1812, type: 5, value: 0, 
-                                                  coolddown:30000, cdType:10, cdMask:16, index:4})
+                                                  objIndex: 1812, type: 53, value: 0, 
+                                                  cooldown:30000, cdType:10, cdMask:16, index:4})
       }, 5)
     }
   }

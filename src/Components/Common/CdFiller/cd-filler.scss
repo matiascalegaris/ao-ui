@@ -6,7 +6,7 @@
   bottom: -10px;
   display: flex;
   flex-direction: row;
-  
+  pointer-events: none;
   .left-side {
     width: 50%;
     height: 100%;

@@ -1,10 +1,10 @@
 
 import { useContext, useEffect, useState } from 'react'
 import { DragDropTypes } from '../../../constants'
-import SpellEntry from '../../Gameplay/SideMenu/InvetoryAndSpells/SpellSelection/SpellEntry/spell-entry'
 import { DragDropContext } from '../DragDropProvider'
 import Sprite from '../Sprite/sprite'
 import './drag-layer.scss'
+import { Spell } from '../../Gameplay/SideMenu/InvetoryAndSpells/SpellSelection/SpellEntry/Spell/spell'
 
 function getItemStyles(x, y, context) {
   if (context.item === null) {
@@ -69,7 +69,7 @@ export const DragLayer = () => {
                     height={grhInfo.height}
                   />
         case DragDropTypes.SPELL:
-          <SpellEntry spell={context.item}/>
+          return <Spell spellInfo={context.item}/>
         default:
           return null
       }

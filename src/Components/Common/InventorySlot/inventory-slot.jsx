@@ -32,7 +32,7 @@ export default function InventorySlot({content, locked, selected, onSelect,
       {
         content.cdMask > 0 ? <CooldownIndicator cdMask={content.cdMask} 
                                           cdType={content.cdType} 
-                                          elementCD={content.coolddown} /> 
+                                          elementCD={content.cooldown} /> 
         : null
       }
       </DropArea>

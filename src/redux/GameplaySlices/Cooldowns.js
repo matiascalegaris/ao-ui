@@ -7,7 +7,7 @@ export const CooldownSlice = createSlice({
       dropItem:800, extractWork:3000, hitMagic:800,
       hitUseItem:800, magicHit:800, useItemClick:276,
       useItemKey:380, walk:210 },
-    activeInterval: Array(10).fill(0),
+    activeInterval: Array(20).fill(0),
   },
   reducers: {
     updateIntervals: (state, action) => {
@@ -17,6 +17,7 @@ export const CooldownSlice = createSlice({
     fireInterval: (state, action) => {
       console.log('fire interval' + action.payload.intervalType)
       state.activeInterval[action.payload.intervalType] = action.payload.startTime
+      console.log(state.activeInterval.map(element => ( Date.now() - element)))
     }
   },
 })

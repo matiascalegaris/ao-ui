@@ -7,11 +7,7 @@ import AoButton from '../../../../Common/ao-button/ao-button'
 import InventoryFrame from '../InventoryFrame/inventory-frame'
 import './spell-selection.scss'
 import SpellEntry from './SpellEntry/spell-entry';
-
-const moveItem = (item) => {
-  console.log('move spell!')
-  console.log(item)
-}
+import { DropArea } from '../../../../Common/DropArea';
 
 export default function SpellSelection () {
   const { t } = useTranslation();
@@ -28,16 +24,21 @@ export default function SpellSelection () {
   const useSpell = evt => {
     window.parent.BabelUI.UseSpellSlot(selectedSpellIndex)
   }
+  const onDrop = dragInfo => {
+    onDropAction(dragInfo.item, dropId)
+  }
   return (
     <div className='spell-selection'>
       <InventoryFrame styles='spell-list' contentStyles='spell-content'>
-      {
-        spellList.map( (spell, index) => (
-          <SpellEntry key={index} spell={spell} 
-                      selected={selectedSpellIndex === index} 
-                      onClick={() => selectNewSpell(spell)}/>
-        ))
-      }
+      <DropArea id={{...dropId, onDrop:onDrop}} acceptTypes={[DragDropTypes.SPELL]}>
+        {
+          spellList.map( (spell, index) => (
+            <SpellEntry key={index} spell={spell} 
+                        selected={selectedSpellIndex === index} 
+                        onClick={() => selectNewSpell(spell)}/>
+          ))
+        }
+      </DropArea>
       </InventoryFrame>
       <div className='button-area'>
         <AoButton styles='throw-button' isRed={true} onClick={useSpell}>{t('spell-use')}</AoButton>

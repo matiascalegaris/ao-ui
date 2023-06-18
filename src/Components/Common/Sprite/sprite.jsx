@@ -7,9 +7,10 @@ const GetImageUrl = imageName =>  {
   return `${GetRootDirectory()}/Graficos/${imageName}.png`
 }
 
-const Sprite = ({imageName, x, y, width, height, styles, innerRef,...otherProps}) => {
+const Sprite = ({imageName, x, y, width, height, styles, innerRef, customSectionStyle, ...otherProps}) => {
   const imageUrl =  GetImageUrl(imageName)
   var sectionStyle = { 
+    ...customSectionStyle,
     width: `${width}px`,
     height: `${height}px`,
     overflow: 'hidden'
