@@ -19,11 +19,18 @@
     display: flex;
     flex-direction: row;
     margin: 10px 10px;
+    justify-content: space-between;
 
     .throw-button {
       width: 70%;
       height: 30px;
       font-size: 1rem;
+    }
+
+    .spell-order-lock {
+      &:hover {
+        margin-bottom: 2px;
+      }
     }
   }
 }

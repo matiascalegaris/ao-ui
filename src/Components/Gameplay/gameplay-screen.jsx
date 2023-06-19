@@ -1,5 +1,6 @@
 import { DragDropProvider } from '../Common/DragDropProvider'
 import { DragLayer } from '../Common/DragLayer/drag-layer'
+import OptionDialog from '../Dialogs/OptionDialog/option-dialog'
 import Chat from './Chat/chat'
 import './gameplay-screen.scss'
 import MiniMap from './MiniMap/mini-map'
@@ -8,6 +9,7 @@ import TopBar from './TopBar/top-bar'
 
 export default function GameplayScreen() {
   console.log('gameplay render')
+  const popupsState = null
   return (
     <div className='gameplay-screen'>
       <TopBar styles='top-bar'/>
@@ -26,6 +28,17 @@ export default function GameplayScreen() {
         <SideMenu styles='right-panel'/>
         <DragLayer/>
         </DragDropProvider>
+        {
+          popupsState ?
+          <div className='popups'>
+            {{
+                'option-dialog':<OptionDialog styles='centered' settings={popupsState.popUp}/>
+              }
+              [popupsState.popUp.popUp]
+            }
+          </div> :
+          null
+        }
       </div>
     </div>
   )

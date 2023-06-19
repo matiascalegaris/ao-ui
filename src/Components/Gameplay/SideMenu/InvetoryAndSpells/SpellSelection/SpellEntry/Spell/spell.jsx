@@ -13,7 +13,7 @@ const getScaletoFit = (originalWidth, originalHeight, targetWidth, targetHeight)
   return widthScale
 }
 
-export const Spell = ({spellInfo, selected, innerRef, styles, ...otherProps}) => {
+export const Spell = ({spellInfo, selected, innerRef, styles, dragEnabled, ...otherProps}) => {
   const dragDropContext = useContext(DragDropContext);
   const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(spellInfo.grh)
   const targetScale = getScaletoFit(grhInfo.width, grhInfo.height, 12, 12)
@@ -22,7 +22,9 @@ export const Spell = ({spellInfo, selected, innerRef, styles, ...otherProps}) =>
     margin: `${(grhInfo.height-12) / -2}px ${(grhInfo.width-12) / -2}px`
   }
   const onSpellMouseDown = evt => {
-    dragDropContext.MouseDownOnDragable(spellInfo, DragDropTypes.SPELL,  Date.now())
+    if (dragEnabled) {
+      dragDropContext.MouseDownOnDragable(spellInfo, DragDropTypes.SPELL,  Date.now())
+    }
   }
   const selectedStyle = {
     ...styles,

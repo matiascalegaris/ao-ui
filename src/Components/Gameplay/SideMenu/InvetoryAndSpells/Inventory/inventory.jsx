@@ -23,6 +23,14 @@ export default function Inventory() {
   const onActivateItem = item => {
     window.parent.BabelUI.UseInvSlotIndex(item.index)
   }
+
+  const requestDeleteItem = evt => {
+    if (selectedItem === -1 || selectedItem > inventory.length ||
+        inventory[selectedItem].objIndex === 0) {
+      return
+    }
+    console.log('delete item ' + selectedItem)
+  }
   console.log('inventory render')
   return (
     <div className='inventory-area'>
@@ -60,7 +68,7 @@ export default function Inventory() {
                          onDropAction={onDropItem}/>
         </div>
       </InventoryFrame>
-      <span className='delete-item'></span>
+      <span className='delete-item' onClick={requestDeleteItem}></span>
     </div>
   )
 }
