@@ -157,6 +157,17 @@ export function useSingleAndDoubleClick(
   return () => setClick(prev => prev + 1);
 }
 
+function ArrayMove(arr, old_index, new_index) {
+  if (new_index >= arr.length) {
+      var k = new_index - arr.length + 1;
+      while (k--) {
+          arr.push(undefined);
+      }
+  }
+  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+  return arr; // for testing
+};
+
 
 
 const GetRootDirectory = () => {
@@ -170,4 +181,4 @@ const GetRootDirectory = () => {
 export {ValidateEmail, ValidatePassword, SanitazeInput, GetRandomInt,
         ValidateRoboCode, ValidateString, ValidValidationCode,
         ValidResetPwdCode, GetRootDirectory, GetColorForCharacterStatus,
-        GetNameForClassId, LoadJsonFile, GetImage, FormatNumberWithDots }
+        GetNameForClassId, LoadJsonFile, GetImage, FormatNumberWithDots, ArrayMove }

@@ -24,7 +24,13 @@ export const Actions = {
   OpenCreateObjMenu: 18,
   OpenSpawnMenu: 19,
   SetGmInvisible: 20
+}
 
+export const SafeLocks = {
+  Group: 1,
+  Clan: 2,
+  Attack: 3,
+  Resurrection: 4
 }
 
 export const eObjType = {

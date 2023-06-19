@@ -17,9 +17,9 @@ export const DragDropProvider = ({ children }) => {
         startTime: startTime,
       })
     },      
-    DragEnd: (context) => {
+    DragEnd: (mouseEvt, context) => {
       if (context.activeContainer && context.activeContainer.onDrop) {
-        context.activeContainer.onDrop(context)
+        context.activeContainer.onDrop(mouseEvt, context)
       }
       setContextValue({...context,
         item: null,

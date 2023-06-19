@@ -42,7 +42,7 @@ export const DragLayer = () => {
     }
     const onMouseUp = evt => {
       if (dragDropContext.item !== null) {
-        dragDropContext.DragEnd(dragDropContext)   
+        dragDropContext.DragEnd(evt,dragDropContext)   
       }
       setMousePos({x:0, y: 0})
     }

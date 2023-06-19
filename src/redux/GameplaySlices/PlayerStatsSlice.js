@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { SafeLocks } from '../../constants'
 
 export const PlayerStats = createSlice({
   name: 'playerStats',
@@ -20,6 +21,7 @@ export const PlayerStats = createSlice({
     attackLock: true,
     clanLock: true,
     groupLock: true,
+    resurrectionLock: true,
     strState: 0,
     agiState: 0
   },
@@ -65,12 +67,30 @@ export const PlayerStats = createSlice({
       state.agi = action.payload.agi;
       state.strState = action.payload.strState;
       state.agiState = action.payload.agiState;
+    },
+    updateLockState: (state, action) => {
+      console.log(action.payload)
+      switch (action.payload.type) {
+        case SafeLocks.Attack:
+          state.attackLock= action.payload.state
+          break
+        case SafeLocks.Clan:
+          state.clanLock= action.payload.state
+          break
+        case SafeLocks.Group:
+          state.groupLock= action.payload.state
+          break
+        case SafeLocks.Resurrection:
+          state.resurrectionLock= action.payload.state
+          break
+        default:
+      }
     }
     
   },
 })
 
-export const { setStats, updateHp, updateMana, updateStamina, updateDrink, updateFood, updateGold, updateStrandAgi } = PlayerStats.actions
+export const { setStats, updateHp, updateMana, updateStamina, updateDrink, updateFood, updateGold, updateStrandAgi, updateLockState } = PlayerStats.actions
 
 export const selectCurrentHp = (state) =>  state.playerStats.currentHp
 export const selectMaxHp = (state) =>  state.playerStats.maxHp
@@ -93,6 +113,7 @@ export const selectArmor = (state) =>  state.playerStats.armor
 export const selectMagicDef = (state) =>  state.playerStats.magicDef
 export const selectMagicBonus = (state) =>  state.playerStats.magicBonus
 export const selectAttackLock = (state) =>  state.playerStats.attackLock
+export const selectResurrectionLock = (state) =>  state.playerStats.resurrectionLock
 export const selectClanLock = (state) =>  state.playerStats.clanLock
 export const selectGroupLock = (state) =>  state.playerStats.groupLock
 

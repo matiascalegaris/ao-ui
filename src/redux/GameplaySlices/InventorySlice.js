@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { eObjType } from '../../constants'
 import { resetGameplay } from './GameStateSlice'
 import { createSelector } from 'reselect'
+import { ArrayMove } from '../../Tools/Utils'
 
 const defaultValues = {
   itemList: Array(48).fill({name:'', count:1, canUse: false, equipped: true, grh:0,
@@ -11,7 +12,7 @@ const defaultValues = {
   selectedItemIndex: -1,
   extraInventorySlotState:[ true, false, false],
   spellList: Array(40).fill({ name:'(Vacio)', index: 0, spellIndex: 0})
-                      .map((element, index) => ({...element, index:index})),
+                      .map((element, index) => ({...element, index:index, name:'(Vacio)' + index})),
   selectedSpellIndex: -1,
   keys: Array(10).fill({name:'', count:0, canUse: false, equipped: false, 
                         grh:0, maxDef:0, minDef:0, maxHit:0, objIndex: 0,
@@ -50,16 +51,22 @@ export const InventorySlice = createSlice({
     selectKeySlot: (state, action) => {
       state.selectedKeyIndex = action.payload
     },
+    moveSpellSlot: (state,action) => {
+      ArrayMove(state.spellList, action.payload.from, action.payload.to)
+      let i = 0
+      state.spellList.forEach( element => { element.index = i; i++})
+    },
     extraReducers: (builder) => {
       builder
         .addCase(resetGameplay, (state) => {
           state = defaultValues
         })
     },
+    
   },
 })
 
-export const { updateInvSlot, setInvLevel, selectInvSlot, selectSpellSlot, updateSpellSlot, updateKeySlot, selectKeySlot } = InventorySlice.actions
+export const { updateInvSlot, setInvLevel, selectInvSlot, selectSpellSlot, updateSpellSlot, updateKeySlot, selectKeySlot, moveSpellSlot } = InventorySlice.actions
 
 export const selectSelectedItemIndex = (state) =>  state.inventory.selectedItemIndex
 

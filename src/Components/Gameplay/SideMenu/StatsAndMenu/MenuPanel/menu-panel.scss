@@ -38,7 +38,11 @@
         text-align: right;
         white-space: pre-line;
         margin-right: 5px;
+        &:hover {
+          color: white;
+        }
       }
+      
     }
   }
 }

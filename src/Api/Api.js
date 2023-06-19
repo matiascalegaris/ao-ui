@@ -298,6 +298,9 @@ if (process.env.NODE_ENV === 'development') {
                                                   objIndex: 1812, type: 53, value: 0, 
                                                   cooldown:30000, cdType:10, cdMask:16, index:4})
       }, 5)
+    },
+    MoveSpellSlot: (from, to) => {
+      console.log(`move from ${from} to ${to}`)
     }
   }
 }

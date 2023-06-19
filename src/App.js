@@ -11,7 +11,7 @@ import { setCharacter } from './redux/CharSelectionSlice';
 import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
 import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
-import { setStats, updateDrink, updateFood, updateGold, updateHp, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
+import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
 import { resetGameplay, setFps } from './redux/GameplaySlices/GameStateSlice';
@@ -138,6 +138,9 @@ function App() {
     })
     RegisterApiCallback('StartInterval', (intervalType, tunnelDelay) => {
       dispatch(fireInterval({intervalType: intervalType, startTime: Date.now() - tunnelDelay}))
+    })
+    RegisterApiCallback('UpdateLockState', (type, state) => {
+      dispatch(updateLockState({type:type, state:state}))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

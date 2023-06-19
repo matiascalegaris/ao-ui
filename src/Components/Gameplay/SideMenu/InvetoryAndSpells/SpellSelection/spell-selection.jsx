@@ -24,13 +24,10 @@ export default function SpellSelection () {
   const useSpell = evt => {
     window.parent.BabelUI.UseSpellSlot(selectedSpellIndex)
   }
-  const onDrop = dragInfo => {
-    
-  }
+  
   return (
     <div className='spell-selection'>
       <InventoryFrame styles='spell-list' contentStyles='spell-content'>
-      <DropArea id={{onDrop:onDrop}} acceptTypes={[DragDropTypes.SPELL]}>
         {
           spellList.map( (spell, index) => (
             <SpellEntry key={index} spell={spell} 
@@ -38,7 +35,6 @@ export default function SpellSelection () {
                         onClick={() => selectNewSpell(spell)}/>
           ))
         }
-      </DropArea>
       </InventoryFrame>
       <div className='button-area'>
         <AoButton styles='throw-button' isRed={true} onClick={useSpell}>{t('spell-use')}</AoButton>

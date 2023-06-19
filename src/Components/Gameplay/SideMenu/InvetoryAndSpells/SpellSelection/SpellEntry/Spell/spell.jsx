@@ -13,7 +13,7 @@ const getScaletoFit = (originalWidth, originalHeight, targetWidth, targetHeight)
   return widthScale
 }
 
-export const Spell = ({spellInfo, selected, ...otherProps}) => {
+export const Spell = ({spellInfo, selected, innerRef, styles, ...otherProps}) => {
   const dragDropContext = useContext(DragDropContext);
   const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(spellInfo.grh)
   const targetScale = getScaletoFit(grhInfo.width, grhInfo.height, 12, 12)
@@ -24,8 +24,17 @@ export const Spell = ({spellInfo, selected, ...otherProps}) => {
   const onSpellMouseDown = evt => {
     dragDropContext.MouseDownOnDragable(spellInfo, DragDropTypes.SPELL,  Date.now())
   }
+  const selectedStyle = {
+    ...styles,
+    opacity: `${dragDropContext.item && dragDropContext.item.index === spellInfo.index ? 0.5 : 1}`
+  }
   return (
-    <div className={'spell-entry ' + (selected ? 'selected-spell' : '')} {...otherProps} onMouseDown={onSpellMouseDown}>
+    <div className={'spell-entry ' + (selected ? 'selected-spell' : '')} 
+         style={selectedStyle} 
+         {...otherProps} 
+         onMouseDown={onSpellMouseDown}
+         ref={innerRef}
+         >        
       <span className="spell-icon">
       <Sprite 
         imageName={grhInfo.imageNumber}

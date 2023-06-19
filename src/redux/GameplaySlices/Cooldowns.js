@@ -11,13 +11,10 @@ export const CooldownSlice = createSlice({
   },
   reducers: {
     updateIntervals: (state, action) => {
-      console.log(action.payload)
       state.intervals = action.payload
     },
     fireInterval: (state, action) => {
-      console.log('fire interval' + action.payload.intervalType)
       state.activeInterval[action.payload.intervalType] = action.payload.startTime
-      console.log(state.activeInterval.map(element => ( Date.now() - element)))
     }
   },
 })

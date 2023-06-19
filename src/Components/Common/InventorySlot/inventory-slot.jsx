@@ -10,7 +10,7 @@ export default function InventorySlot({content, locked, selected, onSelect,
   if (selected) {
     style += 'selected-slot'
   }
-  const onDrop = dragInfo => {
+  const onDrop = (mouseEvt, dragInfo) => {
     onDropAction(dragInfo.item, dropId)
   }
   return (
