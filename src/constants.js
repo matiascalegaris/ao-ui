@@ -23,7 +23,8 @@ export const Actions = {
   OpenGmPannel: 17,
   OpenCreateObjMenu: 18,
   OpenSpawnMenu: 19,
-  SetGmInvisible: 20
+  SetGmInvisible: 20,
+  DisplayHPInfo: 21
 }
 
 export const SafeLocks = {

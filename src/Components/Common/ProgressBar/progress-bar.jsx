@@ -1,6 +1,6 @@
 import './progress-bar.scss'
 
-export default function ProgressBar({styles, currentVal, maxValue, displayMax, extraFill, barStyle, extraStyle, customText}) {
+export default function ProgressBar({styles, currentVal, maxValue, displayMax, extraFill, barStyle, extraStyle, customText, ...otherProps}) {
   if (extraFill === undefined) {
     extraFill = 0
   }
@@ -26,8 +26,7 @@ export default function ProgressBar({styles, currentVal, maxValue, displayMax, e
   }
   displayText = customText !== undefined ? customText : displayText
   return (
-
-    <div className={'progress-bar ' + styles}>
+    <div className={'progress-bar ' + styles} {...otherProps}>
       {
         maxValue > 0 || customText ?
           <>
