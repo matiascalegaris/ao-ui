@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux'
 import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
 import './top-bar.scss'
-import { selectFps } from '../../../redux/GameplaySlices/GameStateSlice'
+import { selectFps, selectIsGameMaster } from '../../../redux/GameplaySlices/GameStateSlice'
 import { selectCurrentCoordinates, selectIsSafeMap, selectMapName, selectMapNumber } from '../../../redux/GameplaySlices/MapInfoSlice'
 import { Actions } from '../../../constants'
 import { FpsCounter } from './FpsCounter/fps-counter'
 import { MapCoords } from './MapCoords/MapCoords'
+import { OnlineCount } from './OnlineCounter'
 
 export default function TopBar({styles}) {
   const onClose = evt => {
@@ -27,15 +28,23 @@ export default function TopBar({styles}) {
   const mapName = useSelector(selectMapName)
   const isSafe = useSelector(selectIsSafeMap)
   const mapNumber = useSelector(selectMapNumber)
+  const isGm = useSelector(selectIsGameMaster)
   console.log('top bar render')
   return (
     <div className={'top-bar ' + styles}>
       <img className='ao-logo' src={require('../../../assets/Misc/ao20_horizontal.png')} />
       <div className='gm-command-area'>
-        <span className='gm-option' onClick={() => {gmCommand(Actions.OpenGmPannel)}}>Panel GM</span>
-        <span className='gm-option' onClick={() => {gmCommand(Actions.OpenCreateObjMenu)}}>Crear Obj</span>
-        <span className='gm-option' onClick={() => {gmCommand(Actions.OpenSpawnMenu)}}>Spawn Npc</span>
-        <span className='gm-option' onClick={() => {gmCommand(Actions.SetGmInvisible)}}>Invisible</span>
+        {
+          isGm ?
+          <>
+            <span className='gm-option' onClick={() => {gmCommand(Actions.OpenGmPannel)}}>Panel GM</span>
+            <span className='gm-option' onClick={() => {gmCommand(Actions.OpenCreateObjMenu)}}>Crear Obj</span>
+            <span className='gm-option' onClick={() => {gmCommand(Actions.OpenSpawnMenu)}}>Spawn Npc</span>
+            <span className='gm-option' onClick={() => {gmCommand(Actions.SetGmInvisible)}}>Invisible</span>
+          </>
+          :
+          null
+        }        
       </div>
       <div className='fps-area'>
         <FpsCounter/>
@@ -51,7 +60,7 @@ export default function TopBar({styles}) {
         <GameBarButton styles='bar-button' onClick={showHelp}>
           <img src={require('../../../assets/Icons/gameplay/ico_info.png')}></img>
         </GameBarButton>
-        <span className='spacer'></span>
+        <OnlineCount/>
         <GameBarButton styles='bar-button' onClick={minimize}>
           <img src={require('../../../assets/Icons/gameplay/ico_minimize.png')}></img>
         </GameBarButton>

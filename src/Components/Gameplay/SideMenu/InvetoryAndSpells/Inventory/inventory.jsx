@@ -4,6 +4,8 @@ import InventorySlot from '../../../../Common/InventorySlot/inventory-slot'
 import ExtraSlotLine from './ExtraSlotLine/extra-slot-line'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectExtraSlotState, selectInventorySlots, selectInvSlot, selectSelectedItemIndex } from '../../../../../redux/GameplaySlices/InventorySlice'
+import { useTranslation } from 'react-i18next'
+import { setGameActiveDialog } from '../../../../../redux/GameplaySlices/GameStateSlice'
 
 const onDropItem = (item, container) => {
   window.parent.BabelUI.MoveInvItem(item.index, container.id)
@@ -14,6 +16,7 @@ export default function Inventory() {
   const extraSlotLines = useSelector(selectExtraSlotState)
   const dispatch = useDispatch()
   const selectedItem = useSelector(selectSelectedItemIndex)
+  const { t } = useTranslation();
   const onSelectItem = item => {
     if (item.index !== selectedItem) {
       dispatch(selectInvSlot(item.index))
@@ -29,7 +32,23 @@ export default function Inventory() {
         inventory[selectedItem].objIndex === 0) {
       return
     }
-    console.log('delete item ' + selectedItem)
+    const deleteItemAction = {
+      popUp:'option-dialog',
+      text: t('delete-item-message', { itemName: inventory[selectedItem].name}),
+      actions: [{
+        caption: t('cancel').toUpperCase(),
+        action:  evt => {
+          dispatch(setGameActiveDialog(null))
+        }}, {
+        caption: t('continue').toUpperCase(),
+        action:  evt => {
+          dispatch(setGameActiveDialog(null))
+          window.parent.BabelUI.DeleteItem(selectedItem)
+        },
+        isRed: true}
+      ]
+    }
+    dispatch(setGameActiveDialog(deleteItemAction))
   }
   console.log('inventory render')
   return (

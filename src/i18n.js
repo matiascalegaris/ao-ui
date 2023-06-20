@@ -82,7 +82,8 @@ const resources = {
       'spell-use': 'Throw',
       'user-class-and-level': `{{class}} - Level  {{level}}`,
       'max-level-exp': 'Max level!',
-      'keys': 'Keys'
+      'keys': 'Keys',
+      'delete-item-message': 'Are you sure you wnat to delete {{itemName}}'
     }
   },
   es: {
@@ -189,7 +190,8 @@ const resources = {
       'spell-use': 'Lanzar',
       'user-class-and-level': `{{class}} - Nivel  {{level}}`,
       'max-level-exp': '¡Nivel máximo!',
-      'keys': 'Llaves'
+      'keys': 'Llaves',
+      'delete-item-message': 'Estas seguro que deseas eliminar {{itemName}}'
     }
   }
 };

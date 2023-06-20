@@ -3,7 +3,7 @@ import Loading from './Components/Dialogs/Loading/loading';
 import LogInFlow from './Components/Login-flow/login-flow';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { displayErrorMessage, displayLoadingText, selectActivePopup, selectPopupData } from './redux/UIFlowSlice'
+import { displayErrorMessage, displayLoadingText, selectActivePopup, selectIsFadeOut, selectPopupData } from './redux/UIFlowSlice'
 import ErrorMessage from './Components/Dialogs/error-message/error-message';
 import {RegisterApiCallback} from './Api/Api'
 import { useTranslation } from 'react-i18next';
@@ -11,10 +11,10 @@ import { setCharacter } from './redux/CharSelectionSlice';
 import OptionDialog from './Components/Dialogs/OptionDialog/option-dialog';
 import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
-import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
+import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMagicAttack, updateMagicResitance, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
-import { resetGameplay, setFps } from './redux/GameplaySlices/GameStateSlice';
+import { resetGameplay, setFps, updateGameTime, updateIsGameMaster, updateOnlines } from './redux/GameplaySlices/GameStateSlice';
 import { setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, updateIntervals } from './redux/GameplaySlices/Cooldowns';
@@ -142,14 +142,34 @@ function App() {
     RegisterApiCallback('UpdateLockState', (type, state) => {
       dispatch(updateLockState({type:type, state:state}))
     })
+    RegisterApiCallback('UpdateOnlines', (newValue) => {
+      dispatch(updateOnlines(newValue))
+    })
+    RegisterApiCallback('UpdateGameTime', (hour, minutes) => {
+      dispatch(updateGameTime({hour:hour, minutes:minutes}))
+    })
+    RegisterApiCallback('UpdateIsGameGaster', (state) => {
+      dispatch(updateIsGameMaster(state))
+    })
+    RegisterApiCallback('UpdateMagicAttack', (value) => {
+      dispatch(updateMagicAttack(value))
+    })
+    RegisterApiCallback('UpdateMagicResistance', (value) => {
+      dispatch(updateMagicResitance(value))
+    })
+    
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
   },[]);
   
   const activePopup = useSelector(selectActivePopup)
   const popupData = useSelector(selectPopupData)
+  const fadeOut = useSelector(selectIsFadeOut)
   return (
     <div className='app'>
+      {
+        fadeOut != null ? <span className={'backgrund ' + (fadeOut ? 'go-to-black' : 'go-to-transparent') }></span> : null
+      }
       <LogInFlow/>
       {
           activePopup !== '' ?

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { RegisterApiCallback } from '../../../Api/Api'
 import { removeCharacter, selectAvailableCharacters, selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice'
-import { displayLoading, displayLoadingText, selectExitScreenActive, setActiveDialog, setActivePopup } from '../../../redux/UIFlowSlice'
+import { displayLoading, displayLoadingText, selectExitScreenActive, setActiveDialog, setActivePopup, setFadeOut } from '../../../redux/UIFlowSlice'
 import OptionDialog from '../../Dialogs/OptionDialog/option-dialog'
 import ValidateCode from '../../Dialogs/validate-code/validate-code'
 import CharacterSelector from '../CharacterSelector/character-selector'
@@ -31,6 +31,7 @@ export default function CharacterSelectionScreen() {
     else if (selection === selectionState.lastSelected &&
              timeStamp - selectionState.lastSelectTime < 350) {
       loginWithCharaceter(selection)
+      dispatch(setFadeOut(true))
     }
     else if(selectedCharacter.index === selection.index) {
       setSelectionState({...selectionState, lastSelectTime:timeStamp, lastSelected:selection})

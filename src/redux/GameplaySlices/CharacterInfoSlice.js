@@ -7,7 +7,6 @@ export const CharacterInfoSlice = createSlice({
     class: 1,
     exp: {min:0, max:0},
     level: 1,
-    time: '00:05'
   },
   reducers: {
     setCharacterInfo: (state, action) => {
@@ -30,6 +29,5 @@ export const selectCharacterName = (state) =>  state.characterInfo.name
 export const selectCharacterLevel = (state) => state.characterInfo.level
 export const selectCharacterClass = (state) => state.characterInfo.class
 export const selectCharacterExp = (state) => state.characterInfo.exp
-export const selectGameTime = (state) => state.characterInfo.time
 
 export default CharacterInfoSlice.reducer

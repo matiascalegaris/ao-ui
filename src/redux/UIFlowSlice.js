@@ -9,7 +9,8 @@ export const UIFlowSlice = createSlice({
     nextScreen: '',
     transitionActive: false,
     selectedEndpoint: 0,
-    popupData: null
+    popupData: null,
+    fadeOut: null
   },
   reducers: {
     setActiveScreen : (state, action) => {
@@ -69,19 +70,23 @@ export const UIFlowSlice = createSlice({
     hidePopup: (state) => {
       state.activePopup = ''
       state.popupData = null
+    },
+    setFadeOut: (state, action) => {
+      state.fadeOut = action.payload
     }
   },
 })
 
 export const { setActiveScreen, displayLoading, displayLoadingText, displayErrorMessage,
                hideErrorMessage, startTransition, transitionComplete, updateEndpoint,
-                setOptionDialog, setActivePopup, hidePopup } = UIFlowSlice.actions
+                setOptionDialog, setActivePopup, hidePopup, setFadeOut } = UIFlowSlice.actions
 
 export const selectActiveDialog = (state) =>  state.uiFlow.activeDialog
 export const selectActivePopup = (state) => state.uiFlow.activePopup
 export const selectPopupData = (state) => state.uiFlow.popupData
 export const selectExitScreenActive = (state) => state.uiFlow.transitionActive
 export const selectActiveEndPoint = (state) => state.uiFlow.selectedEndpoint
+export const selectIsFadeOut = (state) => state.uiFlow.fadeOut
 
 export const setActiveDialog = (dialog) => (dispatch) => {
   dispatch(startTransition(dialog))

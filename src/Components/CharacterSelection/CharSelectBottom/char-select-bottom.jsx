@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCharacter, selectSelectedCharacter } from '../../../redux/CharSelectionSlice';
-import { selectExitScreenActive, setActiveDialog, setActivePopup, setOptionDialog } from '../../../redux/UIFlowSlice';
+import { selectExitScreenActive, setActiveDialog, setActivePopup, setFadeOut, setOptionDialog } from '../../../redux/UIFlowSlice';
 import { GetColorForCharacterStatus, GetNameForClassId } from '../../../Tools/Utils';
 import LoginButton from '../LogInButton/login-button'
 import './char-select-bottom.scss'
@@ -15,6 +15,7 @@ export default function CharSelectBottom({onDeleteChar, onTransferChar}) {
   const doLogin = character => {
     if (selectCharacter != null && selectCharacter.name != null) {
       window.parent.BabelUI.LoginCharacter(selectedCharacter.index)
+      dispatch(setFadeOut(true))
     }
   }
   const transitionActive = useSelector(selectExitScreenActive)

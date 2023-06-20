@@ -75,11 +75,40 @@
   flex-grow: 1;
 }
 
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.go-to-black {
+  opacity: 1;
+  animation: fadein 0.3s linear forwards;
+}
+.go-to-transparent {
+  opacity: 0;
+  animation: fadeout 0.3s linear forwards;
+}
+
 .app {
   display: flex;
   width: 100%;
   height: 100%;
   position: relative;
+
+  .backgrund {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    z-index: -1000;
+  }
   .popups {
     position: absolute;
     width: 100%;

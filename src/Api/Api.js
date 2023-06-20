@@ -301,6 +301,9 @@ if (process.env.NODE_ENV === 'development') {
     },
     MoveSpellSlot: (from, to) => {
       console.log(`move from ${from} to ${to}`)
+    },
+    DeleteItem: itemIndex => {
+      
     }
   }
 }

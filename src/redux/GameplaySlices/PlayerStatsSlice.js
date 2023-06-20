@@ -68,8 +68,13 @@ export const PlayerStats = createSlice({
       state.strState = action.payload.strState;
       state.agiState = action.payload.agiState;
     },
+    updateMagicAttack: (state,action) => {
+      state.magicBonus = action.payload
+    },
+    updateMagicResitance: (state,action) => {
+      state.magicDef = action.payload
+    },
     updateLockState: (state, action) => {
-      console.log(action.payload)
       switch (action.payload.type) {
         case SafeLocks.Attack:
           state.attackLock= action.payload.state
@@ -90,7 +95,9 @@ export const PlayerStats = createSlice({
   },
 })
 
-export const { setStats, updateHp, updateMana, updateStamina, updateDrink, updateFood, updateGold, updateStrandAgi, updateLockState } = PlayerStats.actions
+export const { setStats, updateHp, updateMana, updateStamina, updateDrink, 
+               updateFood, updateGold, updateStrandAgi, 
+              updateLockState, updateMagicAttack, updateMagicResitance } = PlayerStats.actions
 
 export const selectCurrentHp = (state) =>  state.playerStats.currentHp
 export const selectMaxHp = (state) =>  state.playerStats.maxHp

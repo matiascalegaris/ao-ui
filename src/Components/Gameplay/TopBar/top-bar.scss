@@ -81,8 +81,14 @@ $searator-color: #1F1F1C;
     .bar-button {
       margin: auto 2px;
     }
-    .spacer {
+    .onlines {
       flex-grow: 1;
+      text-align: center;
+      margin: auto;
+      color: #C04000;
+      font-weight: 600;
+      font-family: Alegra-AO;
+      font-size: 0.9rem;
     }
   }
 }

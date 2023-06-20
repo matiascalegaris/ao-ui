@@ -20,6 +20,16 @@ export default configureStore({
     chat: ChatSlice,
     cooldowns: CooldownSlice,
     gameState: GameStateSlice
-    
-  }
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ["gameState/setGameActiveDialog"],
+        // Ignore these field paths in all actions
+        ignoredActionPaths: ['gameState.setActiveDialog'],
+        // Ignore these paths in the state
+        ignoredPaths: ["gameState.activeDialog.actions"],
+      },
+    }),
 })

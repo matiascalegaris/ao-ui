@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { selectCharacterClass, selectCharacterExp, selectCharacterLevel, selectCharacterName, selectGameTime } from '../../../../redux/GameplaySlices/CharacterInfoSlice';
+import { selectCharacterClass, selectCharacterExp, selectCharacterLevel, selectCharacterName } from '../../../../redux/GameplaySlices/CharacterInfoSlice';
 import AoButton from '../../../Common/ao-button/ao-button';
 import ProgressBar from '../../../Common/ProgressBar/progress-bar';
 import './exp-area.scss'
 import { Actions, classList } from '../../../../constants';
+import { GameTimer } from './GameTimer';
 
 export default function ExpArea() {
   const { t } = useTranslation();
@@ -12,7 +13,6 @@ export default function ExpArea() {
   const className = classList[useSelector(selectCharacterClass)]
   const userLevel = useSelector(selectCharacterLevel)
   const expBar = useSelector(selectCharacterExp)
-  const gameTime = useSelector(selectGameTime)
   const expBarText = expBar.max === 0 ? t('max-level-exp') : undefined;
   const openStats = evt => {
     window.parent.BabelUI.RequestAction(Actions.RequestSkill)
@@ -33,7 +33,7 @@ export default function ExpArea() {
                      displayMax={true} customText={expBarText}/>
       </span>
       <span className='time-bar'>
-        <p className='timer'>{gameTime}</p>
+        <GameTimer/>
       </span>
     </div>
   )
