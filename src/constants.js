@@ -104,15 +104,16 @@ export const e_CdTypes = {
 
 export const ChatStates = {
   Normal: 0,
-  Globa: 1,
+  Global: 1,
   Private: 2,
-  Yell: 3,
+  Shout: 3,
   Clan: 4,
   Group: 5,
   Gmsg: 6,
   GmGlobal: 7
-
 };
+
+export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
 
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
 export const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf','Orc']

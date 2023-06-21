@@ -83,7 +83,8 @@ const resources = {
       'user-class-and-level': `{{class}} - Level  {{level}}`,
       'max-level-exp': 'Max level!',
       'keys': 'Keys',
-      'delete-item-message': 'Are you sure you wnat to delete {{itemName}}'
+      'delete-item-message': 'Are you sure you wnat to delete {{itemName}}',
+      'send-private-message': "Please enter the username with whom you'd like to start a private conversation."
     }
   },
   es: {
@@ -191,7 +192,8 @@ const resources = {
       'user-class-and-level': `{{class}} - Nivel  {{level}}`,
       'max-level-exp': '¡Nivel máximo!',
       'keys': 'Llaves',
-      'delete-item-message': 'Estas seguro que deseas eliminar {{itemName}}'
+      'delete-item-message': 'Estas seguro que deseas eliminar {{itemName}}',
+      'send-private-message': 'Escriba el usuario con el que desea iniciar una conversación privada.'
     }
   }
 };

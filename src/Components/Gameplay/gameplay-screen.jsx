@@ -7,9 +7,10 @@ import './gameplay-screen.scss'
 import MiniMap from './MiniMap/mini-map'
 import SideMenu from './SideMenu/side-menu'
 import TopBar from './TopBar/top-bar'
-import { selectActiveDialog } from '../../redux/GameplaySlices/GameStateSlice'
+import { exitGameplay, selectActiveDialog } from '../../redux/GameplaySlices/GameStateSlice'
 import { selectExitScreenActive, setFadeOut } from '../../redux/UIFlowSlice'
 import { useEffect } from 'react'
+import SingleInputDialog from '../Dialogs/SingleInputDialog/single-input-dialog'
 
 export default function GameplayScreen() {
   console.log('gameplay render')
@@ -21,6 +22,7 @@ export default function GameplayScreen() {
       dispatch(setFadeOut(false))  
     }, 200);
   }, [])
+  useEffect( () => () => dispatch(exitGameplay), [] );
   const transitionActive = useSelector(selectExitScreenActive)
   return (
     <div className='gameplay-screen'>
@@ -44,7 +46,8 @@ export default function GameplayScreen() {
           popupsState ?
           <div className='popups'>
             {{
-                'option-dialog':<OptionDialog styles='centered' settings={popupsState}/>
+                'option-dialog':<OptionDialog styles='centered' settings={popupsState}/>,
+                'single-input-dialog':<SingleInputDialog styles='centered' settings={popupsState}/>
               }
               [popupsState.popUp]
             }

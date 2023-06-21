@@ -1,6 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
 
-export const resetGameplay = createAction('gaemplay/reset')
+export const resetGameplay = createAction('gamemplay/reset')
+export const exitGameplay = createAction('gameplay/exit')
 
 export const GameStateSlice = createSlice({
   name: 'gameState',
@@ -17,6 +18,7 @@ export const GameStateSlice = createSlice({
     },
     setGameActiveDialog: (state, action) => {
       state.activeDialog = action.payload
+      window.parent.BabelUI.UpdateOpenDialog(action.payload != null)
     },
     updateOnlines: (state, action) => {
       state.online = action.payload
@@ -34,6 +36,10 @@ export const GameStateSlice = createSlice({
       builder
         .addCase(resetGameplay, (state) => {
           state.activeDialog = null
+        })
+        .addCase(exitGameplay, (state) => {
+          state.activeDialog = null
+          window.parent.BabelUI.UpdateOpenDialog(false)
         })
     },
   },

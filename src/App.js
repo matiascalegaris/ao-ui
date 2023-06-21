@@ -13,7 +13,7 @@ import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
 import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMagicAttack, updateMagicResitance, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
-import { postChatMessage } from './redux/GameplaySlices/ChatSlice';
+import { postChatMessage, setWhisperTarget } from './redux/GameplaySlices/ChatSlice';
 import { resetGameplay, setFps, updateGameTime, updateIsGameMaster, updateOnlines } from './redux/GameplaySlices/GameStateSlice';
 import { setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
@@ -156,6 +156,9 @@ function App() {
     })
     RegisterApiCallback('UpdateMagicResistance', (value) => {
       dispatch(updateMagicResitance(value))
+    })
+    RegisterApiCallback('SetWhisperTarget', (target) => {
+      dispatch(setWhisperTarget(target))
     })
     
     const language = window.parent.BabelUI.GetStoredLocale()

@@ -1,0 +1,63 @@
+.input-dialog {
+  .content-area {
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    .desc-text {
+      text-align: center;
+      word-wrap: break-word;
+      margin: 20px 0px;
+      margin-bottom: 5px;
+      max-width: 325px;
+      font-family: Alegra-AO;
+    }
+    .code-area {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      width: 100%;
+      .code {
+        text-align: end;
+        margin-top: auto;
+        margin-bottom: auto;
+        font-size: 0.6rem;
+        font-weight: 900;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+  .bottom-line {
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .line {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding-bottom: 20px;
+      border-bottom: #ffffff14 2px solid;
+      .links {
+        color: #eca40c;
+        text-align: center;
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      &:last-of-type {
+        padding-top: 5px;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+    }
+    .split-area {
+      flex-grow: 1;
+      width: 100%;
+    }
+  }
+}

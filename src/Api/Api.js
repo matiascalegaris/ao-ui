@@ -303,7 +303,9 @@ if (process.env.NODE_ENV === 'development') {
       console.log(`move from ${from} to ${to}`)
     },
     DeleteItem: itemIndex => {
-      
+    },
+    UpdateOpenDialog: state => {
+      console.log('UpdateOpenDialog ' + state)
     }
   }
 }
