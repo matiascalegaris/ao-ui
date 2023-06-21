@@ -102,6 +102,18 @@ export const e_CdTypes = {
   eHandCannon: 10,
 };
 
+export const ChatStates = {
+  Normal: 0,
+  Globa: 1,
+  Private: 2,
+  Yell: 3,
+  Clan: 4,
+  Group: 5,
+  Gmsg: 6,
+  GmGlobal: 7
+
+};
+
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']
 export const raceList = ['Human', 'Elf', 'Drow', 'Gnome', 'Dwarf','Orc']
 export const classList = [ 'Mage', 'Cleric', 'Warrior', 'Assasin', 'Bard', 'Druid', 'Paladin', 'Hunter', 'Worker', 'Pirate', 'Thief', 'Bandit']
