@@ -7,7 +7,7 @@ import { ChatInput } from './chat-input';
 export default function Chat() {
   const dispatch = useDispatch()
   const selectUser = user => {
-    dispatch(setWhisperTarget(user))
+    dispatch(setWhisperTarget({target:user, openChat: true}))
   }
   
   console.log('chat render')

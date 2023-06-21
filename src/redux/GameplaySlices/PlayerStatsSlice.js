@@ -9,7 +9,7 @@ export const PlayerStats = createSlice({
     currentMana: 0,
     maxMana: 0,
     currentShield:0,
-    gold:56946218,
+    gold:56218,
     str:18,
     agi:18,
     currentEnergy:0,

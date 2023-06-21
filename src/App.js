@@ -158,7 +158,7 @@ function App() {
       dispatch(updateMagicResitance(value))
     })
     RegisterApiCallback('SetWhisperTarget', (target) => {
-      dispatch(setWhisperTarget(target))
+      dispatch(setWhisperTarget({target:target, openChat: true}))
     })
     
     const language = window.parent.BabelUI.GetStoredLocale()

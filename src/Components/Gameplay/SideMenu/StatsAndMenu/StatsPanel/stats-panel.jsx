@@ -42,10 +42,11 @@ export default function StatsPanel({styles}) {
   console.log('statsPannel render')
   const showArrowBonus = equippedItems.amunition.min > 0 ||
                          equippedItems.amunition.max > 0
+  const alertGold =  userGold <= 100000
   return (
     <div className={'stats-panel'}>
       <div className='gold-line'>
-        <span className='gold' >
+        <span className={'gold ' + (alertGold ? 'gold-alert' : '') }>
           <img className='stats-icon' 
             onClick={onGoldClick}
             src={require('../../../../../assets/Icons/gameplay/ico_stats_coins.png')} 

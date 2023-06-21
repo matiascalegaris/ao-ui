@@ -24,12 +24,13 @@ export const ChatSlice = createSlice({
       state.messageList[insertionPos] = action.payload
     },
     setWhisperTarget: (state, action) => {
+      console.log('set whisper target from: ' + state.whisperTarget + ' to: ' + action.payload.target)
       if (state.whisperTarget !== action.payload){
-        if (action.payload !== '') {
+        if (action.payload.target !== '') {
           state.chatMode = ChatStates.Private
         }
-        state.forceOpenChatId++
-        state.whisperTarget = action.payload
+        action.payload.oepnChat && state.forceOpenChatId++
+        state.whisperTarget = action.payload.target
       }
     },
     setChatMode: (state, action) => {

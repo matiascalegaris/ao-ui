@@ -51,7 +51,7 @@ export const ChatInput = () => {
     if (event.key === 'Enter') {
       window.parent.BabelUI.SendChat(chatInput)
       const [chatType, targetChar] = GetChatState(chatInput)
-      dispatch(setWhisperTarget(targetChar))
+      dispatch(setWhisperTarget({target:targetChar, openChat: false}))
       dispatch(setChatMode(chatType))
       setChatState({ ...chatState, chatInput:''});
       chatInputElement.current.blur();
