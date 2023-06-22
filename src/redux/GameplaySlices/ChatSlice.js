@@ -42,7 +42,6 @@ export const ChatSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(exitGameplay, (state) => {
-        console.log("exit gameplay call")
         state.whisperTarget = ''
         state.chatMode= ChatStates.Normal
         state.forceOpenChatId = 0
