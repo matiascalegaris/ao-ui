@@ -24,30 +24,33 @@ export const ChatSlice = createSlice({
       state.messageList[insertionPos] = action.payload
     },
     setWhisperTarget: (state, action) => {
-      console.log('set whisper target from: ' + state.whisperTarget + ' to: ' + action.payload.target)
       if (state.whisperTarget !== action.payload){
         if (action.payload.target !== '') {
           state.chatMode = ChatStates.Private
         }
-        action.payload.oepnChat && state.forceOpenChatId++
+        action.payload.openChat && state.forceOpenChatId++
         state.whisperTarget = action.payload.target
       }
     },
     setChatMode: (state, action) => {
       state.chatMode = action.payload
     },
-    extraReducers: (builder) => {
-      builder
-        .addCase(exitGameplay, (state) => {
-          state.whisperTarget = ''
-          state.chatMode= ChatStates.Normal
-          state.forceOpenChatId = 0
-        })
+    openChat: (state) => {
+      state.forceOpenChatId = state.forceOpenChatId + 1
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(exitGameplay, (state) => {
+        console.log("exit gameplay call")
+        state.whisperTarget = ''
+        state.chatMode= ChatStates.Normal
+        state.forceOpenChatId = 0
+      })
+    }
 })
 
-export const { postChatMessage, setWhisperTarget, setChatMode } = ChatSlice.actions
+export const { postChatMessage, setWhisperTarget, setChatMode, openChat } = ChatSlice.actions
 
 export const selectChatMode = (state) => state.chat.chatMode
 export const selectWhisperTarget = (state) => state.chat.whisperTarget
@@ -65,5 +68,9 @@ export const selectMessageList = createSelector(
   }
 )
 
+export const safeOpenChat = () => (dispatch, getState) => {
+  if (getState().gameState.activeDialog) return
+  dispatch(openChat())
+}
 
 export default ChatSlice.reducer

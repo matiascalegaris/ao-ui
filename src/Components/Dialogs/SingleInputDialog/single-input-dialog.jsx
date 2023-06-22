@@ -17,6 +17,12 @@ export default function SingleInputDialog({styles, settings}) {
     event.preventDefault();
     settings.onAccept(text)
   }
+  const handleKeyUp = event => {
+    
+    if (event.key === 'Enter' ) {
+      settings.onAccept(text)
+    }    
+  }
   const validCode = true
   return (
     <AoDialog styles={'input-dialog ' + styles}>
@@ -24,7 +30,13 @@ export default function SingleInputDialog({styles, settings}) {
       <div className='content-area'>
         <p className='desc-text'>{settings.text}</p>
         <div className='code-area'>
-          <AoInput name="code" styles="code" value={text} IsValid={validCode || text.length === 0} autoFocus required handleChange={handleChange} />
+          <AoInput name="code" 
+                   styles="code" value={text} 
+                   IsValid={validCode || text.length === 0} 
+                   autoFocus 
+                   required 
+                   onKeyUp={handleKeyUp}
+                   handleChange={handleChange} />
         </div>
       </div>
       <div className='bottom-line'>

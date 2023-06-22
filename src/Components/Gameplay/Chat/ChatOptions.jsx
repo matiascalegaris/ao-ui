@@ -6,6 +6,7 @@ import { selectIsGameMaster } from '../../../redux/GameplaySlices/GameStateSlice
 export const ChatOptions = ({selectOptions, currentOption}) => {
   const { t } = useTranslation()
   const isGm = useSelector(selectIsGameMaster)
+  console.log("render chat options with selected opt: " + currentOption)
   return (
     <div className='chat-options'>
       <span className='chat-opt' onClick={()=>{ selectOptions(ChatStates.Normal)}}>
@@ -20,8 +21,8 @@ export const ChatOptions = ({selectOptions, currentOption}) => {
         {t('Private')}
       </span>
       <span className='chat-opt' onClick={()=>{ selectOptions(ChatStates.Shout)}}>
-        { currentOption === ChatStates.Yell ? <img className='selection-icon' src={require('../../../assets/Icons/gameplay/ico_check_green.png')}/>: null }
-        {t('Yell')}
+        { currentOption === ChatStates.Shout ? <img className='selection-icon' src={require('../../../assets/Icons/gameplay/ico_check_green.png')}/>: null }
+        {t('Shout')}
       </span>
       <span className='chat-opt' onClick={()=>{ selectOptions(ChatStates.Clan)}}>
         { currentOption === ChatStates.Clan ? <img className='selection-icon' src={require('../../../assets/Icons/gameplay/ico_check_green.png')}/>: null }

@@ -22,7 +22,14 @@ export default function GameplayScreen() {
       dispatch(setFadeOut(false))  
     }, 200);
   }, [])
-  useEffect( () => () => dispatch(exitGameplay), [] );
+  useEffect( () => {
+    console.log('gmeplay mounted')
+    return () => 
+    {
+      console.log('gmeplay unmounted')
+      dispatch(exitGameplay())
+    }
+  }, [] );
   const transitionActive = useSelector(selectExitScreenActive)
   return (
     <div className='gameplay-screen'>

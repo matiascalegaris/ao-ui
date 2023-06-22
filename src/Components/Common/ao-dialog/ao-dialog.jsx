@@ -14,7 +14,7 @@ export default function AoDialog({children, styles, contentStyles, ignoreAnimati
   }
   
   return (
-    <form className={'dialog-container' + animStyles + styles} autoComplete="off">
+    <div className={'dialog-container' + animStyles + styles} autoComplete="off">
       <div className='frame-side-container left'>
         <div className='corner-spacer'></div>
         <div className='left-img frame-center'></div>
@@ -39,6 +39,6 @@ export default function AoDialog({children, styles, contentStyles, ignoreAnimati
         {children}
       </div>
       
-    </form>
+    </div>
   )
 }

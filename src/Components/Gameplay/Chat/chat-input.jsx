@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ChatPrefix, ChatStates } from '../../../constants'
 import AoInput from '../../Common/ao-input/ao-input'
 import { ChatOptions } from './ChatOptions'
-import { selectChatMode, selectForceOpenChat, selectWhisperTarget, setWhisperTarget, setChatMode } from '../../../redux/GameplaySlices/ChatSlice'
+import { selectChatMode, selectForceOpenChat, selectWhisperTarget, setWhisperTarget, setChatMode, openChat, safeOpenChat } from '../../../redux/GameplaySlices/ChatSlice'
 import { RegisterApiCallback } from '../../../Api/Api'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +10,7 @@ import { setGameActiveDialog } from '../../../redux/GameplaySlices/GameStateSlic
 import { replaceAll } from '../../../Tools/Utils'
 
 const GetChatPrefix = (type, targetUser) => {
+  if (type === ChatStates.Normal) return ''
   if (type === ChatStates.Private) {
     return ChatPrefix[type] + targetUser + " "
   }
@@ -32,7 +33,7 @@ const GetChatState = message => {
   return [ret, targetChar]
 }
 
-export const ChatInput = () => {
+export const ChatInput = ({forceOpenChatId}) => {
 
   const [chatState, setChatState] = useState({
     chatInput:'', lastOpenChatId:0
@@ -41,7 +42,7 @@ export const ChatInput = () => {
   const {chatInput} = chatState;
   const chatMode = useSelector(selectChatMode)
   const whisperTarget = useSelector(selectWhisperTarget)
-  const forceOpenChatId = useSelector(selectForceOpenChat)
+  
   const handleChange = event => {
     const { value, name } = event.target;
     setChatState({ ...chatState, [name]: value});
@@ -51,6 +52,8 @@ export const ChatInput = () => {
     if (event.key === 'Enter') {
       window.parent.BabelUI.SendChat(chatInput)
       const [chatType, targetChar] = GetChatState(chatInput)
+      console.log("got chat state:" + chatType + ", " + targetChar)
+
       dispatch(setWhisperTarget({target:targetChar, openChat: false}))
       dispatch(setChatMode(chatType))
       setChatState({ ...chatState, chatInput:''});
@@ -61,7 +64,7 @@ export const ChatInput = () => {
   const handleGlobalKeyPress = evt => {
     if (evt.key === 'Enter' &&
         document.activeElement !== chatInputElement.current) {
-          chatInputElement.current &&  chatInputElement.current.focus()
+          window.parent.APicallbacks.OpenChat(0)
     }
     if (evt.key === ' ' &&
         document.activeElement !== chatInputElement.current) {
@@ -76,11 +79,8 @@ export const ChatInput = () => {
     if (process.env.NODE_ENV === 'development') {
       window.addEventListener("keyup", handleGlobalKeyPress);
     }
-    RegisterApiCallback('OpenChat', (chatMode) => {
-      const nextChat =  GetChatPrefix(chatMode, whisperTarget)
-      setChatState({ ...chatState, chatInput:nextChat})
-      chatInputElement.current &&  chatInputElement.current.focus()
-      
+    RegisterApiCallback('OpenChat', (ignoreValue) => { 
+      dispatch(safeOpenChat())
     })
   },[]);
   useEffect( () => () => {
@@ -90,6 +90,7 @@ export const ChatInput = () => {
     RegisterApiCallback('OpenChat', (chatMode) => {})
   }, [] );
   const onFocus = evt => {
+    console.log("on focu chat")
     evt.currentTarget.setSelectionRange(evt.currentTarget.value.length, evt.currentTarget.value.length)
     window.parent.BabelUI.UpdateInputFocus(true)
   }
@@ -97,12 +98,14 @@ export const ChatInput = () => {
     window.parent.BabelUI.UpdateInputFocus(false)
   }
   const openChatOptions = evt => {
+    console.log("open chat opt")
     setDisplayChatOpt(true)
   }
 
   if (forceOpenChatId > chatState.lastOpenChatId) {
-    chatInputElement.current.focus()
+    chatInputElement.current && chatInputElement.current.focus()
     const nextChat =  GetChatPrefix(chatMode, whisperTarget)
+    console.log("open with next chat: " + nextChat)
     setChatState({ ...chatState, chatInput:nextChat, lastOpenChatId:forceOpenChatId});
     chatInputElement.current &&  chatInputElement.current.focus()
   }
@@ -127,6 +130,7 @@ export const ChatInput = () => {
 
   const selectChatOpt = option => {
     setDisplayChatOpt(false)
+    console.log("got select chat option " + option)
     if (option === ChatStates.Private) {
       dispatch(setGameActiveDialog(requestPrivateMessage))
     } else {
@@ -135,6 +139,7 @@ export const ChatInput = () => {
       chatInputElement.current &&  chatInputElement.current.focus()
     }
   }
+  console.log("render with chat: " + chatInput + " mode " + chatMode + " and whisper: " + whisperTarget + " chat id: " + forceOpenChatId)
   return (
     <div className='input-line'>
         <img src={require('../../../assets/Icons/gameplay/ico_dialog.png')} 

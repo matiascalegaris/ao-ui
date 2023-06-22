@@ -1,3 +1,4 @@
+import { Actions } from "../constants"
 
 const RegisterApiCallback = (name,callback) => {
   if (window.parent.APicallbacks == null) {
@@ -251,6 +252,9 @@ if (process.env.NODE_ENV === 'development') {
     UseSpellSlot: slotIndex => {
     },
     OpenVBDialog: dialogName => {
+      if (dialogName === 'frmCerrar'){
+        window.parent.APicallbacks.SetActiveDialog('login')
+      }
     },
     UpdateInputFocus: newState => {
     },

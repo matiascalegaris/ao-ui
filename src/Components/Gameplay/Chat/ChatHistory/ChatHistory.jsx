@@ -7,7 +7,7 @@ export const ChatHistory = ({selectUser}) => {
   const chatEntries = useSelector(selectMessageList)
   const messagesEndRef = useRef(null)
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView(true)
+    messagesEndRef.current && messagesEndRef.current.scrollIntoView(true)
   }
   const onScroll = evt => {
     //console.log('scroll evt')

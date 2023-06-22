@@ -15,11 +15,16 @@ export default function ExtraSlotLine({locked, inventory, start, onSelect, onAct
       <img className='extra-slot' src={getImageForState(locked)}/>
       {
         inventory.slice(start, start+6).map( (item,index) => (
-          <InventorySlot key={item.index} content={item} locked={locked} 
+          <>
+          {
+            locked ? <img key={item.index} src={require('../../../../../../assets/Icons/inventory-extra/locked-slot.png')}/>
+            : <InventorySlot key={item.index} content={item} locked={locked} 
                          selected={item.index === selectedItem}
                          onActivate={onActivate} onSelect={onSelect}
                          onDropAction={onDropAction}
                          dropId={{type:'inventory', id:item.index}}/>
+          }
+          </>
         ))
       }
     </div>
