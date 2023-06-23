@@ -6,20 +6,19 @@ import ChatEntry from "./ChatEntry/chat-entry"
 const gChatState = {
   isAutoScroll: false
 }
-const scrollElementIntoView = (targetElement, parent ) => {
+const scrollToBottomView = ( parent ) => {
   gChatState.isAutoScroll = true
-  parent.scrollTo(0, targetElement.offsetTop)
+  parent.scrollTo(0, parent.scrollHeight)
 }
 export const ChatHistory = ({selectUser}) => {
   const chatEntries = useSelector(selectMessageList)
   const [chatState, setChatState] = useState({
     lastMessage:0, scrollTarget:-1, 
   });
-  const messagesEndRef = useRef(null)
   const scrollContiner = useRef(null)
   const scrollToBottom = () => {
-    messagesEndRef.current && scrollContiner.current &&
-    scrollElementIntoView(messagesEndRef.current, scrollContiner.current)
+    scrollContiner.current &&
+    scrollToBottomView(scrollContiner.current)
   }
   const onScroll = evt => {
     if (gChatState.isAutoScroll) {
@@ -33,13 +32,17 @@ export const ChatHistory = ({selectUser}) => {
       setChatState({...chatState, scrollTarget: percent})
     }
   }
-  
-  if (chatState.lastMessage < chatEntries.length) {
-    if (chatState.scrollTarget < 0) {
-      scrollToBottom()
+  useEffect(()=> {
+    const goTobottom = chatEntries.length > chatState.lastMessage &&  chatState.scrollTarget < 0
+    let scrollTime = null
+    if (goTobottom) {
+      scrollTime = setTimeout(() => {
+        scrollToBottom()
+      }, 10)
+      setChatState({ ...chatState, lastMessage: chatEntries.length})
     }
-    setChatState({ ...chatState, lastMessage: chatEntries.length})
-  }
+    return () => { goTobottom && clearTimeout(scrollTime)}
+  }, [chatEntries])
   useEffect(() => {
     setTimeout(() => {
       scrollToBottom()
@@ -52,7 +55,6 @@ export const ChatHistory = ({selectUser}) => {
           <ChatEntry key={index} chat={item} onUserSelect={selectUser}/>
         ))
       }
-      <div className='scrollEnd' ref={messagesEndRef}></div>
     </div>
   )
 }
