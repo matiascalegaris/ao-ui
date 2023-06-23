@@ -4,7 +4,6 @@ import './side-menu.scss'
 import ExpArea from './ExpArea/exp-area'
 
 export default function SideMenu({styles}) {
-  console.log('side menu render')
   return (
     <div className={'side-menu ' + styles}>
       <ExpArea/>

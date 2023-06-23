@@ -23,10 +23,8 @@ export default function GameplayScreen() {
     }, 200);
   }, [])
   useEffect( () => {
-    console.log('gmeplay mounted')
     return () => 
     {
-      console.log('gmeplay unmounted')
       dispatch(exitGameplay())
     }
   }, [] );

@@ -52,8 +52,6 @@ export const ChatInput = ({forceOpenChatId}) => {
     if (event.key === 'Enter') {
       window.parent.BabelUI.SendChat(chatInput)
       const [chatType, targetChar] = GetChatState(chatInput)
-      console.log("got chat state:" + chatType + ", " + targetChar)
-
       dispatch(setWhisperTarget({target:targetChar, openChat: false}))
       dispatch(setChatMode(chatType))
       setChatState({ ...chatState, chatInput:''});
@@ -90,7 +88,6 @@ export const ChatInput = ({forceOpenChatId}) => {
     RegisterApiCallback('OpenChat', (chatMode) => {})
   }, [] );
   const onFocus = evt => {
-    console.log("on focu chat")
     evt.currentTarget.setSelectionRange(evt.currentTarget.value.length, evt.currentTarget.value.length)
     window.parent.BabelUI.UpdateInputFocus(true)
   }
@@ -98,14 +95,12 @@ export const ChatInput = ({forceOpenChatId}) => {
     window.parent.BabelUI.UpdateInputFocus(false)
   }
   const openChatOptions = evt => {
-    console.log("open chat opt")
     setDisplayChatOpt(true)
   }
 
   if (forceOpenChatId > chatState.lastOpenChatId) {
     chatInputElement.current && chatInputElement.current.focus()
     const nextChat =  GetChatPrefix(chatMode, whisperTarget)
-    console.log("open with next chat: " + nextChat)
     setChatState({ ...chatState, chatInput:nextChat, lastOpenChatId:forceOpenChatId});
     chatInputElement.current &&  chatInputElement.current.focus()
   }
@@ -130,7 +125,6 @@ export const ChatInput = ({forceOpenChatId}) => {
 
   const selectChatOpt = option => {
     setDisplayChatOpt(false)
-    console.log("got select chat option " + option)
     if (option === ChatStates.Private) {
       dispatch(setGameActiveDialog(requestPrivateMessage))
     } else {
@@ -139,7 +133,6 @@ export const ChatInput = ({forceOpenChatId}) => {
       chatInputElement.current &&  chatInputElement.current.focus()
     }
   }
-  console.log("render with chat: " + chatInput + " mode " + chatMode + " and whisper: " + whisperTarget + " chat id: " + forceOpenChatId)
   return (
     <div className='input-line'>
         <img src={require('../../../assets/Icons/gameplay/ico_dialog.png')} 

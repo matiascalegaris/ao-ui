@@ -109,8 +109,8 @@ function App() {
     RegisterApiCallback('UpdateGold', (gold) => {
       dispatch(updateGold(gold))
     })
-    RegisterApiCallback('UpdateExp', (curremt, max) => {
-      dispatch(updateExp({min: curremt, max: max}))
+    RegisterApiCallback('UpdateExp', (current, max) => {
+      dispatch(updateExp({min: current, max: max}))
     })
     RegisterApiCallback('UpdateStrAndAgi', (str, agi, strState, agiState) => {
       dispatch(updateStrandAgi({str:str, agi:agi, strState:strState, agiState:agiState}))

@@ -6,7 +6,6 @@ import { selectIsGameMaster } from '../../../redux/GameplaySlices/GameStateSlice
 export const ChatOptions = ({selectOptions, currentOption}) => {
   const { t } = useTranslation()
   const isGm = useSelector(selectIsGameMaster)
-  console.log("render chat options with selected opt: " + currentOption)
   return (
     <div className='chat-options'>
       <span className='chat-opt' onClick={()=>{ selectOptions(ChatStates.Normal)}}>

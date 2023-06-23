@@ -15,7 +15,7 @@ export const CharacterInfoSlice = createSlice({
       state.level = action.payload.level
     },
     updateExp: (state, action)=> {
-      state.exp = action.payload.exp
+      state.exp = action.payload
     },
     setUserName: (state, action) => {
       state.name = action.payload
