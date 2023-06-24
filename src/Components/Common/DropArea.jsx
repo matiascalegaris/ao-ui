@@ -16,8 +16,12 @@ export const DropArea = ({children, id, acceptTypes}) => {
       dragDropContext.SetActiveContainer(dragDropContext, null)
     }    
   }
+  const style = {
+    width: '100%', 
+    height: '100%'
+  }
   return (
-    <div onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+    <div style={style} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
     {children}
     </div>
   )

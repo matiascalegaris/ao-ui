@@ -18,7 +18,7 @@ export default function InventorySlot({content, locked, selected, onSelect,
   const containerRef = useRef(null)
   const [eventHandlers] = useTooltipHover(content.grh ? content : null, TooltipTypes.ITEM, containerRef)
   return (
-    <div className={style} ref={containerRef} {...eventHandlers}>
+    <div className={style} ref={containerRef} {...eventHandlers}>  
       <DropArea id={{...dropId, onDrop:onDrop}} acceptTypes={[DragDropTypes.ITEM]}>
       { content.grh && !locked > 0 ?
       <InventoryItem

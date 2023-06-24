@@ -33,6 +33,7 @@ export const DragLayer = () => {
     if (mouseCallbacks.onMouseMove !== null) {
       window.removeEventListener('mousemove', mouseCallbacks.onMouseMove, false);
     }
+    setMouseCallbacks({...mouseCallbacks, onMouseUp: null, onMouseMove: null})
   }
   const registerCurrentCallbacks = () => {
     const onMouseMove = evt => {
@@ -48,7 +49,7 @@ export const DragLayer = () => {
     }
     window.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('mouseup', onMouseUp, false);
-    setMouseCallbacks({...dragDropContext, onMouseUp: onMouseUp, onMouseMove: onMouseMove})
+    setMouseCallbacks({...mouseCallbacks, onMouseUp: onMouseUp, onMouseMove: onMouseMove})
   }
   useEffect(() => {
     clearCurrentCallbacks()
