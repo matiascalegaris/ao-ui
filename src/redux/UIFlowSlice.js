@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
+import { ActiveToolTip } from '../Components/Common/Tooltip/Tooltip-manager'
 
 export const UIFlowSlice = createSlice({
   name: 'uiFlow',
@@ -10,7 +11,8 @@ export const UIFlowSlice = createSlice({
     transitionActive: false,
     selectedEndpoint: 0,
     popupData: null,
-    fadeOut: null
+    fadeOut: null,
+    activeToolTip: null
   },
   reducers: {
     setActiveScreen : (state, action) => {
@@ -40,6 +42,9 @@ export const UIFlowSlice = createSlice({
     setActivePopup : (state, action) => {
       state.activePopup = action.payload.popUp
       state.popupData = action.payload.data
+    },
+    setActiveToolTip: (state, action) => {
+      state.activeToolTip = action.payload
     },
     startTransition : (state, action) => {
       if (state.activeDialog !== action.payload ||
@@ -79,7 +84,7 @@ export const UIFlowSlice = createSlice({
 
 export const { setActiveScreen, displayLoading, displayLoadingText, displayErrorMessage,
                hideErrorMessage, startTransition, transitionComplete, updateEndpoint,
-                setOptionDialog, setActivePopup, hidePopup, setFadeOut } = UIFlowSlice.actions
+                setOptionDialog, setActivePopup, hidePopup, setFadeOut, setActiveToolTip } = UIFlowSlice.actions
 
 export const selectActiveDialog = (state) =>  state.uiFlow.activeDialog
 export const selectActivePopup = (state) => state.uiFlow.activePopup
@@ -87,6 +92,7 @@ export const selectPopupData = (state) => state.uiFlow.popupData
 export const selectExitScreenActive = (state) => state.uiFlow.transitionActive
 export const selectActiveEndPoint = (state) => state.uiFlow.selectedEndpoint
 export const selectIsFadeOut = (state) => state.uiFlow.fadeOut
+export const selectTooltip = (state) => state.uiFlow.activeToolTip
 
 export const setActiveDialog = (dialog) => (dispatch) => {
   dispatch(startTransition(dialog))

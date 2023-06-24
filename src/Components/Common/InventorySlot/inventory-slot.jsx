@@ -3,6 +3,8 @@ import { DragDropTypes } from '../../../constants'
 import InventoryItem from './InventoryItem/inventory-item'
 import { DropArea } from '../DropArea'
 import { CooldownIndicator } from './CooldownIndicator/cooldown-indicator'
+import { TooltipTypes, useTooltipHover } from '../Tooltip/Tooltip-manager'
+import { useRef } from 'react'
 
 export default function InventorySlot({content, locked, selected, onSelect,
                                        onActivate, dropId, onDropAction}) {
@@ -13,8 +15,10 @@ export default function InventorySlot({content, locked, selected, onSelect,
   const onDrop = (mouseEvt, dragInfo) => {
     onDropAction(dragInfo.item, dropId)
   }
+  const containerRef = useRef(null)
+  const [eventHandlers] = useTooltipHover(content.grh ? content : null, TooltipTypes.ITEM, containerRef)
   return (
-    <div className={style}>
+    <div className={style} ref={containerRef} {...eventHandlers}>
       <DropArea id={{...dropId, onDrop:onDrop}} acceptTypes={[DragDropTypes.ITEM]}>
       { content.grh && !locked > 0 ?
       <InventoryItem

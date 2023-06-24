@@ -25,11 +25,11 @@ export default configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types
-        ignoredActions: ["gameState/setGameActiveDialog"],
+        ignoredActions: ["gameState/setGameActiveDialog", "uiFlow/setActiveToolTip"],
         // Ignore these field paths in all actions
         ignoredActionPaths: ['gameState.setActiveDialog'],
         // Ignore these paths in the state
-        ignoredPaths: ["gameState.activeDialog.actions", "gameState.activeDialog"],
+        ignoredPaths: ["gameState.activeDialog.actions", "gameState.activeDialog", "uiFlow.activeToolTip"],
       },
     }),
 })
