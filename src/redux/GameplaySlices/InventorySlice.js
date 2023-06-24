@@ -96,11 +96,13 @@ export const selectEquippedBonus = createSelector(
       amunition: { min: 0, max: 0},
       weapon: { min: 0, max: 0}
     }
+    let useAmunition = false
     itemList.forEach( item => {
       if (item.equipped) {
         switch(item.type) {
           case eObjType.otWeapon:
             equippedSlots.weapon = { min: item.minHit, max: item.maxHit}
+            useAmunition = item.amunition > 0
             break
           case eObjType.otArmor:
             equippedSlots.armor = { min: item.minDef, max: item.maxDef}
@@ -119,6 +121,9 @@ export const selectEquippedBonus = createSelector(
         }
       }
     });
+    if (!useAmunition) {
+      equippedSlots.amunition = { min: 0, max: 0}
+    }
     return equippedSlots
   }
 )

@@ -282,7 +282,7 @@ if (process.env.NODE_ENV === 'development') {
     SetInventory: () => {
       setTimeout(() => {
         window.parent.APicallbacks.UpdateInvSlot({name:'hacha vikinga', count:1, canUse: false, 
-                                                  equipped: true, grh:36467,
+                                                  equipped: true, grh:36467, description:'texto de prueba a ver como se ve',
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
                                                   cooldown:4000, cdType:5, cdMask:19, index:1})

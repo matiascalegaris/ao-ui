@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTooltip, setActiveToolTip } from "../../../redux/UIFlowSlice";
 import './tooltip.scss'
-import Sprite from "../Sprite/sprite";
+import { ItemTooltip } from "./ItemToolTip/item-tooltip";
 
 export const TooltipTypes = {
   ITEM: 'Item',
@@ -26,56 +26,11 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
     onMouseOut() { 
       clearTimeout(isInsideRef.current.timer)
       setHoverState({...isInsideRef.current, timer: null})
-      //dispatch(setActiveToolTip(null))
+      dispatch(setActiveToolTip(null))
     }
   }), [contentInfo, hoverState]);
   
   return [eventHandlers];
-}
-
-const drawIemTooltip = (itemInfo, anchor) => {
-  const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(itemInfo.grh)
-  return (
-    <div className="item-tooltip">
-      <div className="item-header">
-      <Sprite
-          styles="icon"
-          imageName={grhInfo.imageNumber}
-          x={grhInfo.startX}
-          y={grhInfo.startY}
-          width={grhInfo.width}
-          height={grhInfo.height}
-        />
-        <span className="title">{itemInfo.name}</span>
-      </div>
-      {
-        itemInfo.description ? <div className="description">{itemInfo.description}</div> : null
-      }
-      <div className="stats-line">
-      {
-        itemInfo.minDef > 0 || itemInfo.maxDef > 0 ? 
-          <div className="stats-line">
-            <img className="icon" src={require('../../../assets/Icons/gameplay/ico_stats_shield.png')}/>
-            <span className="value">{itemInfo.minDef}/{itemInfo.maxDef}</span>
-          </div> : null
-      }
-      {
-        itemInfo.minHit > 0 || itemInfo.maxHit > 0 ? 
-          <div className="stats-line">
-            <img className="icon" src={require('../../../assets/Icons/gameplay/ico_stats_sword.png')}/>
-            <span className="value">{itemInfo.minHit}/{itemInfo.maxHit}</span>
-          </div> : null
-      }
-      {
-        itemInfo.cooldown > 0 ? 
-          <div className="stats-line">
-            <img className="icon" src={require('../../../assets/Icons/gameplay/ico_timer.png')}/>
-            <span className="value">{itemInfo.cooldown/1000}s</span>
-          </div> : null
-      }
-      </div>
-    </div>
-  )
 }
 
 export const ActiveToolTip = () => {
@@ -108,7 +63,7 @@ export const ActiveToolTip = () => {
   return (
     <div style={posStyle}>
       {{
-          'Item':drawIemTooltip(activeToolTip.contentInfo),
+          'Item':<ItemTooltip itemInfo={activeToolTip.contentInfo} />,
         }
         [activeToolTip.type]
       }
