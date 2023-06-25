@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { useSelector } from 'react-redux'
-import { ActiveToolTip } from '../Components/Common/Tooltip/Tooltip-manager'
 
 export const UIFlowSlice = createSlice({
   name: 'uiFlow',

@@ -1,10 +1,17 @@
 import './item-tooltip.scss'
 import Sprite from '../../Sprite/sprite'
+import { eObjType } from '../../../../constants'
 
 const getDefIconForItemType = item => {
   switch(item.type) {
+    case eObjType.otArmor:
+      return require('../../../../assets/Icons/gameplay/ico_stats_armor.png')
+    case eObjType.otSHIELD:
+      return require('../../../../assets/Icons/gameplay/ico_stats_shield.png')
+    case eObjType.otHELMET:
+        return require('../../../../assets/Icons/gameplay/ico_stats_helmet.png')
     default:
-      require('../../../../assets/Icons/gameplay/ico_stats_shield.png')
+      return require('../../../../assets/Icons/gameplay/ico_stats_shield.png')
   }
 }
 export const ItemTooltip = ({itemInfo}) => {

@@ -11,7 +11,7 @@ export const TooltipTypes = {
 const toolTipWidth = 200
 
 export const useTooltipHover = (contentInfo, type, targetRef) => {
-  const [hoverState, setHoverState] = useState({timer:null})
+  const [hoverState, setHoverState] = useState({timer:null, anchor: null})
   const dispatch = useDispatch()
   const isInsideRef = useRef(hoverState);
 
@@ -19,31 +19,33 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
     isInsideRef.current = hoverState;
   }, [hoverState]);
 
-  let anchor = null
-  if (targetRef.current) {
-    const anchorPos = targetRef.current.getBoundingClientRect()
-    let anchorCenter = (anchorPos.left + anchorPos.width / 2) - (toolTipWidth / 2)
-    if (anchorCenter + toolTipWidth > document.body.clientWidth) {
-      anchorCenter -=  anchorCenter + toolTipWidth - document.body.clientWidth
-    }
-    anchor = {
-      PosX: anchorCenter,
-      PosY: anchorPos.bottom
-    }
-  }
+  
+  useEffect(() => {
+    if (targetRef.current) {
+      const anchorPos = targetRef.current.getBoundingClientRect()
+      let anchorCenter = (anchorPos.left + anchorPos.width / 2) - (toolTipWidth / 2)
+      if (anchorCenter + toolTipWidth > document.body.clientWidth) {
+        anchorCenter -=  anchorCenter + toolTipWidth - document.body.clientWidth
+      }
+      setHoverState({...hoverState, anchor:{
+        PosX: anchorCenter,
+        PosY: anchorPos.bottom
+      }})
+    }    
+  }, [targetRef]);
  
   const eventHandlers = useMemo(() => ({
     onMouseOver() { 
       if (!contentInfo || !type) return
-      setHoverState({
+      setHoverState({ ...isInsideRef.current,
         timer: setTimeout(() => {
-          dispatch(setActiveToolTip({contentInfo, type, anchor}))
-          setHoverState({timer: null})
+          dispatch(setActiveToolTip({contentInfo, type, anchor:isInsideRef.current.anchor}))
+          setHoverState({...isInsideRef.current,timer: null})
         }, 500)})
     },
     onMouseOut() { 
       clearTimeout(isInsideRef.current.timer)
-      setHoverState({timer: null})
+      setHoverState({...isInsideRef.current, timer: null})
       dispatch(setActiveToolTip(null))
     }
   }), [contentInfo, dispatch, targetRef]);
