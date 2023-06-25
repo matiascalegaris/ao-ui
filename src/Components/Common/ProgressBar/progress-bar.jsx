@@ -1,6 +1,8 @@
 import './progress-bar.scss'
 
-export default function ProgressBar({styles, currentVal, maxValue, displayMax, extraFill, barStyle, extraStyle, customText, ...otherProps}) {
+export default function ProgressBar({styles, currentVal, maxValue,
+                                     displayMax, extraFill, barStyle,
+                                    extraStyle, customText, displayPercent, ...otherProps}) {
   if (extraFill === undefined) {
     extraFill = 0
   }
@@ -23,6 +25,9 @@ export default function ProgressBar({styles, currentVal, maxValue, displayMax, e
   };
   var bonusSize = {
     width: `${extraSize}%`
+  }
+  if (displayPercent) {
+    displayText = `${progress.toFixed(2)}%`
   }
   displayText = customText !== undefined ? customText : displayText
   return (
