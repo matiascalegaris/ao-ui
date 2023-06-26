@@ -22,6 +22,12 @@ export default function InventoryItem ({item, onSelect, onActivate}) {
   const onMouseDown = evt => {
     dragDropContext.MouseDownOnDragable(item, DragDropTypes.ITEM,  Date.now())
   }
+  let imgFilters = {}
+  if (item.cantUse > 0) {
+    imgFilters = {
+      filter: 'grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8)'
+    }
+  }
   return (
     <Sprite
           styles="item-icon"
@@ -32,6 +38,7 @@ export default function InventoryItem ({item, onSelect, onActivate}) {
           height={grhInfo.height}
           onClick={onClick}
           onMouseDown={onMouseDown}
+          imageFilter={imgFilters}
         />
   )
 }

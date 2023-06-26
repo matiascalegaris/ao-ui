@@ -1,6 +1,8 @@
 import './item-tooltip.scss'
 import Sprite from '../../Sprite/sprite'
 import { eObjType } from '../../../../constants'
+import { SpellDetails } from '../SpellToolTip/spell-tooltip'
+import { useTranslation } from 'react-i18next'
 
 const getDefIconForItemType = item => {
   switch(item.type) {
@@ -14,8 +16,24 @@ const getDefIconForItemType = item => {
       return require('../../../../assets/Icons/gameplay/ico_stats_shield.png')
   }
 }
+
+const getItemCustomData = objectInfo => {
+  switch(objectInfo.objType) {
+    case eObjType.otScrolls:
+      if (objectInfo.spellIndex > 0) {
+        const spellInfo = window.parent.BabelUI.GetSpellInfo(objectInfo.spellIndex)
+        return <SpellDetails spellInfo={spellInfo}/>
+      }
+      return <></>
+    default:
+      return <></>
+  }
+}
+
 export const ItemTooltip = ({itemInfo}) => {
   const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(itemInfo.grh)
+  const objInfo = window.parent.BabelUI.GetItemInfo(itemInfo.objIndex)
+  const {t}  = useTranslation()
   return (
     <div className="item-tooltip">
       <div className="item-header">
@@ -55,6 +73,13 @@ export const ItemTooltip = ({itemInfo}) => {
           </div> : null
       }
       </div>
+      {
+        itemInfo.cantUse > 0 ? <p className='cant-use'>{t(`cant-use-reason-${itemInfo.cantUse}`)}</p>
+        : null
+      }
+      {
+        getItemCustomData(objInfo)
+      }
     </div>
   )
 }

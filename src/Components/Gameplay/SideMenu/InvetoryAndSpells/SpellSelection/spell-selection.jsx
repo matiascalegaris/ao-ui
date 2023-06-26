@@ -8,7 +8,7 @@ import InventoryFrame from '../InventoryFrame/inventory-frame'
 import './spell-selection.scss'
 import SpellEntry from './SpellEntry/spell-entry';
 import { DropArea } from '../../../../Common/DropArea';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const getSpellOrderIconForState = state => {
   if (state) {
@@ -37,14 +37,16 @@ export default function SpellSelection () {
     setEnableSpellOrder(!enableSpellOrder)
   }
   const img = getSpellOrderIconForState(enableSpellOrder)
+  const scrollRectRef = useRef(null)
   return (
     <div className='spell-selection'>
-      <InventoryFrame styles='spell-list' contentStyles='spell-content'>
+      <InventoryFrame styles='spell-list' contentStyles='spell-content' innerRef={scrollRectRef}>
         {
           spellList.map( (spell, index) => (
             <SpellEntry key={index} spell={spell} 
                         selected={selectedSpellIndex === index} 
                         dragEnabled={enableSpellOrder}
+                        scrollAreaRef={scrollRectRef}
                         onClick={() => selectNewSpell(spell)}/>
           ))
         }

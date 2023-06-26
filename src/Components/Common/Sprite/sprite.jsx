@@ -7,7 +7,7 @@ const GetImageUrl = imageName =>  {
   return `${GetRootDirectory()}/Graficos/${imageName}.png`
 }
 
-const Sprite = ({imageName, x, y, width, height, styles, innerRef, customSectionStyle, ...otherProps}) => {
+const Sprite = ({imageName, x, y, width, height, styles, innerRef, customSectionStyle, imageFilter, ...otherProps}) => {
   const imageUrl =  GetImageUrl(imageName)
   var sectionStyle = { 
     ...customSectionStyle,
@@ -16,13 +16,14 @@ const Sprite = ({imageName, x, y, width, height, styles, innerRef, customSection
     overflow: 'hidden'
   };
   var innerStyle = {
+    ...imageFilter,
     left: `${-x}px`,
     top: `${-y}px`
   }
   return imageUrl ? (
     <div ref={innerRef} style={sectionStyle} className={'managed-sprite ' + styles} {...otherProps}
       onDragStart={ evt => {evt.preventDefault(); return false;}}>
-      <img src={imageUrl} className="image"  style={innerStyle} />
+      <img src={imageUrl} className={"image"}  style={innerStyle} />
     </div>
   ) : null;
 };

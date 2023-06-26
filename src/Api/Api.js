@@ -281,26 +281,29 @@ if (process.env.NODE_ENV === 'development') {
     },
     SetInventory: () => {
       setTimeout(() => {
-        window.parent.APicallbacks.UpdateInvSlot({name:'hacha vikinga', count:1, canUse: false, 
+        window.parent.APicallbacks.UpdateInvSlot({name:'hacha vikinga', count:1, cantUse: 0, 
                                                   equipped: true, grh:36467, description:'texto de prueba a ver como se ve',
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
                                                   cooldown:4000, cdType:5, cdMask:19, index:1})
-        window.parent.APicallbacks.UpdateInvSlot({name:'algun arco', count:1, canUse: false, 
+        window.parent.APicallbacks.UpdateInvSlot({name:'algun arco', count:1, cantUse: 0, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
                                                   cooldown:0, cdType:0, cdMask:2, index:2})
-        window.parent.APicallbacks.UpdateInvSlot({name:'alguna espada', count:1, canUse: false, 
+        window.parent.APicallbacks.UpdateInvSlot({name:'alguna espada', count:1, cantUse: 0, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
                                                   cooldown:0, cdType:0, cdMask:1, index:3})
-        window.parent.APicallbacks.UpdateInvSlot({name:'algun usable', count:1, canUse: false, 
+        window.parent.APicallbacks.UpdateInvSlot({name:'algun usable', count:1, cantUse: 2, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 53, value: 0, 
                                                   cooldown:30000, cdType:10, cdMask:16, index:4})
+
+        window.parent.APicallbacks.UpdateSpellSlot({name:'test', index:1, spellIndex: 5, 
+                                                  grh:36467})                                          
       }, 5)
     },
     MoveSpellSlot: (from, to) => {
@@ -310,7 +313,13 @@ if (process.env.NODE_ENV === 'development') {
     },
     UpdateOpenDialog: state => {
       console.log('UpdateOpenDialog ' + state)
+    },
+    GetSpellInfo : spellIndex => {
+      return { name: "test spell", description: "some spell data", cooldown:40000, requiredMana:1500, requiredSkill:100, requiredStamina: 950}
+    },
+    GetItemInfo : objIndex => {
+      return { objType: 24, spellIndex: 1}
     }
-  }
+  } 
 }
 export {RegisterApiCallback}

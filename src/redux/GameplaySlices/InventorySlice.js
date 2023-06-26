@@ -5,7 +5,7 @@ import { createSelector } from 'reselect'
 import { ArrayMove } from '../../Tools/Utils'
 
 const defaultValues = {
-  itemList: Array(48).fill({name:'', count:1, canUse: false, equipped: true, grh:0,
+  itemList: Array(48).fill({name:'', count:1, cantUse: 0, equipped: true, grh:0,
                            maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: 0,
                            value: 0, cooldown:0, cdType:0, cdMask:0})
                       .map((element, index) => ({...element, count: 0, index:index})),
@@ -14,7 +14,7 @@ const defaultValues = {
   spellList: Array(40).fill({ name:'(Vacio)', index: 0, spellIndex: 0})
                       .map((element, index) => ({...element, index:index, name:'(Vacio)' + index})),
   selectedSpellIndex: -1,
-  keys: Array(10).fill({name:'', count:0, canUse: false, equipped: false, 
+  keys: Array(10).fill({name:'', count:0, cantUse: 0, equipped: false, 
                         grh:0, maxDef:0, minDef:0, maxHit:0, objIndex: 0,
                         type: 0, value: 0, cooldown:0, cdType:0, cdMask:0})
                  .map((element, index) => ({...element, count: 0, index:index})),

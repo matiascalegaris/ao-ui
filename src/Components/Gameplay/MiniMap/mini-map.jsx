@@ -6,7 +6,7 @@ import { InterestPoint } from './InterestPoints/interest-points'
 import { Actions } from '../../../constants'
 
 const GetMapUrl = imageName =>  {
-  return `${GetRootDirectory()}Minimapas/mapa${imageName}.bmp`
+  return `${GetRootDirectory()}/Minimapas/mapa${imageName}.bmp`
 }
 
 const GetStyleForColor = color => {

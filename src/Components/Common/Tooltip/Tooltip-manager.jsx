@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTooltip, setActiveToolTip } from "../../../redux/UIFlowSlice";
 import './tooltip.scss'
 import { ItemTooltip } from "./ItemToolTip/item-tooltip";
+import { SpellTooltip } from "./SpellToolTip/spell-tooltip";
 
 export const TooltipTypes = {
   ITEM: 'Item',
@@ -10,7 +11,7 @@ export const TooltipTypes = {
 }
 const toolTipWidth = 200
 
-export const useTooltipHover = (contentInfo, type, targetRef) => {
+export const useTooltipHover = (contentInfo, type, targetRef, scrollAreaRef) => {
   const [hoverState, setHoverState] = useState({timer:null, anchor: null})
   const dispatch = useDispatch()
   const isInsideRef = useRef(hoverState);
@@ -18,28 +19,26 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
   useEffect(() => {
     isInsideRef.current = hoverState;
   }, [hoverState]);
-
-  
-  useEffect(() => {
-    if (targetRef.current) {
-      const anchorPos = targetRef.current.getBoundingClientRect()
-      let anchorCenter = (anchorPos.left + anchorPos.width / 2) - (toolTipWidth / 2)
-      if (anchorCenter + toolTipWidth > document.body.clientWidth) {
-        anchorCenter -=  anchorCenter + toolTipWidth - document.body.clientWidth
-      }
-      setHoverState({...hoverState, anchor:{
-        PosX: anchorCenter,
-        PosY: anchorPos.bottom
-      }})
-    }    
-  }, [targetRef]);
  
   const eventHandlers = useMemo(() => ({
     onMouseOver() { 
       if (!contentInfo || !type) return
+      let anchor = null
+      if (targetRef.current) {
+        const anchorPos = targetRef.current.getBoundingClientRect()
+        const scrollOffset = scrollAreaRef && scrollAreaRef.current ? scrollAreaRef.current.scrollTop : 0
+        let anchorCenter = (anchorPos.left + anchorPos.width / 2) - (toolTipWidth / 2)
+        if (anchorCenter + toolTipWidth > document.body.clientWidth) {
+          anchorCenter -=  anchorCenter + toolTipWidth - document.body.clientWidth
+        }
+        anchor = {
+          PosX: anchorCenter,
+          PosY: anchorPos.bottom - scrollOffset
+        }
+      }
       setHoverState({ ...isInsideRef.current,
         timer: setTimeout(() => {
-          dispatch(setActiveToolTip({contentInfo, type, anchor:isInsideRef.current.anchor}))
+          dispatch(setActiveToolTip({contentInfo, type, anchor:anchor}))
           setHoverState({...isInsideRef.current,timer: null})
         }, 500)})
     },
@@ -66,18 +65,11 @@ export const ActiveToolTip = () => {
     position: 'absolute',
     display: 'flex'
   }
-  switch(activeToolTip.type) {
-    case TooltipTypes.ITEM:
-      break;
-    case TooltipTypes.SPELL:
-      break;
-    default:
-      break;
-  }
   return (
     <div style={posStyle}>
       {{
           'Item':<ItemTooltip itemInfo={activeToolTip.contentInfo} />,
+          'Spell':<SpellTooltip spell={activeToolTip.contentInfo}/>
         }
         [activeToolTip.type]
       }

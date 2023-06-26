@@ -84,7 +84,13 @@ const resources = {
       'max-level-exp': 'Max level!',
       'keys': 'Keys',
       'delete-item-message': 'Are you sure you wnat to delete {{itemName}}',
-      'send-private-message': "Please enter the username with whom you'd like to start a private conversation."
+      'send-private-message': "Please enter the username with whom you'd like to start a private conversation.",
+      'cant-use-reason-1': 'Your gender cannot use it!',
+      'cant-use-reason-2': 'Your class cannot use it!',
+      'cant-use-reason-3': 'Your faction prohibits you from using this item!',
+      'cant-use-reason-4': 'You do not have enough skills to use it!',
+      'cant-use-reason-5': 'Your race cannot use it!',
+      'cant-use-reason-6': 'You do not have a high enough level!'
     }
   },
   es: {
@@ -193,7 +199,13 @@ const resources = {
       'max-level-exp': '¡Nivel máximo!',
       'keys': 'Llaves',
       'delete-item-message': 'Estas seguro que deseas eliminar {{itemName}}',
-      'send-private-message': 'Escriba el usuario con el que desea iniciar una conversación privada.'
+      'send-private-message': 'Escriba el usuario con el que desea iniciar una conversación privada.',
+      'cant-use-reason-1': 'Tu genero no puede usarlo!',
+      'cant-use-reason-2': 'Tu clase no puede usarlo!',
+      'cant-use-reason-3': 'Tu faccion te prohibe usar este objeto!',
+      'cant-use-reason-4': 'No tienes suficientes skills para usarlo!',
+      'cant-use-reason-5': 'Tu raza no puede usarlo!',
+      'cant-use-reason-6': 'No tienes suficiente nivel!',
     }
   }
 };

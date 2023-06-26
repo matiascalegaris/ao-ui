@@ -6,8 +6,9 @@ import { DropArea } from '../../../../../Common/DropArea'
 import { DragDropContext } from '../../../../../Common/DragDropProvider'
 import { useDispatch } from 'react-redux'
 import { moveSpellSlot } from '../../../../../../redux/GameplaySlices/InventorySlice'
+import { TooltipTypes, useTooltipHover } from '../../../../../Common/Tooltip/Tooltip-manager'
 
-export default function SpellEntry({spell, selected, ...otherProps}) {
+export default function SpellEntry({spell, selected, scrollAreaRef, ...otherProps}) {
   const dragDropContext = useContext(DragDropContext);
   const [dragDirection, setDragDirection] = useState(null)
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ export default function SpellEntry({spell, selected, ...otherProps}) {
     if (targetSlot === dragInfo.item.index) return
     window.parent.BabelUI.MoveSpellSlot(dragInfo.item.index, targetSlot)
     dispatch(moveSpellSlot({from:dragInfo.item.index , to:targetSlot}))
+    
   }
 
   const mouseMove = evt => {
@@ -51,6 +53,7 @@ export default function SpellEntry({spell, selected, ...otherProps}) {
     borderTop: DrawDragMarker && dragDirection === 2 ? '2px solid red' : 'none'
   }
   const spellRef = useRef(null)
+  const [eventHandlers] = useTooltipHover(spell.spellIndex > 0 ? spell : null, TooltipTypes.SPELL, spellRef, scrollAreaRef)
   return (
     <DropArea id={{id:spell.index, onDrop:onDrop}} acceptTypes={[DragDropTypes.SPELL]}>
       <Spell spellInfo={spell} 
@@ -58,6 +61,7 @@ export default function SpellEntry({spell, selected, ...otherProps}) {
              innerRef={spellRef} 
              onMouseMove={mouseMove}
              styles={dragStyle}
+             {...eventHandlers}
              {...otherProps}/>
     </DropArea>
   )
