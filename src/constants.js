@@ -116,6 +116,11 @@ export const ChatStates = {
   GmGlobal: 7
 };
 
+export const ItemCounFormat = {
+  DisplayAll: 0,
+  DisplayReduced : 1
+}
+
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
 
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']

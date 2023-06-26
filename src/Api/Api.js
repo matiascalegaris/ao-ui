@@ -281,7 +281,7 @@ if (process.env.NODE_ENV === 'development') {
     },
     SetInventory: () => {
       setTimeout(() => {
-        window.parent.APicallbacks.UpdateInvSlot({name:'hacha vikinga', count:1, cantUse: 0, 
+        window.parent.APicallbacks.UpdateInvSlot({name:'hacha vikinga', count:999, cantUse: 0, 
                                                   equipped: true, grh:36467, description:'texto de prueba a ver como se ve',
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
@@ -291,12 +291,12 @@ if (process.env.NODE_ENV === 'development') {
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
                                                   cooldown:0, cdType:0, cdMask:2, index:2})
-        window.parent.APicallbacks.UpdateInvSlot({name:'alguna espada', count:1, cantUse: 0, 
+        window.parent.APicallbacks.UpdateInvSlot({name:'alguna espada', count:1500, cantUse: 0, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0, 
                                                   cooldown:0, cdType:0, cdMask:1, index:3})
-        window.parent.APicallbacks.UpdateInvSlot({name:'algun usable', count:1, cantUse: 2, 
+        window.parent.APicallbacks.UpdateInvSlot({name:'algun usable', count:1150, cantUse: 2, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 53, value: 0, 
