@@ -11,8 +11,8 @@ export const TooltipTypes = {
 }
 const toolTipWidth = 200
 
-export const useTooltipHover = (contentInfo, type, targetRef, scrollAreaRef) => {
-  const [hoverState, setHoverState] = useState({timer:null, anchor: null})
+export const useTooltipHover = (contentInfo, type, targetRef) => {
+  const [hoverState, setHoverState] = useState({timer:null})
   const dispatch = useDispatch()
   const isInsideRef = useRef(hoverState);
 
@@ -26,14 +26,13 @@ export const useTooltipHover = (contentInfo, type, targetRef, scrollAreaRef) => 
       let anchor = null
       if (targetRef.current) {
         const anchorPos = targetRef.current.getBoundingClientRect()
-        const scrollOffset = scrollAreaRef && scrollAreaRef.current ? scrollAreaRef.current.scrollTop : 0
         let anchorCenter = (anchorPos.left + anchorPos.width / 2) - (toolTipWidth / 2)
         if (anchorCenter + toolTipWidth > document.body.clientWidth) {
           anchorCenter -=  anchorCenter + toolTipWidth - document.body.clientWidth
         }
         anchor = {
           PosX: anchorCenter,
-          PosY: anchorPos.bottom - scrollOffset
+          PosY: anchorPos.bottom
         }
       }
       setHoverState({ ...isInsideRef.current,

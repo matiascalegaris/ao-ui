@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { moveSpellSlot } from '../../../../../../redux/GameplaySlices/InventorySlice'
 import { TooltipTypes, useTooltipHover } from '../../../../../Common/Tooltip/Tooltip-manager'
 
-export default function SpellEntry({spell, selected, scrollAreaRef, ...otherProps}) {
+export default function SpellEntry({spell, selected, ...otherProps}) {
   const dragDropContext = useContext(DragDropContext);
   const [dragDirection, setDragDirection] = useState(null)
   const dispatch = useDispatch()
@@ -53,7 +53,7 @@ export default function SpellEntry({spell, selected, scrollAreaRef, ...otherProp
     borderTop: DrawDragMarker && dragDirection === 2 ? '2px solid red' : 'none'
   }
   const spellRef = useRef(null)
-  const [eventHandlers] = useTooltipHover(spell.spellIndex > 0 ? spell : null, TooltipTypes.SPELL, spellRef, scrollAreaRef)
+  const [eventHandlers] = useTooltipHover(spell.spellIndex > 0 ? spell : null, TooltipTypes.SPELL, spellRef)
   return (
     <DropArea id={{id:spell.index, onDrop:onDrop}} acceptTypes={[DragDropTypes.SPELL]}>
       <Spell spellInfo={spell} 

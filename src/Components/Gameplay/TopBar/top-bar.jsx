@@ -16,7 +16,7 @@ export default function TopBar({styles}) {
     window.parent.BabelUI.RequestAction(Actions.Minimize)
   }
   const openSettings = evt => {
-    window.parent.BabelUI.OpenVBDialog('frmOpciones')
+    window.parent.BabelUI.RequestAction(Actions.OpenSettings)
   }
   const showHelp = evt => {
     

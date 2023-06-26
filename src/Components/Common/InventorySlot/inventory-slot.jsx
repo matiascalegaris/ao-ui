@@ -28,6 +28,9 @@ export default function InventorySlot({content, locked, selected, onSelect,
       /> : null
       }
       {
+        content.cantUse > 0 ? <span className='cant-use'></span> : null
+      }
+      {
         content.count > 0 && !locked ? <p className='item-count'>{content.count}</p> : null
       }
       {

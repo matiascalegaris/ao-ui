@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectExtraSlotState, selectInventorySlots, selectInvSlot, selectSelectedItemIndex } from '../../../../../redux/GameplaySlices/InventorySlice'
 import { useTranslation } from 'react-i18next'
 import { setGameActiveDialog } from '../../../../../redux/GameplaySlices/GameStateSlice'
+import { useEffect } from 'react'
+import { Actions } from '../../../../../constants'
 
 const onDropItem = (item, container) => {
   window.parent.BabelUI.MoveInvItem(item.index, container.id)
@@ -50,6 +52,9 @@ export default function Inventory() {
     }
     dispatch(setGameActiveDialog(deleteItemAction))
   }
+  useEffect( ()=> {
+    window.parent.BabelUI.RequestAction(Actions.DisplayInventory)
+  }, [])
   console.log('inventory render')
   return (
     <div className='inventory-area'>

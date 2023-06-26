@@ -24,7 +24,10 @@ export const Actions = {
   OpenCreateObjMenu: 18,
   OpenSpawnMenu: 19,
   SetGmInvisible: 20,
-  DisplayHPInfo: 21
+  DisplayHPInfo: 21,
+  OpenSettings: 22,
+  DisplayInventory: 23,
+  DisplaySpells: 24,
 }
 
 export const SafeLocks = {

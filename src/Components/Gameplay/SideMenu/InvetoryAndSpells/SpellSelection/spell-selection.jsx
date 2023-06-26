@@ -1,14 +1,14 @@
 
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { DragDropTypes } from '../../../../../constants';
+import { Actions, DragDropTypes } from '../../../../../constants';
 import { selectSelectedSpellSlotIndex, selectSpellList, selectSpellSlot } from '../../../../../redux/GameplaySlices/InventorySlice';
 import AoButton from '../../../../Common/ao-button/ao-button'
 import InventoryFrame from '../InventoryFrame/inventory-frame'
 import './spell-selection.scss'
 import SpellEntry from './SpellEntry/spell-entry';
 import { DropArea } from '../../../../Common/DropArea';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const getSpellOrderIconForState = state => {
   if (state) {
@@ -36,17 +36,18 @@ export default function SpellSelection () {
   const updateSpellOrderState = evt => {
     setEnableSpellOrder(!enableSpellOrder)
   }
+  useEffect( ()=> {
+    window.parent.BabelUI.RequestAction(Actions.DisplaySpells)
+  }, [])
   const img = getSpellOrderIconForState(enableSpellOrder)
-  const scrollRectRef = useRef(null)
   return (
     <div className='spell-selection'>
-      <InventoryFrame styles='spell-list' contentStyles='spell-content' innerRef={scrollRectRef}>
+      <InventoryFrame styles='spell-list' contentStyles='spell-content'>
         {
           spellList.map( (spell, index) => (
             <SpellEntry key={index} spell={spell} 
                         selected={selectedSpellIndex === index} 
                         dragEnabled={enableSpellOrder}
-                        scrollAreaRef={scrollRectRef}
                         onClick={() => selectNewSpell(spell)}/>
           ))
         }

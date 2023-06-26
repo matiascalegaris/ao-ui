@@ -17,6 +17,15 @@
     pointer-events:none;
   }
 
+  .cant-use {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(255, 0, 0, 0.17);
+  }
+
   .equiped {
     position: absolute;
     top: 0;
