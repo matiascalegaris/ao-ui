@@ -4,6 +4,7 @@ import { selectTooltip, setActiveToolTip } from "../../../redux/UIFlowSlice";
 import './tooltip.scss'
 import { ItemTooltip } from "./ItemToolTip/item-tooltip";
 import { SpellTooltip } from "./SpellToolTip/spell-tooltip";
+import { isInside } from "../../../Tools/Utils";
 
 export const TooltipTypes = {
   ITEM: 'Item',
@@ -31,8 +32,14 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
           anchorCenter -=  anchorCenter + toolTipWidth - document.body.clientWidth
         }
         anchor = {
-          PosX: anchorCenter,
-          PosY: anchorPos.bottom
+          posX: anchorCenter,
+          posY: anchorPos.bottom,
+          mouseRect: {
+            x: anchorPos.left,
+            y: anchorPos.top,
+            width: anchorPos.width,
+            height: anchorPos.height
+          }
         }
       }
       setHoverState({ ...isInsideRef.current,
@@ -51,16 +58,35 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
   return [eventHandlers];
 }
 
+const lastMousePos = {
+  posX: -1,
+  posY: -1
+}
+
 export const ActiveToolTip = () => {
   const activeToolTip = useSelector(selectTooltip)
+  const dispatch = useDispatch()
+  const mouseMove = evt => {
+    lastMousePos.posX = evt.clientX
+    lastMousePos.posY = evt.clientY
+  }
+  useEffect(() => {
+    window.addEventListener('mousemove', mouseMove, false);
+    return () => {
+      window.removeEventListener('mousemove', mouseMove, false);
+    }
+  }, []);
   if (!activeToolTip || !activeToolTip.anchor) {
     return (<></>)
   }
-  
+  if (!isInside(activeToolTip.anchor.mouseRect, lastMousePos.posX, lastMousePos.posY)) {
+    dispatch(setActiveToolTip(null))
+    return <></>
+  }
   const posStyle = {
     width: `${toolTipWidth}px`,
-    top: `${activeToolTip.anchor.PosY}px`,
-    left: `${activeToolTip.anchor.PosX}px`,
+    top: `${activeToolTip.anchor.posY}px`,
+    left: `${activeToolTip.anchor.posX}px`,
     position: 'absolute',
     display: 'flex'
   }

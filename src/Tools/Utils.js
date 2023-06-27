@@ -133,6 +133,11 @@ const LoadJsonFile = async filePath => {
       })
 }
 
+export const isInside = (rect, posX, posY) => {
+  return posX >= rect.x && posX <= rect.x + rect.width &&
+                 posY >= rect.y && posY <= rect.y + rect.height
+}
+
 export function useSingleAndDoubleClick(
     handleSingleClick,
     handleDoubleClick,
