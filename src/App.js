@@ -161,6 +161,11 @@ function App() {
     RegisterApiCallback('SetWhisperTarget', (target) => {
       dispatch(setWhisperTarget({target:target, openChat: true}))
     })
+    RegisterApiCallback('PasteText', (text) => {
+      if (document.activeElement instanceof  HTMLInputElement) {
+        document.activeElement.setRangeText(text, document.activeElement.selectionStart,document.activeElement.selectionEnd, "end")
+      }
+    })
     
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
