@@ -3,6 +3,7 @@ import Sprite from "../../../../../../Common/Sprite/sprite"
 import { useContext } from 'react'
 import { DragDropContext } from '../../../../../../Common/DragDropProvider'
 import { DragDropTypes } from '../../../../../../../constants'
+import { SpellCdIndicator } from './spell-cd-indocator'
 
 const getScaletoFit = (originalWidth, originalHeight, targetWidth, targetHeight) => {
   const widthDiff = originalWidth - targetWidth
@@ -45,7 +46,9 @@ export const Spell = ({spellInfo, selected, innerRef, styles, dragEnabled, ...ot
         width={grhInfo.width}
         height={grhInfo.height}
         customSectionStyle={iconStyle}
-      /></span>{spellInfo.name}
+      />
+      <SpellCdIndicator />
+      </span>{spellInfo.name}
     </div>
   )
 }

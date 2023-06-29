@@ -14,6 +14,8 @@ export const CooldownSlice = createSlice({
       state.intervals = action.payload
     },
     fireInterval: (state, action) => {
+      console.log('fire interval ')
+      console.log(action.payload)
       state.activeInterval[action.payload.intervalType] = action.payload.startTime
     }
   },

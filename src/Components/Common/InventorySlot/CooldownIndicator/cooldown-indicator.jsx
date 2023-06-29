@@ -6,7 +6,6 @@ import { selectActiveIntervals, selectIntervals } from '../../../../redux/Gamepl
 import './cooldown-indicator.scss'
 import { CdFiller } from '../../CdFiller/cd-filler'
 
-// need to replace with this implementation : https://www.smashingmagazine.com/2015/07/designing-simple-pie-charts-with-css/
 const considerInterval = (currentTime, lastStartTime, intervalTime, currentCdState) => {
   let attackInterval = intervalTime - (currentTime - lastStartTime)
   if (attackInterval > currentCdState.longerCd) {
