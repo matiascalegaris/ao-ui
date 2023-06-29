@@ -225,10 +225,10 @@ if (process.env.NODE_ENV === 'development') {
     GetGrhDrawInfo: (grhIndex) => {
       return {
         height: 32,
-        imageNumber: 420,
-        startX: 135,
-        startY: 0,
-        width: 27
+        imageNumber: 108,
+        startX: 256,
+        startY: 32,
+        width: 32
       }
     },
     SendChat: msg => {
