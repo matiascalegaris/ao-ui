@@ -1,15 +1,14 @@
 
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector, useStore } from 'react-redux';
-import { Actions, DragDropTypes } from '../../../../../constants';
+import { Actions } from '../../../../../constants';
 import { selectSelectedSpellSlotIndex, selectSpellList, selectSpellSlot } from '../../../../../redux/GameplaySlices/InventorySlice';
 import AoButton from '../../../../Common/ao-button/ao-button'
 import InventoryFrame from '../InventoryFrame/inventory-frame'
 import './spell-selection.scss'
 import SpellEntry from './SpellEntry/spell-entry';
-import { DropArea } from '../../../../Common/DropArea';
 import { useEffect, useRef, useState } from 'react';
-import { updateSpellListScroll } from '../../../../../redux/GameplaySlices/GameStateSlice';
+import { selectFirstSpellToDisplay, updateSpellListScroll } from '../../../../../redux/GameplaySlices/GameStateSlice';
 
 
 const getSpellOrderIconForState = state => {
@@ -25,9 +24,15 @@ const scrollToPos = ( parent, percent ) => {
   parent.current && parent.current.scrollTo(0, targetPos)
 }
 
+const scrollToListElement = (parent, element) => {
+  if (!parent.current) return
+  parent.current && parent.current.scrollTo(0, parent.current.children[element].offsetTop)
+}
+
 export default function SpellSelection () {
   const { t } = useTranslation();
   const [enableSpellOrder, setEnableSpellOrder] = useState(false)
+  const [displayingSpell, setDisplayingSpell] = useState(-1)
   const spellList = useSelector(selectSpellList)
   const dispatch = useDispatch()
   const selectedSpellIndex = useSelector(selectSelectedSpellSlotIndex)
@@ -60,11 +65,15 @@ export default function SpellSelection () {
     dispatch(updateSpellListScroll(percent))
     for (let i = 0; i < scrollContiner.current.children.length; i++) {
       if (scrollContiner.current.scrollTop <= scrollContiner.current.children[i].offsetTop + (scrollContiner.current.children[i].offsetHeight / 2)) {
-        console.log("first element in view = " + i)
+        window.parent.BabelUI.InformSpellListScroll(i)
         break;
       }
     }
-    window.parent.BabelUI.InformSpellListScroll(percent)
+  }
+  const spellToDisplay = useSelector(selectFirstSpellToDisplay)
+  if (spellToDisplay >= 0 && spellToDisplay !== displayingSpell) {
+    setDisplayingSpell(spellToDisplay)
+    scrollToListElement(scrollContiner, spellToDisplay)
   }
   const img = getSpellOrderIconForState(enableSpellOrder)
   return (

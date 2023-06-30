@@ -14,12 +14,13 @@ import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-c
 import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMagicAttack, updateMagicResitance, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage, setWhisperTarget } from './redux/GameplaySlices/ChatSlice';
-import { resetGameplay, setFps, updateGameTime, updateIsGameMaster, updateOnlines } from './redux/GameplaySlices/GameStateSlice';
+import { resetGameplay, setFps, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines } from './redux/GameplaySlices/GameStateSlice';
 import { setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
 import { ErrorBoundary } from './Components/ErrorBoundary/error-boundary';
+import { updateSettings } from './redux/GameplaySlices/GameSettings';
 
 function App() {
   const dispatch = useDispatch()
@@ -166,6 +167,14 @@ function App() {
       if (document.activeElement instanceof  HTMLInputElement) {
         document.activeElement.setRangeText(text, document.activeElement.selectionStart,document.activeElement.selectionEnd, "end")
       }
+    })
+    RegisterApiCallback('UpdateSettings', (options) => {
+      dispatch(updateSettings(options))
+      const language = window.parent.BabelUI.GetStoredLocale()
+      i18n.changeLanguage(language)
+    })
+    RegisterApiCallback('UpdateFirstSpellToDisplay', (target) => {
+      dispatch(updateFirstSpellToDisplay(target))
     })
     
     const language = window.parent.BabelUI.GetStoredLocale()

@@ -20,7 +20,7 @@ const formatItemCount = (itemCount, format) => {
 export default function InventorySlot({content, locked, selected, onSelect,
                                        onActivate, dropId, onDropAction}) {
   let style = locked ? 'locked-slot ': 'inv-slot '
-  if (selected) {
+  if (selected && content.grh && !locked > 0) {
     style += 'selected-slot'
   }
   const onDrop = (mouseEvt, dragInfo) => {
@@ -38,7 +38,7 @@ export default function InventorySlot({content, locked, selected, onSelect,
         item={content}
         onActivate={onActivate}
         onSelect={onSelect}
-      /> : null
+      /> : <span className='empty-selection' onClick={()=> {onSelect(content)}}></span>
       }
       {
         content.cantUse > 0 ? <span className='cant-use'></span> : null
