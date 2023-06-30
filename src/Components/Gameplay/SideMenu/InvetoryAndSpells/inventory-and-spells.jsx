@@ -4,6 +4,7 @@ import './inventory-and-spells.scss'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import SpellSelection from './SpellSelection/spell-selection';
+import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary';
 
 export default function InventoryAndSpells ({styles}) {
   const [currentState, setCurrentState] = useState({activePannel:'inventory'});
@@ -20,6 +21,7 @@ export default function InventoryAndSpells ({styles}) {
         <AoButton styles={'stats-opt-button ' + (activePannel === 'spells' ? 'selected' : 'unselected')} onClick={() => onChange('spells')}>{t("spells").toUpperCase()}</AoButton>
         </span>
       </div>
+      <ErrorBoundary compName={activePannel}>
       <div className='content-area'>
       {
         {
@@ -29,6 +31,7 @@ export default function InventoryAndSpells ({styles}) {
         [activePannel]
       }
       </div>
+      </ErrorBoundary>
     </div>
   )
 }

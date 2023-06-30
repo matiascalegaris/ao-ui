@@ -5,6 +5,7 @@ import StatsPanel from './StatsPanel/stats-panel'
 import MenuPanel from './MenuPanel/menu-panel'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary'
 
 export default function StatsAndMenu ({styles}) {
   const [currentState, setCurrentState] = useState({activePannel:'stats'});
@@ -20,6 +21,7 @@ export default function StatsAndMenu ({styles}) {
         <AoButton styles={'stats-opt-button ' + (activePannel === 'stats' ? 'selected' : 'unselected')} onClick={() => onChange('stats')}>{t("stats").toUpperCase()}</AoButton>
         <AoButton styles={'stats-opt-button ' + (activePannel === 'menu' ? 'selected' : 'unselected')} onClick={() => onChange('menu')}>{t("menu").toUpperCase()}</AoButton>
       </div>
+      <ErrorBoundary compName={activePannel}>
       <div className='content-area'>
       {
         {
@@ -29,6 +31,7 @@ export default function StatsAndMenu ({styles}) {
         [activePannel]
       }
       </div>
+      </ErrorBoundary>
     </div>
   )
 }

@@ -7,6 +7,7 @@ import './exp-area.scss'
 import { Actions, classList } from '../../../../constants';
 import { GameTimer } from './GameTimer';
 import { useState } from 'react';
+import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary';
 
 export default function ExpArea() {
   const { t } = useTranslation();
@@ -25,6 +26,7 @@ export default function ExpArea() {
   }
   return (
     <div className='exp-area'>
+      <ErrorBoundary compName="exp area">
       <p className='name-line'>{charName}</p>
       <span className='class-line'>
         <p className='class-and-level'>{t('user-class-and-level',{class:t(className), level: userLevel})}</p>
@@ -42,6 +44,7 @@ export default function ExpArea() {
       <span className='time-bar'>
         <GameTimer/>
       </span>
+      </ErrorBoundary>
     </div>
   )
 }

@@ -10,7 +10,8 @@ export const GameStateSlice = createSlice({
     online: 0,
     gameTime: {hour:0, minutes:0},
     isGameMaster: false,
-    activeDialog: null
+    activeDialog: null,
+    spellListScroll: 0
   },
   reducers: {
     setFps: (state, action) => {
@@ -32,6 +33,9 @@ export const GameStateSlice = createSlice({
     updateIsGameMaster: (state, action) => {
       state.isGameMaster = action.payload
     },
+    updateSpellListScroll: (state, action) => {
+      state.spellListScroll = action.payload
+    },
     extraReducers: (builder) => {
       builder
         .addCase(resetGameplay, (state) => {
@@ -45,12 +49,13 @@ export const GameStateSlice = createSlice({
   },
 })
 
-export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime, updateIsGameMaster } = GameStateSlice.actions
+export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime, updateIsGameMaster, updateSpellListScroll } = GameStateSlice.actions
 
 export const selectFps = (state) =>  state.gameState.fps
 export const selectOnlines = (state) => state.gameState.online
 export const selectActiveDialog = (state) => state.gameState.activeDialog
 export const selectGameTime = (state) => state.gameState.gameTime
 export const selectIsGameMaster = (state) => state.gameState.isGameMaster
+export const selectSpellListScroll = (state) => state.gameState.spellListScroll
 
 export default GameStateSlice.reducer

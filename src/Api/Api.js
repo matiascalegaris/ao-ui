@@ -319,6 +319,12 @@ if (process.env.NODE_ENV === 'development') {
     },
     GetItemInfo : objIndex => {
       return { objType: 24, spellIndex: 1}
+    },
+    LogError: error => {
+      console.log(error)
+    },
+    InformSpellListScroll: scrollPos => {
+
     }
   } 
 }

@@ -3,6 +3,7 @@ import { ChatHistory } from './ChatHistory/ChatHistory';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectForceOpenChat, setWhisperTarget } from '../../../redux/GameplaySlices/ChatSlice';
 import { ChatInput } from './chat-input';
+import { ErrorBoundary } from '../../ErrorBoundary/error-boundary';
 
 export default function Chat() {
   const dispatch = useDispatch()
@@ -13,8 +14,10 @@ export default function Chat() {
   console.log('chat render')
   return (
     <div className='game-chat'>
-      <ChatHistory selectUser={selectUser} />
-      <ChatInput forceOpenChatId={forceOpenChatId} />
+      <ErrorBoundary compName="chat">
+        <ChatHistory selectUser={selectUser} />
+        <ChatInput forceOpenChatId={forceOpenChatId} />
+      </ErrorBoundary>
     </div>
   )
 }

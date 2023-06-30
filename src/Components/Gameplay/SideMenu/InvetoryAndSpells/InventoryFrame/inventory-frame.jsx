@@ -1,7 +1,7 @@
 import './inventory-frame.scss'
 
 
-export default function InventoryFrame({children, contentStyles, styles, innerRef}) {
+export default function InventoryFrame({children, contentStyles, styles, innerRef, ...otherProps}) {
   var topCornerspacer = {
     width: `13px`,
     height: `13px`
@@ -32,7 +32,7 @@ export default function InventoryFrame({children, contentStyles, styles, innerRe
       <div className='frame-center image-bottom'></div>
       <img style={bottomCornerSpacer} src={require(`../../../../../assets/frames/inventory/bottom-right.png`)} />
     </div>
-    <div className={'content ' + contentStyles} ref={innerRef}>
+    <div className={'content ' + contentStyles} ref={innerRef} {...otherProps}>
         {children}
     </div>
   </div>

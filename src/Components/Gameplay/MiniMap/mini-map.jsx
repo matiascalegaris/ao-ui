@@ -4,6 +4,7 @@ import { GetRootDirectory } from '../../../Tools/Utils'
 import './mini-map.scss'
 import { InterestPoint } from './InterestPoints/interest-points'
 import { Actions } from '../../../constants'
+import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 
 const GetMapUrl = imageName =>  {
   return `${GetRootDirectory()}/Minimapas/mapa${imageName}.bmp`
@@ -73,6 +74,7 @@ export default function MiniMap() {
   }
   return (
     <div className='mini-map'>
+      <ErrorBoundary compName="minmap">
       <span className='mini-map-image' style={mapStyle} onClick={onMapClick}>
       {
         interesPoins.map( (element, index) => (
@@ -92,7 +94,7 @@ export default function MiniMap() {
       <UserMarker marker={userPos} color={0} 
         onClick={ evt => onMarkerClick(evt, userPos.mapPos.x, userPos.mapPos.y)}/>
       </span>
-      
+      </ErrorBoundary>
     </div>
   )
 }

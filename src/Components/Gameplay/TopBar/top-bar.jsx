@@ -7,6 +7,7 @@ import { Actions } from '../../../constants'
 import { FpsCounter } from './FpsCounter/fps-counter'
 import { MapCoords } from './MapCoords/MapCoords'
 import { OnlineCount } from './OnlineCounter'
+import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 
 export default function TopBar({styles}) {
   const onClose = evt => {
@@ -21,7 +22,7 @@ export default function TopBar({styles}) {
   const dispatch = useDispatch()
   const showHelp = evt => {
     const popupSettings = {
-      url:'https://ao20.com.ar/wiki',
+      url:'https://www.ao20.com.ar/wiki?hideHeaderAndFooter=true',
       popUp:'iframe',
       onClose: evt => {
         dispatch(setGameActiveDialog(null))
@@ -40,6 +41,7 @@ export default function TopBar({styles}) {
   console.log('top bar render')
   return (
     <div className={'top-bar ' + styles}>
+      <ErrorBoundary compName="topbar">
       <img className='ao-logo' src={require('../../../assets/Misc/ao20_horizontal.png')} />
       <div className='gm-command-area'>
         {
@@ -54,9 +56,11 @@ export default function TopBar({styles}) {
           null
         }        
       </div>
-      <div className='fps-area'>
-        <FpsCounter/>
-      </div>
+      { isGm ?
+        <div className='fps-area'>
+          <FpsCounter/>
+        </div> : null
+      }
       <div className='location-coords'>
         <p className='map-name'>{mapName}</p>
         <MapCoords isSafe={isSafe} mapNumber={mapNumber} />
@@ -76,6 +80,7 @@ export default function TopBar({styles}) {
           <img src={require('../../../assets/Icons/gameplay/ico_close.png')}></img>
         </GameBarButton>
       </div>
+      </ErrorBoundary>
     </div>
   )
 }

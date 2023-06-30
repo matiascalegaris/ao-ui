@@ -19,6 +19,7 @@ import { setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './re
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
+import { ErrorBoundary } from './Components/ErrorBoundary/error-boundary';
 
 function App() {
   const dispatch = useDispatch()
@@ -197,7 +198,9 @@ function App() {
           :
           null
       }
-      <ActiveToolTip/>
+      <ErrorBoundary compName="tooltips ">
+        <ActiveToolTip/>
+      </ErrorBoundary>
     </div>
   );
 }
