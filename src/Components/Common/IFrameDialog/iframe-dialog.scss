@@ -1,0 +1,20 @@
+
+.iframe-parent-style {
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  .iframe-content {
+    width: 100%;
+  }
+  .iframe-style {
+    position: relative;
+    width: 100%;
+    border: none;
+    .close-button {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+  }
+}
+

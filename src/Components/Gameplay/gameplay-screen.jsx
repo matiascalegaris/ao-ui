@@ -11,6 +11,7 @@ import { exitGameplay, selectActiveDialog } from '../../redux/GameplaySlices/Gam
 import { selectExitScreenActive, setFadeOut } from '../../redux/UIFlowSlice'
 import { useEffect } from 'react'
 import SingleInputDialog from '../Dialogs/SingleInputDialog/single-input-dialog'
+import { IFrameDialog } from '../Common/IFrameDialog/iframe-dialog'
 
 export default function GameplayScreen() {
   console.log('gameplay render')
@@ -52,7 +53,8 @@ export default function GameplayScreen() {
           <div className='popups'>
             {{
                 'option-dialog':<OptionDialog styles='centered' settings={popupsState}/>,
-                'single-input-dialog':<SingleInputDialog styles='centered' settings={popupsState}/>
+                'single-input-dialog':<SingleInputDialog styles='centered' settings={popupsState}/>,
+                'iframe':<IFrameDialog options={popupsState}/>
               }
               [popupsState.popUp]
             }

@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
 import './top-bar.scss'
-import { selectFps, selectIsGameMaster } from '../../../redux/GameplaySlices/GameStateSlice'
+import { selectFps, selectIsGameMaster, setGameActiveDialog } from '../../../redux/GameplaySlices/GameStateSlice'
 import { selectCurrentCoordinates, selectIsSafeMap, selectMapName, selectMapNumber } from '../../../redux/GameplaySlices/MapInfoSlice'
 import { Actions } from '../../../constants'
 import { FpsCounter } from './FpsCounter/fps-counter'
@@ -18,8 +18,16 @@ export default function TopBar({styles}) {
   const openSettings = evt => {
     window.parent.BabelUI.RequestAction(Actions.OpenSettings)
   }
+  const dispatch = useDispatch()
   const showHelp = evt => {
-    
+    const popupSettings = {
+      url:'https://ao20.com.ar/wiki',
+      popUp:'iframe',
+      onClose: evt => {
+        dispatch(setGameActiveDialog(null))
+      }
+    }
+    dispatch(setGameActiveDialog(popupSettings))
   }
 
   const gmCommand = action => {
