@@ -12,7 +12,11 @@ export const GameStateSlice = createSlice({
     isGameMaster: false,
     activeDialog: null,
     spellListScroll: 0,
-    firstDisplaySpell: -1
+    firstDisplaySpell: -1,
+    trackUserActive: 0,
+    trackUserMousePos: {x:0, y:0},
+    trackUserLastClickTime: 0,
+    trackRemoteInvTab: -1
   },
   reducers: {
     setFps: (state, action) => {
@@ -40,6 +44,18 @@ export const GameStateSlice = createSlice({
     updateFirstSpellToDisplay: (state, action) => {
       state.firstDisplaySpell = action.payload
     },
+    updateTrackState: (state, action) => {
+      state.trackUserActive = action.payload
+    },
+    updateTrackMousePos: (state, action) => {
+      state.trackUserMousePos = action.payload
+    },
+    updateTrackLastMouseClick: (state) => {
+      state.trackUserLastClickTime = Date.now()
+    },
+    updateRemoteTab: (state, action) => {
+      state.trackRemoteInvTab = action.payload
+    },
     extraReducers: (builder) => {
       builder
         .addCase(resetGameplay, (state) => {
@@ -55,7 +71,8 @@ export const GameStateSlice = createSlice({
 
 export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime,
                updateIsGameMaster, updateSpellListScroll,
-               updateFirstSpellToDisplay } = GameStateSlice.actions
+               updateFirstSpellToDisplay, updateTrackState, updateTrackMousePos,
+               updateTrackLastMouseClick, updateRemoteTab } = GameStateSlice.actions
 
 export const selectFps = (state) =>  state.gameState.fps
 export const selectOnlines = (state) => state.gameState.online
