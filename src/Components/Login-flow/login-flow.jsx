@@ -7,11 +7,11 @@ import ValidateAccount from "../Dialogs/validate-account/validate-account";
 import { selectActiveDialog, setActiveDialog } from '../../redux/UIFlowSlice'
 import {RegisterApiCallback} from '../../Api/Api'
 import RequestPasswordReset from '../Dialogs/request-password-reset/request-password-reset';
-import CharacterSelectionScreen from '../CharacterSelection/CharacterSelectionScreen/character-selection';
+import CharacterSelectionScreen from '../Screens/CharacterSelection/CharacterSelectionScreen/character-selection';
 import SetNewPassword from '../Dialogs/set-new-password/set-new-password';
-import CreateCharacterScreen from '../CreateCharacter/create-character';
+import CreateCharacterScreen from '../Screens/CreateCharacter/create-character';
 import ValidateCodeScreen from '../Dialogs/ValidateCodeScreen/validate-code-screen';
-import GameplayScreen from '../Gameplay/gameplay-screen';
+import GameplayScreen from '../Screens/Gameplay/gameplay-screen';
 
 
 export default function LogInFlow() {

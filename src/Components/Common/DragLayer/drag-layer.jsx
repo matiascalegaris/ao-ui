@@ -4,7 +4,7 @@ import { DragDropTypes } from '../../../constants'
 import { DragDropContext } from '../DragDropProvider'
 import Sprite from '../Sprite/sprite'
 import './drag-layer.scss'
-import { Spell } from '../../Gameplay/SideMenu/InvetoryAndSpells/SpellSelection/SpellEntry/Spell/spell'
+import { Spell } from '../../Screens/Gameplay/SideMenu/InvetoryAndSpells/SpellSelection/SpellEntry/Spell/spell'
 
 function getItemStyles(x, y, context) {
   if (context.item === null) {
