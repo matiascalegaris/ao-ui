@@ -9,6 +9,7 @@ import UIFlowReducer from './UIFlowSlice'
 import GameStateSlice from './GameplaySlices/GameStateSlice'
 import CooldownSlice from './GameplaySlices/Cooldowns'
 import GameSettingsSlice from './GameplaySlices/GameSettings'
+import SteamAPislice, { api } from './Api'
 
 
 export default configureStore({
@@ -23,7 +24,7 @@ export default configureStore({
     cooldowns: CooldownSlice,
     gameSettings: GameSettingsSlice,
     gameState: GameStateSlice,
-    
+    steamApi: SteamAPislice    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -35,5 +36,5 @@ export default configureStore({
         // Ignore these paths in the state
         ignoredPaths: ["gameState.activeDialog.actions", "gameState.activeDialog"],
       },
-    }),
+    }).concat(api),
 })

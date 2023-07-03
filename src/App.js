@@ -21,6 +21,7 @@ import { fireInterval, updateIntervals } from './redux/GameplaySlices/Cooldowns'
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
 import { ErrorBoundary } from './Components/ErrorBoundary/error-boundary';
 import { updateSettings } from './redux/GameplaySlices/GameSettings';
+import { loadNews, selectSteamNews } from './redux/Api';
 
 function App() {
   const dispatch = useDispatch()
@@ -193,7 +194,12 @@ function App() {
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
   },[]);
-  
+
+  const news = useSelector(selectSteamNews);
+  useEffect(() => {
+    dispatch(loadNews());
+}, [dispatch]);
+
   const activePopup = useSelector(selectActivePopup)
   const popupData = useSelector(selectPopupData)
   const fadeOut = useSelector(selectIsFadeOut)
