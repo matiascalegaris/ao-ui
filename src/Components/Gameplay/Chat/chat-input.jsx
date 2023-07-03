@@ -78,6 +78,20 @@ export const ChatInput = ({forceOpenChatId}) => {
             window.parent.APicallbacks.PasteText("test paste")
           }, 25)
     }
+    if (evt.key === '}' &&
+        document.activeElement !== chatInputElement.current) {
+          setTimeout(() => {
+            window.parent.APicallbacks.SetRemoteTrackingState(1)
+            window.parent.APicallbacks.UpdateRemoteMousePos(500,500)
+            window.parent.APicallbacks.SetRemoteInvstate(2, 8, 5)
+          }, 25)
+    }
+    if (evt.key === '{' &&
+        document.activeElement !== chatInputElement.current) {
+          setTimeout(() => {
+            window.parent.APicallbacks.RemoteUserClick()
+          }, 25)
+    }
   }
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {

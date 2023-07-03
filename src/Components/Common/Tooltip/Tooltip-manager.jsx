@@ -13,14 +13,22 @@ export const TooltipTypes = {
 const toolTipWidth = 200
 
 export const useTooltipHover = (contentInfo, type, targetRef) => {
-  const [hoverState, setHoverState] = useState({timer:null})
+  const [hoverState, setHoverState] = useState({timer:null, moseOver: false})
   const dispatch = useDispatch()
   const isInsideRef = useRef(hoverState);
 
   useEffect(() => {
     isInsideRef.current = hoverState;
   }, [hoverState]);
- 
+
+  useEffect(() => {
+    if (hoverState.moseOver && !contentInfo) {
+      clearTimeout(isInsideRef.current.timer)
+      setHoverState({...isInsideRef.current, moseOver: false,timer: null})
+      dispatch(setActiveToolTip(null))
+    }
+  }, [contentInfo]);
+  
   const eventHandlers = useMemo(() => ({
     onMouseOver() { 
       if (!contentInfo || !type) return
@@ -43,6 +51,7 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
         }
       }
       setHoverState({ ...isInsideRef.current,
+        moseOver: true,
         timer: setTimeout(() => {
           dispatch(setActiveToolTip({contentInfo, type, anchor:anchor}))
           setHoverState({...isInsideRef.current,timer: null})
@@ -50,7 +59,7 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
     },
     onMouseOut() { 
       clearTimeout(isInsideRef.current.timer)
-      setHoverState({...isInsideRef.current, timer: null})
+      setHoverState({...isInsideRef.current, moseOver: false,timer: null})
       dispatch(setActiveToolTip(null))
     }
   }), [contentInfo, dispatch, targetRef]);

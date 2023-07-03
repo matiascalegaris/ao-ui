@@ -15,7 +15,7 @@ export const GameStateSlice = createSlice({
     firstDisplaySpell: -1,
     trackUserActive: 0,
     trackUserMousePos: {x:0, y:0},
-    trackUserLastClickTime: 0,
+    trackUserLastClick: 0,
     trackRemoteInvTab: -1
   },
   reducers: {
@@ -51,7 +51,7 @@ export const GameStateSlice = createSlice({
       state.trackUserMousePos = action.payload
     },
     updateTrackLastMouseClick: (state) => {
-      state.trackUserLastClickTime = Date.now()
+      state.trackUserLastClick += 1 
     },
     updateRemoteTab: (state, action) => {
       state.trackRemoteInvTab = action.payload
@@ -81,5 +81,9 @@ export const selectGameTime = (state) => state.gameState.gameTime
 export const selectIsGameMaster = (state) => state.gameState.isGameMaster
 export const selectSpellListScroll = (state) => state.gameState.spellListScroll
 export const selectFirstSpellToDisplay = (state) => state.gameState.firstDisplaySpell
+export const selectTrackUserActive = (state) => state.gameState.trackUserActive
+export const selectRemoteMousePos = (state) => state.gameState.trackUserMousePos
+export const selectTrackUserLastClick = (state) => state.gameState.trackUserLastClick
+export const selectTrackUserActiveInvTab = (state) => state.gameState.trackRemoteInvTab
 
 export default GameStateSlice.reducer

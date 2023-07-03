@@ -12,6 +12,7 @@ export class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
+    console.log(this.props.compName + " " + error + " stack: " + errorInfo.componentStack)
     window.parent.BabelUI.LogError(this.props.compName + " " + error + " stack: " + errorInfo.componentStack);
   }
 

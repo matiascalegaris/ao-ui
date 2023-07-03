@@ -9,6 +9,12 @@ import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 const GetMapUrl = imageName =>  {
   return `${GetRootDirectory()}/Minimapas/mapa${imageName}.bmp`
 }
+const buttons = {
+  left: 0,
+  right: 1,
+  middle: 2,  
+};
+
 
 const GetStyleForColor = color => {
   switch (color) {
@@ -41,21 +47,26 @@ const UserMarker = ({marker, color, ...otherProps}) => {
   )
 }
 const onMapClick = evt => {
-  if (evt.shiftKey && evt.target.className === 'mini-map-image') {
+  evt.preventDefault()
+  console.log('mouse button:' + evt.button)
+  if (evt.button === buttons.right && evt.target.className === 'mini-map-image') {
     const rootMapObj = evt.target.parentNode
     const localX = evt.clientX - rootMapObj.offsetLeft - 8;
     const localY = evt.clientY - rootMapObj.offsetTop - 8;
     window.parent.BabelUI.ClickMiniMapPos(localX, localY)
+    return false
   }
-  else {
+  else if(evt.button === buttons.left) {
     window.parent.BabelUI.RequestAction(Actions.OpenMinimap)
   }
 }
 
 const onMarkerClick = (evt, x, y) => {
-  if (evt.shiftKey) {
-    evt.preventDefault()
+  evt.preventDefault()
+  if (evt.button === buttons.right) {
     window.parent.BabelUI.ClickMiniMapPos(x, y)
+    console.log('right click')
+    return false
   }
 }
 export default function MiniMap() {
@@ -73,13 +84,14 @@ export default function MiniMap() {
     top: `${userPos.mapPos.y-2}px`
   }
   return (
-    <div className='mini-map'>
+    <div className='mini-map' onContextMenu={(evt) => evt.preventDefault()}>
       <ErrorBoundary compName="minmap">
-      <span className='mini-map-image' style={mapStyle} onClick={onMapClick}>
+      <span className='mini-map-image' style={mapStyle} onClick={onMapClick} onContextMenu={onMapClick}>
       {
         interesPoins.map( (element, index) => (
           <InterestPoint key={index} pos={element.position} 
             color={element.state} 
+            onContextMenu={ evt => onMarkerClick(evt, element.position.tileX, element.position.tileY)}
             onClick={ evt => onMarkerClick(evt, element.position.tileX, element.position.tileY)}/>
         ))
       }
@@ -87,6 +99,7 @@ export default function MiniMap() {
         groupMarkers.map( (element, index) => (
           <UserMarker key={index} marker={element} 
             color={index + 1}
+            onContextMenu={ evt => onMarkerClick(evt, element.mapPos.x, element.mapPos.y)}
             onClick={ evt => onMarkerClick(evt, element.mapPos.x, element.mapPos.y)}
           />
         ))

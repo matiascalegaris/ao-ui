@@ -15,7 +15,7 @@ import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockStat
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage, setWhisperTarget } from './redux/GameplaySlices/ChatSlice';
 import { resetGameplay, setFps, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
-import { selectSelectedSpellSlotIndex, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
+import { selectSpellSlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
@@ -169,13 +169,15 @@ function App() {
       }
     })
     RegisterApiCallback('ReloadSettings', (options) => {
+      console.log("update settings")
+      console.log(options)
       dispatch(updateSettings(options))
       const language = window.parent.BabelUI.GetStoredLocale()
       i18n.changeLanguage(language)
     })
     RegisterApiCallback('SetRemoteInvstate', (activeTab, selectedSpell, firstDisplaySpell) => {
       dispatch(updateFirstSpellToDisplay(firstDisplaySpell))
-      dispatch(selectSelectedSpellSlotIndex(selectedSpell))
+      dispatch(selectSpellSlot(selectedSpell))
       dispatch(updateRemoteTab(activeTab))
     })
     RegisterApiCallback('SetRemoteTrackingState', (state) => {

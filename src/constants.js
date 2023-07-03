@@ -117,8 +117,8 @@ export const ChatStates = {
 };
 
 export const ItemCounFormat = {
-  DisplayAll: 0,
-  DisplayReduced : 1
+  DisplayReduced : 0,
+  DisplayAll: 1  
 }
 
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']

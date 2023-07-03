@@ -8,7 +8,7 @@ import InventoryFrame from '../InventoryFrame/inventory-frame'
 import './spell-selection.scss'
 import SpellEntry from './SpellEntry/spell-entry';
 import { useEffect, useRef, useState } from 'react';
-import { selectFirstSpellToDisplay, updateSpellListScroll } from '../../../../../redux/GameplaySlices/GameStateSlice';
+import { selectFirstSpellToDisplay, selectTrackUserActive, updateSpellListScroll } from '../../../../../redux/GameplaySlices/GameStateSlice';
 
 
 const getSpellOrderIconForState = state => {
@@ -53,11 +53,11 @@ export default function SpellSelection () {
     window.parent.BabelUI.RequestAction(Actions.DisplaySpells)
   }, [])
   const scrollContiner = useRef(null)
-  const store = useStore(); 
+  const store = useStore();
   useEffect(() =>{
     const scrollValue = store.getState().gameState.spellListScroll;
     scrollToPos(scrollContiner, scrollValue)
- },[])
+  },[])
   
   const onScroll = evt => {
     if (!scrollContiner.current) return
@@ -70,11 +70,15 @@ export default function SpellSelection () {
       }
     }
   }
-  const spellToDisplay = useSelector(selectFirstSpellToDisplay)
-  if (spellToDisplay >= 0 && spellToDisplay !== displayingSpell) {
-    setDisplayingSpell(spellToDisplay)
-    scrollToListElement(scrollContiner, spellToDisplay)
-  }
+  const remoteTracking = useSelector(selectTrackUserActive)
+  const remoteFirstslot= useSelector(selectFirstSpellToDisplay)
+  useEffect(() =>{
+    if (remoteFirstslot >= 0 && remoteFirstslot !== displayingSpell) {
+      setDisplayingSpell(remoteFirstslot)
+      scrollToListElement(scrollContiner, remoteFirstslot)
+    }
+ },[remoteTracking,remoteFirstslot])
+  
   const img = getSpellOrderIconForState(enableSpellOrder)
   return (
     <div className='spell-selection'>

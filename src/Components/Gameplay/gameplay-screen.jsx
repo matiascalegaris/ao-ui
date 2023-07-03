@@ -7,18 +7,19 @@ import './gameplay-screen.scss'
 import MiniMap from './MiniMap/mini-map'
 import SideMenu from './SideMenu/side-menu'
 import TopBar from './TopBar/top-bar'
-import { exitGameplay, selectActiveDialog } from '../../redux/GameplaySlices/GameStateSlice'
+import { exitGameplay, selectActiveDialog, selectTrackUserActive } from '../../redux/GameplaySlices/GameStateSlice'
 import { selectExitScreenActive, setFadeOut } from '../../redux/UIFlowSlice'
 import { useEffect } from 'react'
 import SingleInputDialog from '../Dialogs/SingleInputDialog/single-input-dialog'
 import { IFrameDialog } from '../Common/IFrameDialog/iframe-dialog'
 import { ErrorBoundary } from '../ErrorBoundary/error-boundary'
+import { RemoteCursor } from '../Common/RemoteCursor/remote-cursor'
 
 export default function GameplayScreen() {
   console.log('gameplay render')
   const dispatch = useDispatch()
   const popupsState = useSelector(selectActiveDialog)
-  
+  const remoteTrackActive = useSelector(selectTrackUserActive)
   useEffect(()=> {
     setTimeout(() => {
       dispatch(setFadeOut(false))  
@@ -64,6 +65,9 @@ export default function GameplayScreen() {
             }
           </div> :
           null
+        }
+        {
+          remoteTrackActive ? <RemoteCursor /> : null
         }
         </ErrorBoundary>
       </div>
