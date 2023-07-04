@@ -48,7 +48,6 @@ const UserMarker = ({marker, color, ...otherProps}) => {
 }
 const onMapClick = evt => {
   evt.preventDefault()
-  console.log('mouse button:' + evt.button)
   if (evt.button === buttons.right && evt.target.className === 'mini-map-image') {
     const rootMapObj = evt.target.parentNode
     const localX = evt.clientX - rootMapObj.offsetLeft - 8;
@@ -65,7 +64,6 @@ const onMarkerClick = (evt, x, y) => {
   evt.preventDefault()
   if (evt.button === buttons.right) {
     window.parent.BabelUI.ClickMiniMapPos(x, y)
-    console.log('right click')
     return false
   }
 }

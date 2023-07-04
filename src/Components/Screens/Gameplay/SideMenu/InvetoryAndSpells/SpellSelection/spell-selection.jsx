@@ -42,7 +42,7 @@ export default function SpellSelection () {
       window.parent.BabelUI.UpdateSelectedSpellSlot(spellInfo.index)
     }
   }
-  console.log('spell list render')
+  //console.log('spell list render')
   const useSpell = evt => {
     window.parent.BabelUI.UseSpellSlot(selectedSpellIndex)
   }

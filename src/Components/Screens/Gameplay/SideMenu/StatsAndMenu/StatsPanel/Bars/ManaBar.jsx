@@ -7,7 +7,7 @@ export const ManaBar = () => {
   const maxMana = useSelector(selectMaxMana)
   return (
     <div className='mana-line'>
-        <img className='' src={require('../../../../../../assets/Icons/gameplay/ico_stats_mana.png')} />
+        <img className='' src={require('../../../../../../../assets/Icons/gameplay/ico_stats_mana.png')} />
         <ProgressBar styles='mana-bar-outer' 
                      currentVal={currentMana} 
                      maxValue={maxMana} 

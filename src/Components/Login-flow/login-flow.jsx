@@ -1,7 +1,6 @@
 import './login-flow.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import LogIn from "../Dialogs/login/login";
 import CreateAccount from "../Dialogs/create-account/create-account";
 import ValidateAccount from "../Dialogs/validate-account/validate-account";
 import { selectActiveDialog, setActiveDialog } from '../../redux/UIFlowSlice'
@@ -12,6 +11,7 @@ import SetNewPassword from '../Dialogs/set-new-password/set-new-password';
 import CreateCharacterScreen from '../Screens/CreateCharacter/create-character';
 import ValidateCodeScreen from '../Dialogs/ValidateCodeScreen/validate-code-screen';
 import GameplayScreen from '../Screens/Gameplay/gameplay-screen';
+import { LoginScreen } from '../Screens/LogInScreen/login-screen';
 
 
 export default function LogInFlow() {
@@ -26,7 +26,7 @@ export default function LogInFlow() {
     <div className='login-flow'>
       {
         {
-          'login':<LogIn styles='login-dialog-pos'/>,
+          'login':<LoginScreen/>,
           'create-account': <CreateAccount styles='login-dialog-pos'/>,
           'validate-account': <ValidateAccount styles='login-dialog-pos'/>,
           'validate-code': <ValidateCodeScreen styles='login-dialog-pos'/>,

@@ -16,7 +16,7 @@ import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 import { RemoteCursor } from '../../Common/RemoteCursor/remote-cursor'
 
 export default function GameplayScreen() {
-  console.log('gameplay render')
+  //console.log('gameplay render')
   const dispatch = useDispatch()
   const popupsState = useSelector(selectActiveDialog)
   const remoteTrackActive = useSelector(selectTrackUserActive)

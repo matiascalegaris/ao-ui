@@ -14,7 +14,7 @@ export default function StatsAndMenu ({styles}) {
   const onChange = opt => {
     setCurrentState({...currentState, activePannel:opt})
   }
-  console.log('stats&menu render')
+  //console.log('stats&menu render')
   return (
     <div className='stats-menu-area'>
       <div className='button-line'>

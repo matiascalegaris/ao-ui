@@ -7,7 +7,7 @@ export const EnergyBar = () => {
   const maxEnergy = useSelector(selectMaxEnergy)
   return (
     <>
-    <img className='stats-icon' src={require('../../../../../../assets/Icons/gameplay/ico_stats_stamina.png')} />
+    <img className='stats-icon' src={require('../../../../../../../assets/Icons/gameplay/ico_stats_stamina.png')} />
     <ProgressBar styles='energy-bar-outer' currentVal={currentEnergy} maxValue={maxEnergy} displayMax={true} barStyle='energy-bar'/>
     </>
   )

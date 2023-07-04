@@ -11,7 +11,7 @@ export default function Chat() {
     dispatch(setWhisperTarget({target:user, openChat: true}))
   }
   const forceOpenChatId = useSelector(selectForceOpenChat)
-  console.log('chat render')
+  //console.log('chat render')
   return (
     <div className='game-chat'>
       <ErrorBoundary compName="chat">

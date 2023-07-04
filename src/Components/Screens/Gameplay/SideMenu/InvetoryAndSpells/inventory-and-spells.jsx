@@ -22,7 +22,6 @@ export default function InventoryAndSpells ({styles}) {
   useEffect(()=> {
     if (trackUser && trackRemoteTab > 0) {
       if (trackRemoteTab !== activePannel) {
-        console.log("update selected tab to: " + trackRemoteTab)
         setCurrentState({...currentState, activePannel:trackRemoteTab})
       }
     }

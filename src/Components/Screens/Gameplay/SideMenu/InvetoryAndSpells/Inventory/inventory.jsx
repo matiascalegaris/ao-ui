@@ -55,7 +55,7 @@ export default function Inventory() {
   useEffect( ()=> {
     window.parent.BabelUI.RequestAction(Actions.DisplayInventory)
   }, [])
-  console.log('inventory render')
+  //console.log('inventory render')
   return (
     <div className='inventory-area'>
       <InventoryFrame styles='item-list' >

@@ -20,7 +20,7 @@ export default function ExpArea() {
   const openStats = evt => {
     window.parent.BabelUI.RequestAction(Actions.RequestSkill)
   }
-  console.log('exp area render')
+  //console.log('exp area render')
   const clickExpBar = evt => {
     setDisplayPercentExp(!displayPercentExp)
   }

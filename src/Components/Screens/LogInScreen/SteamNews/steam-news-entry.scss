@@ -1,0 +1,19 @@
+.news-entry {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  opacity: 0.8;
+  .news-title {
+   color:gold; 
+   font-size: 1.2rem;
+   margin-top: 0px;
+   margin-bottom: 5px;
+    &:hover {
+      color:white;
+    }
+  }
+  .news-text {
+    font-family: 'Alegra-AO';
+    margin-top: 0;
+  }
+}

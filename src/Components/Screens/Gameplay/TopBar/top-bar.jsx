@@ -38,11 +38,11 @@ export default function TopBar({styles}) {
   const isSafe = useSelector(selectIsSafeMap)
   const mapNumber = useSelector(selectMapNumber)
   const isGm = useSelector(selectIsGameMaster)
-  console.log('top bar render')
+  //console.log('top bar render')
   return (
     <div className={'top-bar ' + styles}>
       <ErrorBoundary compName="topbar">
-      <img className='ao-logo' src={require('../../../assets/Misc/ao20_horizontal.png')} />
+      <img className='ao-logo' src={require('../../../../assets/Misc/ao20_horizontal.png')} />
       <div className='gm-command-area'>
         {
           isGm ?
@@ -67,17 +67,17 @@ export default function TopBar({styles}) {
       </div>
       <div className='button-online-area'>
         <GameBarButton styles='bar-button' onClick={openSettings}>
-          <img src={require('../../../assets/Icons/gameplay/ico_gear.png')}></img>
+          <img src={require('../../../../assets/Icons/gameplay/ico_gear.png')}></img>
         </GameBarButton>
         <GameBarButton styles='bar-button' onClick={showHelp}>
-          <img src={require('../../../assets/Icons/gameplay/ico_info.png')}></img>
+          <img src={require('../../../../assets/Icons/gameplay/ico_info.png')}></img>
         </GameBarButton>
         <OnlineCount/>
         <GameBarButton styles='bar-button' onClick={minimize}>
-          <img src={require('../../../assets/Icons/gameplay/ico_minimize.png')}></img>
+          <img src={require('../../../../assets/Icons/gameplay/ico_minimize.png')}></img>
         </GameBarButton>
         <GameBarButton styles='bar-button' onClick={onClose}>
-          <img src={require('../../../assets/Icons/gameplay/ico_close.png')}></img>
+          <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
         </GameBarButton>
       </div>
       </ErrorBoundary>

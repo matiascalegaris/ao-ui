@@ -42,7 +42,6 @@ export const SpellDetails = ({spellInfo}) => {
 }
 export const SpellTooltip = ({spell}) => {
   const spellInfo = window.parent.BabelUI.GetSpellInfo(spell.spellIndex)
-  console.log(spellInfo)
   const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(spell.grh)
   return (
     <div className="item-tooltip">

@@ -1,7 +1,7 @@
 .stats-menu-area {
   display: flex;
   flex-direction: column;
-  background-image: url(../../../../assets/Backgrounds/stats-bg.png);
+  background-image: url(../../../../../assets/Backgrounds/stats-bg.png);
   background-size: 100% 100%;
   width: 100%;
   .button-line {
@@ -19,7 +19,7 @@
     .selected {
       border: 2px solid #686865;
       color: white;
-      background-image: url(../../../../assets/Buttons/button_gray_over.png);
+      background-image: url(../../../../../assets/Buttons/button_gray_over.png);
     }
   }
   .content-area {

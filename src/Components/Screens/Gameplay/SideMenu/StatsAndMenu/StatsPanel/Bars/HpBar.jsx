@@ -12,7 +12,7 @@ export const HpBar = () => {
   }
   return (
     <div className='hp-line'>
-        <img className='' src={require('../../../../../../assets/Icons/gameplay/ico_stats_health.png')} />
+        <img className='' src={require('../../../../../../../assets/Icons/gameplay/ico_stats_health.png')} />
         <ProgressBar styles='hp-bar-outer' 
                     currentVal={currentHp} 
                     maxValue={maxHp} 

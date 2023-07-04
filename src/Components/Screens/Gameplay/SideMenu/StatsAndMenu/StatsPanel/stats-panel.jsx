@@ -39,7 +39,7 @@ export default function StatsPanel({styles}) {
     window.parent.BabelUI.GoldClick()
     dispatch(selectInvSlot(0))
   }
-  console.log('statsPannel render')
+  //console.log('statsPannel render')
   const showArrowBonus = equippedItems.amunition.min > 0 ||
                          equippedItems.amunition.max > 0
   const alertGold =  userGold <= 100000
@@ -49,16 +49,16 @@ export default function StatsPanel({styles}) {
         <span className={'gold ' + (alertGold ? 'gold-alert' : '') }>
           <img className='stats-icon' 
             onClick={onGoldClick}
-            src={require('../../../../../assets/Icons/gameplay/ico_stats_coins.png')} 
+            src={require('../../../../../../assets/Icons/gameplay/ico_stats_coins.png')} 
           />
           <p onClick={onGoldClick}>{FormatNumberWithDots(userGold)}</p>
         </span>
         <span className={'agi ' + GetStateStyle(agiState)}>
-          <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_agi.png')} />
+          <img className='stats-icon' src={require('../../../../../../assets/Icons/gameplay/ico_stats_agi.png')} />
           <p>{agi}</p>
         </span>
         <span className={'str ' + GetStateStyle(strState)}>
-          <img className='stats-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_str.png')} />
+          <img className='stats-icon' src={require('../../../../../../assets/Icons/gameplay/ico_stats_str.png')} />
           <p>{str}</p>
         </span>
       </div>
@@ -72,17 +72,17 @@ export default function StatsPanel({styles}) {
       </div>
       <span className='separator-line'></span>
       <div className='defense-area'>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_sword.png')}>
+        <StatValue icon={require('../../../../../../assets/Icons/gameplay/ico_stats_sword.png')}>
           {equippedItems.weapon.min + "/" + equippedItems.weapon.max}
           {
             showArrowBonus ? `+${equippedItems.amunition.min}/${equippedItems.amunition.max}` : null
           }
         </StatValue>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_shield.png')}>{equippedItems.shield.min + "/" + equippedItems.shield.max}</StatValue>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_helmet.png')}>{equippedItems.helm.min + "/" + equippedItems.helm.max}</StatValue>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_armor.png')}>{equippedItems.armor.min + "/" + equippedItems.armor.max}</StatValue>
-        <StatValue iconStyle='magic-armor' icon={require('../../../../../assets/Icons/gameplay/ico_stats_magicshield.png')}>+{mdef}</StatValue>
-        <StatValue icon={require('../../../../../assets/Icons/gameplay/ico_stats_magic.png')}>+{mattack}%</StatValue>
+        <StatValue icon={require('../../../../../../assets/Icons/gameplay/ico_stats_shield.png')}>{equippedItems.shield.min + "/" + equippedItems.shield.max}</StatValue>
+        <StatValue icon={require('../../../../../../assets/Icons/gameplay/ico_stats_helmet.png')}>{equippedItems.helm.min + "/" + equippedItems.helm.max}</StatValue>
+        <StatValue icon={require('../../../../../../assets/Icons/gameplay/ico_stats_armor.png')}>{equippedItems.armor.min + "/" + equippedItems.armor.max}</StatValue>
+        <StatValue iconStyle='magic-armor' icon={require('../../../../../../assets/Icons/gameplay/ico_stats_magicshield.png')}>+{mdef}</StatValue>
+        <StatValue icon={require('../../../../../../assets/Icons/gameplay/ico_stats_magic.png')}>+{mattack}%</StatValue>
       </div>
     </div>
   )
