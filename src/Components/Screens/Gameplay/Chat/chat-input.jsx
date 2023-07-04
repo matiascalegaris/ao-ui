@@ -78,6 +78,12 @@ export const ChatInput = ({forceOpenChatId}) => {
             window.parent.APicallbacks.PasteText("test paste")
           }, 25)
     }
+    if (evt.key === '+' &&
+        document.activeElement !== chatInputElement.current) {
+          setTimeout(() => {
+            window.parent.APicallbacks.StartSpellCd(5,10000)
+          }, 25)
+    }
     if (evt.key === '}' &&
         document.activeElement !== chatInputElement.current) {
           setTimeout(() => {

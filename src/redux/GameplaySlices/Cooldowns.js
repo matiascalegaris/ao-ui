@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 
 export const CooldownSlice = createSlice({
   name: 'cooldowns',
@@ -18,7 +18,7 @@ export const CooldownSlice = createSlice({
       state.activeInterval[action.payload.intervalType] = action.payload.startTime
     },
     startSpellcd: (state, action) => {
-      state.spellCd[action.spellId] = {start: Date.now(), duration: action.cdTime}
+      state.spellCd[action.payload.spellId] = {start: Date.now(), duration: action.payload.cdTime}
     }
   },
 })
@@ -27,7 +27,17 @@ export const { updateIntervals, fireInterval, startSpellcd } = CooldownSlice.act
 
 export const selectIntervals = (state) => state.cooldowns.intervals
 export const selectActiveIntervals = (state) => state.cooldowns.activeInterval
-export const selectSpellCd = (state, spellId) => state.spellCd[spellId]
+//export const selectSpellCd = (state, spellId) => state.cooldowns.spellCd
 
+export const selectSpellCd = createSelector(
+  [
+    // Usual first input - extract value from `state`
+    state => state.cooldowns,
+    // Take the second arg, `category`, and forward to the output selector
+    (state, spellId) => spellId
+  ],
+  // Output selector gets (`items, category)` as args
+  (cooldowns, spellId) => cooldowns.spellCd[spellId]
+);
 
 export default CooldownSlice.reducer

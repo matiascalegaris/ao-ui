@@ -47,7 +47,10 @@ export const Spell = ({spellInfo, selected, innerRef, styles, dragEnabled, ...ot
         height={grhInfo.height}
         customSectionStyle={iconStyle}
       />
-      <SpellCdIndicator />
+      {
+        spellInfo.spellIndex ? <SpellCdIndicator spellId={spellInfo.spellIndex}/> : null
+      }
+      
       </span>{spellInfo.name}
     </div>
   )

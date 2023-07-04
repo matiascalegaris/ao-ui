@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { e_CdTypes } from "../../../../../../../../constants"
-import { selectActiveIntervals, selectIntervals } from "../../../../../../../../redux/GameplaySlices/Cooldowns"
+import { selectActiveIntervals, selectIntervals, selectSpellCd } from "../../../../../../../../redux/GameplaySlices/Cooldowns"
 import { CdFiller } from "../../../../../../../Common/CdFiller/cd-filler"
 
 const considerInterval = (currentTime, lastStartTime, intervalTime, currentCdState) => {
-  let attackInterval = intervalTime - (currentTime - lastStartTime)
+  const elapsedTime = currentTime - lastStartTime
+  let attackInterval = intervalTime - elapsedTime
   if (attackInterval > currentCdState.longerCd) {
     currentCdState.longerCd = attackInterval
     currentCdState.startTime = lastStartTime
@@ -14,7 +15,7 @@ const considerInterval = (currentTime, lastStartTime, intervalTime, currentCdSta
   }
   return false
 }
-const GetLongestIntervalTime = (intervals, activeIntervals) => {
+const GetLongestIntervalTime = (intervals, activeIntervals, spellCd) => {
   let currentCdState = {
     longerCd: 0,
     startTime: 0,
@@ -23,17 +24,17 @@ const GetLongestIntervalTime = (intervals, activeIntervals) => {
   let currentTime = Date.now()
   considerInterval(currentTime, activeIntervals[e_CdTypes.eMelee], intervals.hitMagic, currentCdState)
   considerInterval(currentTime, activeIntervals[e_CdTypes.eMagic], intervals.magic, currentCdState)
-
+  spellCd && considerInterval(currentTime, spellCd.start, spellCd.duration, currentCdState)
   return currentCdState
 }
 
-export const SpellCdIndicator = () => {
+export const SpellCdIndicator = ({spellId}) => {
   const gIntervals = useSelector(selectIntervals)
   const activeIntervals = useSelector(selectActiveIntervals)
-
+  const spellCd = useSelector(state => selectSpellCd(state, spellId))
   const [cdState, setcdState] = useState({progress:1})
-
-  const intervalState = GetLongestIntervalTime(gIntervals, activeIntervals)
+  
+  const intervalState = GetLongestIntervalTime(gIntervals, activeIntervals, spellCd)
   let progress = cdState.progress
   if (intervalState.longerCd > 0) {
     progress = (Date.now() - intervalState.startTime) / intervalState.cdDuration
@@ -46,7 +47,7 @@ export const SpellCdIndicator = () => {
     let interval = null
     if (progress < 1) {
       interval = setInterval(() => {        
-        const intervalState = GetLongestIntervalTime(gIntervals, activeIntervals)
+        const intervalState = GetLongestIntervalTime(gIntervals, activeIntervals, spellCd)
         if (intervalState.longerCd > 0) {
           setcdState({progress:(Date.now() - intervalState.startTime) / intervalState.cdDuration})
         }
@@ -57,7 +58,7 @@ export const SpellCdIndicator = () => {
       }, 10);
     }    
     return () => interval && clearInterval(interval);
-  }, [gIntervals, activeIntervals]);
+  }, [gIntervals, activeIntervals, spellCd]);
 
   return (
     <>
