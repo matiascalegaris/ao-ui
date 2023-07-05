@@ -12,7 +12,9 @@ export const ChatSlice = createSlice({
     endPos: 0,
     whisperTarget: '',
     chatMode: ChatStates.Normal,
-    forceOpenChatId: 0
+    forceOpenChatId: 0,
+    globalEnabled: true,
+    combatEnabled: true
   },
   reducers: {
     postChatMessage: (state, action) => {
@@ -38,6 +40,10 @@ export const ChatSlice = createSlice({
     openChat: (state) => {
       state.forceOpenChatId = state.forceOpenChatId + 1
     },
+    updateGlobalAndCombatModes: (state, action) => {
+      state.globalEnabled = action.payload.globalEnabled
+      state.combatEnabled = action.payload.combatEnabled
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -49,11 +55,13 @@ export const ChatSlice = createSlice({
     }
 })
 
-export const { postChatMessage, setWhisperTarget, setChatMode, openChat } = ChatSlice.actions
+export const { postChatMessage, setWhisperTarget, setChatMode, openChat, updateGlobalAndCombatModes } = ChatSlice.actions
 
 export const selectChatMode = (state) => state.chat.chatMode
 export const selectWhisperTarget = (state) => state.chat.whisperTarget
 export const selectForceOpenChat = (state) => state.chat.forceOpenChatId
+export const selectGlobalChatenabled = (state) => state.chat.globalEnabled
+export const selectCombatChatEnabled = (state) => state.chat.combatEnabled
 
 export const selectMessageList = createSelector(
   (state) => state.chat,

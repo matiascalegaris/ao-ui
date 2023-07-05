@@ -13,7 +13,7 @@ import ValidateCode from './Components/Dialogs/validate-code/validate-code';
 import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-character';
 import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMagicAttack, updateMagicResitance, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
-import { postChatMessage, setWhisperTarget } from './redux/GameplaySlices/ChatSlice';
+import { postChatMessage, setWhisperTarget, updateGlobalAndCombatModes } from './redux/GameplaySlices/ChatSlice';
 import { resetGameplay, setFps, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
 import { selectSpellSlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
@@ -191,6 +191,9 @@ function App() {
     })
     RegisterApiCallback('StartSpellCd', (spellId, cdTime) => {
       dispatch(startSpellcd({spellId, cdTime}))
+    })
+    RegisterApiCallback('UpdateCombatAndGlobalChatModes', (combatEnabled, globalEnabled) => {
+      dispatch(updateGlobalAndCombatModes({combatEnabled, globalEnabled}))
     })
     
     const language = window.parent.BabelUI.GetStoredLocale()

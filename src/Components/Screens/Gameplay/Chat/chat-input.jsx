@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ChatPrefix, ChatStates } from '../../../../constants'
 import AoInput from '../../../Common/ao-input/ao-input'
 import { ChatOptions } from './ChatOptions'
-import { selectChatMode, selectForceOpenChat, selectWhisperTarget, setWhisperTarget, setChatMode, safeOpenChat } from '../../../../redux/GameplaySlices/ChatSlice'
+import { selectChatMode, selectForceOpenChat, selectWhisperTarget, setWhisperTarget, setChatMode, safeOpenChat, selectCombatChatEnabled, selectGlobalChatenabled, updateGlobalAndCombatModes } from '../../../../redux/GameplaySlices/ChatSlice'
 import { RegisterApiCallback } from '../../../../Api/Api'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -42,7 +42,8 @@ export const ChatInput = ({forceOpenChatId}) => {
   const {chatInput} = chatState;
   const chatMode = useSelector(selectChatMode)
   const whisperTarget = useSelector(selectWhisperTarget)
-  
+  const combatChatEnabled = useSelector(selectCombatChatEnabled)
+  const globalChatEnabled = useSelector(selectGlobalChatenabled)
   const handleChange = event => {
     const { value, name } = event.target;
     setChatState({ ...chatState, [name]: value});
@@ -148,6 +149,15 @@ export const ChatInput = ({forceOpenChatId}) => {
     }
   }
   
+  const onCombatChatClick = e => {
+    dispatch(updateGlobalAndCombatModes({combatEnabled:!combatChatEnabled, globalEnabled:globalChatEnabled}))
+    window.parent.BabelUI.UpdateCombatAndGlobatChatState(!combatChatEnabled, globalChatEnabled)
+  }
+
+  const onGlobalChatClick = e => {
+    dispatch(updateGlobalAndCombatModes({combatEnabled:combatChatEnabled, globalEnabled:!globalChatEnabled}))   
+    window.parent.BabelUI.UpdateCombatAndGlobatChatState(combatChatEnabled, !globalChatEnabled) 
+  }
 
   const selectChatOpt = option => {
     setDisplayChatOpt(false)
@@ -161,26 +171,28 @@ export const ChatInput = ({forceOpenChatId}) => {
   }
   return (
     <div className='input-line'>
-        <img src={require('../../../../assets/Icons/gameplay/ico_dialog.png')} 
-          onClick={openChatOptions}
-          className='chat-input-selection'/>
-        <AoInput styles='chat-input' inputStyles='chat-input-area' 
-                  name="chatInput" value={chatInput} IsValid={chatInput} 
-                  required handleChange={handleChange} 
-                  innerRef={chatInputElement}
-                  onKeyUp={handleKeyUp}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  />
-        <div className='chat-display-options'>
-          <p className='option'>INFO</p>
-          <p className='option'>GLOBAL</p>
-        </div>
-        {
-          displayChatOpt ? 
-          <ChatOptions selectOptions={selectChatOpt} currentOption={chatMode} />
-          : null
-        }
+      <img src={require('../../../../assets/Icons/gameplay/ico_dialog.png')} 
+        onClick={openChatOptions}
+        className='chat-input-selection'/>
+      <AoInput styles='chat-input' inputStyles='chat-input-area' 
+                name="chatInput" value={chatInput} IsValid={chatInput} 
+                required handleChange={handleChange} 
+                innerRef={chatInputElement}
+                onKeyUp={handleKeyUp}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                />
+      <div className='chat-display-options'>
+        <p className={'option ' + ( combatChatEnabled ? 'option-enabled' : '') } 
+            onClick={onCombatChatClick}>{t("COMBATE")}</p>
+        <p className={'option ' + ( globalChatEnabled ? 'option-enabled' : '') } 
+           onClick={onGlobalChatClick}>{t("GLOBAL")}</p>
       </div>
+      {
+        displayChatOpt ? 
+        <ChatOptions selectOptions={selectChatOpt} currentOption={chatMode} />
+        : null
+      }
+    </div>
   )
 }
