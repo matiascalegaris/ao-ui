@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { DragDropTypes } from '../../../constants'
 import { DragDropContext } from '../DragDropProvider'
 import Sprite from '../Sprite/sprite'
@@ -26,6 +26,10 @@ export const DragLayer = () => {
   const dragDropContext = useContext(DragDropContext);
   const [mouseCallbacks, setMouseCallbacks] = useState({onMouseUp: null, onMouseMove: null})
   const [mousePos, setMousePos] = useState({x:0, y:0})
+  const dragContextRef = useRef(dragDropContext);
+  useEffect(() => {
+    dragContextRef.current = dragDropContext;
+  }, [dragDropContext]);
   const clearCurrentCallbacks = () => {
     if (mouseCallbacks.onMouseUp !== null) {
       window.removeEventListener('mouseup', mouseCallbacks.onMouseUp, false);
@@ -37,13 +41,13 @@ export const DragLayer = () => {
   }
   const registerCurrentCallbacks = () => {
     const onMouseMove = evt => {
-      if (dragDropContext.item !== null) {
+      if (dragContextRef.current.item !== null) {
         setMousePos({x: evt.pageX, y: evt.pageY})
       }
     }
     const onMouseUp = evt => {
-      if (dragDropContext.item !== null) {
-        dragDropContext.DragEnd(evt,dragDropContext)   
+      if (dragContextRef.current.item !== null) {
+        dragContextRef.current.DragEnd(evt, dragContextRef.current)   
       }
       setMousePos({x:0, y: 0})
     }
@@ -56,7 +60,6 @@ export const DragLayer = () => {
     if (dragDropContext.item !== null) {
       registerCurrentCallbacks()
     }
-
   },[dragDropContext]);
 
   const renderItem = (context) => {

@@ -55,7 +55,7 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
         timer: setTimeout(() => {
           dispatch(setActiveToolTip({contentInfo, type, anchor:anchor}))
           setHoverState({...isInsideRef.current,timer: null})
-        }, 500)})
+        }, 1000)})
     },
     onMouseOut() { 
       clearTimeout(isInsideRef.current.timer)

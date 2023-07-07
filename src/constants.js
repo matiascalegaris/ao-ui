@@ -121,6 +121,12 @@ export const ItemCounFormat = {
   DisplayAll: 1  
 }
 
+export const MouseButtons = {
+  left: 0,
+  right: 1,
+  middle: 2,  
+};
+
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
 
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']

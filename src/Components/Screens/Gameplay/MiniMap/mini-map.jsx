@@ -3,18 +3,12 @@ import { selectCurrentCoordinates, selectGroupMarkers, selectInterestPoints, sel
 import { GetRootDirectory } from '../../../../Tools/Utils'
 import './mini-map.scss'
 import { InterestPoint } from './InterestPoints/interest-points'
-import { Actions } from '../../../../constants'
+import { Actions, MouseButtons } from '../../../../constants'
 import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary'
 
 const GetMapUrl = imageName =>  {
   return `${GetRootDirectory()}/Minimapas/mapa${imageName}.bmp`
 }
-const buttons = {
-  left: 0,
-  right: 1,
-  middle: 2,  
-};
-
 
 const GetStyleForColor = color => {
   switch (color) {
@@ -48,21 +42,21 @@ const UserMarker = ({marker, color, ...otherProps}) => {
 }
 const onMapClick = evt => {
   evt.preventDefault()
-  if (evt.button === buttons.right && evt.target.className === 'mini-map-image') {
+  if (evt.button === MouseButtons.right && evt.target.className === 'mini-map-image') {
     const rootMapObj = evt.target.parentNode
     const localX = evt.clientX - rootMapObj.offsetLeft - 8;
     const localY = evt.clientY - rootMapObj.offsetTop - 8;
     window.parent.BabelUI.ClickMiniMapPos(localX, localY)
     return false
   }
-  else if(evt.button === buttons.left) {
+  else if(evt.button === MouseButtons.left) {
     window.parent.BabelUI.RequestAction(Actions.OpenMinimap)
   }
 }
 
 const onMarkerClick = (evt, x, y) => {
   evt.preventDefault()
-  if (evt.button === buttons.right) {
+  if (evt.button === MouseButtons.right) {
     window.parent.BabelUI.ClickMiniMapPos(x, y)
     return false
   }

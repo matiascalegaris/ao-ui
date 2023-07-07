@@ -45,7 +45,7 @@ const testData = {"appnews":{"appid":1956740,"newsitems":[{"gid":"51245821501459
 export const SteamAPislice = createSlice({
       name: "steamApi",
       initialState: {
-          news: null,
+          news: testData,
           loading: false,
       },
   

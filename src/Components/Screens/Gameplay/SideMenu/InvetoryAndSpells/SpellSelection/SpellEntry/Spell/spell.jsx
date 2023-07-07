@@ -6,8 +6,6 @@ import { DragDropTypes } from '../../../../../../../../constants'
 import { SpellCdIndicator } from './spell-cd-indocator'
 
 const getScaletoFit = (originalWidth, originalHeight, targetWidth, targetHeight) => {
-  const widthDiff = originalWidth - targetWidth
-  const heightDiff = originalHeight - targetHeight
   const heightScale = targetHeight / originalHeight
   const widthScale = targetWidth / originalWidth
   if (heightScale < widthScale) return heightScale
