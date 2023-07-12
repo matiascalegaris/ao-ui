@@ -200,7 +200,18 @@ function App() {
     i18n.changeLanguage(language)
     axios.defaults.headers.common['Accept-Language'] = 'es-AR, es;q=0.9 en;q=0.8'
   },[]);  
-
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      const handleGlobalKeyPress = evt => {
+        if (evt.key === '|' ) {
+              setTimeout(() => {
+                window.parent.APicallbacks.PasteText("test paste")
+              }, 25)
+        }
+      }
+      window.addEventListener("keyup", handleGlobalKeyPress);
+    }
+  },[]);
   const activePopup = useSelector(selectActivePopup)
   const popupData = useSelector(selectPopupData)
   const fadeOut = useSelector(selectIsFadeOut)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { displayLoadingText, selectExitScreenActive, setActiveDialog } from '../../../redux/UIFlowSlice'
+import { displayLoadingText, selectExitScreenActive, setActiveDialog, setFadeOut } from '../../../redux/UIFlowSlice'
 import { LoadJsonFile } from '../../../Tools/Utils'
 import Header from '../CharacterSelection/Header/header'
 import LoginButton from '../CharacterSelection/LogInButton/login-button'
@@ -120,6 +120,11 @@ export default function CreateCharacterScreen() {
     }
     return ''
   })
+  useEffect(()=> {
+    setTimeout(() => {
+      dispatch(setFadeOut(false))  
+    }, 200);
+  }, [])
   const { t } = useTranslation();
   const dispatch = useDispatch()
   const createCharacter = event => {

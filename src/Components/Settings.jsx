@@ -23,7 +23,7 @@ export default function Settings() {
         <h2 className='option'>{t('VIDEO').toUpperCase()}</h2>
         <h2 className='option'>{t('AUDIO').toUpperCase()}</h2>
       </span>
-      <AoInput name="email" type="email" value={email} required handleChange={handleChange} />
+      <AoInput name="email" type="text" value={email} required handleChange={handleChange} />
       <AoButton caption='guardar'/>
     </AoDialog>
   )

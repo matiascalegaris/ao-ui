@@ -73,8 +73,7 @@ export const ChatInput = ({forceOpenChatId}) => {
         document.activeElement !== chatInputElement.current) {
           window.parent.BabelUI.SetInventory()
     }
-    if (evt.key === '|' &&
-        document.activeElement !== chatInputElement.current) {
+    if (evt.key === '|' ) {
           setTimeout(() => {
             window.parent.APicallbacks.PasteText("test paste")
           }, 25)
@@ -104,8 +103,8 @@ export const ChatInput = ({forceOpenChatId}) => {
     if (process.env.NODE_ENV === 'development') {
       window.addEventListener("keyup", handleGlobalKeyPress);
     }
-    RegisterApiCallback('OpenChat', (ignoreValue) => { 
-      dispatch(safeOpenChat())
+    RegisterApiCallback('OpenChat', (mode) => {
+      dispatch(safeOpenChat(mode))
     })
   },[]);
   useEffect( () => () => {

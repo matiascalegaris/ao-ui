@@ -74,7 +74,7 @@ export default function MenuPanel() {
           <img src={require('../../../../../../assets/Icons/gameplay/ico_key.png')}/>
         </MenuToggle>
         <MenuToggle status={resurrectionLock} onClick={() => {requestAction(Actions.UpdateResurrectionLock)}}>
-          <img src={require('../../../../../../assets/Icons/gameplay/ico_key.png')}/>
+          <img src={require('../../../../../../assets/Icons/gameplay/ico_ghost.png')}/>
         </MenuToggle>
         <span className='spacer'></span>
         <div className='report-bug' onClick={() => {requestAction(Actions.ReportBug)}}>

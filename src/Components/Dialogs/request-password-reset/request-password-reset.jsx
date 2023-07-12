@@ -46,7 +46,7 @@ export default function RequestPasswordReset({styles}) {
           <p className='name'>
             {t('email').toUpperCase()}
           </p>
-          <AoInput name="email" type="email" value={email} IsValid={emailValid} required handleChange={handleChange} />
+          <AoInput name="email" type="text" value={email} IsValid={emailValid} required handleChange={handleChange} />
         </div>
         <span className="vertical-gap10"></span>
         <p className='desc-text info-text'>{t('recovery-mail-hint')}</p>

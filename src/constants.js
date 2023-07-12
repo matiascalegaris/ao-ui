@@ -28,6 +28,7 @@ export const Actions = {
   OpenSettings: 22,
   DisplayInventory: 23,
   DisplaySpells: 24,
+  SetMeditate: 25
 }
 
 export const SafeLocks = {
@@ -126,6 +127,12 @@ export const MouseButtons = {
   right: 1,
   middle: 2,  
 };
+
+export const KeyCodeMapping = {
+  c: 67,
+  v: 86,
+  x: 88
+}
 
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
 

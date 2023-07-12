@@ -33,13 +33,20 @@ const scrollToListElement = (parent, element) => {
 }
 
 const getSpellIndexForPos = (scrollList, childRef, height) => {
-  for(var i = 0; i < childRef.current.length; i++) {
+  var i = 0
+  for(; i < childRef.current.length; i++) {
     const rect = childRef.current[i].getBoundingClientRect()
-    if (height > rect.top && height < rect.bottom) {
+    if (height >= rect.top ) {
+      break;
+    }
+  }
+  for(; i < childRef.current.length; i++) {
+    const rect = childRef.current[i].getBoundingClientRect()
+    if (height < rect.bottom) {
       return i
     }
   }
-  return -1
+  return Math.min(i, childRef.current.length - 1)
 }
 export default function SpellSelection () {
   const { t } = useTranslation();
@@ -49,8 +56,13 @@ export default function SpellSelection () {
   const dispatch = useDispatch()
   const spellsRef = useRef([]);
   const selectedSpellIndex = useSelector(selectSelectedSpellSlotIndex)
+  const selectedRef = useRef(selectedSpellIndex);
+
+  useEffect(() => {
+    selectedRef.current = selectedSpellIndex;
+  }, [selectedSpellIndex]);
   const selectNewSpell = spellIndex => {
-    if (spellIndex !== selectedSpellIndex) {
+    if (spellIndex !== selectedRef.current) {
       dispatch(selectSpellSlot(spellIndex))
       window.parent.BabelUI.UpdateSelectedSpellSlot(spellIndex)
     }
@@ -96,33 +108,42 @@ export default function SpellSelection () {
     if (e.button === MouseButtons.left) {
       selectNewSpell(getSpellIndexForPos(scrollContiner, spellsRef, e.clientY))
       const anchorPos = scrollContiner.current.getBoundingClientRect()
-      MouseEvents.move = evt => {
-        var selectSpell = -1
-        if (evt.clientY > anchorPos.bottom ) {
-          const translation = evt.clientY - anchorPos.bottom
-          selectSpell = getSpellIndexForPos(scrollContiner, spellsRef, anchorPos.bottom - 20)
-          scrollContiner.current && scrollContiner.current.scrollTo(0, scrollContiner.current.scrollTop + translation)
-        } 
-        else if (evt.clientY < anchorPos.top) {
-          const translation = evt.clientY - anchorPos.top
-          selectSpell = getSpellIndexForPos(scrollContiner, spellsRef, anchorPos.top + 10)
-          scrollContiner.current && scrollContiner.current.scrollTo(0, scrollContiner.current.scrollTop + translation)
-        }
-        else {
-          selectSpell = getSpellIndexForPos(scrollContiner, spellsRef, evt.clientY)
-        }
-        if (selectSpell >= 0 ) selectNewSpell(selectSpell)
+      if (!MouseEvents.move) {
+        MouseEvents.move = evt => {
+          var selectSpell = -1
+          if (evt.clientY > anchorPos.bottom ) {
+            const translation = (evt.clientY - anchorPos.bottom) * 10
+            scrollContiner.current && scrollContiner.current.scrollTo(0, scrollContiner.current.scrollTop + translation)
+            selectSpell = getSpellIndexForPos(scrollContiner, spellsRef, anchorPos.bottom)
+            if (selectSpell === -1) {
+              selectSpell = spellList.length - 1
+            }
+          } 
+          else if (evt.clientY < anchorPos.top) {
+            const translation = (evt.clientY - anchorPos.top) * 10
+            scrollContiner.current && scrollContiner.current.scrollTo(0, scrollContiner.current.scrollTop + translation)
+            selectSpell = getSpellIndexForPos(scrollContiner, spellsRef, anchorPos.top )
+          }
+          else {
+            selectSpell = getSpellIndexForPos(scrollContiner, spellsRef, evt.clientY)
+          }
+          if (selectSpell >= 0 ) selectNewSpell(selectSpell)
+        }      
+        window.addEventListener('mousemove', MouseEvents.move, false);
       }
-      MouseEvents.up = evt => {
-        if (MouseEvents.up !== null) {
-          window.removeEventListener('mouseup', MouseEvents.up, false);
-        }
-        if (MouseEvents.move !== null) {
-          window.removeEventListener('mousemove', MouseEvents.move, false);
-        }
+      if (!MouseEvents.up) {
+        MouseEvents.up = evt => {
+          if (MouseEvents.up !== null) {
+            window.removeEventListener('mouseup', MouseEvents.up, false);
+            MouseEvents.up = null
+          }
+          if (MouseEvents.move !== null) {
+            window.removeEventListener('mousemove', MouseEvents.move, false);
+            MouseEvents.move = null
+          }
+        }     
+        window.addEventListener('mouseup', MouseEvents.up, false);
       }
-      window.addEventListener('mousemove', MouseEvents.move, false);
-      window.addEventListener('mouseup', MouseEvents.up, false);
     }
   }
 
@@ -140,8 +161,8 @@ export default function SpellSelection () {
         onScroll={onScroll}>
         {
           spellList.map( (spell, index) => (
-            <div ref={el => spellsRef.current[index] = el}>
-              <SpellEntry key={index} spell={spell} 
+            <div key={index} ref={el => spellsRef.current[index] = el}>
+              <SpellEntry spell={spell} 
                           selected={selectedSpellIndex === index} 
                           dragEnabled={enableSpellOrder}/>
             </div>

@@ -46,7 +46,7 @@ export const Spell = ({spellInfo, selected, innerRef, styles, dragEnabled, ...ot
         customSectionStyle={iconStyle}
       />
       {
-        spellInfo.spellIndex ? <SpellCdIndicator spellId={spellInfo.spellIndex}/> : null
+        spellInfo.spellIndex > 0 ? <SpellCdIndicator spellId={spellInfo.spellIndex}/> : null
       }
       
       </span>{spellInfo.name}

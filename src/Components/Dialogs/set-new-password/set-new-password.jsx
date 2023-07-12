@@ -53,7 +53,7 @@ export default function SetNewPassword({styles}) {
           <p className='name'>
             {t('email').toUpperCase()}
           </p>
-          <AoInput name="email" type="email" value={email} IsValid={validEmail} required handleChange={handleChange} />
+          <AoInput name="email" type="text" value={email} IsValid={validEmail} required handleChange={handleChange} />
         </div>
         <div className="vertical-gap10"></div>
         <div className='named-input user'>

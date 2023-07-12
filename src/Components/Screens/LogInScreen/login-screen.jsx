@@ -5,6 +5,7 @@ import './login-screen.scss'
 import { loadNews, selectSteamNews } from '../../../redux/Api'
 import { SteamNewsEntry } from './SteamNews/steam-news-entry'
 import { useEffect } from 'react'
+import { setFadeOut } from '../../../redux/UIFlowSlice'
 
 export const LoginScreen = () => {
   const news = useSelector(selectSteamNews)
@@ -12,6 +13,11 @@ export const LoginScreen = () => {
   useEffect(() => {
     dispatch(loadNews());
   }, [dispatch]);
+  useEffect(()=> {
+    setTimeout(() => {
+      dispatch(setFadeOut(false))  
+    }, 200);
+  }, [])
   return (
     <div className='login-screen'>
       <div className='conten-line'>

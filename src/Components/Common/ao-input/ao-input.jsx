@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { SanitazeInput } from '../../../Tools/Utils';
 import './ao-input.scss';
+import { KeyCodeMapping } from '../../../constants';
 
 
 const AoInput = ({handleChange, IsValid, styles, inputStyles, innerRef, ...otherProps}) => {
@@ -8,12 +9,42 @@ const AoInput = ({handleChange, IsValid, styles, inputStyles, innerRef, ...other
   if (!IsValid) {
     errStyle = 'error '
   }
+  const inputElement = useRef(null);
   const HandleChange = input => {
     handleChange(SanitazeInput(input))
   }
+  const onKeyDown = evt => {
+    var ctrlDown = evt.ctrlKey||evt.metaKey
+    if (ctrlDown && evt.keyCode === KeyCodeMapping.c) {
+      if (inputElement.current &&  inputElement.current.selectionStart < inputElement.current.selectionEnd) {
+        let content = inputElement.current.value
+        window.parent.BabelUI.Copytext(content.substring(inputElement.current.selectionStart, inputElement.current.selectionEnd))
+      }
+    }
+  }
+  const onMouseMove = evt => {
+    if (evt.buttons > 0 ) {
+      const rect =  inputElement.current.getBoundingClientRect()
+      const localX = evt.clientX - rect.left;
+      const localY = evt.clientY - rect.top;
+      const fontSize = window
+      .getComputedStyle(inputElement.current, null)
+      .getPropertyValue("font-size");
+    }
+  }
+  const selectAllText = evt => {
+    inputElement.current.selectionStart = 0
+    inputElement.current.selectionEnd = inputElement.current.value.length
+  }
   return (  
   <div className={'group ' + errStyle + styles }>
-    <input className={'form-input ' + inputStyles} onChange={HandleChange} ref={innerRef} {...otherProps} />
+    <input className={'form-input ' + inputStyles} 
+      onChange={HandleChange} 
+      ref={(el)=> {inputElement.current = el; ; if (innerRef){ innerRef.current = el;}}}
+      onKeyDown={onKeyDown}
+      onMouseMove={onMouseMove}
+      onDoubleClick={selectAllText}
+      {...otherProps} />
   </div>
 )}
 

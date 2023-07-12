@@ -45,7 +45,7 @@ export default function ValidateAccount() {
           <p className='name'>
             {t('email').toUpperCase()}
           </p>
-          <AoInput name="email" type="email" value={email} IsValid={validEmail || email.length === 0} required handleChange={handleChange} />
+          <AoInput name="email" type="text" value={email} IsValid={validEmail || email.length === 0} required handleChange={handleChange} />
         </div>
         <span className="vertical-gap10"></span>
         <div className='code-area'>

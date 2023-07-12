@@ -37,7 +37,11 @@ export default function CharacterSelectionScreen() {
       setSelectionState({...selectionState, lastSelectTime:timeStamp, lastSelected:selection})
     }
   }
-
+  useEffect(()=> {
+    setTimeout(() => {
+      dispatch(setFadeOut(false))  
+    }, 200);
+  }, [])
   const loginWithCharaceter = (character) =>{
     if (transitionActive) return
     if (character != null && character.name != null) {

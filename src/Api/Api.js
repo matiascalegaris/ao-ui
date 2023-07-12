@@ -250,6 +250,7 @@ if (process.env.NODE_ENV === 'development') {
     UpdateSelectedSpellSlot: slotIndex => {
     },
     UseSpellSlot: slotIndex => {
+      console.log("use spell " + slotIndex)
     },
     OpenVBDialog: dialogName => {
       if (dialogName === 'frmCerrar'){
@@ -327,6 +328,9 @@ if (process.env.NODE_ENV === 'development') {
     },
     UpdateCombatAndGlobatChatState: (combat, global) => {
       
+    },
+    Copytext: text => {
+      console.log("copy:" + text)
     }
   } 
 }

@@ -2,6 +2,11 @@ import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { ChatStates } from '../../constants'
 import { exitGameplay } from './GameStateSlice'
 
+const ChatInputMode = {
+  Normal: 0,
+  ClanChat: 1
+}
+
 export const ChatSlice = createSlice({
   name: 'chat',
   initialState: {
@@ -18,7 +23,7 @@ export const ChatSlice = createSlice({
   },
   reducers: {
     postChatMessage: (state, action) => {
-      const insertionPos = state.endPos%state.messageList.length
+      const insertionPos = state.endPos % state.messageList.length
       state.endPos += 1
       if (state.endPos  - state.startPos > state.messageList.length) {
         state.startPos += 1
@@ -37,7 +42,14 @@ export const ChatSlice = createSlice({
     setChatMode: (state, action) => {
       state.chatMode = action.payload
     },
-    openChat: (state) => {
+    openChat: (state, action) => {
+      if (action.payload === ChatInputMode.ClanChat) {
+        if (state.chatMode !== ChatStates.Clan) {
+          state.chatMode = ChatStates.Clan
+        }
+      } else if (state.chatMode === ChatStates.Clan) {
+        state.chatMode = ChatStates.Normal
+      }
       state.forceOpenChatId = state.forceOpenChatId + 1
     },
     updateGlobalAndCombatModes: (state, action) => {
@@ -75,9 +87,9 @@ export const selectMessageList = createSelector(
   }
 )
 
-export const safeOpenChat = () => (dispatch, getState) => {
+export const safeOpenChat = (mode) => (dispatch, getState) => {
   if (getState().gameState.activeDialog) return
-  dispatch(openChat())
+  dispatch(openChat(mode))
 }
 
 export default ChatSlice.reducer
