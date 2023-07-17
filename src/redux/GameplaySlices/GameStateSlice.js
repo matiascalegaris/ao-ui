@@ -56,6 +56,15 @@ export const GameStateSlice = createSlice({
     updateRemoteTab: (state, action) => {
       state.trackRemoteInvTab = action.payload
     },
+    openNpcTradeDialog: (state) => {
+      state.activeDialog = {
+        popUp: 'npc-trade',
+        npcItemsList: Array(42).fill({name:'', count:1, cantUse: 0, equipped: false, grh:0,
+        maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: 0,
+        value: 0, cooldown:0, cdType:0, cdMask:0})
+        .map((element, index) => ({...element, count: 0, index:index}))
+      }
+    },
     extraReducers: (builder) => {
       builder
         .addCase(resetGameplay, (state) => {
@@ -65,7 +74,7 @@ export const GameStateSlice = createSlice({
           state.activeDialog = null
           window.parent.BabelUI.UpdateOpenDialog(false)
         })
-    },
+    }
   },
 })
 

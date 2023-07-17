@@ -285,22 +285,22 @@ if (process.env.NODE_ENV === 'development') {
         window.parent.APicallbacks.UpdateInvSlot({name:'hacha vikinga', count:999, cantUse: 0, 
                                                   equipped: true, grh:36467, description:'texto de prueba a ver como se ve',
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
-                                                  objIndex: 1812, type: 2, value: 0, 
+                                                  objIndex: 1812, type: 2, value: 5, 
                                                   cooldown:4000, cdType:5, cdMask:19, index:1})
         window.parent.APicallbacks.UpdateInvSlot({name:'algun arco', count:1, cantUse: 0, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
-                                                  objIndex: 1812, type: 2, value: 0, 
+                                                  objIndex: 1812, type: 2, value: 0.5, 
                                                   cooldown:0, cdType:0, cdMask:2, index:2})
         window.parent.APicallbacks.UpdateInvSlot({name:'alguna espada', count:1500, cantUse: 0, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
-                                                  objIndex: 1812, type: 2, value: 0, 
+                                                  objIndex: 1812, type: 2, value: 1.666, 
                                                   cooldown:0, cdType:0, cdMask:1, index:3})
         window.parent.APicallbacks.UpdateInvSlot({name:'algun usable', count:1150, cantUse: 2, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
-                                                  objIndex: 1812, type: 53, value: 0, 
+                                                  objIndex: 1812, type: 53, value: 10, 
                                                   cooldown:30000, cdType:10, cdMask:16, index:4})
 
         window.parent.APicallbacks.UpdateSpellSlot({name:'test', index:1, spellIndex: 5, 
