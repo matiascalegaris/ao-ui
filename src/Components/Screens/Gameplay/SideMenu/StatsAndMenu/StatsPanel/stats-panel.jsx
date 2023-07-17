@@ -37,7 +37,7 @@ export default function StatsPanel({styles}) {
   const equippedItems = useSelector(selectEquippedBonus)
   const onGoldClick = evt => {
     window.parent.BabelUI.GoldClick()
-    dispatch(selectInvSlot(0))
+    dispatch(selectInvSlot(-1))
   }
   //console.log('statsPannel render')
   const showArrowBonus = equippedItems.amunition.min > 0 ||
