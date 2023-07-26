@@ -26,7 +26,7 @@ export const SpellDetails = ({spellInfo}) => {
         spellInfo.cooldown > 0 ? 
           <div className="stats-line">
             <img className="icon" src={require('../../../../assets/Icons/gameplay/ico_timer.png')}/>
-            <span className="value">{spellInfo.cooldown/1000}s</span>
+            <span className="value">{spellInfo.cooldown}s</span>
           </div> : null
       }
       {

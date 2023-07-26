@@ -61,6 +61,7 @@ function App() {
         maxMana: stats.maxMan,
         currentShield: stats.hpShield,
         gold: stats.gold,
+        safeGoldForLevel: stats.safeGoldForLevel,
         currentEnergy: stats.minSta,
         maxEnergy: stats.maxSta,
         drink: stats.minAgu,
@@ -111,8 +112,8 @@ function App() {
     RegisterApiCallback('UpdateDrink', (slotInfo) => {
       dispatch(updateDrink(slotInfo))
     })
-    RegisterApiCallback('UpdateGold', (gold) => {
-      dispatch(updateGold(gold))
+    RegisterApiCallback('UpdateGold', (gold, safeGoldForLevel) => {
+      dispatch(updateGold({gold, safeGoldForLevel}))
     })
     RegisterApiCallback('UpdateExp', (current, max) => {
       dispatch(updateExp({min: current, max: max}))
