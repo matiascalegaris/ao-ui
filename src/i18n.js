@@ -209,6 +209,11 @@ const resources = {
       'cant-use-reason-4': 'No tienes suficientes skills para usarlo!',
       'cant-use-reason-5': 'Tu raza no puede usarlo!',
       'cant-use-reason-6': 'No tienes suficiente nivel!',
+      'merchant': 'comerciante',
+      'buy': 'comprar',
+      'sell': 'vender',
+      'offer': 'oferta',
+      'inventory': 'inventario'
     }
   }
 };

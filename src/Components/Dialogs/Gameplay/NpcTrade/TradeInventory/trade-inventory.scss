@@ -1,0 +1,15 @@
+
+.inv-frame-content {
+
+  padding: 8px;
+
+  .ribbon-pos {
+    top:-32px;
+  }
+  .inventory-slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: auto;
+    margin: 10px 2px;    
+  }
+}

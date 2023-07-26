@@ -14,6 +14,8 @@ import SingleInputDialog from '../../Dialogs/SingleInputDialog/single-input-dial
 import { IFrameDialog } from '../../Common/IFrameDialog/iframe-dialog'
 import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 import { RemoteCursor } from '../../Common/RemoteCursor/remote-cursor'
+import { NpcTrade } from '../../Dialogs/Gameplay/NpcTrade/npc-trade'
+import { HotKeyBar } from './HotkeyBar/hotkey-bar'
 
 export default function GameplayScreen() {
   //console.log('gameplay render')
@@ -45,13 +47,15 @@ export default function GameplayScreen() {
             <MiniMap/>
             </ErrorBoundary>
           </div>
-          <div className='gameplay-window'></div>
+          <div className='gameplay-window'>
+          <ErrorBoundary compName='hoykeys'>
+            <HotKeyBar/>
+          </ErrorBoundary>
+          </div>
           <span className={'gameplay-bottom-frame ' + (transitionActive ? 'gp-bottom-exit-animation' : 'gp-bottom-intro-animation')}></span>
         </div>
         <span className={'menu-separator ' + (transitionActive ? 'gp-right-exit-animation' : 'gp-right-intro-animation')}><span className='frame-corner bot-right'></span></span>
         <SideMenu styles={'right-panel ' + (transitionActive ? 'gp-right-exit-animation' : 'gp-right-intro-animation')}/>
-        <DragLayer/>
-        </DragDropProvider>
         <ErrorBoundary compName="gameplay popups">
         {
           popupsState ?
@@ -59,7 +63,8 @@ export default function GameplayScreen() {
             {{
                 'option-dialog':<OptionDialog styles='centered' settings={popupsState}/>,
                 'single-input-dialog':<SingleInputDialog styles='centered' settings={popupsState}/>,
-                'iframe':<IFrameDialog options={popupsState}/>
+                'iframe':<IFrameDialog options={popupsState}/>,
+                'npc-trade':<NpcTrade settings={popupsState}/>
               }
               [popupsState.popUp]
             }
@@ -70,6 +75,8 @@ export default function GameplayScreen() {
           remoteTrackActive ? <RemoteCursor /> : null
         }
         </ErrorBoundary>
+        <DragLayer/>
+        </DragDropProvider>
       </div>
     </div>
   )
