@@ -18,7 +18,8 @@ const defaultValues = {
                         grh:0, maxDef:0, minDef:0, maxHit:0, objIndex: 0,
                         type: 0, value: 0, cooldown:0, cdType:0, cdMask:0})
                  .map((element, index) => ({...element, count: 0, index:index})),
-  selectedKeyIndex: -1
+  selectedKeyIndex: -1,
+  hotkeys: Array(10).fill({type:null, content:null, lastUse: 0}).map((element, index) => ({...element, index:index}))
 }
 
 export const InventorySlice = createSlice({
@@ -56,6 +57,12 @@ export const InventorySlice = createSlice({
       let i = 0
       state.spellList.forEach( element => { element.index = i; i++})
     },
+    setHotkeySlot: (state, action) => {
+      state.hotkeys[action.payload.index] = action.payload
+    },
+    activateRemoteHotkey: (state, action) => {
+      state.hotkeys[action.payload.index].lastUse = state.hotkeys[action.payload.index].lastUse + 1
+    },
     extraReducers: (builder) => {
       builder
         .addCase(resetGameplay, (state) => {
@@ -66,7 +73,9 @@ export const InventorySlice = createSlice({
   },
 })
 
-export const { updateInvSlot, setInvLevel, selectInvSlot, selectSpellSlot, updateSpellSlot, updateKeySlot, selectKeySlot, moveSpellSlot } = InventorySlice.actions
+export const { updateInvSlot, setInvLevel, selectInvSlot, selectSpellSlot, 
+               updateSpellSlot, updateKeySlot, selectKeySlot,
+              moveSpellSlot, setHotkeySlot, activateRemoteHotkey } = InventorySlice.actions
 
 export const selectSelectedItemIndex = (state) =>  state.inventory.selectedItemIndex
 
@@ -76,6 +85,7 @@ export const selectSelectedSpellSlotIndex = (state) => state.inventory.selectedS
 export const selectExtraSlotState = (state) => state.inventory.extraInventorySlotState
 export const selectKeys = (state) => state.inventory.keys
 export const selectSelectedKeyIdex = (state) => state.inventory.selectedKeyIndex
+export const selectHotkeys = (state) => state.inventory.hotkeys
 
 export const selectEquippedItems = createSelector(
   (state) => state.inventory.itemList,
@@ -127,5 +137,48 @@ export const selectEquippedBonus = createSelector(
     return equippedSlots
   }
 )
+export const selectHotkeySlot = createSelector(
+  [
+    // Usual first input - extract value from `state`
+    state => state.inventory.itemList,
+    // Take the second arg, `category`, and forward to the output selector
+    (state, hotkey) => hotkey
+  ],
+  // Output selector gets (`items, category)` as args
+  (inventory, hotkey) => {
+    const content = inventory[hotkey.lastKnownSlot]
+    if (content.objIndex === hotkey.targetIndex) {
+      return content
+    }
+    for (let i = 0; i < inventory.length; i++) {
+      if (inventory[i].objIndex === hotkey.targetIndex) {
+        return inventory[i]
+      }
+    }
+    return null
+  }
+);
+
+export const selectHotkeySpellSlot = createSelector(
+  [
+    // Usual first input - extract value from `state`
+    state => state.inventory.spellList,
+    // Take the second arg, `category`, and forward to the output selector
+    (state, hotkey) => hotkey
+  ],
+  // Output selector gets (`items, category)` as args
+  (spellList, hotkey) => {
+    const content = spellList[hotkey.lastKnownSlot]
+    if (content.spellIndex === hotkey.targetIndex) {
+      return content
+    }
+    for (let i = 0; i < spellList.length; i++) {
+      if (spellList[i].spellIndex === hotkey.targetIndex) {
+        return spellList[i]
+      }
+    }
+    return null
+  }
+);
 
 export default InventorySlice.reducer

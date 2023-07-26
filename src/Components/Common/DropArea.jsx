@@ -6,7 +6,6 @@ export const DropArea = ({children, id, acceptTypes}) => {
 
   const mouseEnter = etv => {
     if (dragDropContext.item === null) return;
-
     if (acceptTypes.includes(dragDropContext.itemType)) {
       dragDropContext.SetActiveContainer(dragDropContext, id)
     }
@@ -18,7 +17,8 @@ export const DropArea = ({children, id, acceptTypes}) => {
   }
   const style = {
     width: '100%', 
-    height: '100%'
+    height: '100%',
+    PointerEvents: 'all'
   }
   return (
     <div style={style} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>

@@ -15,7 +15,7 @@ import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockStat
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage, setWhisperTarget, updateGlobalAndCombatModes } from './redux/GameplaySlices/ChatSlice';
 import { resetGameplay, setFps, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
-import { selectSpellSlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
+import { activateRemoteHotkey, selectSpellSlot, setHotkeySlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, startSpellcd, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
@@ -195,7 +195,20 @@ function App() {
     RegisterApiCallback('UpdateCombatAndGlobalChatModes', (combatEnabled, globalEnabled) => {
       dispatch(updateGlobalAndCombatModes({combatEnabled, globalEnabled}))
     })
-    
+    RegisterApiCallback('UseRemoveHotkey', (index) => {
+      dispatch(activateRemoteHotkey(index))
+    })
+    RegisterApiCallback('UpdateHotkeySlot', (index, type, targetIndex, lastKnownSlot ) => {
+      dispatch(setHotkeySlot({
+        type: type,
+        index: index,
+        content: {
+          targetIndex: targetIndex,
+          lastKnownSlot: lastKnownSlot,
+          lastUse: 0
+        }
+      }))
+    })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)
     axios.defaults.headers.common['Accept-Language'] = 'es-AR, es;q=0.9 en;q=0.8'
