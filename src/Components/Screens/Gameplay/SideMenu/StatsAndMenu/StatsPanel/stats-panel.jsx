@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAgi, selectAgiState, selectGold, selectMagicBonus, selectMagicDef, selectStr, selectStrState } from '../../../../../../redux/GameplaySlices/PlayerStatsSlice'
+import { selectAgi, selectAgiState, selectGold, selectMagicBonus, selectMagicDef, selectSafeGoldForLevel, selectStr, selectStrState } from '../../../../../../redux/GameplaySlices/PlayerStatsSlice'
 import { FormatNumberWithDots } from '../../../../../../Tools/Utils'
 import './stats-panel.scss'
 import StatValue from './StatValue/stat-value'
@@ -9,6 +9,7 @@ import { DrinkBar } from './Bars/DrinkBar'
 import { FoodBar } from './Bars/FoodBar'
 import { EnergyBar } from './Bars/EnergyBar'
 import { ManaBar } from './Bars/ManaBar'
+import { selectCharacterLevel } from '../../../../../../redux/GameplaySlices/CharacterInfoSlice'
 
 
 const GetStateStyle = state => {
@@ -42,7 +43,9 @@ export default function StatsPanel({styles}) {
   //console.log('statsPannel render')
   const showArrowBonus = equippedItems.amunition.min > 0 ||
                          equippedItems.amunition.max > 0
-  const alertGold =  userGold <= 100000
+  const goldForLevel = useSelector(selectSafeGoldForLevel)
+  const userLevel = useSelector(selectCharacterLevel)
+  const alertGold =  userGold > (goldForLevel * userLevel)
   return (
     <div className={'stats-panel'}>
       <div className='gold-line'>

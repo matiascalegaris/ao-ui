@@ -10,6 +10,7 @@ export const PlayerStats = createSlice({
     maxMana: 0,
     currentShield:0,
     gold:56218,
+    safeGoldForLevel:3000,
     str:18,
     agi:18,
     currentEnergy:0,
@@ -33,6 +34,7 @@ export const PlayerStats = createSlice({
       state.maxMana = action.payload.maxMana
       state.currentShield = action.payload.currentShield
       state.gold = action.payload.gold
+      state.safeGoldForLevel = action.payload.safeGoldForLevel
       state.currentEnergy = action.payload.currentEnergy
       state.maxEnergy = action.payload.maxEnergy
       state.drink = action.payload.drink
@@ -60,7 +62,8 @@ export const PlayerStats = createSlice({
       state.food = action.payload
     },
     updateGold: (state, action) => {
-      state.gold = action.payload
+      state.gold = action.payload.gold
+      state.safeGoldForLevel = action.payload.safeGoldForLevel
     },
     updateStrandAgi: (state, action) => {
       state.str = action.payload.str;
@@ -123,6 +126,7 @@ export const selectAttackLock = (state) =>  state.playerStats.attackLock
 export const selectResurrectionLock = (state) =>  state.playerStats.resurrectionLock
 export const selectClanLock = (state) =>  state.playerStats.clanLock
 export const selectGroupLock = (state) =>  state.playerStats.groupLock
+export const selectSafeGoldForLevel = (state) =>  state.playerStats.safeGoldForLevel
 
 
 export default PlayerStats.reducer
