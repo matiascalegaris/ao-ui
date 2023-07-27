@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useRef, useState } from 'react'
-import { DragDropTypes } from '../../../constants'
+import { DragDropTypes, MouseButtons } from '../../../constants'
 import { DragDropContext } from '../DragDropProvider'
 import Sprite from '../Sprite/sprite'
 import './drag-layer.scss'
@@ -46,7 +46,7 @@ export const DragLayer = () => {
       }
     }
     const onMouseUp = evt => {
-      if (dragContextRef.current.item !== null) {
+      if (dragContextRef.current.item !== null && evt.button === MouseButtons.right) {
         dragContextRef.current.DragEnd(evt, dragContextRef.current)   
       }
       setMousePos({x:0, y: 0})
@@ -63,6 +63,9 @@ export const DragLayer = () => {
   },[dragDropContext]);
 
   const renderItem = (context) => {
+      if (mousePos.x  === 0 &&  mousePos.y === 0) {
+        return null
+      }
       switch (context.itemType) {
         case DragDropTypes.ITEM:
           const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(context.item.grh)

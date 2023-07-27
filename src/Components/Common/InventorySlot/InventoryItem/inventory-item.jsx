@@ -1,6 +1,6 @@
 import Sprite from '../../Sprite/sprite'
 import './inventory-item.scss'
-import { DragDropTypes } from '../../../../constants'
+import { DragDropTypes, MouseButtons } from '../../../../constants'
 import React, { useState } from 'react';
 import { DragDropContext } from '../../DragDropProvider';
 
@@ -20,7 +20,9 @@ export default function InventoryItem ({item, onSelect, onActivate}) {
     }
   }
   const onMouseDown = evt => {
-    dragDropContext.MouseDownOnDragable(item, DragDropTypes.ITEM,  Date.now())
+    if (evt.button === MouseButtons.right) {
+      dragDropContext.MouseDownOnDragable(item, DragDropTypes.ITEM,  Date.now())
+    }
   }
   
   return (
