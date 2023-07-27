@@ -331,6 +331,9 @@ if (process.env.NODE_ENV === 'development') {
     },
     Copytext: text => {
       console.log("copy:" + text)
+    },
+    SetHotkey: (index, type, value, preferredSlot) => {
+      
     }
   } 
 }
