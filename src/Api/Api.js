@@ -302,6 +302,11 @@ if (process.env.NODE_ENV === 'development') {
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 53, value: 10, 
                                                   cooldown:30000, cdType:10, cdMask:16, index:4})
+        window.parent.APicallbacks.UpdateInvSlot({name:'pocion', count:1150, cantUse: 2, 
+                                                  equipped: true, grh:36467,
+                                                  maxDef:0, minDef:0, minHit:0, maxHit:0, 
+                                                  objIndex: 1812, type: 11, value: 10, 
+                                                  cooldown:0, cdType:0, cdMask:8, index:10})
 
         window.parent.APicallbacks.UpdateSpellSlot({name:'test', index:1, spellIndex: 5, 
                                                   grh:36467})                                          

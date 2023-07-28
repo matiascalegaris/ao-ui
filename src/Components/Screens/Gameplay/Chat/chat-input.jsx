@@ -98,6 +98,12 @@ export const ChatInput = ({forceOpenChatId}) => {
             window.parent.APicallbacks.RemoteUserClick()
           }, 25)
     }
+    if (evt.key === '<' &&
+        document.activeElement !== chatInputElement.current) {
+          setTimeout(() => {
+            window.parent.APicallbacks.StartStunTime(1000, 0)
+          }, 25)
+    }
   }
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {

@@ -8,6 +8,7 @@ export const CooldownSlice = createSlice({
       hitUseItem:800, magicHit:800, useItemClick:276,
       useItemKey:380, walk:210 },
     activeInterval: Array(20).fill(0),
+    activeStunTime: null,
     spellCd: {}
   },
   reducers: {
@@ -19,14 +20,18 @@ export const CooldownSlice = createSlice({
     },
     startSpellcd: (state, action) => {
       state.spellCd[action.payload.spellId] = {start: Date.now(), duration: action.payload.cdTime}
+    },
+    startStun: (state, action) => {
+      state.activeStunTime = {duration: action.payload.duration, startTime: action.payload.startTime}
     }
   },
 })
 
-export const { updateIntervals, fireInterval, startSpellcd } = CooldownSlice.actions
+export const { updateIntervals, fireInterval, startSpellcd, startStun } = CooldownSlice.actions
 
 export const selectIntervals = (state) => state.cooldowns.intervals
 export const selectActiveIntervals = (state) => state.cooldowns.activeInterval
+export const selectStunTime = (state) => state.cooldowns.activeStunTime
 //export const selectSpellCd = (state, spellId) => state.cooldowns.spellCd
 
 export const selectSpellCd = createSelector(

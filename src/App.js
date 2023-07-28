@@ -17,7 +17,7 @@ import { postChatMessage, setWhisperTarget, updateGlobalAndCombatModes } from '.
 import { resetGameplay, setFps, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
 import { activateRemoteHotkey, selectSpellSlot, setHotkeySlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
-import { fireInterval, startSpellcd, updateIntervals } from './redux/GameplaySlices/Cooldowns';
+import { fireInterval, startSpellcd, startStun, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
 import { ErrorBoundary } from './Components/ErrorBoundary/error-boundary';
 import { updateSettings } from './redux/GameplaySlices/GameSettings';
@@ -144,6 +144,9 @@ function App() {
     })
     RegisterApiCallback('StartInterval', (intervalType, tunnelDelay) => {
       dispatch(fireInterval({intervalType: intervalType, startTime: Date.now() - tunnelDelay}))
+    })
+    RegisterApiCallback('StartStunTime', (duration, tunnelDelay) => {
+      dispatch(startStun({duration: duration, startTime: Date.now() - tunnelDelay}))
     })
     RegisterApiCallback('UpdateLockState', (type, state) => {
       dispatch(updateLockState({type:type, state:state}))

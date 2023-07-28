@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { e_CDTypeMask, e_CdTypes } from '../../../../constants'
-import { selectActiveIntervals, selectIntervals } from '../../../../redux/GameplaySlices/Cooldowns'
+import { selectActiveIntervals, selectIntervals, selectStunTime } from '../../../../redux/GameplaySlices/Cooldowns'
 import './cooldown-indicator.scss'
 import { CdFiller } from '../../CdFiller/cd-filler'
 
@@ -16,7 +16,7 @@ const considerInterval = (currentTime, lastStartTime, intervalTime, currentCdSta
   }
   return false
 }
-const GetLongestIntervalTime = (cdMask, cdType, customCd, intervals, activeIntervals) => {
+const GetLongestIntervalTime = (cdMask, cdType, customCd, intervals, activeIntervals, stunTime) => {
   let currentCdState = {
     longerCd: 0,
     startTime: 0,
@@ -34,6 +34,10 @@ const GetLongestIntervalTime = (cdMask, cdType, customCd, intervals, activeInter
   if (cdType > 0 && cdType < activeIntervals.length) {
     considerInterval(currentTime, activeIntervals[cdType], customCd, currentCdState)
   }
+
+  if (stunTime) {
+    considerInterval(currentTime, stunTime.startTime, stunTime.duration, currentCdState)
+  }
   return currentCdState
 }
 
@@ -41,11 +45,11 @@ export const CooldownIndicator = ({cdMask, cdType, elementCD}) => {
   const gIntervals = useSelector(selectIntervals)
   const activeIntervals = useSelector(selectActiveIntervals)
   const [cdState, setcdState] = useState({progress:1})
-
+  const stunTime = useSelector(selectStunTime)
   let progress = cdState.progress
   if (cdMask > 0) {
     const intervalState = GetLongestIntervalTime(cdMask, cdType, elementCD,
-                                                    gIntervals, activeIntervals)
+                                                    gIntervals, activeIntervals, stunTime)
     if (intervalState.longerCd > 0) {
       progress = (Date.now() - intervalState.startTime) / intervalState.cdDuration
     }
@@ -59,7 +63,7 @@ export const CooldownIndicator = ({cdMask, cdType, elementCD}) => {
       interval = setInterval(() => {
         if (cdMask > 0) {
           const intervalState = GetLongestIntervalTime(cdMask, cdType, elementCD,
-                                                          gIntervals, activeIntervals)
+                                                          gIntervals, activeIntervals, stunTime)
           if (intervalState.longerCd > 0) {
             setcdState({progress:(Date.now() - intervalState.startTime) / intervalState.cdDuration})
           }
@@ -72,7 +76,7 @@ export const CooldownIndicator = ({cdMask, cdType, elementCD}) => {
       }, 10);
     }    
     return () => interval && clearInterval(interval);
-  }, [gIntervals, activeIntervals, cdMask, cdType, elementCD]);
+  }, [gIntervals, activeIntervals, cdMask, cdType, elementCD, stunTime]);
 
   return (
     <>
