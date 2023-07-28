@@ -94,8 +94,11 @@ export const NpcTrade = ({settings}) => {
   const price = Math.round(state.selectedItemValue * state.amount)
   return (
     <AoDialog styles='npc-trade' contentStyles='content'>
-      <h1 className='game-dialog-header'>{t('merchant').toUpperCase()}</h1>
-      <span className='header-line'></span>
+      <div className='header-line'>
+        <img src={require('../../../../assets/Icons/gameplay/Merchant.png')}/>
+        <h1 className='game-dialog-header'>{t('merchant').toUpperCase()}</h1>
+      </div>
+      <span className='header-underline'></span>
       <AoButton styles='close-button' onClick={onClose}>
         <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
       </AoButton>

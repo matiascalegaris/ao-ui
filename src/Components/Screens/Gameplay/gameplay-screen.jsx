@@ -16,6 +16,7 @@ import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 import { RemoteCursor } from '../../Common/RemoteCursor/remote-cursor'
 import { NpcTrade } from '../../Dialogs/Gameplay/NpcTrade/npc-trade'
 import { HotKeyBar } from './HotkeyBar/hotkey-bar'
+import { selectDisplayHotkeys } from '../../../redux/GameplaySlices/GameSettings'
 
 export default function GameplayScreen() {
   //console.log('gameplay render')
@@ -33,6 +34,7 @@ export default function GameplayScreen() {
       dispatch(exitGameplay())
     }
   }, [] );
+  const displayHotkeys = useSelector(selectDisplayHotkeys)
   const transitionActive = useSelector(selectExitScreenActive)
   return (
     <div className='gameplay-screen'>
@@ -48,9 +50,14 @@ export default function GameplayScreen() {
             </ErrorBoundary>
           </div>
           <div className='gameplay-window'>
-          <ErrorBoundary compName='hoykeys'>
-            <HotKeyBar/>
-          </ErrorBoundary>
+            {
+              displayHotkeys ?
+              <ErrorBoundary compName='hoykeys'>
+                <HotKeyBar/>
+              </ErrorBoundary>
+              : null
+            }
+            
           </div>
           <span className={'gameplay-bottom-frame ' + (transitionActive ? 'gp-bottom-exit-animation' : 'gp-bottom-intro-animation')}></span>
         </div>
