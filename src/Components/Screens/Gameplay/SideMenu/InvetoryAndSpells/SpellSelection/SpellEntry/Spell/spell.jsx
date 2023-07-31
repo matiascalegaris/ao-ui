@@ -2,7 +2,7 @@ import './spell.scss'
 import Sprite from "../../../../../../../Common/Sprite/sprite"
 import { useContext } from 'react'
 import { DragDropContext } from '../../../../../../../Common/DragDropProvider'
-import { DragDropTypes } from '../../../../../../../../constants'
+import { DragDropTypes, MouseButtons } from '../../../../../../../../constants'
 import { SpellCdIndicator } from './spell-cd-indocator'
 
 const getScaletoFit = (originalWidth, originalHeight, targetWidth, targetHeight) => {
@@ -21,7 +21,7 @@ export const Spell = ({spellInfo, selected, innerRef, styles, dragEnabled, ...ot
     margin: `${(grhInfo.height-12) / -2}px ${(grhInfo.width-12) / -2}px`
   }
   const onSpellMouseDown = evt => {
-    if (dragEnabled) {
+    if (dragEnabled && evt.button === MouseButtons.right) {
       dragDropContext.MouseDownOnDragable(spellInfo, DragDropTypes.SPELL,  Date.now())
     }
   }
