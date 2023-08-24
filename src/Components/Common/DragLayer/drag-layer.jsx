@@ -46,9 +46,17 @@ export const DragLayer = () => {
       }
     }
     const onMouseUp = evt => {
-      if (dragContextRef.current.item !== null && evt.button === MouseButtons.right) {
-        dragContextRef.current.DragEnd(evt, dragContextRef.current)   
+      if (process.env.NODE_ENV === 'development') {
+        if (dragContextRef.current.item !== null) {
+          dragContextRef.current.DragEnd(evt, dragContextRef.current)   
+        }
       }
+      else {
+        if (dragContextRef.current.item !== null && evt.button === MouseButtons.right) {
+          dragContextRef.current.DragEnd(evt, dragContextRef.current)   
+        }
+      }
+      
       setMousePos({x:0, y: 0})
     }
     window.addEventListener('mousemove', onMouseMove, false);
@@ -66,19 +74,20 @@ export const DragLayer = () => {
       if (mousePos.x  === 0 &&  mousePos.y === 0) {
         return null
       }
-      switch (context.itemType) {
-        case DragDropTypes.ITEM:
-          const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(context.item.grh)
+      if ((context.itemType & DragDropTypes.ITEM) > 0 ) {
+        const grhInfo = window.parent.BabelUI.GetGrhDrawInfo(context.item.grh)
           return <Sprite imageName={grhInfo.imageNumber}
                     x={grhInfo.startX}
                     y={grhInfo.startY}
                     width={grhInfo.width}
                     height={grhInfo.height}
                   />
-        case DragDropTypes.SPELL:
-          return <Spell spellInfo={context.item}/>
-        default:
-          return null
+      }
+      else if ((context.itemType & DragDropTypes.SPELL) > 0) {
+        return <Spell spellInfo={context.item}/>
+      }
+      else {
+        return null
       }
     }
   return (

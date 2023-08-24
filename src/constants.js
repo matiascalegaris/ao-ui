@@ -1,6 +1,7 @@
 export const DragDropTypes = {
-  ITEM: 'Item',
-  SPELL: 'Spell'
+  ITEM: 1,
+  SPELL: 1 << 1,
+  BINDABLE: 1 << 2
 }
 
 export const Actions = {

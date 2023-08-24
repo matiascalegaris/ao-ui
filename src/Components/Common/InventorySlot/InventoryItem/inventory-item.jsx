@@ -19,9 +19,13 @@ export default function InventoryItem ({item, onSelect, onActivate}) {
       onSelect(item)
     }
   }
+  let DragType = DragDropTypes.ITEM
+  if (item.isBindable) {
+    DragType |= DragDropTypes.BINDABLE
+  }
   const onMouseDown = evt => {
-    if (evt.button === MouseButtons.right) {
-      dragDropContext.MouseDownOnDragable(item, DragDropTypes.ITEM,  Date.now())
+    if (evt.button === MouseButtons.right || process.env.NODE_ENV === 'development') {
+      dragDropContext.MouseDownOnDragable(item, DragType,  Date.now())
     }
   }
   

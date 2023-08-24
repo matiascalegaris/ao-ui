@@ -291,7 +291,7 @@ if (process.env.NODE_ENV === 'development') {
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
                                                   objIndex: 1812, type: 2, value: 0.5, 
-                                                  cooldown:0, cdType:0, cdMask:2, index:2})
+                                                  cooldown:0, cdType:0, cdMask:2, index:2, isBindable:true})
         window.parent.APicallbacks.UpdateInvSlot({name:'alguna espada', count:1500, cantUse: 0, 
                                                   equipped: true, grh:36467,
                                                   maxDef:0, minDef:0, minHit:5000, maxHit:5000, 
@@ -309,7 +309,7 @@ if (process.env.NODE_ENV === 'development') {
                                                   cooldown:0, cdType:0, cdMask:8, index:10})
 
         window.parent.APicallbacks.UpdateSpellSlot({name:'test', index:1, spellIndex: 5, 
-                                                  grh:36467})                                          
+                                                  grh:36467, isBindable:true})                                          
       }, 5)
     },
     MoveSpellSlot: (from, to) => {
@@ -337,9 +337,10 @@ if (process.env.NODE_ENV === 'development') {
     Copytext: text => {
       console.log("copy:" + text)
     },
-    SetHotkey: (index, type, value, preferredSlot) => {
-      
-    }
+    UpdateHoykeySlotInfo: (slotIndex, value, LastKnownSlot, Type) => {
+      console.log("update hotkey slot " + slotIndex)
+    },
+
   } 
 }
 export {RegisterApiCallback}
