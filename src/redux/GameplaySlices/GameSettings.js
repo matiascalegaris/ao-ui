@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { ItemCounFormat } from '../../constants'
 
 const defaultSettings = {
@@ -7,7 +7,7 @@ const defaultSettings = {
   combatChat: 0,
   spellMode: 0,
   scrollDrag: 0,
-  displayHotkeyBar: false
+  featureToggles: ['hotokey-enabled']
 }
 export const GameSettingsSlice = createSlice({
   name: 'gameSettings',
@@ -19,17 +19,31 @@ export const GameSettingsSlice = createSlice({
       state.spellMode = action.payload.spellMode
       state.scrollDrag = action.payload.scrollDrag
     },
-    setDisplayHotkeys: (state, action) => {
-      state.displayHotkeyBar = action.payload
+    clearFeatureToggles: (state) => {
+      state.featureToggles = []
+    },
+    addFeatureToggle: (state, action) => {
+      state.featureToggles.push(action.payload)
     }
   },
 })
 
-export const { updateSettings, setDisplayHotkeys } = GameSettingsSlice.actions
+export const { updateSettings, clearFeatureToggles, addFeatureToggle } = GameSettingsSlice.actions
 
 export const selectItemCountFormat = (state) => state.gameSettings.itemCountFormat
 export const selectSpellListScrollLock = (state) => state.gameSettings.spellListScrollLock
-export const selectDisplayHotkeys = (state) => state.gameSettings.displayHotkeyBar
 
+export const isToggleEnabled = createSelector(
+  [
+    // Usual first input - extract value from `state`
+    state => state.gameSettings.featureToggles,
+    // Take the second arg, `category`, and forward to the output selector
+    (state, toggleName) => toggleName
+  ],
+  // Output selector gets (`items, category)` as args
+  (toggles, toggleName) => {
+    return toggles.includes(toggleName)
+  }
+);
 
 export default GameSettingsSlice.reducer

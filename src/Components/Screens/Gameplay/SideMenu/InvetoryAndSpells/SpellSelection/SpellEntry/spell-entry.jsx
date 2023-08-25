@@ -55,7 +55,7 @@ export default function SpellEntry({spell, selected, ...otherProps}) {
   const spellRef = useRef(null)
   const [eventHandlers] = useTooltipHover(spell.spellIndex > 0 ? spell : null, TooltipTypes.SPELL, spellRef)
   return (
-    <DropArea id={{id:spell.index, onDrop:onDrop}} acceptTypes={[DragDropTypes.SPELL]}>
+    <DropArea id={{id:spell.index, onDrop:onDrop}} acceptTypes={DragDropTypes.SPELL}>
       <Spell spellInfo={spell} 
              selected={selected}
              innerRef={spellRef} 

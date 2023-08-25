@@ -20,9 +20,13 @@ export const Spell = ({spellInfo, selected, innerRef, styles, dragEnabled, ...ot
     transform: `scale(${targetScale})`,
     margin: `${(grhInfo.height-12) / -2}px ${(grhInfo.width-12) / -2}px`
   }
+  let DragType = DragDropTypes.SPELL
+  if (spellInfo.isBindable) {
+    DragType |= DragDropTypes.BINDABLE
+  }
   const onSpellMouseDown = evt => {
-    if (dragEnabled && evt.button === MouseButtons.right) {
-      dragDropContext.MouseDownOnDragable(spellInfo, DragDropTypes.SPELL,  Date.now())
+    if (dragEnabled && (evt.button === MouseButtons.right || process.env.NODE_ENV === 'development')) {
+      dragDropContext.MouseDownOnDragable(spellInfo, DragType,  Date.now())
     }
   }
   const selectedStyle = {
@@ -35,7 +39,7 @@ export const Spell = ({spellInfo, selected, innerRef, styles, dragEnabled, ...ot
          {...otherProps} 
          onMouseDown={onSpellMouseDown}
          ref={innerRef}
-         >        
+         >
       <span className="spell-icon">
       <Sprite 
         imageName={grhInfo.imageNumber}

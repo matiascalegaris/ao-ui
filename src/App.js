@@ -20,7 +20,7 @@ import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from
 import { fireInterval, startSpellcd, startStun, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
 import { ErrorBoundary } from './Components/ErrorBoundary/error-boundary';
-import { updateSettings } from './redux/GameplaySlices/GameSettings';
+import { addFeatureToggle, clearFeatureToggles, updateSettings } from './redux/GameplaySlices/GameSettings';
 import { loadNews, selectSteamNews } from './redux/Api';
 import axios from 'axios';
 
@@ -95,6 +95,7 @@ function App() {
       dispatch(updateInvSlot(slotInfo))
     })
     RegisterApiCallback('UpdateSpellSlot', (slotInfo) => {
+      console.log(slotInfo)
       dispatch(updateSpellSlot(slotInfo))
     })
     RegisterApiCallback('UpdateHp', (slotInfo) => {
@@ -202,7 +203,7 @@ function App() {
     RegisterApiCallback('UseRemoveHotkey', (index) => {
       dispatch(activateRemoteHotkey(index))
     })
-    RegisterApiCallback('UpdateHotkeySlot', (index, type, targetIndex, lastKnownSlot ) => {
+    RegisterApiCallback('UpdateHotkeySlot', (index, targetIndex, lastKnownSlot, type ) => {
       dispatch(setHotkeySlot({
         type: type,
         index: index,
@@ -212,6 +213,12 @@ function App() {
           lastUse: 0
         }
       }))
+    })
+    RegisterApiCallback('ClearToggles', () => {
+      dispatch(clearFeatureToggles())
+    })
+    RegisterApiCallback('ActivateFeatureToggle', (toggleName) => {
+      dispatch(addFeatureToggle(toggleName))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

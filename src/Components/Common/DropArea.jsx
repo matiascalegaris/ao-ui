@@ -6,12 +6,12 @@ export const DropArea = ({children, id, acceptTypes}) => {
 
   const mouseEnter = etv => {
     if (dragDropContext.item === null) return;
-    if (acceptTypes.includes(dragDropContext.itemType)) {
+    if ((acceptTypes & dragDropContext.itemType) > 0) {
       dragDropContext.SetActiveContainer(dragDropContext, id)
     }
   }
   const mouseLeave = evt => {
-    if (acceptTypes.includes(dragDropContext.itemType)) {
+    if ((acceptTypes & dragDropContext.itemType) > 0) {
       dragDropContext.SetActiveContainer(dragDropContext, null)
     }    
   }

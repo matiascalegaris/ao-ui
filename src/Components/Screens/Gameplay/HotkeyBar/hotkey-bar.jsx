@@ -7,12 +7,21 @@ import { HotkeyItem } from './hotkey-item'
 import { HotkeySpell } from './hoykey-spell'
 import Frame from '../../../Common/Frame/frame'
 
+const DrawContent = (type, content) => {
+  if ((type & DragDropTypes.ITEM) > 0) {
+    return (<HotkeyItem targetElement={content} />)
+  } else if ((type & DragDropTypes.SPELL) > 0) {
+    return (<HotkeySpell targetElement={content}/>)
+  }
+  else {
+    return null
+  }
+}
 export const HotKeyBar = () => {
   const hoykeyList = useSelector(selectHotkeys)
   const dispath = useDispatch()
   const onDrop = (mouseEvt, dragInfo) => {
-    console.log(dragInfo)
-    if (dragInfo.itemType === DragDropTypes.ITEM) {
+    if ((dragInfo.itemType & DragDropTypes.ITEM) > 0) {
       dispath(setHotkeySlot({
         type: dragInfo.itemType,
         index: dragInfo.activeContainer.id,
@@ -22,7 +31,8 @@ export const HotKeyBar = () => {
           lastUse: 0
         }
       }))
-    } else if (dragInfo.itemType === DragDropTypes.SPELL) {
+      window.parent.BabelUI.UpdateHoykeySlotInfo(dragInfo.activeContainer.id, dragInfo.item.objIndex, dragInfo.item.index, DragDropTypes.ITEM)
+    } else if ((dragInfo.itemType & DragDropTypes.SPELL) > 0) {
       dispath(setHotkeySlot({
         type: dragInfo.itemType,
         index: dragInfo.activeContainer.id,
@@ -32,6 +42,7 @@ export const HotKeyBar = () => {
           lastUse: 0
         }
       }))
+      window.parent.BabelUI.UpdateHoykeySlotInfo(dragInfo.activeContainer.id, dragInfo.item.spellIndex, dragInfo.item.index, DragDropTypes.SPELL)
     }
     
   }
@@ -41,13 +52,9 @@ export const HotKeyBar = () => {
         hoykeyList.map((el,index) => (
           <div className='slot-container'>
             <div key={index} className='slot'>
-            <DropArea id={{type:'hotkey', id:index, onDrop:onDrop}} acceptTypes={[DragDropTypes.ITEM, DragDropTypes.SPELL]}>
+            <DropArea id={{type:'hotkey', id:index, onDrop:onDrop}} acceptTypes={DragDropTypes.BINDABLE}>
             {
-              {
-                'Item':<HotkeyItem targetElement={el.content} />,
-                'Spell':<HotkeySpell targetElement={el.content}/>
-              }
-              [el.type]
+              DrawContent(el.type, el.content)
             }
             </DropArea>
             </div>
