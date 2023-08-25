@@ -10,6 +10,7 @@ import { OnlineCount } from './OnlineCounter'
 import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary'
 
 export default function TopBar({styles}) {
+  const dispatch = useDispatch()
   const onClose = evt => {
     window.parent.BabelUI.OpenVBDialog('frmCerrar')
   }
@@ -17,9 +18,12 @@ export default function TopBar({styles}) {
     window.parent.BabelUI.RequestAction(Actions.Minimize)
   }
   const openSettings = evt => {
-    window.parent.BabelUI.RequestAction(Actions.OpenSettings)
+    dispatch(setGameActiveDialog({
+      popUp:'settings'
+    })) 
+    //window.parent.BabelUI.RequestAction(Actions.OpenSettings)
   }
-  const dispatch = useDispatch()
+  
   const showHelp = evt => {
     const popupSettings = {
       url:'https://www.ao20.com.ar/wiki?hideHeaderAndFooter=true',

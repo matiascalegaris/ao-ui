@@ -90,7 +90,26 @@ const resources = {
       'cant-use-reason-3': 'Your faction prohibits you from using this item!',
       'cant-use-reason-4': 'You do not have enough skills to use it!',
       'cant-use-reason-5': 'Your race cannot use it!',
-      'cant-use-reason-6': 'You do not have a high enough level!'
+      'cant-use-reason-6': 'You do not have a high enough level!',
+      'throw-spells': 'Throw spells',
+      'no-Lock': "Don't Lock",
+      'lock-throw': "Lock on release",
+      'lock-cast': "Lock on Cast",
+      'invert': 'Invert Mouse',
+      'graphic-cursor' : 'Use rendered cursor',
+      'interface-language' : 'Language',
+      'other': 'Other',
+      'Npc-text': 'Npcs Text',
+      'Tutorial': 'Tutorial',
+      'text': 'Text',
+      'rendered': 'Rendered',
+      'Disabled': 'Disabled',
+      'Enabled': 'Enabled',
+      'block-spell-list-scroll': 'Block spell list scroll',
+      'copy-terminal': 'Copy dialogs to terminal',
+      'write-and-move': 'Move while writting',
+      'fight': 'fight',
+      'mouse-sens': 'Mouse sensitivity'
     }
   },
   es: {
@@ -213,7 +232,25 @@ const resources = {
       'buy': 'comprar',
       'sell': 'vender',
       'offer': 'oferta',
-      'inventory': 'inventario'
+      'throw-spells': 'Lanzar hechizos',
+      'no-Lock': "Sin bloqueo",
+      'lock-throw': "Bloqueo en soltar",
+      'lock-cast': "Bloqueo al lanzar",
+      'invert': 'Invertir',
+      'graphic-cursor' : 'User cursores graficos',
+      'interface-language' : 'Idioma de la interfaz',
+      'other': 'Otros',
+      'Npc-text': 'Texto Npcs',
+      'Tutorial': 'Tutorial',
+      'text': 'Texto',
+      'rendered': 'Renderizado',
+      'Disabled': 'Desactivado',
+      'Enabled': 'Activado',
+      'block-spell-list-scroll': 'Bloquear scroll de lista de hechizos',
+      'copy-terminal': 'Copiar dialogos a consola',
+      'write-and-move': 'Moverse al escribir',
+      'fight': 'Lucha',
+      'mouse-sens': 'Sensibilidad del mouse'
     }
   }
 };

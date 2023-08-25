@@ -17,6 +17,7 @@ import { RemoteCursor } from '../../Common/RemoteCursor/remote-cursor'
 import { NpcTrade } from '../../Dialogs/Gameplay/NpcTrade/npc-trade'
 import { HotKeyBar } from './HotkeyBar/hotkey-bar'
 import { selectDisplayHotkeys } from '../../../redux/GameplaySlices/GameSettings'
+import { SettingsDialog } from '../../Dialogs/Gameplay/Settings/settings-dialog'
 
 export default function GameplayScreen() {
   //console.log('gameplay render')
@@ -71,7 +72,8 @@ export default function GameplayScreen() {
                 'option-dialog':<OptionDialog styles='centered' settings={popupsState}/>,
                 'single-input-dialog':<SingleInputDialog styles='centered' settings={popupsState}/>,
                 'iframe':<IFrameDialog options={popupsState}/>,
-                'npc-trade':<NpcTrade settings={popupsState}/>
+                'npc-trade':<NpcTrade settings={popupsState}/>,
+                'settings':<SettingsDialog settings={popupsState}/>
               }
               [popupsState.popUp]
             }
