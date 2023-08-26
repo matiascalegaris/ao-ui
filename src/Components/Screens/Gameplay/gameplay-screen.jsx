@@ -16,9 +16,17 @@ import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 import { RemoteCursor } from '../../Common/RemoteCursor/remote-cursor'
 import { NpcTrade } from '../../Dialogs/Gameplay/NpcTrade/npc-trade'
 import { HotKeyBar } from './HotkeyBar/hotkey-bar'
-import { isToggleEnabled } from '../../../redux/GameplaySlices/GameSettings'
+import { isToggleEnabled, selectHideHotkeys, setHideToggles } from '../../../redux/GameplaySlices/GameSettings'
 import { SettingsDialog } from '../../Dialogs/Gameplay/Settings/settings-dialog'
+import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
 
+const showHKIcon = status => {
+  if (status) {
+    return require('../../../assets/Icons/gameplay/ico_arrow_up.png')
+  } else {
+    return require('../../../assets/Icons/gameplay/ico_arrow_down.png')
+  }
+}
 export default function GameplayScreen() {
   //console.log('gameplay render')
   const dispatch = useDispatch()
@@ -37,8 +45,9 @@ export default function GameplayScreen() {
   }, [] );
   const displayHotkeys = useSelector(state => isToggleEnabled(state, 'hotokey-enabled'))
   const transitionActive = useSelector(selectExitScreenActive)
+  const hideHotkeys = useSelector(selectHideHotkeys)
   const hideShowHotKeys = evt => {
-
+    dispatch(setHideToggles(!hideHotkeys))
   }
   return (
     <div className='gameplay-screen'>
@@ -57,8 +66,12 @@ export default function GameplayScreen() {
             {
               displayHotkeys ?
               <ErrorBoundary compName='hoykeys'>
-                <HotKeyBar/>
-                <div className='hide-show-hotkeys' onClick={hideShowHotKeys}></div>
+                {
+                  hideHotkeys ? null : <HotKeyBar/>
+                }
+                <GameBarButton styles='hide-show-hotkeys' onClick={hideShowHotKeys}>
+                  <img src={showHKIcon(hideHotkeys)}></img>
+                </GameBarButton>
               </ErrorBoundary>
               : null
             }

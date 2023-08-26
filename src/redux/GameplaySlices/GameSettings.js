@@ -7,7 +7,8 @@ const defaultSettings = {
   combatChat: 0,
   spellMode: 0,
   scrollDrag: 0,
-  featureToggles: ['hotokey-enabled']
+  featureToggles: ['hotokey-enabled'],
+  hideHotkeys: false
 }
 export const GameSettingsSlice = createSlice({
   name: 'gameSettings',
@@ -24,14 +25,18 @@ export const GameSettingsSlice = createSlice({
     },
     addFeatureToggle: (state, action) => {
       state.featureToggles.push(action.payload)
+    },
+    setHideToggles: (state, action) => {
+      state.hideHotkeys = action.payload
     }
   },
 })
 
-export const { updateSettings, clearFeatureToggles, addFeatureToggle } = GameSettingsSlice.actions
+export const { updateSettings, clearFeatureToggles, addFeatureToggle, setHideToggles } = GameSettingsSlice.actions
 
 export const selectItemCountFormat = (state) => state.gameSettings.itemCountFormat
 export const selectSpellListScrollLock = (state) => state.gameSettings.spellListScrollLock
+export const selectHideHotkeys = (state) => state.gameSettings.hideHotkeys
 
 export const isToggleEnabled = createSelector(
   [
