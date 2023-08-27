@@ -20,7 +20,7 @@ import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from
 import { fireInterval, startSpellcd, startStun, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
 import { ErrorBoundary } from './Components/ErrorBoundary/error-boundary';
-import { addFeatureToggle, clearFeatureToggles, updateSettings } from './redux/GameplaySlices/GameSettings';
+import { addFeatureToggle, clearFeatureToggles, setHideHotkeys, updateSettings } from './redux/GameplaySlices/GameSettings';
 import { loadNews, selectSteamNews } from './redux/Api';
 import axios from 'axios';
 
@@ -219,6 +219,9 @@ function App() {
     })
     RegisterApiCallback('ActivateFeatureToggle', (toggleName) => {
       dispatch(addFeatureToggle(toggleName))
+    })
+    RegisterApiCallback('SetHideHotkeyState', (newState) => {
+      dispatch(setHideHotkeys(newState))
     })
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

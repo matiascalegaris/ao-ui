@@ -16,7 +16,7 @@ import { ErrorBoundary } from '../../ErrorBoundary/error-boundary'
 import { RemoteCursor } from '../../Common/RemoteCursor/remote-cursor'
 import { NpcTrade } from '../../Dialogs/Gameplay/NpcTrade/npc-trade'
 import { HotKeyBar } from './HotkeyBar/hotkey-bar'
-import { isToggleEnabled, selectHideHotkeys, setHideToggles } from '../../../redux/GameplaySlices/GameSettings'
+import { isToggleEnabled, selectHideHotkeys, setHideHotkeys } from '../../../redux/GameplaySlices/GameSettings'
 import { SettingsDialog } from '../../Dialogs/Gameplay/Settings/settings-dialog'
 import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
 
@@ -47,7 +47,8 @@ export default function GameplayScreen() {
   const transitionActive = useSelector(selectExitScreenActive)
   const hideHotkeys = useSelector(selectHideHotkeys)
   const hideShowHotKeys = evt => {
-    dispatch(setHideToggles(!hideHotkeys))
+    dispatch(setHideHotkeys(!hideHotkeys))
+    window.parent.BabelUI.UpdateHideHotkeyState(!hideHotkeys);
   }
   return (
     <div className='gameplay-screen'>

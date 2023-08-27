@@ -26,13 +26,13 @@ export const GameSettingsSlice = createSlice({
     addFeatureToggle: (state, action) => {
       state.featureToggles.push(action.payload)
     },
-    setHideToggles: (state, action) => {
+    setHideHotkeys: (state, action) => {
       state.hideHotkeys = action.payload
     }
   },
 })
 
-export const { updateSettings, clearFeatureToggles, addFeatureToggle, setHideToggles } = GameSettingsSlice.actions
+export const { updateSettings, clearFeatureToggles, addFeatureToggle, setHideHotkeys } = GameSettingsSlice.actions
 
 export const selectItemCountFormat = (state) => state.gameSettings.itemCountFormat
 export const selectSpellListScrollLock = (state) => state.gameSettings.spellListScrollLock

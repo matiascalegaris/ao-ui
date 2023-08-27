@@ -340,7 +340,8 @@ if (process.env.NODE_ENV === 'development') {
     UpdateHoykeySlotInfo: (slotIndex, value, LastKnownSlot, Type) => {
       console.log("update hotkey slot " + slotIndex)
     },
-
+    UpdateHideHotkeyState: newState => {
+    }
   } 
 }
 export {RegisterApiCallback}
