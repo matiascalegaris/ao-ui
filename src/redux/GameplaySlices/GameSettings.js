@@ -7,7 +7,8 @@ const defaultSettings = {
   combatChat: 0,
   spellMode: 0,
   scrollDrag: 0,
-  featureToggles: ['hotokey-enabled'],
+  //featureToggles: ['hotokey-enabled'],
+  featureToggles: [],
   hideHotkeys: false
 }
 export const GameSettingsSlice = createSlice({

@@ -341,6 +341,9 @@ if (process.env.NODE_ENV === 'development') {
       console.log("update hotkey slot " + slotIndex)
     },
     UpdateHideHotkeyState: newState => {
+    },
+    GetNpcName: npcNumber => {
+      return "Gulfas morgolock"
     }
   } 
 }

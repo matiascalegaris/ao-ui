@@ -1,3 +1,5 @@
+import { useRef } from "react"
+import { TooltipTypes, useTooltipHover } from "../../../../Common/Tooltip/Tooltip-manager"
 
 const selectColor = color => {
   switch (color)
@@ -8,7 +10,7 @@ const selectColor = color => {
       return 'rgb(255, 201, 14)'
   }
 }
-export const InterestPoint = ({pos, color, ...otherProps}) => {
+export const InterestPoint = ({pos, color, pointData, ...otherProps}) => {
   const style = {
     position: 'absolute',
     left: `${pos.tileX-2}px`,
@@ -24,9 +26,13 @@ export const InterestPoint = ({pos, color, ...otherProps}) => {
     stopOpacity: '0.3'
   }
   const svgID = "ipointGrad-" + color;
-  return ( 
-  <svg height="5px" width="5px" style={style} {...otherProps}>
-    <circle cx="2.5" cy="2.5" r="1.5"   style={innerStyle} />
-  </svg>
+  const containerRef = useRef(null)
+  const NpcName = window.parent.BabelUI.GetNpcName(pointData.npcNumber)
+  const [eventHandlers] = useTooltipHover(NpcName, TooltipTypes.Npc, containerRef)
+
+  return (
+    <svg height="5px" width="5px" style={style} {...otherProps} ref={containerRef} {...eventHandlers}>
+      <circle cx="2.5" cy="2.5" r="1.5"   style={innerStyle} />
+    </svg>
   )
 }

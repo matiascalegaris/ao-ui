@@ -5,10 +5,12 @@ import './tooltip.scss'
 import { ItemTooltip } from "./ItemToolTip/item-tooltip";
 import { SpellTooltip } from "./SpellToolTip/spell-tooltip";
 import { isInside } from "../../../Tools/Utils";
+import { NpcToolTip } from "./NpcToolTip/npc-tooltip";
 
 export const TooltipTypes = {
   ITEM: 'Item',
-  SPELL: 'Spell'
+  SPELL: 'Spell',
+  Npc: 'Npc'
 }
 const toolTipWidth = 200
 
@@ -103,7 +105,8 @@ export const ActiveToolTip = () => {
     <div style={posStyle}>
       {{
           'Item':<ItemTooltip itemInfo={activeToolTip.contentInfo} />,
-          'Spell':<SpellTooltip spell={activeToolTip.contentInfo}/>
+          'Spell':<SpellTooltip spell={activeToolTip.contentInfo}/>,
+          'Npc': <NpcToolTip data={activeToolTip.contentInfo}/>
         }
         [activeToolTip.type]
       }

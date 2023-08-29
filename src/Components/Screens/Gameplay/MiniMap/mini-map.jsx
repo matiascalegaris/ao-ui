@@ -83,6 +83,7 @@ export default function MiniMap() {
         interesPoins.map( (element, index) => (
           <InterestPoint key={index} pos={element.position} 
             color={element.state} 
+            pointData={element}
             onContextMenu={ evt => onMarkerClick(evt, element.position.tileX, element.position.tileY)}
             onClick={ evt => onMarkerClick(evt, element.position.tileX, element.position.tileY)}/>
         ))
