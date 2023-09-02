@@ -19,6 +19,7 @@ import { HotKeyBar } from './HotkeyBar/hotkey-bar'
 import { isToggleEnabled, selectHideHotkeys, setHideHotkeys } from '../../../redux/GameplaySlices/GameSettings'
 import { SettingsDialog } from '../../Dialogs/Gameplay/Settings/settings-dialog'
 import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
+import { AoStore } from '../../Dialogs/Gameplay/AoStore/ao-store'
 
 const showHKIcon = status => {
   if (status) {
@@ -91,7 +92,8 @@ export default function GameplayScreen() {
                 'single-input-dialog':<SingleInputDialog styles='centered' settings={popupsState}/>,
                 'iframe':<IFrameDialog options={popupsState}/>,
                 'npc-trade':<NpcTrade settings={popupsState}/>,
-                'settings':<SettingsDialog settings={popupsState}/>
+                'settings':<SettingsDialog settings={popupsState}/>,
+                'ao-shop':<AoStore settings={popupsState}/>
               }
               [popupsState.popUp]
             }

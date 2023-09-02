@@ -5,6 +5,7 @@ import { useState } from "react";
 import './gameplay-options.scss'
 import Select from 'react-select';
 import { Slider } from "../../../Common/Slider/slider";
+import AoButton from "../../../Common/ao-button/ao-button";
 
 
 const ThrowSpellsOptions = [
@@ -110,5 +111,6 @@ export const GameplayTab = () => {
           <Select unstyled className="server-selector" classNamePrefix='throw-selector-prop' options={tutorialOptions} value={tutorialOpt} onChange={updateTutorialOpt}  />
         </div>        
       </Section>
+      <AoButton>{t('change-keysettings')}</AoButton>
     </div>
   )}

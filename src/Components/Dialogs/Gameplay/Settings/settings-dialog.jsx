@@ -4,6 +4,8 @@ import './settings-dialog.scss'
 import { useState } from 'react';
 import AoButton from '../../../Common/ao-button/ao-button';
 import { GameplayTab } from './gameplay-option-tab';
+import { AudioSettingsTab } from './audio-settings-tab';
+import { VideoSettingsTab } from './video-settings';
 
 export const SettingsDialog = ({settings}) => {
   const { t } = useTranslation();
@@ -25,8 +27,8 @@ export const SettingsDialog = ({settings}) => {
     {
       {
         'gameplay':<GameplayTab styles='centered'/>,
-        'video':<GameplayTab styles='centered'/>,
-        'audio':<GameplayTab/>
+        'video':<VideoSettingsTab styles='centered'/>,
+        'audio':<AudioSettingsTab styles='centered'/>
       }
       [activePannel]
     }

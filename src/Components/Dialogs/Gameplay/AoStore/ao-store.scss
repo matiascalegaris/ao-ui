@@ -1,0 +1,83 @@
+.ao-shop {
+  position: relative;
+  margin: auto;
+
+  .close-button{
+    position: absolute;
+    right: -21px;
+    top: -21px;
+  }
+
+  .header-line {
+    display: flex;
+    flex: row;
+    margin: 5px auto;
+    .game-dialog-header {
+      text-align: center;
+      font-weight: 900; 
+      margin-left: 10px;
+      font-size: 1rem;
+    }
+  }
+
+  .header-underline {
+    width: 100%;
+    height: 16px;
+    background-repeat: repeat-x;
+    background-image: url(../../../../assets/Misc/divider_horizontal_big.png);
+  }
+
+  .search-area {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .search-bar {
+      flex-grow: 1;
+      padding: 5px 20px;
+      .search-text {
+        margin: 0;
+        font-family: 'Alegra-AO'; 
+      }
+      .search-input {
+        max-width: 200px;
+      }
+    }
+    .credit-area {
+      background-image: url(../../../../assets/Icons/Dialogs/aoshopcredits.png);
+      width: 79px;
+      height: 72px;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+
+      .cretis-text {
+        color: gold;
+        text-align: center;
+        margin-bottom: 0px;
+        margin-top: 5px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .item-selection-area {
+    min-width: 300px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: row;
+
+    .item-list-frame {
+      min-width: 300px;
+      min-height: 300px;
+    }
+
+    .item-preview-frame {
+      min-width: 200px;
+    }
+  }
+
+  .button-line{
+
+  }
+}

@@ -109,7 +109,19 @@ const resources = {
       'copy-terminal': 'Copy dialogs to terminal',
       'write-and-move': 'Move while writting',
       'fight': 'fight',
-      'mouse-sens': 'Mouse sensitivity'
+      'mouse-sens': 'Mouse sensitivity',
+      'change-keysettings': 'Change Keys',
+      'music': 'Music',
+      'fx': 'Effects',
+      'ambient': 'Ambient',
+      'navigationFx': 'Navigations FX',
+      'invertLR': 'Invert L / R channels',
+      'showFps': 'Show Fps',
+      'moveGameWindow': 'Move game window',
+      'characterBreading': 'Character breading',
+      'fullScreen': 'Fullscreen',
+      'floorItemInfo': 'Floor item info',
+      'fullInventoryNumber': 'Display full number on inventory'
     }
   },
   es: {
@@ -250,7 +262,19 @@ const resources = {
       'copy-terminal': 'Copiar dialogos a consola',
       'write-and-move': 'Moverse al escribir',
       'fight': 'Lucha',
-      'mouse-sens': 'Sensibilidad del mouse'
+      'mouse-sens': 'Sensibilidad del mouse',
+      'change-keysettings': 'Configurar teclas',
+      'music': 'Musica',
+      'fx': 'Efectos',
+      'ambient': 'Ambiente',
+      'navigationFx': 'Efectos de navegacion',
+      'invertLR': 'Invertir canales L / R',
+      'showFps': 'Mostrar Fps',
+      'moveGameWindow': 'Mover ventana del juego',
+      'characterBreading': 'Respiracion de personajes',
+      'fullScreen': 'Pantalla completa',
+      'floorItemInfo': 'Informacion de items en el suelo',
+      'fullInventoryNumber': 'Mostrar numeros completos en el inventario'
     }
   }
 };
