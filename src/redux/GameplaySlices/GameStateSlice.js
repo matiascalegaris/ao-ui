@@ -10,7 +10,11 @@ export const GameStateSlice = createSlice({
     online: 0,
     gameTime: {hour:0, minutes:0},
     isGameMaster: false,
-    activeDialog: null,
+    activeDialog:  {
+      popUp: 'ao-shop',
+      itemList: [],
+      availableCredits: 99
+    },
     spellListScroll: 0,
     firstDisplaySpell: -1,
     trackUserActive: 0,
@@ -63,6 +67,12 @@ export const GameStateSlice = createSlice({
         maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: 0,
         value: 0, cooldown:0, cdType:0, cdMask:0})
         .map((element, index) => ({...element, count: 0, index:index}))
+      }
+    },
+    openAoShop: (state) => {
+      state.activeDialog = {
+        popUp: 'ao-shop',
+        itemList: []
       }
     },
     extraReducers: (builder) => {

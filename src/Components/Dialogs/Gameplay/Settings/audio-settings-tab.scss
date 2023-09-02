@@ -1,0 +1,19 @@
+.audio-settings-tab {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  .option-column {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 2.5%;
+
+    .chat-options {
+      margin-top: 10px;
+      
+      .check-box-label {
+        font-weight: 400;
+      }
+    }
+  }
+}
