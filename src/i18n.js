@@ -121,7 +121,8 @@ const resources = {
       'characterBreading': 'Character breading',
       'fullScreen': 'Fullscreen',
       'floorItemInfo': 'Floor item info',
-      'fullInventoryNumber': 'Display full number on inventory'
+      'fullInventoryNumber': 'Display full number on inventory',
+      'reload-character-warning': 'For safety, reload your character after the transaction is complete.'
     }
   },
   es: {
@@ -274,7 +275,8 @@ const resources = {
       'characterBreading': 'Respiracion de personajes',
       'fullScreen': 'Pantalla completa',
       'floorItemInfo': 'Informacion de items en el suelo',
-      'fullInventoryNumber': 'Mostrar numeros completos en el inventario'
+      'fullInventoryNumber': 'Mostrar numeros completos en el inventario',
+      'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.'
     }
   }
 };
