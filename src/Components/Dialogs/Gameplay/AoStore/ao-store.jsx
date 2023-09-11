@@ -37,9 +37,6 @@ export const AoStore = ({settings}) => {
         <h1 className='game-dialog-header'>{t('ao-shop').toUpperCase()}</h1>
       </div>
       <span className='header-underline'></span>
-      <AoButton styles='close-button' onClick={onClose}>
-        <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
-      </AoButton>
       <div className='search-area'>
         <div className='search-bar'>
           <p className='search-text'>{t('search')}</p>
@@ -95,6 +92,8 @@ export const AoStore = ({settings}) => {
         </Frame>
       </div>
       <div className='button-line'>
+        <AoButton styles='shop-button' onClick={onClose}>{t('cancel').toLocaleUpperCase()}</AoButton>
+        <AoButton styles='shop-button'>{t('buy').toLocaleUpperCase()}</AoButton>
       </div>
     </AoDialog>
 )}

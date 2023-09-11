@@ -156,6 +156,13 @@
   }
 
   .button-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 5px;
 
+    .shop-button {
+      padding: 5px 20px;
+    }
   }
 }
