@@ -27,7 +27,7 @@ export default function ClanDetailsDialog({styles}) {
     <AoDialog styles={styles}>
       <div className='clan-details-dialog'>
         <div className='details-box'>
-          <p className='text-title'>Informacion del clan</p>
+          <p className='text-title'>Información del clan</p>
           <Label name={'Nombre'} value={mockClanDetail.nombre}/>
           <Label name={'Fundador'} value={mockClanDetail.fundador}/>
           <Label name={'Fecha de creacion'} value={mockClanDetail.fecha_creacion}/>
@@ -35,6 +35,7 @@ export default function ClanDetailsDialog({styles}) {
           <Label name={'Miembros'} value={mockClanDetail.miembros} />
           <Label name={'Alineación'} value={mockClanDetail.alineacion} />
           <Label name={'Nivel del clan'} value={mockClanDetail.nivel_del_clan} />
+          <div className='flag'/>
         </div>
         <label className='description-box text-title'>
           Solicitud de ingreso

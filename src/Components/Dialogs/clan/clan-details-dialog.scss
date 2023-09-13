@@ -13,6 +13,7 @@
     background-repeat: no-repeat;
     border-radius: 1rem;
     padding: 3%;
+    position: relative;
   }
 
   .text {
@@ -35,9 +36,13 @@
     opacity: 0.8;
   }
 
-  .label:hover {
-    transform: translate(2em);
-    opacity: 1;
+  .flag {
+    background-image: url(../../../assets/Icons/Dialogs/aoshopcredits.png);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 79px;
+    height: 72px;
   }
 
   .description-box {
