@@ -1,6 +1,6 @@
 .world-map {
   position: relative;
-  margin: auto;
+  margin: -10px auto;
 
   .close-button{
     position: absolute;
@@ -32,12 +32,17 @@
     flex-direction: row;
 
     .map-area {
-      min-width: 500px;
-      min-height: 500px;
+      display: flex;
+      flex-direction: row;
       .world-selector {
         display: flex;
-        flex-direction: row;
-        margin: 10px 10px 0px 10px;
+        flex-direction: column;
+        margin: 10px 1px 0px 10px;
+        .stats-opt-button {
+          writing-mode: vertical-rl;
+          text-orientation: upright;
+          min-width: 15px;
+        }
         .unselected {
           color: #ffffff70;
           border: 2px solid #21221F;
@@ -49,17 +54,45 @@
         }
       }
       .map-grid-frame {
-        margin: 00px 10px 10px 10px;
+        margin: 0px;
       }
-      
+
       .map-grid {
-        width: 500px;
-        height: 500px;
-        margin: 0px 10px 10px 10px;
+        margin: 10px 10px 10px 10px;
       }
     }
     .side-bar-area {
+      display: flex;
+      flex-direction: column;
       width: 200px;
+
+      .map-name {
+        text-align: center;
+        margin-top: 10px;
+        color: gold;
+        font-family: 'Alegra-AO';
+        font-weight: 600;
+      }
+      .npc-info {
+        width: 100%;
+      }
+      .npc-list-title {
+        display: flex;
+        flex-direction: row;
+      }
+      .npc-list-name {
+        flex-grow: 1;
+      }
+      .npc-list-count {
+
+      }
+      .no-npc-found{
+        width: 100%;
+        color: gold;
+        font-family: 'Alegra-AO';
+        font-weight: 600;
+        text-align: center;
+      }
     }
   }
 }

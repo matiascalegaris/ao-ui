@@ -5,22 +5,35 @@ import { useDispatch } from 'react-redux';
 import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 import './world-map.scss';
 import Frame from '../../../Common/Frame/frame';
+import { useState } from 'react';
+import { GetRootDirectory } from '../../../../Tools/Utils';
 
 const Worlds = [
   { name: 'Argentum', index: 1},
   { name: 'Dungeons', index: 2},
   { name: 'Jogormut', index: 3}
 ]
+const GetWorldImage = image => {
+  return `${GetRootDirectory()}/interface/${image}.bmp`
+}
 
+const GetMapList = () => {
+  return [{
+    name: 'Desierto',
+    npcList: [{name: 'Gallo', count: 100}]
+  }]
+}
 export const WorldMap = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch()
+  const [ dialogState, setDialogState] = useState({activeWorld: Worlds[0].index, selectedMap: 0})
+  const { activeWorld, selectedMap } = dialogState
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
   }
-  const activeWorld =  Worlds[0].index; 
+  const selectedMapDetails = GetMapList()[selectedMap]
   const onChangeWorld = world => {
-
+    setDialogState({...dialogState, activeWorld: world.index})
   }
   return (
     <AoDialog styles='world-map' contentStyles='content'>
@@ -37,13 +50,38 @@ export const WorldMap = () => {
           <div className='world-selector'>
             {
               Worlds.map( world => (
-                <AoButton styles={'stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}>{t(world.name).toUpperCase()}</AoButton>
+                <AoButton key={world.index} styles={'stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}>{t(world.name).toUpperCase()}</AoButton>
               ))
             }
           </div>
-          <Frame styles='map-grid-frame' contentStyles='map-grid'></Frame>
+          <Frame styles='map-grid-frame' contentStyles='map-grid'>
+            <img src={GetWorldImage(`es_mapa${activeWorld}`)}></img>
+          </Frame>
         </div>
-        <Frame contentStyles='side-bar-area'></Frame>
+        <div className='side-bar-area'>
+          <p className='map-name'>{selectedMapDetails.name}</p>
+          <Frame contentStyles='npc-info'>
+            {
+              selectedMapDetails.npcList.length > 0 ?
+              <>
+                <div className='npc-list-title'>
+                  <span className='npc-list-name'>{t('Npcs')}</span>
+                  <span className='npc-list-count'>{t('count')}</span>
+                </div>
+                {
+                selectedMapDetails.npcList.map( npcEntry => (
+                  <div className='npc-list-title'>
+                    <span className='npc-list-name'>{npcEntry.name}</span>
+                    <span className='npc-list-count'>{npcEntry.count}</span>
+                  </div>
+                  ))
+                }
+              </>
+              :
+              <p className='no-npc-found'>{t('no-npc-found')}</p>
+            }
+          </Frame>
+        </div>
       </div>
     </AoDialog>
   )

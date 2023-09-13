@@ -278,7 +278,8 @@ const resources = {
       'floorItemInfo': 'Informacion de items en el suelo',
       'fullInventoryNumber': 'Mostrar numeros completos en el inventario',
       'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.',
-      'deny': 'Rechazar'
+      'deny': 'Rechazar',
+      'credits': 'Créditos'
     }
   }
 };
