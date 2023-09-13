@@ -121,7 +121,14 @@ const resources = {
       'characterBreading': 'Character breading',
       'fullScreen': 'Fullscreen',
       'floorItemInfo': 'Floor item info',
-      'fullInventoryNumber': 'Display full number on inventory'
+      'fullInventoryNumber': 'Display full number on inventory',
+      'clan-information': 'Clan information',
+      'founder': 'Founder',
+      'creation-date': 'Creation date',
+      'leader': 'Leader',
+      'members': 'Members',
+      'alignment': 'Alignment',
+      'clan-level': 'Clan level'
     }
   },
   es: {
@@ -274,7 +281,14 @@ const resources = {
       'characterBreading': 'Respiracion de personajes',
       'fullScreen': 'Pantalla completa',
       'floorItemInfo': 'Informacion de items en el suelo',
-      'fullInventoryNumber': 'Mostrar numeros completos en el inventario'
+      'fullInventoryNumber': 'Mostrar numeros completos en el inventario',
+      'clan-information': 'Información del clan',
+      'founder': 'Fundador',
+      'creation-date': 'Fecha de creación',
+      'leader': 'Líder',
+      'members': 'Miembros',
+      'alignment': 'Alineación',
+      'clan-level': 'Nivel del clan'
     }
   }
 };
