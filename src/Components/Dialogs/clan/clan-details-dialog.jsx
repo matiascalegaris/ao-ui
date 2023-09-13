@@ -40,14 +40,14 @@ export default function ClanDetailsDialog({styles}) {
           <div className='flag'/>
         </div>
         <label className='description-box text-title'>
-          Solicitud de ingreso
+          {t('admission-application')}
           <textarea 
             className='text-input'
             value={requestContent}
             onChange={e => setRequestContent(e.target.value)}
           />
         </label>
-        <AoButton caption='guardar' styles='guardar'>Solicitar Ingreso</AoButton>
+        <AoButton caption='guardar' styles='guardar'>{t('request-admission')}</AoButton>
       </div>
     </AoDialog>
   )

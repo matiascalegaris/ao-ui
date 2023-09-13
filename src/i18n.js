@@ -128,7 +128,9 @@ const resources = {
       'leader': 'Leader',
       'members': 'Members',
       'alignment': 'Alignment',
-      'clan-level': 'Clan level'
+      'clan-level': 'Clan level',
+      'admission-application': 'Admission application',
+      'request-admission': 'Request admission'
     }
   },
   es: {
@@ -288,7 +290,9 @@ const resources = {
       'leader': 'Líder',
       'members': 'Miembros',
       'alignment': 'Alineación',
-      'clan-level': 'Nivel del clan'
+      'clan-level': 'Nivel del clan',
+      'admission-application': 'Solicitud de ingreso',
+      'request-admission': 'Solicitar ingreso'
     }
   }
 };
