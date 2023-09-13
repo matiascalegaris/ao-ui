@@ -344,6 +344,18 @@ if (process.env.NODE_ENV === 'development') {
     },
     GetNpcName: npcNumber => {
       return "Gulfas morgolock"
+    },
+    SellItem: (slot, amount) => {
+
+    },
+    BuyItem: (slot, amount) => {
+
+    },
+    CloseMerchant: () => {
+
+    },
+    MoveMerchantItem: (from, to) => {
+
     }
   } 
 }

@@ -14,7 +14,7 @@ import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-c
 import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMagicAttack, updateMagicResitance, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage, setWhisperTarget, updateGlobalAndCombatModes } from './redux/GameplaySlices/ChatSlice';
-import { resetGameplay, setFps, setGameActiveDialog, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
+import { handleMerchantItemChange, openNpcTradeDialog, resetGameplay, setFps, setGameActiveDialog, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
 import { activateRemoteHotkey, selectSpellSlot, setHotkeySlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, startSpellcd, startStun, updateIntervals } from './redux/GameplaySlices/Cooldowns';
@@ -95,7 +95,6 @@ function App() {
       dispatch(updateInvSlot(slotInfo))
     })
     RegisterApiCallback('UpdateSpellSlot', (slotInfo) => {
-      console.log(slotInfo)
       dispatch(updateSpellSlot(slotInfo))
     })
     RegisterApiCallback('UpdateHp', (slotInfo) => {
@@ -231,15 +230,23 @@ function App() {
           caption: t('decline').toUpperCase(),
           action:  evt => {
             window.parent.BabelUI.SendQuestionResponse(false)
+            dispatch(setGameActiveDialog(null))
           }}, {
           caption: t('accept').toUpperCase(),
           action:  evt => {
             window.parent.BabelUI.SendQuestionResponse(true)
+            dispatch(setGameActiveDialog(null))
           },
           isRed: true}
         ]
       }
       dispatch(setGameActiveDialog(questionACtion))
+    })
+    RegisterApiCallback('OpenMerchant', () => {
+      dispatch(openNpcTradeDialog())
+    })
+    RegisterApiCallback('UpdateMerchantSlot', (slotInfo) => {
+      dispatch(handleMerchantItemChange(slotInfo))
     })
     
     const language = window.parent.BabelUI.GetStoredLocale()
