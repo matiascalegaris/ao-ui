@@ -279,7 +279,8 @@ const resources = {
       'fullInventoryNumber': 'Mostrar numeros completos en el inventario',
       'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.',
       'deny': 'Rechazar',
-      'credits': 'Créditos'
+      'credits': 'Créditos',
+      'Amount': 'Cantidad'
     }
   }
 };
