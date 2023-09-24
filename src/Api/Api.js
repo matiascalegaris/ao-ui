@@ -355,7 +355,12 @@ if (process.env.NODE_ENV === 'development') {
 
     },
     MoveMerchantItem: (from, to) => {
-
+    },
+    BuyPatronItem: (objIndex) => {
+    },
+    UpdateBoolSetting: (settingType, newValue) => {
+    },
+    UpdateIntSetting: (settingType, newValue) => {
     }
   } 
 }

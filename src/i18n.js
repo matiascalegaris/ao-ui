@@ -123,7 +123,10 @@ const resources = {
       'floorItemInfo': 'Floor item info',
       'fullInventoryNumber': 'Display full number on inventory',
       'reload-character-warning': 'For safety, reload your character after the transaction is complete.',
-      'deny': 'deny'
+      'decline': 'decline',
+      'search': 'Search',
+      'credits': 'Credits',
+      'details': 'Details'
     }
   },
   es: {
@@ -278,7 +281,11 @@ const resources = {
       'floorItemInfo': 'Informacion de items en el suelo',
       'fullInventoryNumber': 'Mostrar numeros completos en el inventario',
       'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.',
-      'deny': 'Rechazar'
+      'decline': 'Rechazar',
+      'search': 'Buscar',
+      'credits': 'Creditos',
+      'details': 'Detalles',
+      'price': 'Precio'
     }
   }
 };
