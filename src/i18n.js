@@ -301,10 +301,9 @@ const resources = {
       'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.',
       'deny': 'Rechazar',
       'credits': 'Créditos',
-      'Amount': 'Cantidad'
+      'Amount': 'Cantidad',
       'decline': 'Rechazar',
       'search': 'Buscar',
-      'credits': 'Creditos',
       'details': 'Detalles',
       'price': 'Precio'
     }
