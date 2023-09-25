@@ -12,7 +12,10 @@ export const FindNpc = ({onClose, onSelectMap}) => {
   const { search, selectedIndex } = dialogState;
 
   const npcList = Array(1000).fill({name:''}).map( (el, index) => ({name:' Npc ' + index, id: index}))
-  
+
+  const filteredList = npcList.filter( el => (
+    el.name.includes(search)
+  ))
   const handleChange = event => {
     const { value, name } = event.target;
     setDialogState({ ...dialogState, [name]: value});
@@ -35,7 +38,7 @@ export const FindNpc = ({onClose, onSelectMap}) => {
       <div className='result-area'>
         <Frame contentStyles='npc-list'>
         {
-          npcList.map( (el, index) => (
+          filteredList.map( (el, index) => (
             <p className='npc-name'>{el.name}</p>
           ))
         }

@@ -43,8 +43,18 @@
     flex-direction: row;
 
     .npc-list {
-      width: 300px;
+      width: 200px;
       height: 300px;
+      background-size: 100% 100%;
+      background-image: url('../../../../../assets/Backgrounds/leather_black.png');
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+
+      .npc-name {
+        margin: 2px;
+        font-family: "Alegra-Ao";
+      }
     }
 
     .map-list {
