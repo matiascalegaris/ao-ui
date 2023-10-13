@@ -21,6 +21,8 @@ import { SettingsDialog } from '../../Dialogs/Gameplay/Settings/settings-dialog'
 import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
 import { AoStore } from '../../Dialogs/Gameplay/AoStore/ao-store'
 import { WorldMap } from '../../Dialogs/Gameplay/WorldMap/world-map'
+import { SkillList } from '../../Dialogs/Gameplay/SkillList/skill-list'
+import { EventList, PublicEvents } from '../../Dialogs/Gameplay/PublicEvents/public-events'
 
 const showHKIcon = status => {
   if (status) {
@@ -96,7 +98,9 @@ export default function GameplayScreen() {
                 'npc-trade':<NpcTrade settings={popupsState}/>,
                 'settings':<SettingsDialog settings={popupsState}/>,
                 'ao-shop':<AoStore settings={popupsState}/>,
-                'world-map': <WorldMap settings={popupsState}/>
+                'world-map': <WorldMap settings={popupsState}/>,
+                'skill-list': <SkillList/>,
+                'public-events': <PublicEvents/>
               }
               [popupsState.popUp]
             }

@@ -165,6 +165,33 @@ export const KeyCodeMapping = {
   x: 88
 }
 
+export const SkillList = {
+  Magic: 1,
+  Steal: 2,
+  CombatTechnique: 3,
+  Weapons: 4,
+  Meditate: 5,
+  Stab: 6,
+  Hide: 7,
+  Survival: 8,
+  Comerce: 9,
+  Defense: 10,
+  Leadership: 11,
+  Projetiles: 12,
+  Wrestling: 13,
+  Sail: 14,
+  Riding: 15,
+  MagicResistance: 16,
+  Lumber: 17,
+  Fishing: 18,
+  Mining: 19,
+  Smith: 20,
+  Carpenter: 21,
+  Alchemy: 22,
+  Tailoring: 23,
+  Taming: 24
+}
+
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
 
 export const attributeList = ['sta-str', 'sta-agi', 'sta-int', 'sta-cha', 'sta-cons']

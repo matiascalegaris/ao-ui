@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCharacterClass, selectCharacterExp, selectCharacterLevel, selectCharacterName } from '../../../../../redux/GameplaySlices/CharacterInfoSlice';
 import AoButton from '../../../../Common/ao-button/ao-button';
 import ProgressBar from '../../../../Common/ProgressBar/progress-bar';
@@ -8,6 +8,7 @@ import { Actions, classList } from '../../../../../constants';
 import { GameTimer } from './GameTimer';
 import { useState } from 'react';
 import { ErrorBoundary } from '../../../../ErrorBoundary/error-boundary';
+import { setGameActiveDialog } from '../../../../../redux/GameplaySlices/GameStateSlice';
 
 export default function ExpArea() {
   const { t } = useTranslation();
@@ -17,7 +18,11 @@ export default function ExpArea() {
   const expBar = useSelector(selectCharacterExp)
   const expBarText = expBar.max === 0 ? t('max-level-exp') : undefined;
   const [displayPercentExp, setDisplayPercentExp] = useState(false)
+  const dispatch = useDispatch()
   const openStats = evt => {
+    dispatch(setGameActiveDialog({
+      popUp:'skill-list'
+    })) 
     window.parent.BabelUI.RequestAction(Actions.RequestSkill)
   }
   //console.log('exp area render')

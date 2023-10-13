@@ -1,10 +1,11 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentCoordinates, selectGroupMarkers, selectInterestPoints, selectMapNumber } from '../../../../redux/GameplaySlices/MapInfoSlice'
 import { GetRootDirectory } from '../../../../Tools/Utils'
 import './mini-map.scss'
 import { InterestPoint } from './InterestPoints/interest-points'
 import { Actions, MouseButtons } from '../../../../constants'
 import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary'
+import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice'
 
 const GetMapUrl = imageName =>  {
   return `${GetRootDirectory()}/Minimapas/mapa${imageName}.bmp`
@@ -40,19 +41,6 @@ const UserMarker = ({marker, color, ...otherProps}) => {
     </svg>
   )
 }
-const onMapClick = evt => {
-  evt.preventDefault()
-  if (evt.button === MouseButtons.right && evt.target.className === 'mini-map-image') {
-    const rootMapObj = evt.target.parentNode
-    const localX = evt.clientX - rootMapObj.offsetLeft - 8;
-    const localY = evt.clientY - rootMapObj.offsetTop - 8;
-    window.parent.BabelUI.ClickMiniMapPos(localX, localY)
-    return false
-  }
-  else if(evt.button === MouseButtons.left) {
-    window.parent.BabelUI.RequestAction(Actions.OpenMinimap)
-  }
-}
 
 const onMarkerClick = (evt, x, y) => {
   evt.preventDefault()
@@ -70,6 +58,23 @@ export default function MiniMap() {
     backgroundImage: `url(${GetMapUrl(mapNumber)})`
   }
 
+  const dispatch = useDispatch()
+  const onMapClick = evt => {
+    evt.preventDefault()
+    if (evt.button === MouseButtons.right && evt.target.className === 'mini-map-image') {
+      const rootMapObj = evt.target.parentNode
+      const localX = evt.clientX - rootMapObj.offsetLeft - 8;
+      const localY = evt.clientY - rootMapObj.offsetTop - 8;
+      window.parent.BabelUI.ClickMiniMapPos(localX, localY)
+      return false
+    }
+    else if(evt.button === MouseButtons.left) {
+      dispatch(setGameActiveDialog({
+        popUp:'world-map'
+      })) 
+      window.parent.BabelUI.RequestAction(Actions.OpenMinimap)
+    }
+  }
   const userMarker = {
     position: 'absolute',
     left: `${userPos.mapPos.x-2}px`,
