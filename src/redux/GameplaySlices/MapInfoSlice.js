@@ -5,6 +5,7 @@ const defaultValues = {
   mapName: 'ciudad de prueba',
   interestPoints: [{position:{tileX:20, tileY:20}, npcNumber:300, state:1}, {position:{tileX:99, tileY:99}, npcNumber:300, state:2}],
   mapNumber:1,
+  minimapFile: 1,
   isSafe: true,
   coordinates: {x:12, y:15, mapPos: {x: 12, y: 14}},
   groupMarkers:  Array(6).fill({mapPos: {x:0, y: 0}, index:1})
@@ -16,6 +17,7 @@ export const MapInfoSlice = createSlice({
     setMapInfo: (state, action) => {
       state.mapName = action.payload.mapName
       state.mapNumber = action.payload.mapNumber
+      state.minimapFile = action.payload.minimapFile
       state.isSafe = action.payload.isSafe
     },
     setInterestPoints: (state, action) => {
@@ -41,6 +43,7 @@ export const { setMapInfo, setCoordinates, setInterestPoints, updateGroupMarker 
 export const selectMapName = (state) =>  state.mapInfo.mapName
 export const selectInterestPoints = (state) => state.mapInfo.interestPoints
 export const selectMapNumber = (state) => state.mapInfo.mapNumber
+export const selectMinimapNumber = (state) => state.mapInfo.minimapFile
 export const selectCurrentCoordinates = (state) => state.mapInfo.coordinates
 export const selectIsSafeMap = (state) => state.mapInfo.isSafe
 export const selectGroupMarkers = (state) => state.mapInfo.groupMarkers.filter( e => e.mapPos.x > 0)

@@ -121,8 +121,8 @@ function App() {
     RegisterApiCallback('UpdateStrAndAgi', (str, agi, strState, agiState) => {
       dispatch(updateStrandAgi({str:str, agi:agi, strState:strState, agiState:agiState}))
     })
-    RegisterApiCallback('UpdateMapNumber', (mapName, mapNumber, isSafe) => {
-      dispatch(setMapInfo({mapName, mapNumber, isSafe}))
+    RegisterApiCallback('UpdateMapNumber', (mapName, mapNumber, minimapFile, isSafe) => {
+      dispatch(setMapInfo({mapName, mapNumber, minimapFile, isSafe}))
     })
     RegisterApiCallback('UpdateMapNpc', (data) => {
       dispatch(setInterestPoints(data))

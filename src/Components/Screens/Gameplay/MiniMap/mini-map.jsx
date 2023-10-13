@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { selectCurrentCoordinates, selectGroupMarkers, selectInterestPoints, selectMapNumber } from '../../../../redux/GameplaySlices/MapInfoSlice'
+import { selectCurrentCoordinates, selectGroupMarkers, selectInterestPoints, selectMinimapNumber } from '../../../../redux/GameplaySlices/MapInfoSlice'
 import { GetRootDirectory } from '../../../../Tools/Utils'
 import './mini-map.scss'
 import { InterestPoint } from './InterestPoints/interest-points'
@@ -62,7 +62,7 @@ const onMarkerClick = (evt, x, y) => {
   }
 }
 export default function MiniMap() {
-  const mapNumber = useSelector(selectMapNumber)
+  const mapNumber = useSelector(selectMinimapNumber)
   const interesPoins = useSelector(selectInterestPoints)
   const userPos = useSelector(selectCurrentCoordinates)
   const groupMarkers = useSelector(selectGroupMarkers)
