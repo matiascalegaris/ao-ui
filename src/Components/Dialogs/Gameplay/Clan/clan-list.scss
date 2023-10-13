@@ -1,0 +1,144 @@
+.clan-list-dialog {
+  display: flex;
+  flex-direction: column;
+  min-width: 580px;
+  max-width: 680px;
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      text-align: center;
+    }
+
+    img {
+      height: 100%;
+      width: 40px;
+      margin-right: 1rem;
+    }
+  }
+
+  .frame-sep{
+    height: 18px;
+    width: 100%;
+
+    .small {
+      height: 10px;
+    }
+  }
+
+
+  .list-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 2%;
+      
+    .filters {
+      display: flex;
+      flex-direction: row;
+      height: 33px;
+
+      .btn {
+        border: 2px solid #494943;
+      }
+
+
+      .search-input {
+        border: none;
+        outline: none;  
+        width: 15rem;
+        height: 90%;
+        font-size: 0.9rem;
+        background-color: black;
+        font-family: Alegra-AO;
+      }
+
+      .search-img {
+        padding: 0.1rem;
+      }
+    
+
+      .select {
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+
+        label {
+          font-size: 0.9rem;
+          padding-right: 0.2rem;
+          font-family: Alegra-AO;
+        }
+      }
+
+      .alineacion {
+        background-color: black;
+        color: white;
+        height: 100%;
+        outline: none;
+      }
+    
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      height: 250px;
+      margin-top: 1rem;
+      overflow-y: scroll;
+      background-image: url('../../../../assets/Backgrounds/main_pj_info.png');
+      background-size: cover;
+
+      span {
+        font-size: 0.9rem;
+        padding-left: 0.9rem; 
+        padding-top: 0.3rem;
+        font-family: Alegra-AO;
+      }
+
+      span:hover {
+        background-color: rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    .red {
+      animation: mypulseRed 5s infinite
+    }
+  
+    .blue{
+      animation: mypulseBlue 5s infinite
+    }
+
+    @keyframes mypulseRed {
+      50% {
+        box-shadow: 0 0 2rem 0.1em rgb(201 55 55 / 25%);
+      }
+    }
+
+    @keyframes mypulseBlue {
+      50% {
+        box-shadow: 0 0 2rem 0.1em rgba(7, 54, 156, 0.25);
+      }
+    }
+    
+    
+  }
+
+  
+  .last {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.5rem;
+
+    .fundar {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+
+}
