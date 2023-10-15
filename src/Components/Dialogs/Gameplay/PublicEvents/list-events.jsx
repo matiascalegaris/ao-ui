@@ -1,18 +1,18 @@
 import { useTranslation } from "react-i18next";
 import AoButton from "../../../Common/ao-button/ao-button"
 
-export const EventList = ({activeEvents}) => {
+export const EventList = ({activeEvents, createNew}) => {
   const { t } = useTranslation();
   return (
     <div className='eventList-area'>
         <span className='event-line'>
           <div className='event-name'>{t('event-description')}</div>
           <div className='event-name'>{t('event-type')}</div>
-          <div className='party-size'>{t('group-size')}</div>
-          <div className='group-type'>{t('premade')}</div>
-          <div className='max-user'>{t('max-players')}</div>
-          <div className='inscription-price'>{t('incription-price')}</div>
-          
+          <div className='party-size center-text'>{t('group-size')}</div>
+          <div className='party-size center-text'>{t('level-range')}</div>
+          <div className='max-user center-text'>{t('max-players')}</div>
+          <div className='inscription-price center-text'>{t('incription-price')}</div>
+          <div className='action-button'></div>
         </span>
         <div className='event-list'>
           {
@@ -20,15 +20,16 @@ export const EventList = ({activeEvents}) => {
               <span className='event-line' key={el.id}>
                 <div className='event-name'>{el.Description}</div>
                 <div className='event-name'>{el.eventType}</div>
-                <div className='party-size'>{el.groupSize}</div>
-                <div className='group-type'>{el.groupType}</div>
-                <div className='max-user'>{el.currentPlayers}/{el.maxPlayers}</div>
-                <div className='inscription-price'>{el.inscriptionFee}</div>
-                <AoButton>{t('join')}</AoButton>
+                <div className='party-size center-text'>{el.groupSize}</div>
+                <div className='group-type center-text'>{el.groupType}</div>
+                <div className='max-user center-text'>{el.currentPlayers}/{el.maxPlayers}</div>
+                <div className='inscription-price center-text'>{el.inscriptionFee}</div>
+                <AoButton styles='action-button'>{t('join')}</AoButton>
               </span>
             ))
           }
         </div>
+        <AoButton isRed={true} styles='action-button main-action-button' onClick={createNew}>{t('create-new').toLocaleUpperCase()}</AoButton>
       </div>
   )
 }

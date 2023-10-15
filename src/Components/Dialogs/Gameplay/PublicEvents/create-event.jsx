@@ -1,0 +1,157 @@
+import { useTranslation } from "react-i18next";
+import { Section } from "../Settings/Section"
+import AoInput from "../../../Common/ao-input/ao-input";
+import { useEffect, useState } from "react";
+import Select from 'react-select';
+import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
+import { Slider } from "../../../Common/Slider/slider";
+import AoCheckbox from "../../../Common/ao-checkbox/ao-checkbox";
+import AoButton from "../../../Common/ao-button/ao-button";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCharacterName } from "../../../../redux/GameplaySlices/CharacterInfoSlice";
+import { setGameActiveDialog } from "../../../../redux/GameplaySlices/GameStateSlice";
+
+
+export const CreateEvent = () => {
+  const { t } = useTranslation();
+  const eventTypes = [
+    { value: 'deathmatch', label: t('Deathmatch'), index: 1, minPlayers:2, maxPlayers: 40, defaultMin:2, defaultMax:20, step:1, showTeamSize: true},
+    { value: 'navalconquest', label: t('Abordaje'), index: 2, minPlayers:6, maxPlayers: 12, defaultMin:6, defaultMax:12, step:2, showTeamSize: false},
+  ]
+  const teamTypes = [
+    { value: 'random', label: t('random'), index: 1 },
+    { value: 'premade', label: t('premade'), index: 2},
+  ]
+  const [ eventInfo, setEventInfo] = useState({description:'',
+     eventType: 1, 
+     minLevel:1, 
+     teamSize:1,
+     maxLevel:47,
+     requestPassword: false,
+     minPlayers:eventTypes[0].defaultMin,
+     maxPlayers:eventTypes[0].defaultMax,
+     password:'',
+     inscriptionPrice: 0,
+     teamType: 1})
+  const {description , eventType, teamType, minPlayers, maxPlayers, minLevel, maxLevel, teamSize, requestPassword, password , inscriptionPrice} = eventInfo
+  const handleChange = evt => {
+    const { value, name } = evt.target;
+    setEventInfo({ ...eventInfo, [name]: value});
+  }
+  const handleChangeBox = evt => {
+    const { name } = evt.target;
+    setEventInfo({...eventInfo, [name]: !eventInfo[name]})
+  }
+  const selectedEvent = eventTypes.find(e => ( e.index === eventType))
+  const selectedTeamType = teamTypes.find(e => ( e.index === teamType))
+  const updateEventOpt = evt => {
+    setEventInfo({ ...eventInfo, 
+      eventType: evt.index,
+      minPlayers:evt.defaultMin,
+      maxPlayers:evt.defaultMax});
+  }
+  const updateTeamTypes = evt => {
+    setEventInfo({ ...eventInfo, teamType: evt.index});
+  }
+
+  const setLevelRange = evt => {
+    setEventInfo({ ...eventInfo, minLevel: evt.minValue, maxLevel: evt.maxValue});
+  }
+
+  const setPlayerRange = evt => {
+    setEventInfo({ ...eventInfo, minPlayers: evt.minValue, maxPlayers: evt.maxValue});
+  }
+  const setTeamSize = val => {
+    setEventInfo({ ...eventInfo, teamSize: Math.round(val)});
+    
+  }
+  const charName = useSelector(selectCharacterName)
+  useEffect( () => {
+    setEventInfo({ ...eventInfo, description: charName });
+  }, [charName])
+  const dispatch = useDispatch()
+  const createNew = evt => {
+    window.parent.BabelUI.CreateEvent(description, eventType, minLevel, teamSize, 
+                                      maxLevel, minPlayers, maxPlayers, password, 
+                                      inscriptionPrice, teamType )
+    dispatch(setGameActiveDialog(null))
+  }
+  const validInscriptionPrice = inscriptionPrice >= 0 && inscriptionPrice < 10000000
+  const validTeamSize = (minPlayers % teamSize === 0) && (maxPlayers % teamSize === 0)
+  const canCreate = description.length > 0 && (validTeamSize || !selectedEvent.showTeamSize) && validInscriptionPrice
+  return (
+    <div className="create-event">
+      <div className="column">
+        <Section name={t('event-description').toUpperCase()}>
+          <AoInput styles='margin-bot' inputStyles='input-style' showDelete={description.length > 0} name="description" IsValid={description.length > 4} value={description} required handleChange={handleChange} />
+          <Select unstyled className="ao-selector" classNamePrefix='global-select-prop' options={eventTypes} value={selectedEvent} onChange={updateEventOpt}  />
+        </Section>
+        <Section name={t('teams-type').toUpperCase()}>
+          <Select unstyled className="ao-selector" classNamePrefix='global-select-prop' options={teamTypes} value={selectedTeamType} onChange={updateTeamTypes}  />
+        </Section>
+        <Section name={t('private-match').toUpperCase()}>
+          <AoCheckbox label={t('request-password')} name="requestPassword" styles='generic-checkbox' labelStyle='check-box-label' handleChange={handleChangeBox} state={requestPassword} />
+          { requestPassword && <AoInput styles='margin-bot' inputStyles='input-style' showDelete={password.length > 0} name="password" IsValid={true} value={password} required handleChange={handleChange}/>}
+        </Section>
+        <Section name={t('incription-price').toUpperCase()}>
+          <AoInput styles='margin-bot' type="number" 
+                   inputStyles='center-text' showDelete={false} 
+                   name="inscriptionPrice" IsValid={validInscriptionPrice} 
+                   min="0" max="10000000"
+                   alue={inscriptionPrice} required handleChange={handleChange}/>
+        </Section>
+      </div>
+      <div className="column">
+        <Section name={t('level-range').toUpperCase()}>
+          <MultiRangeSlider
+            min={1}
+            max={47}
+            minValue={minLevel}
+					  maxValue={maxLevel}
+            onInput={setLevelRange}
+            onChange={setLevelRange}
+            label={true}
+            ruler={false}
+            step={1}
+            style={{ border: "none", boxShadow: "none", padding: "15px 10px", marginBottom: '5px'}}
+            barLeftColor="DimGray"
+            barInnerColor="DarkSlateGray"
+            barRightColor="DimGray"
+            thumbLeftColor="black"
+            thumbRightColor="black"
+          />
+        </Section>
+        <Section name={t('max-players').toUpperCase()}>
+          <MultiRangeSlider            
+              min={selectedEvent.minPlayers}
+              max={selectedEvent.maxPlayers}
+              minValue={minPlayers}
+					    maxValue={maxPlayers}
+              onInput={setPlayerRange}
+              onChange={setPlayerRange}
+              label={true}
+              ruler={false}
+              step={1}
+              style={{ border: "none", boxShadow: "none", padding: "15px 10px", marginBottom: '5px'}}
+              barLeftColor="DimGray"
+              barInnerColor="DarkSlateGray"
+              barRightColor="DimGray"
+              thumbLeftColor="black"
+              thumbRightColor="black"
+            />
+        </Section>
+        {
+          selectedEvent.showTeamSize &&
+          <Section name={t('team-size').toUpperCase()}>
+            <Slider min={1} max={ Math.round(maxPlayers/2)} currentValue={teamSize} onChange={setTeamSize} />
+            <p className="team-size-value">{teamSize}</p>
+            {
+              !validTeamSize && <p className="error-msg">{t('invalid-team-size')}</p>
+            }
+          </Section>
+        }
+        <AoButton disabled={!canCreate} isRed={true} styles='main-action-button' onClick={createNew}>{t('create').toLocaleUpperCase()}</AoButton>
+      </div>
+    </div>
+  )
+}

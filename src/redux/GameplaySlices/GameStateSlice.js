@@ -88,10 +88,29 @@ export const GameStateSlice = createSlice({
       }
       window.parent.BabelUI.UpdateOpenDialog(true)
     },
+    openLobbyList: (state) => {
+      state.activeDialog = {
+        popUp: 'public-events',
+        eventList: [],
+      }
+      window.parent.BabelUI.UpdateOpenDialog(true)
+    },
+    UpdateLobbySlot: (state, action) => {
+      if (state.activeDialog.eventList.length <= action.payload.index ) {
+        let dif = action.payload.index - state.activeDialog.eventList.length
+        for (let i = 0; i <= dif; i++) {
+          state.activeDialog.eventList.push({})
+        }
+      }
+      state.activeDialog.eventList[action.payload.index] = action.payload
+    },
     extraReducers: (builder) => {
       builder
         .addCase(resetGameplay, (state) => {
           state.activeDialog = null
+          state.spellListScroll = 0
+          state.firstDisplaySpell = -1
+          state.trackUserActive = 0
         })
         .addCase(exitGameplay, (state) => {
           state.activeDialog = null

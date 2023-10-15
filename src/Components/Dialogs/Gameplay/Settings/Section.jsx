@@ -1,3 +1,5 @@
+import './section.scss'
+
 export const Section = ({children, name, style, contentStyle}) => {
   return (
     <div className={"section-area " + style}>

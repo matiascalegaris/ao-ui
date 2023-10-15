@@ -31,44 +31,98 @@
     min-width: 300px;
     display: flex;
     flex-direction: column;
+    margin: 10px;
 
     .event-line {
       display: flex;
       flex-direction: row;
       align-items: center;
+      margin-bottom: 5px;
+      background-color: #0000005c;
+      padding: 2px 0px 2px 15px;
+
       .event-name{
         width: 120px;
-        text-align: center;
-        margin-right: 2px;
+        margin-right: 5px;
       }
       .party-size {
-        width: 40px;
-        text-align: center;
-        margin-right: 2px;
+        width: 50px;
+        margin-right: 5px;
       }
       .group-type{
-        width: 40px;
-        text-align: center;
-        margin-right: 2px;
+        width: 50px;
+        margin-right: 5px;
       }
       .max-user {
-        width: 40px;
-        text-align: center;
-        margin-right: 2px;
+        width: 50px;
+        margin-right: 5px;
       }
       .inscription-price {
-        width: 60px;
-        text-align: center;
-        margin-right: 2px;
+        width: 70px;
+        margin-right: 5px;
       }
-      .actionButton {
-        width: 60px;
-      }
+      
+    }
+  }
+  .action-button {
+    width: 100px;
+  }
+  .main-action-button {
+    margin: 10px 0px 10px auto;
+  }
 
-    }
-    .main-action-button {
+  .create-event {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: 600px;
+    .column {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+      margin: 2.5%;
+      max-width: 270px;
+      .team-size-value {
         margin: auto;
+      }
+      .margin-bot {
+        margin-bottom: 5px;
+      }
+      
+      .generic-checkbox {
+        margin: 10px 0;
+            
+        .check-box-label {
+          font-weight: 400;
+        }
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      .input-style {
+        margin: 0;
+      }
+      .error-msg {
+        margin: auto;
+        color: red;
+      }
+      .bar {
+        height: 5px;
+        .bar-left {
+          height: 5px;
+          max-height: 5px;
+          padding: 0px;
+        }
+        .min-caption {
+          background-color: black;
+        }
+        .max-caption {
+          background-color: black;
+        }
+      }
+      
     }
-    
   }
 }

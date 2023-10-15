@@ -140,7 +140,23 @@ const resources = {
       'time-light': "Time light",
       'day': 'Day',
       'night': 'Night',
-      'light-state': "Lighting"
+      'light-state': "Lighting",
+      'event-description': 'Description',
+      'event-type': 'Type',
+      'group-size': 'Group size',
+      'level-range': 'Level range',
+      'max-players': 'Players',
+      'incription-price': 'incription fee',
+      'join': 'Join',
+      'create-new': 'create new',
+      'event-list': 'available events',
+      'teams-type': 'Teams type',
+      'random': 'Random teams',
+      'premade': 'Premade teams',
+      'team-size': 'team size',
+      'private-match': 'private match',
+      'invalid-team-size': 'Min and Max players has to be multiple of the team size',
+      'request-password': 'Request password'
     }
   },
   es: {
@@ -315,7 +331,23 @@ const resources = {
       'time-light': "Luz horaria",
       'day': 'Día',
       'night': 'Noche',
-      'light-state': "Iluminacion"
+      'light-state': "Iluminacion",
+      'event-description': 'Descripcion',
+      'event-type': 'Tipo',
+      'group-size': 'Tamaño de grupo',
+      'level-range': 'Limite de nivel',
+      'max-players': 'Jugadores',
+      'incription-price': 'Costo de inscripcion',
+      'join': 'Ingresar',
+      'create-new': 'Crear nuevo',
+      'event-list': 'Eventos disponibles',
+      'teams-type': 'Formato de Equipos',
+      'random': 'Equipos aleatoreos',
+      'premade': 'Equipos pre armados (grupos)',
+      'team-size': 'Tamaño de equipos',
+      'private-match': 'Evento privados',
+      'invalid-team-size': 'La cantidad maxima y minima de jugadores debe ser divisible por el tamaño del equipo',
+      'request-password': 'Pedir contraseña'
     }
   }
 };

@@ -364,6 +364,11 @@ if (process.env.NODE_ENV === 'development') {
     },
     UpdateIntSetting: (settingType, newValue) => {
       console.log("Update setting: " + settingType + " new value: " + newValue)
+    },
+    CreateEvent: (description, eventType, minLevel,
+                  teamSize, maxLevel, minPlayers, 
+                  maxPlayers, password,inscriptionPrice, teamType) => {
+
     }
   } 
 }

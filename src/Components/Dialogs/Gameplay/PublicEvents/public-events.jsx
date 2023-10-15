@@ -5,15 +5,27 @@ import AoDialog from '../../../Common/ao-dialog/ao-dialog'
 import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 import { useTranslation } from 'react-i18next';
 import { EventList } from './list-events';
+import { useState } from 'react';
+import { CreateEvent } from './create-event';
 
+const EventMenuState = {
+  ListEvents: 1,
+  CreateEvent: 2
+}
 export const PublicEvents = ({activeEvents}) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [dialogState, setDialogState] = useState({displayState:EventMenuState.ListEvents})
+  const { displayState } = dialogState
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
   }
-  activeEvents = [{id: 1, eventType: 'Deathmatch', Description: 'prueba', groupSize:1, groupType:1, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, currentPlayers:0, inscriptionFee: 5430233},
-                  {id: 1, eventType: 'Abordaje', Description: 'prueba 2', groupSize:6, groupType:2, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, currentPlayers:0, inscriptionFee: 5430233}]
+  activeEvents = [{ index: 0, id: 1, eventType: 'Deathmatch', Description: 'prueba', groupSize:1, groupType:1, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:false},
+                  { index: 1, id: 2, eventType: 'Abordaje', Description: 'prueba 2', groupSize:6, groupType:2, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:true}]
+
+  const createNewEvent = evt => {
+    setDialogState({...dialogState, displayState: EventMenuState.CreateEvent})
+  }
   return (
     <AoDialog styles='event-list-dialog' contentStyles='content'>
       <div className='header-line'>
@@ -23,10 +35,10 @@ export const PublicEvents = ({activeEvents}) => {
       <AoButton styles='close-button' onClick={onClose}>
         <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
       </AoButton>
-
-      <EventList activeEvents={activeEvents}/>
-
-      <AoButton isRed={true} styles='main-action-button'>{t('create-new').toLocaleUpperCase()}</AoButton>
+      {
+        displayState === EventMenuState.ListEvents ? <EventList activeEvents={activeEvents} createNew={createNewEvent}/> : <CreateEvent/>
+      }
+      
     </AoDialog>
   )
 }
