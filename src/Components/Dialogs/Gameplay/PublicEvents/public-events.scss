@@ -40,7 +40,13 @@
       margin-bottom: 5px;
       background-color: #0000005c;
       padding: 2px 0px 2px 15px;
+      position: relative;
 
+      .private-room {
+        position: absolute;
+        margin: auto;
+        left: -10px;
+      }
       .event-name{
         width: 120px;
         margin-right: 5px;
