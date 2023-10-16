@@ -15,8 +15,8 @@ import { setGameActiveDialog } from "../../../../redux/GameplaySlices/GameStateS
 export const CreateEvent = () => {
   const { t } = useTranslation();
   const eventTypes = [
-    { value: 'deathmatch', label: t('Deathmatch'), index: 1, minPlayers:2, maxPlayers: 40, defaultMin:2, defaultMax:20, step:1, showTeamSize: true},
-    { value: 'navalconquest', label: t('Abordaje'), index: 2, minPlayers:6, maxPlayers: 12, defaultMin:6, defaultMax:12, step:2, showTeamSize: false},
+    { value: 'deathmatch', label: t('Deathmatch'), index: 3, minPlayers:2, maxPlayers: 40, defaultMin:2, defaultMax:20, step:1, showTeamSize: true},
+    { value: 'navalconquest', label: t('Abordaje'), index: 4, minPlayers:6, maxPlayers: 12, defaultMin:6, defaultMax:12, step:2, showTeamSize: false},
   ]
   const teamTypes = [
     { value: 'random', label: t('random'), index: 1 },
