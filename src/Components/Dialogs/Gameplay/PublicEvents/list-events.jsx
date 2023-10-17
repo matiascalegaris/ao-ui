@@ -1,8 +1,38 @@
 import { useTranslation } from "react-i18next";
 import AoButton from "../../../Common/ao-button/ao-button"
+import { useDispatch } from "react-redux";
+import { setGameActiveDialog } from "../../../../redux/GameplaySlices/GameStateSlice";
 
 export const EventList = ({activeEvents, createNew}) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch()
+  const onJoinEvent = lobby => {
+    if (lobby.isPrivate) {
+      const deleteItemAction = {
+        popUp:'input-dialog',
+        text: t('request-lobby-password'),
+        actions: [{
+          caption: t('cancel').toUpperCase(),
+          action:  evt => {
+            dispatch(setGameActiveDialog({
+              popUp: 'public-events',
+              eventList: activeEvents,
+            }))
+          }}, {
+          caption: t('continue').toUpperCase(),
+          action:  evt => {
+            dispatch(setGameActiveDialog(null))
+            window.parent.BabelUI.JoinLobby(lobby.id, evt)
+          },
+          isRed: true}
+        ]
+      }
+      dispatch(setGameActiveDialog(deleteItemAction))
+    }
+    else {
+
+    }
+  }
   return (
     <div className='eventList-area'>
         <span className='event-line'>
@@ -25,7 +55,7 @@ export const EventList = ({activeEvents, createNew}) => {
                 <div className='group-type center-text'>{el.minLevel}/{el.maxLevel}</div>
                 <div className='max-user center-text'>{el.registeredPlayers}/{el.maxPlayers}</div>
                 <div className='inscription-price center-text'>{el.inscriptionFee}</div>
-                <AoButton styles='action-button'>{t('join')}</AoButton>
+                <AoButton styles='action-button' onClick={() => onJoinEvent(el)}>{t('join')}</AoButton>
               </span>
             ))
           }

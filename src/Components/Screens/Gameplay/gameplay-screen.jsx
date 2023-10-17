@@ -23,6 +23,7 @@ import { AoStore } from '../../Dialogs/Gameplay/AoStore/ao-store'
 import { WorldMap } from '../../Dialogs/Gameplay/WorldMap/world-map'
 import { SkillList } from '../../Dialogs/Gameplay/SkillList/skill-list'
 import { EventList, PublicEvents } from '../../Dialogs/Gameplay/PublicEvents/public-events'
+import { GenericInputDialog } from '../../Dialogs/GenericInputDialog/generic-input-dialog'
 
 const showHKIcon = status => {
   if (status) {
@@ -100,7 +101,8 @@ export default function GameplayScreen() {
                 'ao-shop':<AoStore settings={popupsState}/>,
                 'world-map': <WorldMap settings={popupsState}/>,
                 'skill-list': <SkillList/>,
-                'public-events': <PublicEvents activeEvents={popupsState.eventList}/>
+                'public-events': <PublicEvents activeEvents={popupsState.eventList}/>,
+                'input-dialog' : <GenericInputDialog settings={popupsState} />
               }
               [popupsState.popUp]
             }

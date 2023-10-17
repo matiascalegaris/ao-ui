@@ -369,6 +369,9 @@ if (process.env.NODE_ENV === 'development') {
                   teamSize, maxLevel, minPlayers, 
                   maxPlayers, password,inscriptionPrice, teamType) => {
 
+    },
+    JoinLobby: (id, password) => {
+      console.log("joind lobby: " + id + "with pwd: " + password )
     }
   } 
 }
