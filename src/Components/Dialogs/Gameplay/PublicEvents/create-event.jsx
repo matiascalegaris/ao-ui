@@ -51,7 +51,7 @@ export const CreateEvent = () => {
       eventType: evt.index,
       minPlayers:evt.defaultMin,
       maxPlayers:evt.defaultMax,
-      teamSize: Math.min(Math.round(evt.defaultMax/2), teamSize)});
+      teamSize: Math.min(Math.floor(evt.defaultMax/2), teamSize)});
   }
   const updateTeamTypes = evt => {
     setEventInfo({ ...eventInfo, teamType: evt.index});
@@ -65,7 +65,7 @@ export const CreateEvent = () => {
     setEventInfo({ ...eventInfo, 
       minPlayers: evt.minValue, 
       maxPlayers: evt.maxValue,
-      teamSize: Math.min(Math.round(evt.maxValue/2), teamSize)});
+      teamSize: Math.min(Math.floor(evt.maxValue/2), teamSize)});
   }
   const setTeamSize = val => {
     setEventInfo({ ...eventInfo, teamSize: Math.round(val)});
@@ -125,6 +125,7 @@ export const CreateEvent = () => {
             thumbLeftColor="black"
             thumbRightColor="black"
           />
+          <p className="team-size-value">{minLevel} / {maxLevel}</p>
         </Section>
         <Section name={t('max-players').toUpperCase()}>
           <MultiRangeSlider            
@@ -143,11 +144,12 @@ export const CreateEvent = () => {
               thumbLeftColor="black"
               thumbRightColor="black"
             />
+            <p className="team-size-value">{minPlayers} / {maxPlayers}</p>
         </Section>
         {
           selectedEvent.showTeamSize &&
           <Section name={t('team-size').toUpperCase()}>
-            <Slider min={1} max={ Math.round(maxPlayers/2)} currentValue={teamSize} onChange={setTeamSize} />
+            <Slider min={1} max={ Math.floor(maxPlayers/2)} currentValue={teamSize} onChange={setTeamSize} />
             <p className="team-size-value">{teamSize}</p>
             {
               !validTeamSize && <p className="error-msg">{t('invalid-team-size')}</p>
