@@ -11,7 +11,8 @@ export const GameStateSlice = createSlice({
     gameTime: {hour:0, minutes:0},
     isGameMaster: false,
     activeDialog:  {
-      popUp: 'public-events'
+      popUp: 'public-events',
+      eventList: [],
     },
     spellListScroll: 0,
     firstDisplaySpell: -1,
@@ -123,7 +124,8 @@ export const GameStateSlice = createSlice({
 export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime, openAoShop,
                updateIsGameMaster, updateSpellListScroll, openNpcTradeDialog,
                updateFirstSpellToDisplay, updateTrackState, updateTrackMousePos,
-               updateTrackLastMouseClick, updateRemoteTab, handleMerchantItemChange } = GameStateSlice.actions
+               updateTrackLastMouseClick, updateRemoteTab, handleMerchantItemChange,
+               openLobbyList, UpdateLobbySlot } = GameStateSlice.actions
 
 export const selectFps = (state) =>  state.gameState.fps
 export const selectOnlines = (state) => state.gameState.online

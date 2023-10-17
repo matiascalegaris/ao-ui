@@ -18,7 +18,7 @@ export const EventList = ({activeEvents, createNew}) => {
           {
             activeEvents.map( el => (
               <span className='event-line' key={el.id}>
-                { el.isPrivate && <img className="private-room" src={require('../../../../assets/Icons/inventory-extra/locked-slot.png')}/> }
+                { el.isPrivate && <img className="private-room" src={require('../../../../assets/Icons/inventory-extra/transparent-lock.png')}/> }
                 <div className='event-name'>{el.Description}</div>
                 <div className='event-name'>{el.eventType}</div>
                 <div className='party-size center-text'>{el.groupSize} { el.groupType === 1 ? t('random') : t('premade')}</div>

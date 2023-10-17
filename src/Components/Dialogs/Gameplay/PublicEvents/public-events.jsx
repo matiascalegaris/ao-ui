@@ -20,9 +20,10 @@ export const PublicEvents = ({activeEvents}) => {
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
   }
-  activeEvents = [{ index: 0, id: 1, eventType: 'Deathmatch', Description: 'prueba', groupSize:1, groupType:1, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:false},
-                  { index: 1, id: 2, eventType: 'Abordaje', Description: 'prueba 2', groupSize:6, groupType:2, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:true}]
-
+  if (process.env.NODE_ENV === 'development') {
+    activeEvents = [{ index: 0, id: 1, eventType: 'Deathmatch', Description: 'prueba', groupSize:1, groupType:1, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:false},
+                    { index: 1, id: 2, eventType: 'Abordaje', Description: 'prueba 2', groupSize:6, groupType:2, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:true}]
+  }
   const createNewEvent = evt => {
     setDialogState({...dialogState, displayState: EventMenuState.CreateEvent})
   }

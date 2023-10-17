@@ -45,7 +45,7 @@
       .private-room {
         position: absolute;
         margin: auto;
-        left: -10px;
+        left: -15px;
       }
       .event-name{
         width: 120px;
@@ -120,6 +120,11 @@
           height: 5px;
           max-height: 5px;
           padding: 0px;
+        }
+        .caption {          
+          &:hover {
+            display: flex;
+          }
         }
         .min-caption {
           background-color: black;

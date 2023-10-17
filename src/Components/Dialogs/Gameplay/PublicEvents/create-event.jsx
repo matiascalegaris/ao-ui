@@ -23,7 +23,7 @@ export const CreateEvent = () => {
     { value: 'premade', label: t('premade'), index: 2},
   ]
   const [ eventInfo, setEventInfo] = useState({description:'',
-     eventType: 1, 
+     eventType: 3, 
      minLevel:1, 
      teamSize:1,
      maxLevel:47,
@@ -33,7 +33,9 @@ export const CreateEvent = () => {
      password:'',
      inscriptionPrice: 0,
      teamType: 1})
-  const {description , eventType, teamType, minPlayers, maxPlayers, minLevel, maxLevel, teamSize, requestPassword, password , inscriptionPrice} = eventInfo
+  const {description , eventType, teamType, minPlayers, 
+         maxPlayers, minLevel, maxLevel, teamSize,
+         requestPassword, password , inscriptionPrice} = eventInfo
   const handleChange = evt => {
     const { value, name } = evt.target;
     setEventInfo({ ...eventInfo, [name]: value});
@@ -48,7 +50,8 @@ export const CreateEvent = () => {
     setEventInfo({ ...eventInfo, 
       eventType: evt.index,
       minPlayers:evt.defaultMin,
-      maxPlayers:evt.defaultMax});
+      maxPlayers:evt.defaultMax,
+      teamSize: Math.min(Math.round(evt.defaultMax/2), teamSize)});
   }
   const updateTeamTypes = evt => {
     setEventInfo({ ...eventInfo, teamType: evt.index});
@@ -59,7 +62,10 @@ export const CreateEvent = () => {
   }
 
   const setPlayerRange = evt => {
-    setEventInfo({ ...eventInfo, minPlayers: evt.minValue, maxPlayers: evt.maxValue});
+    setEventInfo({ ...eventInfo, 
+      minPlayers: evt.minValue, 
+      maxPlayers: evt.maxValue,
+      teamSize: Math.min(Math.round(evt.maxValue/2), teamSize)});
   }
   const setTeamSize = val => {
     setEventInfo({ ...eventInfo, teamSize: Math.round(val)});
@@ -98,7 +104,7 @@ export const CreateEvent = () => {
                    inputStyles='center-text' showDelete={false} 
                    name="inscriptionPrice" IsValid={validInscriptionPrice} 
                    min="0" max="10000000"
-                   alue={inscriptionPrice} required handleChange={handleChange}/>
+                   alue={inscriptionPrice} handleChange={handleChange}/>
         </Section>
       </div>
       <div className="column">
@@ -108,7 +114,6 @@ export const CreateEvent = () => {
             max={47}
             minValue={minLevel}
 					  maxValue={maxLevel}
-            onInput={setLevelRange}
             onChange={setLevelRange}
             label={true}
             ruler={false}
@@ -127,7 +132,6 @@ export const CreateEvent = () => {
               max={selectedEvent.maxPlayers}
               minValue={minPlayers}
 					    maxValue={maxPlayers}
-              onInput={setPlayerRange}
               onChange={setPlayerRange}
               label={true}
               ruler={false}

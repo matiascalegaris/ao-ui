@@ -100,7 +100,7 @@ export default function GameplayScreen() {
                 'ao-shop':<AoStore settings={popupsState}/>,
                 'world-map': <WorldMap settings={popupsState}/>,
                 'skill-list': <SkillList/>,
-                'public-events': <PublicEvents/>
+                'public-events': <PublicEvents activeEvents={popupsState.eventList}/>
               }
               [popupsState.popUp]
             }
