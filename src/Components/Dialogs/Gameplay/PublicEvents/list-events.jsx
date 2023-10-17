@@ -30,7 +30,8 @@ export const EventList = ({activeEvents, createNew}) => {
       dispatch(setGameActiveDialog(deleteItemAction))
     }
     else {
-
+      dispatch(setGameActiveDialog(null))
+      window.parent.BabelUI.JoinLobby(lobby.id, "")
     }
   }
   return (

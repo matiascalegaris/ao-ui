@@ -156,7 +156,8 @@ const resources = {
       'team-size': 'team size',
       'private-match': 'private match',
       'invalid-team-size': 'Min and Max players has to be multiple of the team size',
-      'request-password': 'Request password'
+      'request-password': 'Request password',
+      'request-lobby-password': 'Insert password  to join'
     }
   },
   es: {
@@ -347,7 +348,8 @@ const resources = {
       'team-size': 'Tamaño de equipos',
       'private-match': 'Evento privados',
       'invalid-team-size': 'La cantidad maxima y minima de jugadores debe ser divisible por el tamaño del equipo',
-      'request-password': 'Pedir contraseña'
+      'request-password': 'Pedir contraseña',
+      'request-lobby-password': 'Ingrese la contraseña para ingresar'
     }
   }
 };

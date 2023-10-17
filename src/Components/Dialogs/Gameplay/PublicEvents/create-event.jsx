@@ -104,6 +104,11 @@ export const CreateEvent = () => {
                    inputStyles='center-text' showDelete={false} 
                    name="inscriptionPrice" IsValid={validInscriptionPrice} 
                    min="0" max="10000000"
+                   onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
                    alue={inscriptionPrice} handleChange={handleChange}/>
         </Section>
       </div>
