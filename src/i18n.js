@@ -149,7 +149,7 @@ const resources = {
       'incription-price': 'incription fee',
       'join': 'Join',
       'create-new': 'create new',
-      'event-list': 'available events',
+      'event-list': 'available battlegrounds',
       'teams-type': 'Teams type',
       'random': 'Random teams',
       'premade': 'Premade teams',
@@ -157,7 +157,8 @@ const resources = {
       'private-match': 'private match',
       'invalid-team-size': 'Min and Max players has to be multiple of the team size',
       'request-password': 'Request password',
-      'request-lobby-password': 'Insert password  to join'
+      'request-lobby-password': 'Insert password  to join',
+      'create-event': 'create battleground'
     }
   },
   es: {
@@ -341,15 +342,17 @@ const resources = {
       'incription-price': 'Costo de inscripcion',
       'join': 'Ingresar',
       'create-new': 'Crear nuevo',
-      'event-list': 'Eventos disponibles',
+      'event-list': 'Battlegrounds disponibles',
       'teams-type': 'Formato de Equipos',
       'random': 'Aleatoreos',
       'premade': 'Pre armados',
       'team-size': 'Tamaño de equipos',
-      'private-match': 'Evento privados',
+      'private-match': 'Partida privada',
       'invalid-team-size': 'La cantidad maxima y minima de jugadores debe ser divisible por el tamaño del equipo',
       'request-password': 'Pedir contraseña',
-      'request-lobby-password': 'Ingrese la contraseña para ingresar'
+      'request-lobby-password': 'Ingrese la contraseña para ingresar',
+      'create': 'crear',
+      'create-event': 'crear battleground'
     }
   }
 };

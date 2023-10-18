@@ -21,8 +21,8 @@ export const PublicEvents = ({activeEvents}) => {
     dispatch(setGameActiveDialog(null))
   }
   if (process.env.NODE_ENV === 'development') {
-    activeEvents = [{ index: 0, id: 1, eventType: 'Deathmatch', Description: 'prueba', groupSize:1, groupType:1, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:false},
-                    { index: 1, id: 2, eventType: 'Abordaje', Description: 'prueba 2', groupSize:6, groupType:2, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:true}]
+    activeEvents = [{ index: 0, id: 1, eventType: 'Deathmatch', description: 'partida de uff al sudar', groupSize:1, groupType:1, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:false},
+                    { index: 1, id: 2, eventType: 'Abordaje', description: 'prueba 2', groupSize:6, groupType:2, minLevel:1, maxLevel:47, minPlayers:1, maxPlayers:12, registeredPlayers:0, inscriptionFee: 5430233, isPrivate:true}]
   }
   const createNewEvent = evt => {
     setDialogState({...dialogState, displayState: EventMenuState.CreateEvent})
@@ -30,7 +30,7 @@ export const PublicEvents = ({activeEvents}) => {
   return (
     <AoDialog styles='event-list-dialog' contentStyles='content'>
       <div className='header-line'>
-        <h1 className='game-dialog-header'>{t('event-list').toUpperCase()}</h1>
+        <h1 className='game-dialog-header'>{ displayState === EventMenuState.ListEvents ? t('event-list').toUpperCase() : t('create-event').toUpperCase()}</h1>
       </div>
       <span className='header-underline'></span>
       <AoButton styles='close-button' onClick={onClose}>

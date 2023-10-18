@@ -49,14 +49,13 @@ export const EventList = ({activeEvents, createNew}) => {
           {
             activeEvents.map( el => (
               <span className='event-line' key={el.id}>
-                { el.isPrivate && <img className="private-room" src={require('../../../../assets/Icons/inventory-extra/transparent-lock.png')}/> }
                 <div className='event-name'>{el.description}</div>
                 <div className='event-name'>{el.eventType}</div>
                 <div className='party-size center-text'>{el.groupSize} { el.groupType === 1 ? t('random') : t('premade')}</div>
                 <div className='group-type center-text'>{el.minLevel}/{el.maxLevel}</div>
                 <div className='max-user center-text'>{el.registeredPlayers}/{el.maxPlayers}</div>
                 <div className='inscription-price center-text'>{el.inscriptionFee}</div>
-                <AoButton styles='action-button' onClick={() => onJoinEvent(el)}>{t('join')}</AoButton>
+                <AoButton styles='action-button' onClick={() => onJoinEvent(el)}>{t('join')} { el.isPrivate && <img className="private-room" src={require('../../../../assets/Icons/inventory-extra/transparent-lock.png')}/> }</AoButton>
               </span>
             ))
           }

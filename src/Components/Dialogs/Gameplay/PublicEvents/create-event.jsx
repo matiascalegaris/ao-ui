@@ -83,7 +83,7 @@ export const CreateEvent = () => {
   }
   const charName = useSelector(selectCharacterName)
   useEffect( () => {
-    setEventInfo({ ...eventInfo, description: charName });
+    setEventInfo({ ...eventInfo, description: 'partida de ' + charName });
   }, [charName])
   const dispatch = useDispatch()
   const createNew = evt => {
@@ -175,7 +175,9 @@ export const CreateEvent = () => {
         {
           selectedEvent.showTeamSize &&
           <Section name={t('team-size').toUpperCase()}>
-            <Slider min={1} max={ Math.floor(maxPlayers/2)} currentValue={teamSize} onChange={setTeamSize} />
+            <div className="team-size-slider">
+              <Slider min={1} max={ Math.floor(maxPlayers/2)} currentValue={teamSize} onChange={setTeamSize} />
+            </div>
             <p className="team-size-value">{teamSize}</p>
             {
               !validTeamSize && <p className="error-msg">{t('invalid-team-size')}</p>

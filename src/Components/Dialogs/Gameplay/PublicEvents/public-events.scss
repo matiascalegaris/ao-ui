@@ -51,7 +51,7 @@
       .private-room {
         position: absolute;
         margin: auto;
-        left: -15px;
+        right: 2px;
       }
       .event-name{
         width: 120px;
@@ -59,15 +59,15 @@
       }
       .party-size {
         width: 50px;
-        margin-right: 5px;
+        margin-right: 10px;
       }
       .group-type{
         width: 50px;
-        margin-right: 5px;
+        margin-right: 10px;
       }
       .max-user {
         width: 50px;
-        margin-right: 5px;
+        margin-right: 10px;
       }
       .inscription-price {
         width: 70px;
@@ -78,6 +78,7 @@
   }
   .action-button {
     width: 100px;
+    position: relative;
   }
   .main-action-button {
     margin: 10px 0px 10px auto;
@@ -101,6 +102,10 @@
         margin-bottom: 5px;
       }
       
+      .team-size-slider {
+        margin: 0px 20px;
+      }
+
       .generic-checkbox {
         margin: 10px 0;
             
