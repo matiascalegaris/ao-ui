@@ -263,6 +263,17 @@ function App() {
     i18n.changeLanguage(language)
     axios.defaults.headers.common['Accept-Language'] = 'es-AR, es;q=0.9 en;q=0.8'
   },[]);  
+
+  useEffect(() => {
+    const onMouseUp = evt => {
+      window.MouseDown = false
+    }
+    const onMouseDown = evt => {
+      window.MouseDown = true
+    }
+    window.addEventListener('mousedown', onMouseDown, false);
+    window.addEventListener('mouseup', onMouseUp, false);
+  },[]);
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       const handleGlobalKeyPress = evt => {

@@ -10,13 +10,14 @@ import AoButton from "../../../Common/ao-button/ao-button";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCharacterName } from "../../../../redux/GameplaySlices/CharacterInfoSlice";
 import { setGameActiveDialog } from "../../../../redux/GameplaySlices/GameStateSlice";
+import GameBarButton from "../../../Common/ao-button/GameBarButton/game-bar-button";
 
 
 export const CreateEvent = () => {
   const { t } = useTranslation();
   const eventTypes = [
-    { value: 'deathmatch', label: t('Deathmatch'), index: 3, minPlayers:2, maxPlayers: 40, defaultMin:2, defaultMax:20, step:1, showTeamSize: true},
-    { value: 'navalconquest', label: t('Abordaje'), index: 4, minPlayers:6, maxPlayers: 12, defaultMin:6, defaultMax:12, step:2, showTeamSize: false},
+    { value: 'deathmatch', label: t('Deathmatch'), index: 3, minPlayers:1, maxPlayers: 40, defaultMin:2, defaultMax:20, step:1, showTeamSize: true},
+    { value: 'navalconquest', label: t('Abordaje'), index: 4, minPlayers:4, maxPlayers: 12, defaultMin:6, defaultMax:12, step:2, showTeamSize: false},
   ]
   const teamTypes = [
     { value: 'random', label: t('random'), index: 1 },
@@ -40,6 +41,11 @@ export const CreateEvent = () => {
     const { value, name } = evt.target;
     setEventInfo({ ...eventInfo, [name]: value});
   }
+  const handleChangeNumeric = evt => {
+    const { value, name } = evt.target;
+    setEventInfo({ ...eventInfo, [name]: parseInt(value)});
+  }
+  
   const handleChangeBox = evt => {
     const { name } = evt.target;
     setEventInfo({...eventInfo, [name]: !eventInfo[name]})
@@ -58,10 +64,14 @@ export const CreateEvent = () => {
   }
 
   const setLevelRange = evt => {
-    setEventInfo({ ...eventInfo, minLevel: evt.minValue, maxLevel: evt.maxValue});
+    if (minLevel !== evt.minValue || maxLevel !== evt.maxValue) {
+      setEventInfo({ ...eventInfo, minLevel: evt.minValue, maxLevel: evt.maxValue});
+    }
+    
   }
 
   const setPlayerRange = evt => {
+    if (minPlayers === evt.minValue && maxPlayers === evt.maxValue) return
     setEventInfo({ ...eventInfo, 
       minPlayers: evt.minValue, 
       maxPlayers: evt.maxValue,
@@ -82,6 +92,9 @@ export const CreateEvent = () => {
                                       inscriptionPrice, teamType )
     dispatch(setGameActiveDialog(null))
   }
+  const updateIncriptionFee = valueChange => {
+    setEventInfo({ ...eventInfo, inscriptionPrice: Math.max(inscriptionPrice + valueChange, 0)});
+  }
   const validInscriptionPrice = inscriptionPrice >= 0 && inscriptionPrice < 10000000
   const validTeamSize = (minPlayers % teamSize === 0) && (maxPlayers % teamSize === 0)
   const canCreate = description.length > 0 && (validTeamSize || !selectedEvent.showTeamSize) && validInscriptionPrice
@@ -100,16 +113,22 @@ export const CreateEvent = () => {
           { requestPassword && <AoInput styles='margin-bot' inputStyles='input-style' showDelete={password.length > 0} name="password" IsValid={true} value={password} required handleChange={handleChange}/>}
         </Section>
         <Section name={t('incription-price').toUpperCase()}>
-          <AoInput styles='margin-bot' type="number" 
-                   inputStyles='center-text' showDelete={false} 
-                   name="inscriptionPrice" IsValid={validInscriptionPrice} 
-                   min="0" max="10000000"
-                   onKeyPress={(event) => {
-                      if (!/[0-9]/.test(event.key)) {
-                        event.preventDefault();
-                      }
-                    }}
-                   alue={inscriptionPrice} handleChange={handleChange}/>
+          <span className="inscription-fee-line margin-bot">
+          <GameBarButton styles='fixed-increment' onClick={() => updateIncriptionFee(-1000)}>-1K</GameBarButton>
+          <GameBarButton styles='fixed-increment' onClick={() => updateIncriptionFee(-10000)}>-10K</GameBarButton>
+            <AoInput type="number" 
+                    inputStyles='center-text' showDelete={false} 
+                    name="inscriptionPrice" IsValid={validInscriptionPrice} 
+                    min="0" max="10000000"
+                    onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                    value={inscriptionPrice} handleChange={handleChangeNumeric}/>
+          <GameBarButton styles='fixed-increment' onClick={() => updateIncriptionFee(1000)}>+1K</GameBarButton>
+          <GameBarButton styles='fixed-increment' onClick={() => updateIncriptionFee(10000)}>+10K</GameBarButton>
+          </span>
         </Section>
       </div>
       <div className="column">
@@ -119,6 +138,7 @@ export const CreateEvent = () => {
             max={47}
             minValue={minLevel}
 					  maxValue={maxLevel}
+            onInput={setLevelRange}
             onChange={setLevelRange}
             label={true}
             ruler={false}
@@ -138,6 +158,7 @@ export const CreateEvent = () => {
               max={selectedEvent.maxPlayers}
               minValue={minPlayers}
 					    maxValue={maxPlayers}
+              onInput={setPlayerRange}
               onChange={setPlayerRange}
               label={true}
               ruler={false}

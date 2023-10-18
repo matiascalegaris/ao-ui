@@ -33,6 +33,12 @@
     flex-direction: column;
     margin: 10px;
 
+    .event-list {
+      min-height: 150px;
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+
     .event-line {
       display: flex;
       flex-direction: row;
@@ -102,11 +108,23 @@
           font-weight: 400;
         }
       }
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+
+      .inscription-fee-line {
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        .fixed-increment {
+          color: gold;
+          padding: 3px;
+        }
       }
+      
       .input-style {
         margin: 0;
       }
@@ -123,6 +141,12 @@
         }
         .caption {          
           &:hover {
+            display: flex;
+          }
+          &:active {
+            display: flex;
+          }
+          &:focus {
             display: flex;
           }
         }

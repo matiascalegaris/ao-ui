@@ -10,10 +10,7 @@ export const GameStateSlice = createSlice({
     online: 0,
     gameTime: {hour:0, minutes:0},
     isGameMaster: false,
-    activeDialog:  {
-      popUp: 'public-events',
-      eventList: [],
-    },
+    activeDialog:  null,
     spellListScroll: 0,
     firstDisplaySpell: -1,
     trackUserActive: 0,

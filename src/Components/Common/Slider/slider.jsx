@@ -16,14 +16,12 @@ export const Slider = ({min, max, currentValue, onChange}) => {
     onChange( Math.min(Math.max(localX / clientRect.width * range + min, min), max))
   }
   const onMouseDown = evt => {
-    console.log("slider mouse down")
     if (evt.button === MouseButtons.left) {
       updatePos(evt.clientX)
     }    
   }
   const onMouseMove = evt => {
-    console.log("slider mouse move")
-    if (evt.buttons > 0 ) {
+    if (window.MouseDown > 0 ) {
       updatePos(evt.clientX)
     }
   }
