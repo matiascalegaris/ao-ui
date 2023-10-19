@@ -345,7 +345,7 @@ const resources = {
       'event-list': 'Battlegrounds disponibles',
       'teams-type': 'Formato de Equipos',
       'random': 'Aleatoreos',
-      'premade': 'Pre armados',
+      'premade': 'Grupos',
       'team-size': 'Tamaño de equipos',
       'private-match': 'Partida privada',
       'invalid-team-size': 'La cantidad maxima y minima de jugadores debe ser divisible por el tamaño del equipo',
