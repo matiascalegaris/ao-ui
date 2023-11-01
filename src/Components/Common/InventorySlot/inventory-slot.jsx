@@ -18,7 +18,7 @@ const formatItemCount = (itemCount, format) => {
   return `${(itemCount/1000).toFixed(1)}k`
 }
 export default function InventorySlot({content, locked, selected, onSelect,
-                                       onActivate, dropId, onDropAction}) {
+                                       onActivate, dropId, onDropAction, tooltipDelay = 1000}) {
   let style = locked ? 'locked-slot ': 'inv-slot '
   if (selected && content.grh && !locked > 0) {
     style += 'selected-slot'
@@ -29,7 +29,7 @@ export default function InventorySlot({content, locked, selected, onSelect,
   const itemCountFormat = useSelector(selectItemCountFormat)
   
   const containerRef = useRef(null)
-  const [eventHandlers] = useTooltipHover(content.grh ? content : null, TooltipTypes.ITEM, containerRef)
+  const [eventHandlers] = useTooltipHover(content.grh ? content : null, TooltipTypes.ITEM, containerRef, tooltipDelay)
   return (
     <div className={style} ref={containerRef} {...eventHandlers}>  
       <DropArea id={{...dropId, onDrop:onDrop}} acceptTypes={DragDropTypes.ITEM}>

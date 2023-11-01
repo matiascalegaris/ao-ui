@@ -14,7 +14,7 @@ export const TooltipTypes = {
 }
 const toolTipWidth = 200
 
-export const useTooltipHover = (contentInfo, type, targetRef) => {
+export const useTooltipHover = (contentInfo, type, targetRef, delayedDisplayTime = 1000) => {
   const [hoverState, setHoverState] = useState({timer:null, moseOver: false})
   const dispatch = useDispatch()
   const isInsideRef = useRef(hoverState);
@@ -57,7 +57,7 @@ export const useTooltipHover = (contentInfo, type, targetRef) => {
         timer: setTimeout(() => {
           dispatch(setActiveToolTip({contentInfo, type, anchor:anchor}))
           setHoverState({...isInsideRef.current,timer: null})
-        }, 1000)})
+        }, delayedDisplayTime)})
     },
     onMouseOut() { 
       clearTimeout(isInsideRef.current.timer)

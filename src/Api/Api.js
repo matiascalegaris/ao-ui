@@ -372,6 +372,9 @@ if (process.env.NODE_ENV === 'development') {
     },
     JoinLobby: (id, password) => {
       console.log("joind lobby: " + id + "with pwd: " + password )
+    },
+    UpdateSkills: updateArray => {
+      console.log('Update skill value')
     }
   } 
 }
