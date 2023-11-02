@@ -38,7 +38,6 @@ export default function ClanListDialog({styles, stylesDetail}) {
 
   let clanes = search ? mockClanList.filter((clan) => clan.nombre.toLocaleLowerCase().includes(search)) : mockClanList
   let styleAlineacion = ''
-  console.log('Alineacion:', alineacion)
   if(alineacion === Alineaciones.legion) {
     clanes = clanes.filter((clan) => clan.alineacion === Alineaciones.legion)
     styleAlineacion = ' red'

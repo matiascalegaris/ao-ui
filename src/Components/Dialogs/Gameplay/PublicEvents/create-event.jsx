@@ -12,7 +12,6 @@ import { selectCharacterName } from "../../../../redux/GameplaySlices/CharacterI
 import { setGameActiveDialog } from "../../../../redux/GameplaySlices/GameStateSlice";
 import GameBarButton from "../../../Common/ao-button/GameBarButton/game-bar-button";
 
-
 export const CreateEvent = () => {
   const { t } = useTranslation();
   const eventTypes = [

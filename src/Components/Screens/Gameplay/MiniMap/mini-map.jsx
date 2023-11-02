@@ -72,7 +72,7 @@ export default function MiniMap() {
       dispatch(setGameActiveDialog({
         popUp:'world-map'
       })) 
-      window.parent.BabelUI.RequestAction(Actions.OpenMinimap)
+      //window.parent.BabelUI.RequestAction(Actions.OpenMinimap)
     }
   }
   const userMarker = {
