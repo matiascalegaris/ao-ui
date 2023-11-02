@@ -358,7 +358,19 @@ if (process.env.NODE_ENV === 'development') {
     MoveMerchantItem: (from, to) => {
     },
     GetWorldGrid: () => {
-      return [{height:22, width: 19}, {height:22, width: 19}, {height:22, width: 19}, {height:22, width: 19}]
+      let mapDetails = {}
+      for( var i = 0 ; i < 22*19; i++) {
+        mapDetails[i] = {
+          isSafe: false,
+          name: "some test",
+          npcList: Array(3).fill({tileX: 1, tileY: 1, index:15})
+        }
+      }
+      return { worlds: Array(3).fill({
+        height:22, width: 19,
+        mapList: Array(22*19).fill(0).map( (el,index) => (index)),
+        MapDetails: mapDetails
+      })}
     },
     BuyPatronItem: (objIndex) => {
     },

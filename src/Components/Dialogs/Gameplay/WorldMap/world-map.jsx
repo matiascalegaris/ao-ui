@@ -28,6 +28,7 @@ let WorldGrid = []
 const GetWorldGrid = worldIndex => {
   if (WorldGrid.length === 0) {
     WorldGrid = window.parent.BabelUI.GetWorldGrid()
+    console.log(JSON.stringify(WorldGrid))
   }
   return WorldGrid[worldIndex]
 }
