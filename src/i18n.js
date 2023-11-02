@@ -158,7 +158,12 @@ const resources = {
       'invalid-team-size': 'Min and Max players has to be multiple of the team size',
       'request-password': 'Request password',
       'request-lobby-password': 'Insert password  to join',
-      'create-event': 'create battleground'
+      'create-event': 'create battleground',
+      'skill-list': 'Skills',
+      'combat skills': 'Combat skills',
+      'other skills': 'Other skills',
+      'availableskills': 'Available skills:'
+
     }
   },
   es: {
@@ -352,7 +357,33 @@ const resources = {
       'request-password': 'Pedir contraseña',
       'request-lobby-password': 'Ingrese la contraseña para ingresar',
       'create': 'crear',
-      'create-event': 'crear battleground'
+      'create-event': 'crear battleground',
+      'Magic': 'Magia',
+      'Meditatation': 'Meditar',
+      'Magic resistance': 'Resistencia magica',
+      'Combat dexterity': 'Destreza en combate',
+      'Unarmed combat': 'Combate sin armas',
+      'Armed combat': 'Combate con armas',
+      'Shield defence': 'Defensa con escudos',
+      'Ranged weapons': 'Armas a distancia',
+      'Stabbing': 'Apuñalar',
+      'Stealing': 'Robar',
+      'Logging': 'Talar',
+      'Fishing': 'Pesca',
+      'Mining': 'Mineria',
+      'Carpentry': 'Carpinteria',
+      'Smithy': 'Herreria',
+      'Hiding': 'Ocultarse',
+      'Survival': 'Supervivencia',
+      'Commerce': 'Comercio',
+      'Leadership': 'Liderazgo',
+      'Taming': 'Doma de animales',
+      'Sailing': 'Navegacion',
+      'Tailoring': 'Sastreria',
+      'skill-list': 'Skills',
+      'combat skills': 'Habilidades de combate',
+      'other skills': 'Otras habilidades',
+      'availableskills': 'Puntos disponibles:'
     }
   }
 };

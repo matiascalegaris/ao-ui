@@ -28,7 +28,7 @@ export const InterestPoint = ({pos, color, pointData, ...otherProps}) => {
   const svgID = "ipointGrad-" + color;
   const containerRef = useRef(null)
   const NpcName = window.parent.BabelUI.GetNpcName(pointData.npcNumber)
-  const [eventHandlers] = useTooltipHover(NpcName, TooltipTypes.Npc, containerRef)
+  const [eventHandlers] = useTooltipHover(NpcName, TooltipTypes.Npc, containerRef, 0)
 
   return (
     <svg height="5px" width="5px" style={style} {...otherProps} ref={containerRef} {...eventHandlers}>

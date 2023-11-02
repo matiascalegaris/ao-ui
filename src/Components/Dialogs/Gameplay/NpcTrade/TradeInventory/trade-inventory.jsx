@@ -17,6 +17,7 @@ export const TradeInventory = ({tittle, slotDetail, selectedIndex, onSelect, onD
                               selected={index === selectedIndex}
                               dropId={{type:'inventory', id:item.index}}
                               onDropAction={onDropItem}
+                              tooltipDelay={0}
                               />
               : <img key={item.index} src={require('../../../../../assets/Icons/inventory-extra/locked-slot.png')}/>
         ))

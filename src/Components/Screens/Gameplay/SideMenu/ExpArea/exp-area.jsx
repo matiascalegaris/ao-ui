@@ -21,7 +21,11 @@ export default function ExpArea() {
   const dispatch = useDispatch()
   const openStats = evt => {
     dispatch(setGameActiveDialog({
-      popUp:'skill-list'
+      popUp:'skill-list',
+      details: {
+        availableSkills: 200,
+        skillList: Array(25).fill(0).map( (e,index) => (index))
+      }
     })) 
     window.parent.BabelUI.RequestAction(Actions.RequestSkill)
   }

@@ -165,7 +165,7 @@ export const KeyCodeMapping = {
   x: 88
 }
 
-export const SkillList = {
+export const SkillListId = {
   Magic: 1,
   Steal: 2,
   CombatTechnique: 3,
@@ -189,7 +189,9 @@ export const SkillList = {
   Carpenter: 21,
   Alchemy: 22,
   Tailoring: 23,
-  Taming: 24
+  Taming: 24,
+
+  SkillTypeCount: 25
 }
 
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
