@@ -24,25 +24,13 @@ const GetWorldImage = image => {
   return `${GetRootDirectory()}/interface/${image}.bmp`
 }
 
-let WorldGrid = []
+let WorldGrid = null
 const GetWorldGrid = worldIndex => {
-  if (WorldGrid.length === 0) {
+  if (!WorldGrid) {
     WorldGrid = window.parent.BabelUI.GetWorldGrid()
-    console.log(JSON.stringify(WorldGrid))
+    console.log(WorldGrid)
   }
-  return WorldGrid[worldIndex]
-}
-
-const GetMapList = (world) => {
-  return [{
-    name: 'Desierto',
-    npcList: [{name: 'Pirata salvaje', count: 999, index: 1},
-     {name: 'Pirata salvaje', count: 999, index: 2},
-     {name: 'Pirata con nombre muy largo salvaje', count: 999, index: 3},
-     {name: 'Pirata salvaje', count: 999, index: 4},
-     {name: 'Pirata con nombre muy largo salvaje', count: 999, index: 5}, 
-     {name: 'Pirata con nombre muy largo salvaje', count: 999, index: 6}]
-  }]
+  return WorldGrid.worlds[worldIndex]
 }
 
 const getBackgroundStyle = (showSafe, mapInfo, isSelected) => {
@@ -78,10 +66,9 @@ export const WorldMap = () => {
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
   }
-  const selectedMapDetails = GetMapList()[selectedWorld]
   const selectedGrid = GetWorldGrid(selectedWorld)
-  const gridCount = (selectedGrid.height) * (selectedGrid.width)
-  const grid = Array(gridCount).fill({ mapNumber: 0, name: 'Desierto'}).map( (el, index) => ({...el, mapNumber: index, isSafe: index % 2 === 0}));
+  const grid = selectedGrid.mapList
+  const selectedMapDetails = selectedGrid.mapDetails[selectedWorld]
   const gridStyle = {
     gridTemplateColumns: `repeat(${selectedGrid.width}, 1fr)`,
     width: `${selectedGrid.width * CellSize}px`,
@@ -158,12 +145,12 @@ export const WorldMap = () => {
             <img src={GetWorldImage(`es_mapa${activeWorld}`)} style={mapImageStyle}></img>
             <div className='grid-layer' style={gridStyle}>
               {
-                grid.map( (el, index) => (
-                  <span className={'grid-element ' + getBackgroundStyle(displaySafeUnsafe, el, el.mapNumber === selectedMap)} 
+                grid.map( (el) => (
+                  <span key={el} className={'grid-element ' + getBackgroundStyle(displaySafeUnsafe, selectedGrid.mapDetails[el], el === selectedMap)} 
                     onClick={() => onSelectMap(el)}
-                    key={el.mapNumber} style={cellSize}>
+                    style={cellSize}>
                     {
-                      showMapNumbers && <p className='grid-number'>{el.mapNumber}</p>
+                      showMapNumbers && <p className='grid-number'>{el}</p>
                     }
                   </span>
                 ))

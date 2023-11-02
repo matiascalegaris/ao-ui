@@ -361,7 +361,7 @@ if (process.env.NODE_ENV === 'development') {
       let mapDetails = {}
       for( var i = 0 ; i < 22*19; i++) {
         mapDetails[i] = {
-          isSafe: false,
+          isSafe: true,
           name: "some test",
           npcList: Array(3).fill({tileX: 1, tileY: 1, index:15})
         }
@@ -369,7 +369,7 @@ if (process.env.NODE_ENV === 'development') {
       return { worlds: Array(3).fill({
         height:22, width: 19,
         mapList: Array(22*19).fill(0).map( (el,index) => (index)),
-        MapDetails: mapDetails
+        mapDetails
       })}
     },
     BuyPatronItem: (objIndex) => {
