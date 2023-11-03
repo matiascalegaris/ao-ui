@@ -14,12 +14,19 @@ import AoInput from '../../../Common/ao-input/ao-input';
 import GameBarButton from '../../../Common/ao-button/GameBarButton/game-bar-button';
 import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary';
 import { FindNpc } from './FindNpc/find-npc';
+import { NpcDetails } from './FrameNpc/npc-details';
 
 const Worlds = [
-  { name: 'Argentum', index: 1},
-  { name: 'Jogormut', index: 3},
-  { name: 'Dungeons', index: 2}
+  { name: 'Argentum', index: 0},
+  { name: 'Jogormut', index: 2},
+  { name: 'Dungeons', index: 1}
 ]
+
+const IgnoreMapNumbers = [400, 300]
+
+const IgnoreMapNumber = number => {
+  return IgnoreMapNumbers.includes(number)
+}
 const GetWorldImage = image => {
   return `${GetRootDirectory()}/interface/${image}.bmp`
 }
@@ -33,8 +40,8 @@ const GetWorldGrid = worldIndex => {
   return WorldGrid.worlds[worldIndex]
 }
 
-const getBackgroundStyle = (showSafe, mapInfo, isSelected) => {
-  if (!showSafe) return isSelected ? 'selected-grid-element' : ''
+const getBackgroundStyle = (showSafe, mapInfo, isSelected, number) => {
+  if (!showSafe || IgnoreMapNumber(number)) return isSelected ? 'selected-grid-element' : ''
   if (mapInfo.isSafe) {
     return 'safe-area ' +  (isSelected ? 'selected-grid-element' : '')
   }
@@ -47,16 +54,14 @@ export const WorldMap = () => {
   const dispatch = useDispatch()
   const [ dialogState, setDialogState] = useState({
      activeWorld: Worlds[0].index,
-     selectedWorld: 0, 
      selectedNpc:null,
      showMapNumbers:false,
      displaySafeUnsafe:false,
-     selectedMap: 0,
+     selectedMap: 1,
      findMap: null,
      popupsState: null
     })
   const { activeWorld, 
-        selectedWorld, 
         selectedNpc, 
         showMapNumbers,
         displaySafeUnsafe,
@@ -66,16 +71,19 @@ export const WorldMap = () => {
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
   }
-  const selectedGrid = GetWorldGrid(selectedWorld)
+  const selectedGrid = GetWorldGrid(activeWorld)
   const grid = selectedGrid.mapList
-  const selectedMapDetails = selectedGrid.mapDetails[selectedWorld]
+  const selectedMapDetails = selectedGrid.mapDetails[selectedMap]
+  const selectedNpcDetails = selectedNpc != null ? window.parent.BabelUI.GetNpcDetails(selectedNpc) : null
   const gridStyle = {
     gridTemplateColumns: `repeat(${selectedGrid.width}, 1fr)`,
     width: `${selectedGrid.width * CellSize}px`,
     height: `${selectedGrid.height *CellSize}px`
   }
   const onChangeWorld = world => {
-    setDialogState({...dialogState, activeWorld: world.index})
+    if (activeWorld !== world.index) {
+      setDialogState({...dialogState, activeWorld: world.index})
+    }
   }
   const selectNpc = npc => {
     setDialogState({...dialogState, selectedNpc: npc.index})
@@ -92,8 +100,8 @@ export const WorldMap = () => {
     const { name } = evt.target;
     setDialogState({ ...dialogState, [name]: value});
   }
-  const onSelectMap = mapInfo => {
-    setDialogState({ ...dialogState, selectedMap: mapInfo.mapNumber});
+  const onSelectMap = manNumber => {
+    setDialogState({ ...dialogState, selectedMap: manNumber});
   }
   const openNpcSearch = evt => {
     setDialogState({ ...dialogState, popupsState:'find-npc'});
@@ -142,15 +150,16 @@ export const WorldMap = () => {
             }
           </div>
           <Frame styles='map-grid-frame' contentStyles='map-grid'>
-            <img src={GetWorldImage(`es_mapa${activeWorld}`)} style={mapImageStyle}></img>
+            <img src={GetWorldImage(`es_mapa${activeWorld + 1}`)} style={mapImageStyle}></img>
             <div className='grid-layer' style={gridStyle}>
               {
-                grid.map( (el) => (
-                  <span key={el} className={'grid-element ' + getBackgroundStyle(displaySafeUnsafe, selectedGrid.mapDetails[el], el === selectedMap)} 
-                    onClick={() => onSelectMap(el)}
+                grid.map( (mapNumber, index) => (
+                  <span key={index} 
+                    className={'grid-element ' + getBackgroundStyle(displaySafeUnsafe, selectedGrid.mapDetails[mapNumber], mapNumber === selectedMap, mapNumber)} 
+                    onClick={() => onSelectMap(mapNumber)}
                     style={cellSize}>
                     {
-                      showMapNumbers && <p className='grid-number'>{el}</p>
+                      showMapNumbers && !IgnoreMapNumber(mapNumber) && <p className='grid-number'>{mapNumber}</p>
                     }
                   </span>
                 ))
@@ -160,10 +169,10 @@ export const WorldMap = () => {
         </div>
         <div className='side-bar-area'>
           <h2 className='zone-title'>{t('Current zone')}</h2>
-          <p className='zone-name'>{selectedMapDetails.name}</p>
+          <p className='zone-name'>{selectedMapDetails && selectedMapDetails.name}</p>
           <FrameMap contentStyles='npc-info'>
             {
-              selectedMapDetails.npcList.length > 0 ?
+              selectedMapDetails && selectedMapDetails.npcList.length > 0 ?
               <>
                 <div className='npc-list-title'>
                   <span className='npc-list-name npc-header-line'>{t('Npcs')}</span>
@@ -184,7 +193,11 @@ export const WorldMap = () => {
             }
           </FrameMap>
           <p className='npc-details-tittle'>{t('Details')}</p>
-          <FrameMap contentStyles='npc-info npc-details-frame'></FrameMap>
+          <FrameMap contentStyles='npc-info npc-details-frame'>
+            {
+              selectedNpcDetails && <NpcDetails npcDetails={selectedNpcDetails}/>
+            }
+          </FrameMap>
 
 
           <div className='npc-preview-container'>

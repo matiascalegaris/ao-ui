@@ -325,7 +325,7 @@ if (process.env.NODE_ENV === 'development') {
       return { name: "test spell", description: "some spell data", cooldown:40000, requiredMana:1500, requiredSkill:100, requiredStamina: 950}
     },
     GetItemInfo : objIndex => {
-      return { objType: 24, spellIndex: 1, grhIndex: 10, text: "some item details with a long explanations"}
+      return { objType: 24, spellIndex: 1, grhIndex: 10,  name:'some item', text: "some item details with a long explanations"}
     },
     LogError: error => {
       console.log(error)
@@ -363,7 +363,7 @@ if (process.env.NODE_ENV === 'development') {
         mapDetails[i] = {
           isSafe: true,
           name: "some test",
-          npcList: Array(3).fill({tileX: 1, tileY: 1, index:15})
+          npcList: Array(10).fill({name: "test", count: 5, index:15})
         }
       }
       return { worlds: Array(3).fill({
@@ -387,6 +387,20 @@ if (process.env.NODE_ENV === 'development') {
     },
     UpdateSkills: updateArray => {
       console.log('Update skill value')
+    },
+    GetNpcDetails: npcIndex => {
+      return {
+        name: "some npc",
+        body: 456,
+        head: 0,
+        exp: 10,
+        hp: 200000,
+        minDamage: 1000,
+        maxDamage: 5000,
+        gold: 10,
+        clanExp: 2,
+        dropList: [{itemIndex:10, dropRate: 0.01}]
+      }
     }
   } 
 }
