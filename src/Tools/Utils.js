@@ -181,6 +181,12 @@ export function replaceAll(str, find, replace) {
   return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
+export const ConvertToPercent = value => {
+  value = value * 100
+
+  return parseFloat(value.toFixed(2))
+} 
+
 const GetRootDirectory = () => {
   if (process.env.NODE_ENV === 'development') {
     return (`${process.env.PUBLIC_URL}/Recursos/`)

@@ -395,11 +395,11 @@ if (process.env.NODE_ENV === 'development') {
         head: 0,
         exp: 10,
         hp: 200000,
-        minDamage: 1000,
-        maxDamage: 5000,
-        gold: 10,
+        minDamage: 300,
+        maxDamage: 500,
+        gold: 100,
         clanExp: 2,
-        dropList: [{itemIndex:10, dropRate: 0.01}]
+        dropList: [{itemIndex:10, dropRate: 0.01},{itemIndex:10, dropRate: 0.05},{itemIndex:10, dropRate: 0.001}]
       }
     }
   } 

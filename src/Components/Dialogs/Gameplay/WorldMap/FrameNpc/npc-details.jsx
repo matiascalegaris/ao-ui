@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import './npc-details.scss'
 import Sprite from '../../../../Common/Sprite/sprite';
+import { ConvertToPercent } from '../../../../../Tools/Utils';
 
 export const NpcDetails = ({npcDetails}) => {
   const { t } = useTranslation();
@@ -23,13 +24,15 @@ export const NpcDetails = ({npcDetails}) => {
         <p className='info-text'>{t('clan-exp')}: {npcDetails.clanExp}</p>
       </div>
       <div className="info-line">
-        <p className='info-text'>{t('drops')}</p>
+        <h4 className='drop-title'>{t('drops').toUpperCase()}</h4>
       </div>
       <div className='drop-list'>
-        <div className="info-line">
-          <img className='gold-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_coins.png')}/>
-          <p className='info-text'>{npcDetails.gold}</p>
-        </div>
+        { npcDetails.gold > 0 &&
+          <div className="info-line">
+            <img className='gold-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_coins.png')}/>
+            <p className='info-text'>{npcDetails.gold}</p>
+          </div>
+        }
         {
           itemList.map( (item, index) => (
             <div className="info-line" key={index} >
@@ -41,7 +44,7 @@ export const NpcDetails = ({npcDetails}) => {
                 width={item.grhInfo.width}
                 height={item.grhInfo.height}
               />
-              <p className='info-text'>{item.details.name}</p>
+              <p className='info-text'>{item.details.name} ({ConvertToPercent(item.dropRate)}%)</p>
             </div>
           ))
         }
