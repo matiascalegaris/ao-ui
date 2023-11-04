@@ -15,12 +15,8 @@ import GameBarButton from '../../../Common/ao-button/GameBarButton/game-bar-butt
 import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary';
 import { FindNpc } from './FindNpc/find-npc';
 import { NpcDetails } from './FrameNpc/npc-details';
-
-const Worlds = [
-  { name: 'Argentum', index: 0},
-  { name: 'Jogormut', index: 2},
-  { name: 'Dungeons', index: 1}
-]
+import { NpcPreview } from './FrameNpc/npc-preview';
+import { Worlds } from '../../../../constants';
 
 const IgnoreMapNumbers = [400, 300]
 
@@ -32,12 +28,16 @@ const GetWorldImage = image => {
 }
 
 let WorldGrid = null
-const GetWorldGrid = worldIndex => {
+const GetWorlds = () => {
   if (!WorldGrid) {
     WorldGrid = window.parent.BabelUI.GetWorldGrid()
     console.log(WorldGrid)
   }
-  return WorldGrid.worlds[worldIndex]
+  return WorldGrid.worlds
+}
+const GetWorldGrid = worldIndex => {
+  
+  return GetWorlds()[worldIndex]
 }
 
 const getBackgroundStyle = (showSafe, mapInfo, isSelected, number) => {
@@ -100,6 +100,26 @@ export const WorldMap = () => {
     const { name } = evt.target;
     setDialogState({ ...dialogState, [name]: value});
   }
+
+  const updateMapSearch = (evt) => {
+    updateSelectedMapAndNpc(evt.target.value, selectedNpc)
+  }
+
+  const updateSelectedMapAndNpc = (mapNumberIndex, newNpcSelection) => {
+    const mapNumber = parseInt(mapNumberIndex)
+    var targetWorld = 0;
+    for (var i = 0; i < GetWorlds().length; i++) {
+      if (GetWorlds()[i].mapList.includes(mapNumber)) {
+        targetWorld = i
+        break;
+      }
+    }
+    setDialogState({ ...dialogState, 
+                    selectedMap: mapNumber, 
+                    activeWorld: targetWorld, 
+                    selectedNpc: newNpcSelection,
+                    popupsState:null});
+  }
   const onSelectMap = manNumber => {
     setDialogState({ ...dialogState, selectedMap: manNumber});
   }
@@ -119,11 +139,15 @@ export const WorldMap = () => {
         <span className='header-underline'></span>
         <div className='header-navbar'>
           <div className='continent'>
-            <h2 className='continent-title'>Continent</h2>
+            <h2 className='continent-title'>{t('Continent')}</h2>
             <div className='continent-selector'>
             {
               Worlds.map( world => (
-                <AoButton key={world.index} styles={'testcheck stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}><span className='world-name'>{t(world.name)}</span></AoButton>
+                <AoButton key={world.index} 
+                  styles={'testcheck stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} 
+                  onClick={() => onChangeWorld(world)}>
+                    <span className='world-name'>{t(world.name)}</span>
+                </AoButton>
               ))
             }
             </div>
@@ -131,8 +155,9 @@ export const WorldMap = () => {
           <div className='search'>
             <h2 className='search-title'>{t('Search zone')}</h2>
             <div className='search-input--container'>
-              <AoInput name="findMap" type="number"   styles='search-input search-selected'
-                min="1" max="10000" value={findMap} IsValid={true} handleChange={handleChange} />
+              <AoInput name="findMap" type="number" styles='search-input search-selected'
+                showDelete={findMap !== null} showSearch={findMap === null}
+                min="1" max="10000" value={findMap} IsValid={true} handleChange={updateMapSearch} />
             </div>
           </div>
         </div>
@@ -169,7 +194,7 @@ export const WorldMap = () => {
         </div>
         <div className='side-bar-area'>
           <h2 className='zone-title'>{t('Current zone')}</h2>
-          <p className='zone-name'>{selectedMapDetails && selectedMapDetails.name}</p>
+          <p className='zone-name'>{selectedMapDetails && selectedMapDetails.name} ({selectedMap})</p>
           <FrameMap contentStyles='npc-info'>
             {
               selectedMapDetails && selectedMapDetails.npcList.length > 0 ?
@@ -179,10 +204,10 @@ export const WorldMap = () => {
                   <span className='npc-list-count npc-header-line'>{t('Amount')}</span>
                 </div>
                 {
-                selectedMapDetails.npcList.map( npcEntry => (
-                  <div className={'npc-list-title ' + ( selectedNpc === npcEntry.index ? 'selected-npc' : '')} 
+                selectedMapDetails.npcList.map( (npcEntry) => (
+                  <div key={npcEntry.index} className={'npc-list-title ' + ( selectedNpc === npcEntry.index ? 'selected-npc' : '')} 
                        onClick={ () => selectNpc(npcEntry)}>
-                    <span key={npcEntry.index} className='npc-list-name'>{npcEntry.name}</span>
+                    <span  className='npc-list-name'>{npcEntry.name}</span>
                     <span className='npc-list-count'>{npcEntry.count}</span>
                   </div>
                   ))
@@ -201,7 +226,9 @@ export const WorldMap = () => {
 
 
           <div className='npc-preview-container'>
-            <FrameNpc contentStyles='npc-preview'></FrameNpc>
+            <FrameNpc contentStyles='npc-preview'>
+              { selectedNpcDetails && <NpcPreview npcDetails={selectedNpcDetails} /> }
+            </FrameNpc>
           </div>
 
           <AoButton styles='search-npc-button' onClick={openNpcSearch}>{t('Search NPC')}</AoButton>
@@ -231,7 +258,7 @@ export const WorldMap = () => {
           popupsState ?
           <div className='popups'>
             {{
-                'find-npc':<FindNpc styles='centered' onClose={onCloseNpcFind}/>
+                'find-npc':<FindNpc styles='centered' onClose={onCloseNpcFind} worldInfo={GetWorlds()} onSelectMap={updateSelectedMapAndNpc}/>
               }
               [popupsState]
             }

@@ -1,7 +1,7 @@
 import Sprite from '../Sprite/sprite'
 import './draw-character.scss'
 
-const DrawCharacter = ({ body, head, helm, shield, weapon }) => {
+const DrawCharacter = ({ body, head, helm, shield, weapon, styles, style }) => {
   const charInfo = window.parent.BabelUI.GetCharacterDrawInfo(body, head, helm, shield, weapon)
   const bodyStyle = {
     width: `${charInfo.body.body.width}px`,
@@ -11,7 +11,7 @@ const DrawCharacter = ({ body, head, helm, shield, weapon }) => {
     top: `${charInfo.body.HeadOffsetY + 13}px`,
   }
   return (
-    <div className='character-container'>
+    <div className={'character-container ' + styles} style={style}>
       <div className='body-area' style={bodyStyle}>
         <Sprite className='body' imageName={charInfo.body.body.imageNumber} x={charInfo.body.body.startX}
         y={charInfo.body.body.startY} width={charInfo.body.body.width} height={charInfo.body.body.height}/>

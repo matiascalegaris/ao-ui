@@ -5,48 +5,81 @@ import './find-npc.scss'
 import { useTranslation } from 'react-i18next'
 import Frame from '../../../../Common/Frame/frame'
 import AoButton from '../../../../Common/ao-button/ao-button'
+import { Worlds } from '../../../../../constants'
 
-export const FindNpc = ({onClose, onSelectMap}) => {
+var NcpDirectory = null;
+const GetNpcList = worlds => {
+  if (NcpDirectory === null) {
+    NcpDirectory = {}
+    for (var i = 0; i < worlds.length; i++) {
+      let mapDetailKeys = Object.keys(worlds[i].mapDetails)
+      for (var j = 0; j < mapDetailKeys.length; j++) {
+        if (worlds[i].mapDetails[mapDetailKeys[j]].npcList) {
+          for (var npcI = 0; npcI < worlds[i].mapDetails[mapDetailKeys[j]].npcList.length; npcI++) {
+            var npcId = worlds[i].mapDetails[mapDetailKeys[j]].npcList[npcI].index
+            if (NcpDirectory[npcId] === undefined) {
+              NcpDirectory[npcId] = {
+                name: worlds[i].mapDetails[mapDetailKeys[j]].npcList[npcI].name,
+                mapList: [{mapIndex:mapDetailKeys[j], 
+                          mapName: worlds[i].mapDetails[mapDetailKeys[j]].name,
+                          count: worlds[i].mapDetails[mapDetailKeys[j]].npcList[npcI].count, 
+                          world: Worlds[i].index }]
+              }
+            } else {
+              NcpDirectory[npcId].mapList.push( {mapIndex:mapDetailKeys[j], 
+                mapName: worlds[i].mapDetails[mapDetailKeys[j]].name,
+                count: worlds[i].mapDetails[mapDetailKeys[j]].npcList[npcI].count, 
+                world: Worlds[i].index })
+            }
+          } 
+        }       
+      }
+    }
+  }
+  return NcpDirectory;
+}
+
+export const FindNpc = ({onClose, onSelectMap, worldInfo}) => {
   const { t } = useTranslation();
   const [ dialogState, setDialogState] = useState({search:'', selectedIndex: -1})
   const { search, selectedIndex } = dialogState;
 
-  const npcList = Array(1000).fill({name:''}).map( (el, index) => ({name:' Npc ' + index, id: index}))
-
+  const npcList = GetNpcList(worldInfo)
+  console.log(npcList)
   const searchTerm = search.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase()
-  const filteredList = npcList.filter( e => 
-    e.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase().includes(searchTerm)
+  const npcKeys = Object.keys(npcList)
+  const filteredList = npcKeys.filter( e => 
+    npcList[e].name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase().includes(searchTerm)
   )
 
-  const mapList = Array(100).fill({}).map( (el, index) => ({name:'mapName' + index, id: index}))
+  const mapList = npcList[selectedIndex] ? npcList[selectedIndex].mapList : null
   const handleChange = event => {
     const { value, name } = event.target;
     setDialogState({ ...dialogState, [name]: value});
   }
 
-  const selectNpc = npcInfo => {
-    setDialogState({ ...dialogState, selectedIndex: npcInfo.index});
+  const selectNpc = npcIndex => {
+    setDialogState({ ...dialogState, selectedIndex: npcIndex});
   }
   return (
     <AoDialog styles='find-npc' contentStyles='content'>
       <div className='header-line'>
-        <img src={require('../../../../../assets/Icons/Dialogs/AOShopIcon.png')}/>
         <h1 className='game-dialog-header'>{t('npc-search').toUpperCase()}</h1>
       </div>
       <AoButton styles='close-button' onClick={onClose}>
         <img src={require('../../../../../assets/Icons/gameplay/ico_close.png')}></img>
       </AoButton>
-      <span className='header-underline'></span>
+      <span className='find-header-underline'></span>
       <div className='search-area'>
         <p className='search-text'>{t('search')}</p>
-        <AoInput styles='search-input' name="search" value={search} IsValid={true} required handleChange={handleChange} />
+        <AoInput styles='search-input' name="search" value={search} IsValid={true} showDelete={search.length > 0} required handleChange={handleChange} />
       </div>
 
       <div className='result-area'>
         <Frame contentStyles='npc-list'>
         {
           filteredList.map( (el, index) => (
-            <p className={'npc-name ' + ( el.index === selectedIndex ? 'selected-npc' : '')} onClick={ () => selectNpc(el)}>{el.name}</p>
+            <p key={index} className={'npc-name ' + ( el === selectedIndex ? 'selected-npc' : '')} onClick={ () => selectNpc(el)}>{npcList[el].name}</p>
           ))
         }
         </Frame>
@@ -54,17 +87,17 @@ export const FindNpc = ({onClose, onSelectMap}) => {
           <div className='element-line list-header'>
             <p className='mapNumber header-style'>{t('map').toLocaleUpperCase()}</p>
             <p className='mapName header-style'>{t('name').toLocaleUpperCase()}</p>
-            <p className='world-name header-style'>{t('area').toLocaleUpperCase()}</p>
+            <p className='world-name header-style'>{t('Continent').toLocaleUpperCase()}</p>
             <p className='npcCount header-style'>{t('amount').toLocaleUpperCase()}</p>
           </div>
           <div className='item-list'>
            {
-              mapList.map( el => (
-                <div className={'element-line ' + (el.objIndex === selectedIndex ? 'selected-shop-item' : '')}>
-                  <p className='mapNumber'>{512}</p>
-                  <p className='mapName'>{'costa sur de algun mapa'}</p>
-                  <p className='world-name'>{'Argentum'}</p>
-                  <p className='npcCount'>{5}</p>
+              mapList && mapList.map( el => (
+                <div className={'element-line '} onDoubleClick={()=>onSelectMap(el.mapIndex, selectedIndex)}>
+                  <p className='mapNumber'>{el.mapIndex}</p>
+                  <p className='mapName'>{el.mapName}</p>
+                  <p className='world-name'>{Worlds[el.world].name}</p>
+                  <p className='npcCount'>{el.count}</p>
                 </div>
               ))
            }

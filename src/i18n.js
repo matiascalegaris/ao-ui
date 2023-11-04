@@ -162,8 +162,11 @@ const resources = {
       'skill-list': 'Skills',
       'combat skills': 'Combat skills',
       'other skills': 'Other skills',
-      'availableskills': 'Available skills:'
-
+      'availableskills': 'Available skills:',
+      'experience': "Experience",
+      'clan-exp': "Clan Exp",
+      'no-npc-found': 'there are no npc in this map',
+      'npc-search': 'find npc'
     }
   },
   es: {
@@ -383,7 +386,22 @@ const resources = {
       'skill-list': 'Skills',
       'combat skills': 'Habilidades de combate',
       'other skills': 'Otras habilidades',
-      'availableskills': 'Puntos disponibles:'
+      'availableskills': 'Puntos disponibles:',
+      'experience': "Experiencia",
+      'clan-exp': "Experiencia de clan",
+      'no-npc-found': "No se encontraron npc en este mapa",
+      'npc-search': "buscar npc",
+      'Continent': 'Continente',
+      'Search zone': 'Buscar mapa',
+      'Current zone': 'Mapa seleccionado',
+      'Details': 'Detalles',
+      'Search NPC': 'Buscar NPC',
+      'Markers': 'Indicadores',
+      'Map numbers': 'Número de mapa',
+      'Safe-unsafe': 'Seguro / Inseguro',
+      'world map': 'mapa del mundo',
+      'map' : 'mapa',
+      'amount': 'cantidad'
     }
   }
 };

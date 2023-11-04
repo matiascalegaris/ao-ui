@@ -160,7 +160,7 @@
       flex-direction: column;
       width: 200px;
       margin: 10px;
-      margin-top: -28px;
+      margin-top: -35px;
 
       .zone-title {
         margin: 0;
@@ -183,6 +183,7 @@
         width: 100%;
         height: 100px;
         overflow-y: scroll;
+        background-image: url(../../../../assets/Backgrounds/leather_black.png);
       }
 
       .npc-details-frame {
@@ -190,13 +191,15 @@
       }
 
       .npc-preview-container {
-        margin: 1rem auto 0.4rem auto;
+        margin: 0.5rem auto 0.4rem auto;
         width: 80%;
+        background-image: url(../../../../assets/Backgrounds/leather_black.png);
       }
 
       .npc-preview {
         width: 100%;
         height: 100px;
+        background-image: url(../../../../assets/Backgrounds/leather_black.png);
       }
 
       .npc-list-title {
@@ -294,9 +297,6 @@
             font-weight: 400;
           }
         }
-        // input[type=checkbox] {
-        //   display: none;
-        // }
       }
 
     }

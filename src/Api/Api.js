@@ -136,6 +136,48 @@ if (process.env.NODE_ENV === 'development') {
               width: 0
             }
           })
+          case 1136:
+            return  ({
+            body: {
+              body: {
+                height: 256,
+                imageNumber: 4113,
+                startX: 0,
+                startY: 0,
+                width: 256
+              },
+              HeadOffsetX: 0,
+              HeadOffsetY: -35
+            },
+            head: {
+                height: 0,
+                imageNumber: 0,
+                startX: 0,
+                startY: 0,
+                width: 0
+              },
+            helm: {
+                height: 0,
+                imageNumber: 0,
+                startX: 0,
+                startY: 0,
+                width: 0
+              },
+            shield: {
+              height: 0,
+              imageNumber: 0,
+              startX: 0,
+              startY: 0,
+              width: 0
+            },
+            weapon: {
+                height: 0,
+                imageNumber: 0,
+                startX: 0,
+                startY: 0,
+                width: 0
+              }
+            })
         default:
           return ({
             body: {
@@ -363,14 +405,14 @@ if (process.env.NODE_ENV === 'development') {
         mapDetails[i] = {
           isSafe: true,
           name: "some test",
-          npcList: Array(10).fill({name: "test", count: 5, index:15})
+          npcList: Array(10).fill({name: "test", count: 5, index:1136}).map( (el, idx) => ({...el, index: el.index + idx}))
         }
       }
       return { worlds: Array(3).fill({
         height:22, width: 19,
         mapList: Array(22*19).fill(0).map( (el,index) => (index)),
         mapDetails
-      })}
+      }).map( (world, wIndex) => ({...world, mapList: Array(22*19).fill(0).map( (el,index) => (index + (22*19 * wIndex)))}))}
     },
     BuyPatronItem: (objIndex) => {
     },
@@ -391,7 +433,7 @@ if (process.env.NODE_ENV === 'development') {
     GetNpcDetails: npcIndex => {
       return {
         name: "some npc",
-        body: 456,
+        body: 1136,
         head: 0,
         exp: 10,
         hp: 200000,

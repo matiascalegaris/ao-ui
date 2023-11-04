@@ -4,6 +4,12 @@ export const DragDropTypes = {
   BINDABLE: 1 << 2
 }
 
+export const Worlds = [
+  { name: 'Argentum', index: 0},
+  { name: 'Jourmut', index: 2},
+  { name: 'Dungeons', index: 1}
+]
+
 export const Actions = {
 	Minimize: 1,
 	Close: 2,

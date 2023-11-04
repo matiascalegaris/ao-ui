@@ -50,8 +50,8 @@ export const HotKeyBar = () => {
     <Frame styles='hotkey-bar' contentStyles='content-style'>
       {
         hoykeyList.map((el,index) => (
-          <div className='slot-container'>
-            <div key={index} className='slot'>
+          <div key={index} className='slot-container'>
+            <div  className='slot'>
             <DropArea id={{type:'hotkey', id:index, onDrop:onDrop}} acceptTypes={DragDropTypes.BINDABLE}>
             {
               DrawContent(el.type, el.content)
@@ -59,7 +59,7 @@ export const HotKeyBar = () => {
             </DropArea>
             </div>
             {
-              <div key={el.lastUse} className='hk-number'>{index + 1}</div>
+              <div className='hk-number'>{index + 1}</div>
             }
           </div>
         ))
