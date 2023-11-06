@@ -24,6 +24,7 @@ import { WorldMap } from '../../Dialogs/Gameplay/WorldMap/world-map'
 import { SkillList } from '../../Dialogs/Gameplay/SkillList/skill-list'
 import { EventList, PublicEvents } from '../../Dialogs/Gameplay/PublicEvents/public-events'
 import { GenericInputDialog } from '../../Dialogs/GenericInputDialog/generic-input-dialog'
+import { ClanListDialog } from '../../Dialogs/Gameplay/Clan/clan-list'
 
 const showHKIcon = status => {
   if (status) {
@@ -102,7 +103,8 @@ export default function GameplayScreen() {
                 'world-map': <WorldMap settings={popupsState}/>,
                 'skill-list': <SkillList details={popupsState.details}/>,
                 'public-events': <PublicEvents activeEvents={popupsState.eventList}/>,
-                'input-dialog' : <GenericInputDialog settings={popupsState} />
+                'input-dialog' : <GenericInputDialog settings={popupsState} />,
+                'clan-list': <ClanListDialog contentInfo={popupsState}/>
               }
               [popupsState.popUp]
             }

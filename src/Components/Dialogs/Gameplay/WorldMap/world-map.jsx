@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import AoButton from '../../../Common/ao-button/ao-button'
 import AoDialog from '../../../Common/ao-dialog/ao-dialog'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 import './world-map.scss';
 import { FrameMap } from './FrameMap/framemap'
@@ -11,12 +11,13 @@ import { useState } from 'react';
 import { GetRootDirectory } from '../../../../Tools/Utils';
 import AoCheckbox from '../../../Common/ao-checkbox/ao-checkbox';
 import AoInput from '../../../Common/ao-input/ao-input';
-import GameBarButton from '../../../Common/ao-button/GameBarButton/game-bar-button';
 import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary';
 import { FindNpc } from './FindNpc/find-npc';
 import { NpcDetails } from './FrameNpc/npc-details';
 import { NpcPreview } from './FrameNpc/npc-preview';
-import { Worlds } from '../../../../constants';
+import { Actions, MouseButtons, Worlds } from '../../../../constants';
+import { selectClanSignal, selectCurrentCoordinates, selectMapNumber, setClanSignal } from '../../../../redux/GameplaySlices/MapInfoSlice';
+import { MapMarker } from './map-marker';
 
 const IgnoreMapNumbers = [400, 300]
 
@@ -31,7 +32,6 @@ let WorldGrid = null
 const GetWorlds = () => {
   if (!WorldGrid) {
     WorldGrid = window.parent.BabelUI.GetWorldGrid()
-    console.log(WorldGrid)
   }
   return WorldGrid.worlds
 }
@@ -40,12 +40,19 @@ const GetWorldGrid = worldIndex => {
   return GetWorlds()[worldIndex]
 }
 
-const getBackgroundStyle = (showSafe, mapInfo, isSelected, number) => {
-  if (!showSafe || IgnoreMapNumber(number)) return isSelected ? 'selected-grid-element' : ''
-  if (mapInfo.isSafe) {
-    return 'safe-area ' +  (isSelected ? 'selected-grid-element' : '')
+const getBackgroundStyle = (showSafe, mapInfo, isSelected, number, clanSignal) => {
+  var composedStyle = ''
+  if (IgnoreMapNumber(number)) return composedStyle
+  if (isSelected) {
+    composedStyle = 'selected-grid-element'
+  } else if (clanSignal && clanSignal.map === number) {
+    composedStyle = 'clan-grid-element'
   }
-  return 'unsafe-area ' +  (isSelected ? 'selected-grid-element' : '')
+  if (!showSafe) return composedStyle
+  if (mapInfo.isSafe) {
+    return 'safe-area ' +  composedStyle
+  }
+  return 'unsafe-area ' +  composedStyle
 }
 
 const CellSize = 25;
@@ -53,12 +60,12 @@ export const WorldMap = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch()
   const [ dialogState, setDialogState] = useState({
-     activeWorld: Worlds[0].index,
+     activeWorld: 0,
      selectedNpc:null,
      showMapNumbers:false,
      displaySafeUnsafe:false,
-     selectedMap: 1,
-     findMap: null,
+     selectedMap: -1,
+     findMap: "",
      popupsState: null
     })
   const { activeWorld, 
@@ -71,10 +78,19 @@ export const WorldMap = () => {
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
   }
+  const clanSignal = useSelector(selectClanSignal)
+  if (clanSignal) {
+    const now = Date.now()
+    if (now - clanSignal.startTime > 60000) {
+      dispatch(setClanSignal(null))
+    }
+  }
+  const userMap = useSelector(selectMapNumber)
   const selectedGrid = GetWorldGrid(activeWorld)
   const grid = selectedGrid.mapList
   const selectedMapDetails = selectedGrid.mapDetails[selectedMap]
   const selectedNpcDetails = selectedNpc != null ? window.parent.BabelUI.GetNpcDetails(selectedNpc) : null
+
   const gridStyle = {
     gridTemplateColumns: `repeat(${selectedGrid.width}, 1fr)`,
     width: `${selectedGrid.width * CellSize}px`,
@@ -118,9 +134,14 @@ export const WorldMap = () => {
                     selectedMap: mapNumber, 
                     activeWorld: targetWorld, 
                     selectedNpc: newNpcSelection,
-                    popupsState:null});
+                    findMap: mapNumberIndex,
+                    popupsState: null});
   }
-  const onSelectMap = manNumber => {
+  const onSelectMap = (evt, manNumber) => {
+    if (evt.button === MouseButtons.right)
+    {
+      window.parent.BabelUI.RequestAction(Actions.TeleportToMap, manNumber)
+    }
     setDialogState({ ...dialogState, selectedMap: manNumber});
   }
   const openNpcSearch = evt => {
@@ -129,6 +150,10 @@ export const WorldMap = () => {
   const onCloseNpcFind = evt => {
     setDialogState({ ...dialogState, popupsState:null});
   }
+  if (selectedMap === -1) {
+    updateSelectedMapAndNpc(userMap, selectedNpc)
+  }
+  const userPos = useSelector(selectCurrentCoordinates)
   return (
     <AoDialog styles='world-map' contentStyles='content'>
       <div className='header-line'>
@@ -156,7 +181,7 @@ export const WorldMap = () => {
             <h2 className='search-title'>{t('Search zone')}</h2>
             <div className='search-input--container'>
               <AoInput name="findMap" type="number" styles='search-input search-selected'
-                showDelete={findMap !== null} showSearch={findMap === null}
+                showDelete={findMap !== null}
                 min="1" max="10000" value={findMap} IsValid={true} handleChange={updateMapSearch} />
             </div>
           </div>
@@ -180,9 +205,21 @@ export const WorldMap = () => {
               {
                 grid.map( (mapNumber, index) => (
                   <span key={index} 
-                    className={'grid-element ' + getBackgroundStyle(displaySafeUnsafe, selectedGrid.mapDetails[mapNumber], mapNumber === selectedMap, mapNumber)} 
-                    onClick={() => onSelectMap(mapNumber)}
+                    className={'grid-element ' + getBackgroundStyle(displaySafeUnsafe, 
+                                                                    selectedGrid.mapDetails[mapNumber], 
+                                                                    mapNumber === selectedMap, 
+                                                                    mapNumber,
+                                                                    clanSignal)} 
+                    onClick={(evt) => onSelectMap(evt, mapNumber)}
                     style={cellSize}>
+                    { 
+                      clanSignal && clanSignal.map === mapNumber && 
+                      <MapMarker posX={clanSignal.tileX} posY={clanSignal.tileY} color={1}/>
+                    }
+                    { 
+                      userMap === mapNumber && 
+                      <MapMarker posX={userPos.x} posY={userPos.y} color={2}/>
+                    }
                     {
                       showMapNumbers && !IgnoreMapNumber(mapNumber) && <p className='grid-number'>{mapNumber}</p>
                     }

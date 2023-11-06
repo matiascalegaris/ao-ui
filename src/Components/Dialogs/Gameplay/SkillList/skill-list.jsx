@@ -76,10 +76,27 @@ export const SkillList = ({details}) => {
     setAvailableSkills(availableSkills - amount)
   }
   const onAcceptChange = evt => {
-    dispatch(setGameActiveDialog(null))
-    if (details.availableSkills > availableSkills ) {
-      window.parent.BabelUI.UpdateSkills(modifiedSkills)
+    if (details.availableSkills === availableSkills ) {
+      dispatch(setGameActiveDialog(null))
+      return;
     }
+    const questionACtion = {
+      popUp:'option-dialog',
+      text: t('update-skill-question'),
+      actions: [{
+        caption: t('decline').toUpperCase(),
+        action:  evt => {          
+          dispatch(setGameActiveDialog(null))
+        }}, {
+        caption: t('accept').toUpperCase(),
+        action:  evt => {
+          window.parent.BabelUI.UpdateSkills(modifiedSkills)
+          dispatch(setGameActiveDialog(null))
+        },
+        isRed: true}
+      ]
+    }
+    dispatch(setGameActiveDialog(questionACtion))
   }
   return (
     <AoDialog styles='skill-dialog' contentStyles='content'>

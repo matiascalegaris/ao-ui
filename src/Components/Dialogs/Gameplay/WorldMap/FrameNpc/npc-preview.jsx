@@ -2,10 +2,8 @@ import DrawCharacter from "../../../../Common/DrawCharacter/draw-character"
 
 export const NpcPreview = ({npcDetails}) => {
   var scale = {x:1, y:1}
-  console.log(npcDetails)
   if (npcDetails.head === 0) {
     let drawInfo = window.parent.BabelUI.GetCharacterDrawInfo(npcDetails.body, 0, 0, 0, 0)
-    console.log(drawInfo)
     if (drawInfo.body.body.height > 100) {
       scale.y = 100 / drawInfo.body.body.height
     }
@@ -14,7 +12,6 @@ export const NpcPreview = ({npcDetails}) => {
     }
     scale.x = Math.min(scale.x, scale.y)
     scale.y = scale.x
-    console.log(scale)
   }
   const styles = {
     margin: "auto",

@@ -52,7 +52,6 @@ const AoInput = ({handleChange, IsValid, styles, inputStyles, imgStyles, innerRe
         className={'input-img ' + imgStyles}
         src={require('../../../assets/Icons/Dialogs/cancel.png')}
         onClick={(e) => {
-          console.log('Delete')
           HandleChange({ target: { value: '', name: otherProps.name }})
           inputElement.current?.focus()
         }}

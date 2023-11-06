@@ -21,11 +21,6 @@ export const InterestPoint = ({pos, color, pointData, ...otherProps}) => {
     strokeWidth: "1",
     stroke: 'rgba(255, 255, 255, 0.38)'
   }
-  const outerColorStyle = {
-    stopColor: 'rgb(255, 255, 255)',
-    stopOpacity: '0.3'
-  }
-  const svgID = "ipointGrad-" + color;
   const containerRef = useRef(null)
   const NpcName = window.parent.BabelUI.GetNpcName(pointData.npcNumber)
   const [eventHandlers] = useTooltipHover(NpcName, TooltipTypes.Npc, containerRef, 0)

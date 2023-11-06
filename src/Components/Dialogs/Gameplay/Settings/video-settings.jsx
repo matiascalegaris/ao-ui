@@ -20,7 +20,8 @@ export const VideoSettingsTab = () => {
     displayFloorItemInfo,
     displayFullNumbersInventory,
     enableBabelUI,
-    lightSettings
+    lightSettings,
+    disableDungeonLighting,
   } = videoSettings
 
   const handleChange = evt => {
@@ -62,6 +63,7 @@ export const VideoSettingsTab = () => {
           <AoCheckbox label={t('fullScreen')} name="fullScreen" styles='chat-options' labelStyle='check-box-label' handleChange={handleChange} state={fullScreen} />
           <AoCheckbox label={t('floorItemInfo')} name="displayFloorItemInfo" styles='chat-options' labelStyle='check-box-label' handleChange={handleChange} state={displayFloorItemInfo} />
           <AoCheckbox label={t('fullInventoryNumber')} name="displayFullNumbersInventory" styles='chat-options' labelStyle='check-box-label' handleChange={handleChange} state={displayFullNumbersInventory} />
+          <AoCheckbox label={t('disableDungeonLighting')} name="disableDungeonLighting" styles='chat-options' labelStyle='check-box-label' handleChange={handleChange} state={disableDungeonLighting} />
           <AoCheckbox label={t('enableExperimentalUI')} name="enableBabelUI" styles='chat-options' labelStyle='check-box-label' handleChange={handleChange} state={enableBabelUI} />
         </Section>
       </div>

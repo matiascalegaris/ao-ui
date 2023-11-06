@@ -1,8 +1,11 @@
+.clan-dialog {
+  margin:auto;
+}
 .clan-list-dialog {
   display: flex;
   flex-direction: column;
-  min-width: 580px;
-  max-width: 680px;
+  min-width: 410px;
+  max-width: 410px;
 
   .title {
     display: flex;
@@ -50,7 +53,7 @@
       .search-input {
         border: none;
         outline: none;  
-        width: 15rem;
+        width: 12rem;
         height: 90%;
         font-size: 0.9rem;
         background-color: black;
@@ -86,7 +89,7 @@
     .list {
       display: flex;
       flex-direction: column;
-      height: 250px;
+      height: 150px;
       margin-top: 1rem;
       overflow-y: scroll;
       background-image: url('../../../../assets/Backgrounds/main_pj_info.png');
@@ -135,7 +138,7 @@
     padding: 0.5rem;
 
     .fundar {
-      padding: 0.5rem 1rem;
+      padding: 0.1rem 1rem;
       font-size: 0.8rem;
     }
   }

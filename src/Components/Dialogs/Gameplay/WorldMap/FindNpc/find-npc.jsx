@@ -45,7 +45,6 @@ export const FindNpc = ({onClose, onSelectMap, worldInfo}) => {
   const { search, selectedIndex } = dialogState;
 
   const npcList = GetNpcList(worldInfo)
-  console.log(npcList)
   const searchTerm = search.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase()
   const npcKeys = Object.keys(npcList)
   const filteredList = npcKeys.filter( e => 
