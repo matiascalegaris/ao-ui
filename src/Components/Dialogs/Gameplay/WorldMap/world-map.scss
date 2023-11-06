@@ -127,10 +127,16 @@
 
         .grid-element {
           display: flex;
+          position: relative;
         }
 
         .selected-grid-element {
           border: 1px solid white;
+          box-sizing: border-box;
+        }
+
+        .clan-grid-element {
+          border: 1px solid blue;
           box-sizing: border-box;
         }
 

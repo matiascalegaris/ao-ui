@@ -69,8 +69,10 @@
       .column-title {
         pointer-events: none;
         font-weight: 600;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         margin-bottom: 10px;
+        padding: 1px 5px;
+        background-image: url(../../../../assets/Buttons/button_gray_off.png);
       }
     }
     .title-left {
@@ -98,6 +100,11 @@
         color: gold;
         font-weight: 800;
         min-width: 10px;
+
+        
+      }
+      .disabled {
+        color: rgba(255, 217, 0, 0.226);
       }
       .currentValue {
         background: black;

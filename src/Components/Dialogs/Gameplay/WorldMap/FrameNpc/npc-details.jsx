@@ -33,7 +33,7 @@ export const NpcDetails = ({npcDetails}) => {
           </div>
           <div className='drop-list'>
             { npcDetails.gold > 0 &&
-              <div className="info-line">
+              <div className="info-line center-elements">
                 <img className='gold-icon' src={require('../../../../../assets/Icons/gameplay/ico_stats_coins.png')}/>
                 <p className='info-text'>{npcDetails.gold}</p>
               </div>

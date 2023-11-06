@@ -21,7 +21,8 @@ const defaultSettings = {
       displayFloorItemInfo: false,
       displayFullNumbersInventory: false,
       enableBabelUI: false,
-      lightSettings: 1
+      lightSettings: 1,
+      disableDungeonLighting: 0
     },
     audio: {
       enableMusic: false,

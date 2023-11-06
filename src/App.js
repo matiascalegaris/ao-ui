@@ -16,7 +16,7 @@ import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices
 import { postChatMessage, setWhisperTarget, updateGlobalAndCombatModes } from './redux/GameplaySlices/ChatSlice';
 import { UpdateLobbySlot, handleMerchantItemChange, openAoShop, openLobbyList, openNpcTradeDialog, resetGameplay, setFps, setGameActiveDialog, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
 import { activateRemoteHotkey, selectSpellSlot, setHotkeySlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
-import { setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
+import { setClanSignal, setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, startSpellcd, startStun, updateIntervals } from './redux/GameplaySlices/Cooldowns';
 import { ActiveToolTip } from './Components/Common/Tooltip/Tooltip-manager';
 import { ErrorBoundary } from './Components/ErrorBoundary/error-boundary';
@@ -257,7 +257,23 @@ function App() {
     RegisterApiCallback('UpdatelobbySlot', (eventSlot) => {
       dispatch(UpdateLobbySlot(eventSlot))
     })
-
+    RegisterApiCallback('ShowClanCall', (map, tileX, tileY) => {
+      dispatch(setClanSignal({
+        map,
+        tileX,
+        tileY,
+        startTime: Date.now()
+      }))
+    })
+    RegisterApiCallback('OpenSkillDialog', (availableSkills, skillList) => {
+      dispatch(setGameActiveDialog({
+        popUp:'skill-list',
+        details: {
+          availableSkills,
+          skillList
+        }
+      })) 
+    })
     
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

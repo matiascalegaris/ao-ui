@@ -401,7 +401,8 @@ const resources = {
       'Safe-unsafe': 'Seguro / Inseguro',
       'world map': 'mapa del mundo',
       'map' : 'mapa',
-      'amount': 'cantidad'
+      'amount': 'cantidad',
+      'disableDungeonLighting': "Desactivar oscuridad en dungeons"
     }
   }
 };

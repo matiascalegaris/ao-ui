@@ -4,6 +4,7 @@ import AoButton from '../../../Common/ao-button/ao-button';
 import ClanDetailsDialog from './clan-details-dialog';
 import { useState, useRef } from 'react';
 import AoInput from '../../../Common/ao-input/ao-input';
+import { useTranslation } from 'react-i18next';
 
 const Alineaciones = {
   'neutral': 'Neutral',
@@ -11,7 +12,8 @@ const Alineaciones = {
   'legion': 'Legion'
 }
 
-export default function ClanListDialog({styles, stylesDetail}) {
+export const ClanListDialog = ({stylesDetail, contentInfo}) => {
+  const { t } = useTranslation()
   const [search, setSearch] = useState('')
   const [alineacion, setAlineacion] = useState(Alineaciones.neutral)
   const inputRef = useRef(null);
@@ -48,7 +50,7 @@ export default function ClanListDialog({styles, stylesDetail}) {
   }
 
   return (
-    <AoDialog styles={styles}>
+    <AoDialog styles='clan-dialog'>
       <div className="clan-list-dialog">
         <div className='title'>
           <img className='frame-sep' src={require('../../../../assets/Icons/Dialogs/clan-flag.png')} />
@@ -59,7 +61,7 @@ export default function ClanListDialog({styles, stylesDetail}) {
           <div className='filters'>
             <AoInput 
               styles={'btn'} 
-              placeholder='Busca tu clan' 
+              placeholder={t('Search clan')}
               name="search" 
               value={search} 
               handleChange={(e) => setSearch(e.target.value)} 
@@ -78,15 +80,15 @@ export default function ClanListDialog({styles, stylesDetail}) {
                 onChange={(e) => setAlineacion(e.target.value)}
               >
               <option value="">Todas</option>
-                <option value={Alineaciones.legion}>Legión Oscura</option>
-                <option value={Alineaciones.armada}>Armada</option>
+                <option value={Alineaciones.legion}>{t('Legión Oscura')}</option>
+                <option value={Alineaciones.armada}>{t('Armada')}</option>
               </select>
             </div>
           </div>
           <div className={'list'+ styleAlineacion}>
             {clanes.map((clan) => 
               <span 
-                onClick={() => {
+                onDoubleClick={() => {
                   mockGetDetailClanFn(clan.nombre, clan.alineacion).then((clanDetail) => setSelectedClan(clanDetail))
                 }}
               >

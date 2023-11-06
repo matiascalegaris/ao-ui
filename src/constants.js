@@ -37,7 +37,8 @@ export const Actions = {
   DisplaySpells: 24,
   SetMeditate: 25,
   OpenKeySettings: 26,
-  SaveSettings: 27
+  SaveSettings: 27,
+  TeleportToMap: 28
 }
 
 export const SettingType = {
@@ -65,7 +66,8 @@ export const SettingType = {
   musicVolume: 22,
   fxVolume: 23,
   ambientVolume: 24,
-  lightSettings: 25
+  lightSettings: 25,
+  disableDungeonLighting: 26
 }
 
 export const SafeLocks = {
@@ -172,32 +174,32 @@ export const KeyCodeMapping = {
 }
 
 export const SkillListId = {
-  Magic: 1,
-  Steal: 2,
-  CombatTechnique: 3,
-  Weapons: 4,
-  Meditate: 5,
-  Stab: 6,
-  Hide: 7,
-  Survival: 8,
-  Comerce: 9,
-  Defense: 10,
-  Leadership: 11,
-  Projetiles: 12,
-  Wrestling: 13,
-  Sail: 14,
-  Riding: 15,
-  MagicResistance: 16,
-  Lumber: 17,
-  Fishing: 18,
-  Mining: 19,
-  Smith: 20,
-  Carpenter: 21,
-  Alchemy: 22,
-  Tailoring: 23,
-  Taming: 24,
+  Magic: 0,
+  Steal: 1,
+  CombatTechnique: 2,
+  Weapons: 3,
+  Meditate: 4,
+  Stab: 5,
+  Hide: 6,
+  Survival: 7,
+  Comerce: 8,
+  Defense: 9,
+  Leadership: 10,
+  Projetiles: 11,
+  Wrestling: 12,
+  Sail: 13,
+  Riding: 14,
+  MagicResistance: 15,
+  Lumber: 16,
+  Fishing: 17,
+  Mining: 18,
+  Smith: 19,
+  Carpenter: 20,
+  Alchemy: 21,
+  Tailoring: 22,
+  Taming: 23,
 
-  SkillTypeCount: 25
+  SkillTypeCount: 24
 }
 
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
