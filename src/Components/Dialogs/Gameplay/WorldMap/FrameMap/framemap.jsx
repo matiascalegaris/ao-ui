@@ -1,6 +1,6 @@
 import './framemap.scss'
 
-export default function Frame({children, contentStyles, styles}) {
+export const FrameMap = ({children, contentStyles, styles}) => {
   var spacer = {
     width: `15px`,
     height: `15px`

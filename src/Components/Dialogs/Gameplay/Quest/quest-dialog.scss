@@ -1,0 +1,58 @@
+.quest-dialog {
+  position: relative;
+  margin: auto auto auto 150px;
+
+  
+  .close-button{
+    position: absolute;
+    right: -21px;
+    top: -21px;
+  }
+
+  .content {    
+    .header-line {
+      display: flex;
+      flex: row;
+      margin: 5px auto;
+      .game-dialog-header {
+        text-align: center;
+        font-weight: 900; 
+        margin-left: 10px;
+        font-size: 1rem;
+      }
+    }
+    .header-underline {
+      width: 100%;
+      height: 20px;
+      background-repeat: repeat-x;
+      background-image: url(../../../../assets/Misc/divider_horizontal_big.png);
+    }
+
+    .quest-info-area {
+      display: flex;
+      flex-direction: row;
+
+      .quest-list-frame {
+
+      }
+
+      .quest-description {
+
+      }
+
+      .objective-column {
+
+      }
+
+      .reward-column {
+        
+      }
+    }
+    .button-line {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-around;
+    }
+  }
+}
