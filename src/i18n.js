@@ -7,6 +7,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
+      'log in': 'Log-in',
       "SETTINGS": "Settings",
       'recovery-mail-hint': `If you don't get the recovery email, please check in the "Spam" folder.`,
       'recover-password-text': `Enter the email address that you used to create the account and we'll send you a recovery code.`,
@@ -166,7 +167,8 @@ const resources = {
       'experience': "Experience",
       'clan-exp': "Clan Exp",
       'no-npc-found': 'there are no npc in this map',
-      'npc-search': 'find npc'
+      'npc-search': 'find npc',
+      'update-skill-question' : "Deseas actualizar los puntos de habilidad?"
     }
   },
   es: {
@@ -383,6 +385,7 @@ const resources = {
       'Taming': 'Doma de animales',
       'Sailing': 'Navegacion',
       'Tailoring': 'Sastreria',
+      'Alchemy': 'Alquimia',
       'skill-list': 'Skills',
       'combat skills': 'Habilidades de combate',
       'other skills': 'Otras habilidades',
