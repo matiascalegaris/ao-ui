@@ -168,7 +168,7 @@ const resources = {
       'clan-exp': "Clan Exp",
       'no-npc-found': 'there are no npc in this map',
       'npc-search': 'find npc',
-      'update-skill-question' : "Deseas actualizar los puntos de habilidad?"
+      'update-skill-question' : "Do you wish to update your skills?"
     }
   },
   es: {
@@ -405,7 +405,8 @@ const resources = {
       'world map': 'mapa del mundo',
       'map' : 'mapa',
       'amount': 'cantidad',
-      'disableDungeonLighting': "Desactivar oscuridad en dungeons"
+      'disableDungeonLighting': "Desactivar oscuridad en dungeons",
+      'update-skill-question' : "Deseas actualizar tus habilidades?"
     }
   }
 };
