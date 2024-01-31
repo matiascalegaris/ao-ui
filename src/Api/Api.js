@@ -443,6 +443,9 @@ if (process.env.NODE_ENV === 'development') {
         clanExp: 2,
         dropList: [{itemIndex:10, dropRate: 0.01},{itemIndex:10, dropRate: 0.05},{itemIndex:10, dropRate: 0.001}]
       }
+    },
+    SendGuildRequest: (guildName, requestText) => {
+      console.log("send guild quresto to guild: " + guildName + " request: " + requestText)
     }
   } 
 }

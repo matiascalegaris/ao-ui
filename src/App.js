@@ -14,7 +14,7 @@ import TransferCharacter from './Components/Dialogs/TransferCharacter/transfer-c
 import { setStats, updateDrink, updateFood, updateGold, updateHp, updateLockState, updateMagicAttack, updateMagicResitance, updateMana, updateStamina, updateStrandAgi } from './redux/GameplaySlices/PlayerStatsSlice';
 import { setCharacterInfo, setUserName, updateExp } from './redux/GameplaySlices/CharacterInfoSlice';
 import { postChatMessage, setWhisperTarget, updateGlobalAndCombatModes } from './redux/GameplaySlices/ChatSlice';
-import { UpdateLobbySlot, handleMerchantItemChange, openAoShop, openLobbyList, openNpcTradeDialog, resetGameplay, setFps, setGameActiveDialog, updateFirstSpellToDisplay, updateGameTime, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
+import { UpdateLobbySlot, handleMerchantItemChange, openAoShop, openLobbyList, openNpcTradeDialog, resetGameplay, setFps, setGameActiveDialog, updateFirstSpellToDisplay, updateGameTime, updateGuildInfo, updateIsGameMaster, updateOnlines, updateRemoteTab, updateTrackLastMouseClick, updateTrackMousePos, updateTrackState } from './redux/GameplaySlices/GameStateSlice';
 import { activateRemoteHotkey, selectSpellSlot, setHotkeySlot, setInvLevel, updateInvSlot, updateKeySlot, updateSpellSlot } from './redux/GameplaySlices/InventorySlice';
 import { setClanSignal, setCoordinates, setInterestPoints, setMapInfo, updateGroupMarker } from './redux/GameplaySlices/MapInfoSlice';
 import { fireInterval, startSpellcd, startStun, updateIntervals } from './redux/GameplaySlices/Cooldowns';
@@ -274,6 +274,24 @@ function App() {
         }
       })) 
     })
+    RegisterApiCallback('OpenClanList', (clanCount) => {
+      dispatch(setGameActiveDialog({
+        popUp:'clan-list',
+        details: {
+          guildList: Array(clanCount)
+        }
+      }))
+    })
+    RegisterApiCallback('SetGuildInfo', (index, guildInfo) => {
+      dispatch(updateGuildInfo({index, guildInfo}))
+    })
+    RegisterApiCallback('DisplayGuildDetail', (guildInfo) => {
+      dispatch(setGameActiveDialog({
+        popUp:'guild-detail',
+        details: guildInfo
+      }))
+    })
+    
     
     const language = window.parent.BabelUI.GetStoredLocale()
     i18n.changeLanguage(language)

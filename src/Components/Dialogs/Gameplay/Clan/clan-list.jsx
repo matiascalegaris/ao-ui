@@ -1,61 +1,50 @@
 import './clan-list.scss'
 import AoDialog from "../../../Common/ao-dialog/ao-dialog";
 import AoButton from '../../../Common/ao-button/ao-button';
-import ClanDetailsDialog from './clan-details-dialog';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import AoInput from '../../../Common/ao-input/ao-input';
 import { useTranslation } from 'react-i18next';
+import { Actions, GuildAlignment, GuildAlignmentsStr } from '../../../../constants';
+import { useDispatch } from 'react-redux';
+import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 
-const Alineaciones = {
-  'neutral': 'Neutral',
-  'armada': 'Armada',
-  'legion': 'Legion'
-}
-
-export const ClanListDialog = ({stylesDetail, contentInfo}) => {
+export const ClanListDialog = ({contentInfo}) => {
   const { t } = useTranslation()
   const [search, setSearch] = useState('')
-  const [alineacion, setAlineacion] = useState(Alineaciones.neutral)
-  const inputRef = useRef(null);
-  const [selectedClan, setSelectedClan] = useState(false)
-
-  if(selectedClan){
-    return (
-      <ClanDetailsDialog 
-        clan={selectedClan} 
-        styles={stylesDetail} 
-        onClose={() => setSelectedClan(null)}
-      />
-    )
-  }
-
-  //TO DO: replace this FN
-  const mockGetDetailClanFn = async (clanName, alineacion) => {
-    return {
-      nombre: clanName,
-      alineacion: alineacion,
-      ...mockClanDetail
-    }
-  }
-
-  let clanes = search ? mockClanList.filter((clan) => clan.nombre.toLocaleLowerCase().includes(search)) : mockClanList
+  const [aligment, setAligment] = useState(GuildAlignment.Neutral)
+  
+  const dispatch = useDispatch()
+  
+  const alignmentFilter = aligment === -1 ? contentInfo.details.guildList : contentInfo.details.guildList.filter( el => el.aligment === aligment)
+  const searchTerm = search.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase()
+  const clanes = search ? alignmentFilter.filter( e => 
+    e.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase().includes(searchTerm)
+  ) : alignmentFilter
   let styleAlineacion = ''
-  if(alineacion === Alineaciones.legion) {
-    clanes = clanes.filter((clan) => clan.alineacion === Alineaciones.legion)
+  if(aligment === GuildAlignment.Chaos) {
     styleAlineacion = ' red'
   }
-  if(alineacion === Alineaciones.armada) {
-    clanes = clanes.filter((clan) => clan.alineacion === Alineaciones.armada)
+  if(aligment === GuildAlignment.Army) {
     styleAlineacion = ' blue'
   }
-
+  
+  const onSelectClan = (evt, guildIndex) => {
+    window.parent.BabelUI.RequestAction(Actions.eDisplayGuildDetails, guildIndex)
+  }
+  const onClose = evt => {
+    dispatch(setGameActiveDialog(null))
+  }
   return (
-    <AoDialog styles='clan-dialog'>
+    <AoDialog styles='clan-dialog' ignoreAnimation={true}>
+      <AoButton styles='close-button' onClick={onClose}>
+        <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
+      </AoButton>
       <div className="clan-list-dialog">
         <div className='title'>
           <img className='frame-sep' src={require('../../../../assets/Icons/Dialogs/clan-flag.png')} />
-          <h2>CLANES</h2>
+          <h2>{t('guilds').toLocaleUpperCase()}</h2>
         </div>
+        
         <img className='frame-sep' src={require('../../../../assets/frame/top-center.jpg')} />
         <div className='list-box'>
           <div className='filters'>
@@ -71,117 +60,39 @@ export const ClanListDialog = ({stylesDetail, contentInfo}) => {
               showSearch={true}
             />
             <div className='select'>
-              <label for='Alineacion' >Alineación</label>
+              <label htmlFor='Alineacion' >{t('Alineación')}</label>
               <select 
-                id='Alineacion' 
-                className="btn alineacion" 
-                name="alineacion"
-                value={alineacion}
-                onChange={(e) => setAlineacion(e.target.value)}
+                id='aligment' 
+                className="btn aligment" 
+                name="aligment"
+                value={aligment}
+                onChange={(e) => setAligment(parseInt(e.target.value))}
               >
-              <option value="">Todas</option>
-                <option value={Alineaciones.legion}>{t('Legión Oscura')}</option>
-                <option value={Alineaciones.armada}>{t('Armada')}</option>
+                <option value={-1}>{t('Todas')}</option>
+                {
+                  GuildAlignmentsStr.map( (str, index) => (
+                    <option key={index} value={index}>{t(str)}</option>    
+                  ))
+                }
               </select>
             </div>
           </div>
-          <div className={'list'+ styleAlineacion}>
+          <div className={'list '+ styleAlineacion}>
             {clanes.map((clan) => 
               <span 
-                onDoubleClick={() => {
-                  mockGetDetailClanFn(clan.nombre, clan.alineacion).then((clanDetail) => setSelectedClan(clanDetail))
-                }}
+                className='clan-opt'
+                onDoubleClick={evt => {onSelectClan(evt, clan.index)}}
               >
-                {clan.nombre}
+                {clan.name}
               </span>)
             }
           </div>
         </div>
         <img className='frame-sep small' src={require('../../../../assets/frame/top-center.jpg')} />
         <div className='last'>
-          <AoButton caption='guardar' styles='fundar'>FUNDAR CLAN</AoButton>
+          <AoButton caption='guardar' styles='fundar'>{t('CREATE CLAN')}</AoButton>
         </div>
       </div> 
     </AoDialog>  
   )
-}
-
-
-const mockClanList = [
-  {
-    nombre: 'Two Easy',
-    alineacion: Alineaciones.neutral
-  },
-  {
-    nombre: 'mRades',
-    alineacion: Alineaciones.neutral
-  },
-  {
-    nombre: 'clan loco',
-    alineacion: Alineaciones.neutral
-  },
-  {
-    nombre: 'el leon',
-    alineacion: Alineaciones.armada
-  },
-  {
-    nombre: 'patito bullrich',
-    alineacion: Alineaciones.neutral
-  },
-  {
-    nombre: 'el indio panquequen',
-    alineacion: Alineaciones.legion
-  },
-  {
-    nombre: 'dolar',
-    alineacion: Alineaciones.armada
-  },
-  {
-    nombre: 'dolar qatar',
-    alineacion: Alineaciones.legion
-  },
-  {
-    nombre: 'dolar ccl',
-    alineacion: Alineaciones.armada
-  },
-  {
-    nombre: 'dolar mep',
-    alineacion: Alineaciones.neutral
-  },
-  {
-    nombre: 'dolar bolsa',
-    alineacion: Alineaciones.legion
-  },
-  {
-    nombre: 'dolar qatar',
-    alineacion: Alineaciones.legion
-  },
-  {
-    nombre: 'DANGER',
-    alineacion: Alineaciones.legion
-  },
-  {
-    nombre: 'Skywalker',
-    alineacion: Alineaciones.armada
-  },
-  {
-    nombre: 'SayHEllo',
-    alineacion: Alineaciones.neutral
-  },
-  {
-    nombre: 'PUESTO AHI',
-    alineacion: Alineaciones.legion
-  },
-  {
-    nombre: 'Daleeee',
-    alineacion: Alineaciones.neutral
-  }
-]
-
-const mockClanDetail = {
-  'fundador': 'tenesule',
-  'fecha_creacion': '03/08/2023',
-  'lider': '1269',
-  'miembros': 10,
-  'nivel_del_clan': 4
 }

@@ -25,7 +25,7 @@ const IgnoreMapNumber = number => {
   return IgnoreMapNumbers.includes(number)
 }
 const GetWorldImage = image => {
-  return `${GetRootDirectory()}/interface/${image}.bmp`
+  return `${GetRootDirectory()}/Interface/${image}.bmp`
 }
 
 let WorldGrid = null

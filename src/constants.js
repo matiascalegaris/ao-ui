@@ -38,7 +38,8 @@ export const Actions = {
   SetMeditate: 25,
   OpenKeySettings: 26,
   SaveSettings: 27,
-  TeleportToMap: 28
+  TeleportToMap: 28,
+  eDisplayGuildDetails: 29
 }
 
 export const SettingType = {
@@ -201,6 +202,15 @@ export const SkillListId = {
 
   SkillTypeCount: 24
 }
+
+export const GuildAlignment = {
+  Neutral: 0,
+  Army: 1,
+  Chaos: 2,
+  Citizen: 3,
+  Criminal: 4
+}
+export const GuildAlignmentsStr = ['Neutral', 'Armada', 'Legion', 'Ciudadana', 'Criminal']
 
 export const ChatPrefix = ['', ';','\\', '-', "/CMSG" ,'/GRUPO', '/GMSG', '/RMSG']
 

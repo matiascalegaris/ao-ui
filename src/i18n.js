@@ -166,7 +166,9 @@ const resources = {
       'experience': "Experience",
       'clan-exp': "Clan Exp",
       'no-npc-found': 'there are no npc in this map',
-      'npc-search': 'find npc'
+      'npc-search': 'find npc',
+      'send-request': 'Send request',
+      'long-clan-request-text': 'The admission request will go directly to the leader of the guild to which you make the request. They have the authority to accept or reject requests. It is advisable to accompany your request with a brief note explaining the reasons why you want to join the guild.'
     }
   },
   es: {
@@ -352,7 +354,7 @@ const resources = {
       'create-new': 'Crear nuevo',
       'event-list': 'Battlegrounds disponibles',
       'teams-type': 'Formato de Equipos',
-      'random': 'Aleatoreos',
+      'random': 'Aleatorios',
       'premade': 'Grupos',
       'team-size': 'Tamaño de equipos',
       'private-match': 'Partida privada',
@@ -402,7 +404,10 @@ const resources = {
       'world map': 'mapa del mundo',
       'map' : 'mapa',
       'amount': 'cantidad',
-      'disableDungeonLighting': "Desactivar oscuridad en dungeons"
+      'disableDungeonLighting': "Desactivar oscuridad en dungeons",
+      'Description': "Descripción",
+      'send-request': 'Enviar solicitud',
+      'long-clan-request-text': 'La solicitud de ingreso le llegará directamente al lider del clan al cual hagas la petición, este tiene la facultad de aceptar y rechazar las solicitudes. Es aconsejable que acompañes tu solicitud con una breve nota en la que expliques cuales son las razones por las que quieres pertenecer al clan'
     }
   }
 };

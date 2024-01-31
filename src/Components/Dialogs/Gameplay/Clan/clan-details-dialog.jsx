@@ -3,6 +3,9 @@ import './clan-details-dialog.scss'
 import AoDialog from '../../../Common/ao-dialog/ao-dialog'
 import AoButton from '../../../Common/ao-button/ao-button'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice'
+import { Actions } from '../../../../constants'
 
 const Label = ({name, value}) => (
   <div key={name} className='label'>
@@ -11,37 +14,44 @@ const Label = ({name, value}) => (
   </div>
 )
 
-export default function ClanDetailsDialog({ clan, styles, onClose }) {
-  const [requestContent, setRequestContent] = useState('')
-  const { t } = useTranslation();
-
+export const ClanDetailsDialog = ({ guild }) => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const onClose = evt => {
+    dispatch(setGameActiveDialog(null))
+    window.parent.BabelUI.RequestAction(Actions.OpenClanDialog)
+  }
+  const onRequestJoin = e => {
+    dispatch(setGameActiveDialog({
+      popUp:'guild-request',
+      details: guild
+    }))
+  }
   return (
-    <AoDialog styles={styles} ignoreAnimation={true}>
-      <div className='clan-details-dialog'>
-      <AoButton styles='close-button' onClick={onClose}>
-        <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
-      </AoButton>
+    <AoDialog styles='clan-details-dialog' contentStyles='clan-details-content' ignoreAnimation={true}>
         <div className='details-box'>
           <p className='text-title'>{t('clan-information')}</p>
-          <Label name={t('name')} value={clan.nombre}/>
-          <Label name={t('founder')} value={clan.fundador}/>
-          <Label name={t('creation-date')} value={clan.fecha_creacion}/>
-          <Label name={t('leader')} value={clan.lider} />
-          <Label name={t('members')} value={clan.miembros} />
-          <Label name={t('alignment')} value={clan.alineacion} />
-          <Label name={t('clan-level')} value={clan.nivel_del_clan} />
+          <Label name={t('name')} value={guild.name}/>
+          <Label name={t('founder')} value={guild.founderName}/>
+          <Label name={t('creation-date')} value={guild.creationDate}/>
+          <Label name={t('leader')} value={guild.leaderName}/>
+          <Label name={t('members')} value={guild.memberCount}/>
+          <Label name={t('alignment')} value={t(guild.aligment)}/>
+          <Label name={t('clan-level')} value={guild.level}/>
           <div className='flag'/>
         </div>
+        <AoButton styles='close-button' onClick={onClose}>
+          <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
+        </AoButton>
         <label className='description-box text-title'>
-          {t('admission-application')}
+          {t('Description')}
           <textarea 
             className='text-input'
-            value={requestContent}
-            onChange={e => setRequestContent(e.target.value)}
+            disabled
+            value={guild.description}
           />
         </label>
-        <AoButton caption='guardar' styles='guardar'>{t('request-admission')}</AoButton>
-      </div>
+        <AoButton caption='guardar' styles='guardar' onClick={onRequestJoin}>{t('request-admission').toUpperCase()}</AoButton>
     </AoDialog>
   )
 }

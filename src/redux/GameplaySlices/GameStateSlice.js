@@ -1,4 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
+import { GuildAlignment } from '../../constants'
 
 export const resetGameplay = createAction('gamemplay/reset')
 export const exitGameplay = createAction('gameplay/exit')
@@ -10,7 +11,7 @@ export const GameStateSlice = createSlice({
     online: 0,
     gameTime: {hour:0, minutes:0},
     isGameMaster: false,
-    activeDialog:  null,
+    activeDialog: null,
     spellListScroll: 0,
     firstDisplaySpell: -1,
     trackUserActive: 0,
@@ -102,6 +103,12 @@ export const GameStateSlice = createSlice({
       }
       state.activeDialog.eventList[action.payload.index] = action.payload
     },
+    updateGuildInfo: (state, action) => {
+      if (state.activeDialog.popUp !== "clan-list") {
+        return
+      }
+      state.activeDialog.details.guildList[action.payload.index] = action.payload.guildInfo
+    },
     extraReducers: (builder) => {
       builder
         .addCase(resetGameplay, (state) => {
@@ -122,7 +129,7 @@ export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime, openA
                updateIsGameMaster, updateSpellListScroll, openNpcTradeDialog,
                updateFirstSpellToDisplay, updateTrackState, updateTrackMousePos,
                updateTrackLastMouseClick, updateRemoteTab, handleMerchantItemChange,
-               openLobbyList, UpdateLobbySlot } = GameStateSlice.actions
+               openLobbyList, UpdateLobbySlot, updateGuildInfo } = GameStateSlice.actions
 
 export const selectFps = (state) =>  state.gameState.fps
 export const selectOnlines = (state) => state.gameState.online

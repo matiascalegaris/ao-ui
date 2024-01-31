@@ -25,6 +25,8 @@ import { SkillList } from '../../Dialogs/Gameplay/SkillList/skill-list'
 import { EventList, PublicEvents } from '../../Dialogs/Gameplay/PublicEvents/public-events'
 import { GenericInputDialog } from '../../Dialogs/GenericInputDialog/generic-input-dialog'
 import { ClanListDialog } from '../../Dialogs/Gameplay/Clan/clan-list'
+import { ClanDetailsDialog } from '../../Dialogs/Gameplay/Clan/clan-details-dialog'
+import { ClanRequest } from '../../Dialogs/Gameplay/Clan/clan-request'
 
 const showHKIcon = status => {
   if (status) {
@@ -104,7 +106,9 @@ export default function GameplayScreen() {
                 'skill-list': <SkillList details={popupsState.details}/>,
                 'public-events': <PublicEvents activeEvents={popupsState.eventList}/>,
                 'input-dialog' : <GenericInputDialog settings={popupsState} />,
-                'clan-list': <ClanListDialog contentInfo={popupsState}/>
+                'clan-list': <ClanListDialog contentInfo={popupsState}/>,
+                'guild-detail': <ClanDetailsDialog guild={popupsState.details}/>,
+                'guild-request': <ClanRequest guildDetails={popupsState.details}/>
               }
               [popupsState.popUp]
             }
