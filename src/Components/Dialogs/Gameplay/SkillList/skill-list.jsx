@@ -37,7 +37,8 @@ const SkillGroups = {
      {name: 'Leadership', id: SkillListId.Leadership}, 
      {name: 'Taming', id: SkillListId.Taming},
      {name: 'Sailing', id: SkillListId.Sail},
-     {name: 'Tailoring', id: SkillListId.Tailoring}]
+     {name: 'Tailoring', id: SkillListId.Tailoring},
+     {name: 'Alchemy', id: SkillListId.Alchemy}]
   ]
 }
 export const SkillList = ({details}) => {

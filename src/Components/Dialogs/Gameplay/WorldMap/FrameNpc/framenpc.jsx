@@ -1,6 +1,6 @@
 import './framenpc.scss'
 
-export default function Frame({children, contentStyles, styles}) {
+export const FrameNpc = ({children, contentStyles, styles}) => {
   var spacer = {
     width: `35px`,
     height: `35px`

@@ -32,7 +32,7 @@ export const AoStore = ({settings}) => {
   const buyItem = evt => {
     if (selectedIndex > 0) {
       window.parent.BabelUI.BuyPatronItem(selectedIndex)
-      dispatch(setGameActiveDialog(null))
+      // dispatch(setGameActiveDialog(null))
     }
   }
   

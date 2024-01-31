@@ -7,6 +7,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
+      'log in': 'Log-in',
       "SETTINGS": "Settings",
       'recovery-mail-hint': `If you don't get the recovery email, please check in the "Spam" folder.`,
       'recover-password-text': `Enter the email address that you used to create the account and we'll send you a recovery code.`,
@@ -167,6 +168,7 @@ const resources = {
       'clan-exp': "Clan Exp",
       'no-npc-found': 'there are no npc in this map',
       'npc-search': 'find npc',
+      'update-skill-question' : "Do you wish to update your skills?",
       'send-request': 'Send request',
       'long-clan-request-text': 'The admission request will go directly to the leader of the guild to which you make the request. They have the authority to accept or reject requests. It is advisable to accompany your request with a brief note explaining the reasons why you want to join the guild.'
     }
@@ -385,6 +387,7 @@ const resources = {
       'Taming': 'Doma de animales',
       'Sailing': 'Navegacion',
       'Tailoring': 'Sastreria',
+      'Alchemy': 'Alquimia',
       'skill-list': 'Skills',
       'combat skills': 'Habilidades de combate',
       'other skills': 'Otras habilidades',
@@ -405,6 +408,7 @@ const resources = {
       'map' : 'mapa',
       'amount': 'cantidad',
       'disableDungeonLighting': "Desactivar oscuridad en dungeons",
+      'update-skill-question' : "Deseas actualizar tus habilidades?",
       'Description': "Descripción",
       'send-request': 'Enviar solicitud',
       'long-clan-request-text': 'La solicitud de ingreso le llegará directamente al lider del clan al cual hagas la petición, este tiene la facultad de aceptar y rechazar las solicitudes. Es aconsejable que acompañes tu solicitud con una breve nota en la que expliques cuales son las razones por las que quieres pertenecer al clan'

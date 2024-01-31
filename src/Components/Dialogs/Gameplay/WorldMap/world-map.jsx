@@ -4,8 +4,8 @@ import AoDialog from '../../../Common/ao-dialog/ao-dialog'
 import { useDispatch, useSelector } from 'react-redux';
 import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 import './world-map.scss';
-import FrameMap from './FrameMap/framemap'
-import FrameNpc from './FrameNpc/framenpc'
+import { FrameMap } from './FrameMap/framemap'
+import { FrameNpc } from './FrameNpc/framenpc'
 import Frame from '../../../Common/Frame/frame';
 import { useState } from 'react';
 import { GetRootDirectory } from '../../../../Tools/Utils';
